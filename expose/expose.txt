@@ -1,0 +1,16 @@
+Expose:
+
+1. Introduction & Parallel dataflow systems (Stratosphere & Spark)
+	- webscale data analytics
+	- problem to use technical systems
+2. Idea
+	- Language & Running on systems
+	- Optimization of systems
+	- Evaluation
+3. Related work
+	- SystemML
+	- Faloutsos Paper
+	- Stratosphere Iteration paper
+	- etc.
+
+Pages: 3-5
