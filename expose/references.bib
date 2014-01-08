@@ -1,56 +1,128 @@
-@inproceedings{Alexandrov:Parallel,
- author = {Alexandrov, Alexander and Ewen, Stephan and Heimel, Max and Hueske, Fabian and Kao, Odej and Markl, Volker and Nijkamp, Erik and Warneke, Daniel},
- title = {{MapReduce} and {PACT} - Comparing Data Parallel Programming Models},
- booktitle = {Proceedings of the 14th Conference on Database Systems for Business, Technology, and Web (BTW)},
- series = {BTW 2011},
- year = {2011},
- isbn = {978-3-88579-274-1},
- location = {Kaiserslautern, Germany},
- pages = {25-44},
- doi = {},
- publisher = {GI},
- address = {Bonn, Germany},
- keywords = {}
-}
 
-@INPROCEEDINGS{Ghoting:SystemML, 
-author={Ghoting, Amol and Krishnamurthy, R. and Pednault, E. and Reinwald, B. and Sindhwani, V. and Tatikonda, S. and Yuanyuan Tian and Vaithyanathan, S.}, 
-booktitle={Data Engineering (ICDE), 2011 IEEE 27th International Conference on}, 
-title={SystemML: Declarative machine learning on MapReduce}, 
-year={2011}, 
-pages={231-242}, 
-keywords={data analysis;high level languages;learning (artificial intelligence);linear algebra;optimisation;parallel programming;SystemML;data cluster;declarative machine learning;higher level language;linear algebra;machine cluster;open source MapReduce;optimization strategy;parallel programming;supervised ML algorithm;unsupervised ML algorithm;Clustering algorithms;Computer architecture;Machine learning;Machine learning algorithms;Optimization;Runtime;Semantics}, 
-doi={10.1109/ICDE.2011.5767930}, 
-ISSN={1063-6382},}
+@article{hilbert:s2011a,
+	Annote = {Survey of the growth of storage, telecommunications and computing capacities of society. It shows that digital capacities are growing at an exponential rate resulting in huge amounts of data. Good paper for introduction part of thesis.},
+	Author = {Hilbert, Martin and L{\'o}pez, Priscila},
+	Date-Added = {2014-01-07 21:30:31 +0000},
+	Date-Modified = {2014-01-08 08:56:28 +0000},
+	Journal = {Science},
+	Keywords = {Digital technology},
+	Number = {6025},
+	Pages = {60--65},
+	Publisher = {American Association for the Advancement of Science},
+	Rating = {2},
+	Read = {1},
+	Title = {The worlds technological capacity to store, communicate, and compute information},
+	Volume = {332},
+	Year = {2011},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QdGZpbGVzL0hpbGJlcnQvSGlsYmVydCAoMjAxMWEpIC0gVGhlIHdvcmxkcyB0ZWNobm9sb2dpY2FsIGNhcGFjaXR5IHRvIHN0b3JlLCBjb21tdW5pY2F0ZSwgYW5kIGNvbXB1dGUgaW5mb3JtYXRpb24ucGRm0hcLGBlXTlMuZGF0YU8RAsoAAAAAAsoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAM6XudNIKwAAAFAunx9IaWxiZXJ0ICgyMDExYSkgLSBUaCM1NTUwN0QucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVVB9zvF9T1BERiAAAAAAAAEABAAACSAAAAAAAAAAAAAAAAAAAAAHSGlsYmVydAAAEAAIAADOl6vDAAAAEQAIAADO8W8/AAAAAQAYAFAunwBCYB0AQluiAAlOlQAI+lIAAmSOAAIAW01hY2ludG9zaCBIRDpVc2VyczoAdGlsbDoARHJvcGJveDoAbGlicmFyeToAZmlsZXM6AEhpbGJlcnQ6AEhpbGJlcnQgKDIwMTFhKSAtIFRoIzU1NTA3RC5wZGYAAA4AzgBmAEgAaQBsAGIAZQByAHQAIAAoADIAMAAxADEAYQApACAALQAgAFQAaABlACAAdwBvAHIAbABkAHMAIAB0AGUAYwBoAG4AbwBsAG8AZwBpAGMAYQBsACAAYwBhAHAAYQBjAGkAdAB5ACAAdABvACAAcwB0AG8AcgBlACwAIABjAG8AbQBtAHUAbgBpAGMAYQB0AGUALAAgAGEAbgBkACAAYwBvAG0AcAB1AHQAZQAgAGkAbgBmAG8AcgBtAGEAdABpAG8AbgAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAj1VzZXJzL3RpbGwvRHJvcGJveC9saWJyYXJ5L2ZpbGVzL0hpbGJlcnQvSGlsYmVydCAoMjAxMWEpIC0gVGhlIHdvcmxkcyB0ZWNobm9sb2dpY2FsIGNhcGFjaXR5IHRvIHN0b3JlLCBjb21tdW5pY2F0ZSwgYW5kIGNvbXB1dGUgaW5mb3JtYXRpb24ucGRmAAATAAEvAAAVAAIAC///AACABtIbHB0eWiRjbGFzc25hbWVYJGNsYXNzZXNdTlNNdXRhYmxlRGF0YaMdHyBWTlNEYXRhWE5TT2JqZWN00hscIiNcTlNEaWN0aW9uYXJ5oiIgXxAPTlNLZXllZEFyY2hpdmVy0SYnVHJvb3SAAQAIABEAGgAjAC0AMgA3AEAARgBNAFUAYABnAGoAbABuAHEAcwB1AHcAhACOAQUBCgESA+AD4gPnA/ID+wQJBA0EFAQdBCIELwQyBEQERwRMAAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAABE4=}}
 
-@article{Ewen:Iterations,
- author = {Ewen, Stephan and Tzoumas, Kostas and Kaufmann, Moritz and Markl, Volker},
- title = {Spinning Fast Iterative Data Flows},
- journal = {Proc. VLDB Endow.},
- issue_date = {July 2012},
- volume = {5},
- number = {11},
- month = jul,
- year = {2012},
- issn = {2150-8097},
- pages = {1268--1279},
- numpages = {12},
- url = {http://dl.acm.org/citation.cfm?id=2350229.2350245},
- acmid = {2350245},
- publisher = {VLDB Endowment},
-}
 
-@MISC{Kang:Pegasus,
-    author = {U Kang and Charalampos E. Tsourakakis and Christos Faloutsos},
-    title = {PEGASUS: A Peta-Scale Graph Mining System- Implementation and Observations},
-    year = {2009}
-}
+@misc{moore:1965a,
+	Author = {Moore, Gordon E and others},
+	Date-Added = {2014-01-08 10:36:23 +0000},
+	Date-Modified = {2014-01-08 10:37:46 +0000},
+	Keywords = {Integrated circuits},
+	Publisher = {McGraw-Hill},
+	Title = {Cramming more components onto integrated circuits},
+	Year = {1965},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QUWZpbGVzL01vb3JlL01vb3JlICgxOTY1YSkgLSBDcmFtbWluZyBtb3JlIGNvbXBvbmVudHMgb250byBpbnRlZ3JhdGVkIGNpcmN1aXRzLnBkZtIXCxgZV05TLmRhdGFPEQJgAAAAAAJgAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADOl7nTSCsAAABVmi4fTW9vcmUgKDE5NjVhKSAtIENyYW0jNTU5OTBCLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFWZC87y6NkAAAAAAAAAAAABAAQAAAkgAAAAAAAAAAAAAAAAAAAABU1vb3JlAAAQAAgAAM6Xq8MAAAARAAgAAM7y2skAAAABABgAVZouAEJgHQBCW6IACU6VAAj6UgACZI4AAgBZTWFjaW50b3NoIEhEOlVzZXJzOgB0aWxsOgBEcm9wYm94OgBsaWJyYXJ5OgBmaWxlczoATW9vcmU6AE1vb3JlICgxOTY1YSkgLSBDcmFtIzU1OTkwQi5wZGYAAA4AjABFAE0AbwBvAHIAZQAgACgAMQA5ADYANQBhACkAIAAtACAAQwByAGEAbQBtAGkAbgBnACAAbQBvAHIAZQAgAGMAbwBtAHAAbwBuAGUAbgB0AHMAIABvAG4AdABvACAAaQBuAHQAZQBnAHIAYQB0AGUAZAAgAGMAaQByAGMAdQBpAHQAcwAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAbFVzZXJzL3RpbGwvRHJvcGJveC9saWJyYXJ5L2ZpbGVzL01vb3JlL01vb3JlICgxOTY1YSkgLSBDcmFtbWluZyBtb3JlIGNvbXBvbmVudHMgb250byBpbnRlZ3JhdGVkIGNpcmN1aXRzLnBkZgATAAEvAAAVAAIAC///AACABtIbHB0eWiRjbGFzc25hbWVYJGNsYXNzZXNdTlNNdXRhYmxlRGF0YaMdHyBWTlNEYXRhWE5TT2JqZWN00hscIiNcTlNEaWN0aW9uYXJ5oiIgXxAPTlNLZXllZEFyY2hpdmVy0SYnVHJvb3SAAQAIABEAGgAjAC0AMgA3AEAARgBNAFUAYABnAGoAbABuAHEAcwB1AHcAhACOAOIA5wDvA1MDVQNaA2UDbgN8A4ADhwOQA5UDogOlA7cDugO/AAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAA8E=}}
 
-@inproceedings{Leich:BigData,
-author = { Marcus Leich and Jochen Adamek and Moritz Schubotz and Arvid Heise and Astrid Rheinländer and Volker Markl },
-title = { Applying Stratosphere for Big Data Analytics },
-year = { 2013 },
-month = { 0 },
-booktitle = { Database Systems for Business, Technology, and Web (BTW) },
-priority = { 0 }
-}
+
+
+
+@misc{ibm:2014a,
+	Date-Added = {2014-01-08 09:12:33 +0000},
+	Date-Modified = {2014-01-08 14:41:30 +0000},
+	Howpublished = {\url{http://www.ibm.com/big-data/}},
+	Keywords = {Big data},
+	Lastchecked = {01/08/2014},
+	Note = {Cited January 8th 2014},
+	Title = {Big data within IBM},
+	Url = {http://www.ibm.com/big-data/},
+	Year = {2014},
+	Bdsk-Url-1 = {http://www.ibm.com/big-data/}}
+
+
+
+@misc{mskcc:2013a,
+	Date-Added = {2014-01-08 14:05:47 +0000},
+	Date-Modified = {2014-01-08 14:36:43 +0000},
+	Howpublished = {\url{http://www.mskcc.org/pressroom/press/ibm-watson-hard-work-new-breakthroughs-transform-quality-care-patients}},
+	Keywords = {Big data, Application},
+	Lastchecked = {01/08/2014},
+	Note = {Cited January 8th 2014},
+	Title = {IBM Watson Hard At Work: New Breakthroughs Transform Quality Care for Patients},
+	Url = {http://www.mskcc.org/pressroom/press/ibm-watson-hard-work-new-breakthroughs-transform-quality-care-patients},
+	Year = {2013}}
+
+
+@article{lohr:yt2012a,
+	Author = {Lohr, Steve},
+	Date-Added = {2014-01-08 13:26:12 +0000},
+	Date-Modified = {2014-01-08 13:26:28 +0000},
+	Journal = {New York Times},
+	Keywords = {Big data},
+	Title = {The age of big data},
+	Volume = {11},
+	Year = {2012},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QMWZpbGVzL0xvaHIvTG9ociAoMjAxMmEpIC0gVGhlIGFnZSBvZiBiaWcgZGF0YS5wZGbSFwsYGVdOUy5kYXRhTxEB/gAAAAAB/gACAAAMTWFjaW50b3NoIEhEAAAAAAAAAAAAAAAAAAAAzpe500grAAAAVdb1H0xvaHIgKDIwMTJhKSAtIFRoZSBhIzU1RDY2MS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABV1mHO8xAyAAAAAAAAAAAAAQAEAAAJIAAAAAAAAAAAAAAAAAAAAARMb2hyABAACAAAzperwwAAABEACAAAzvMCIgAAAAEAGABV1vUAQmAdAEJbogAJTpUACPpSAAJkjgACAFhNYWNpbnRvc2ggSEQ6VXNlcnM6AHRpbGw6AERyb3Bib3g6AGxpYnJhcnk6AGZpbGVzOgBMb2hyOgBMb2hyICgyMDEyYSkgLSBUaGUgYSM1NUQ2NjEucGRmAA4ATgAmAEwAbwBoAHIAIAAoADIAMAAxADIAYQApACAALQAgAFQAaABlACAAYQBnAGUAIABvAGYAIABiAGkAZwAgAGQAYQB0AGEALgBwAGQAZgAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAExVc2Vycy90aWxsL0Ryb3Bib3gvbGlicmFyeS9maWxlcy9Mb2hyL0xvaHIgKDIwMTJhKSAtIFRoZSBhZ2Ugb2YgYmlnIGRhdGEucGRmABMAAS8AABUAAgAL//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4AwgDHAM8C0QLTAtgC4wLsAvoC/gMFAw4DEwMgAyMDNQM4Az0AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAADPw==}}
+
+
+@article{dean:c2008a,
+	Annote = {Very good paper explaining the functioning and the implementation of Google's MapReduce framework. Moreover, it highlights the internal use of this system and its extensive growth over the last couple of years. Very good for referencing.},
+	Author = {Dean, Jeffrey and Ghemawat, Sanjay},
+	Date-Added = {2014-01-07 16:53:41 +0000},
+	Date-Modified = {2014-01-07 21:29:11 +0000},
+	Journal = {Communications of the ACM},
+	Keywords = {MapReduce, Parallel dataflow, Programming model, Distributed computing},
+	Number = {1},
+	Pages = {107--113},
+	Publisher = {ACM},
+	Rating = {4},
+	Read = {1},
+	Title = {MapReduce: simplified data processing on large clusters},
+	Volume = {51},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QVGZpbGVzL0RlYW4vRGVhbiAoMjAwOGEpIC0gTWFwUmVkdWNlIHNpbXBsaWZpZWQgZGF0YSBwcm9jZXNzaW5nIG9uIGxhcmdlIGNsdXN0ZXJzLnBkZtIXCxgZV05TLmRhdGFPEQJoAAAAAAJoAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADOl7nTSCsAAABCwwYfRGVhbiAoMjAwOGEpIC0gTWFwUmUjNDQwMzVDLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQDXM7rNe9QREYgAAAAAAABAAQAAAkgAAAAAAAAAAAAAAAAAAAABERlYW4AEAAIAADOl6vDAAAAEQAIAADO6yffAAAAAQAYAELDBgBCYB0AQluiAAlOlQAI+lIAAmSOAAIAWE1hY2ludG9zaCBIRDpVc2VyczoAdGlsbDoARHJvcGJveDoAbGlicmFyeToAZmlsZXM6AERlYW46AERlYW4gKDIwMDhhKSAtIE1hcFJlIzQ0MDM1Qy5wZGYADgCUAEkARABlAGEAbgAgACgAMgAwADAAOABhACkAIAAtACAATQBhAHAAUgBlAGQAdQBjAGUAIABzAGkAbQBwAGwAaQBmAGkAZQBkACAAZABhAHQAYQAgAHAAcgBvAGMAZQBzAHMAaQBuAGcAIABvAG4AIABsAGEAcgBnAGUAIABjAGwAdQBzAHQAZQByAHMALgBwAGQAZgAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAG9Vc2Vycy90aWxsL0Ryb3Bib3gvbGlicmFyeS9maWxlcy9EZWFuL0RlYW4gKDIwMDhhKSAtIE1hcFJlZHVjZSBzaW1wbGlmaWVkIGRhdGEgcHJvY2Vzc2luZyBvbiBsYXJnZSBjbHVzdGVycy5wZGYAABMAAS8AABUAAgAL//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4A5QDqAPIDXgNgA2UDcAN5A4cDiwOSA5sDoAOtA7ADwgPFA8oAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAADzA==}}
+
+
+@misc{hadoop:2008a,
+	Date-Added = {2014-01-08 16:02:41 +0000},
+	Date-Modified = {2014-01-08 16:05:00 +0000},
+	Howpublished = {\url{http://hadoop.apache.org/}},
+	Keywords = {MapReduce},
+	Note = {Cited January 8th 2014},
+	Title = {Hadoop},
+	Url = {http://hadoop.apache.org/},
+	Year = {2008}}
+
+
+@inproceedings{zaharia:2010a,
+	Annote = {Spark parallel dataflow engine is described in this paper. It is centered around its abstractions resilient distributed dataset (RDD), broadcasted variables, accumulated variables and its parallel operations reduce, collect and foreach. Moreover, Spark achieves fault tolerance via lineage information. If the system detect a faulty node, then the lost data slice is reconstructed with its parent records.},
+	Author = {Zaharia, Matei and Chowdhury, Mosharaf and Franklin, Michael J and Shenker, Scott and Stoica, Ion},
+	Booktitle = {Proceedings of the 2nd USENIX conference on Hot topics in cloud computing},
+	Date-Added = {2014-01-07 18:46:09 +0000},
+	Date-Modified = {2014-01-07 21:29:11 +0000},
+	Keywords = {Programming model, Distributed computing, Parallel dataflow},
+	Pages = {10--10},
+	Rating = {4},
+	Read = {1},
+	Title = {Spark: cluster computing with working sets},
+	Year = {2010},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QTWZpbGVzL1phaGFyaWEvWmFoYXJpYSAoMjAxMGEpIC0gU3BhcmsgY2x1c3RlciBjb21wdXRpbmcgd2l0aCB3b3JraW5nIHNldHMucGRm0hcLGBlXTlMuZGF0YU8RAlQAAAAAAlQAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAM6XudNIKwAAAELH6R9aYWhhcmlhICgyMDEwYSkgLSBTcCM0NEZCRjUucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARPv1zus77VBERiAAAAAAAAEABAAACSAAAAAAAAAAAAAAAAAAAAAHWmFoYXJpYQAAEAAIAADOl6vDAAAAEQAIAADO6y3dAAAAAQAYAELH6QBCYB0AQluiAAlOlQAI+lIAAmSOAAIAW01hY2ludG9zaCBIRDpVc2VyczoAdGlsbDoARHJvcGJveDoAbGlicmFyeToAZmlsZXM6AFphaGFyaWE6AFphaGFyaWEgKDIwMTBhKSAtIFNwIzQ0RkJGNS5wZGYAAA4AgAA/AFoAYQBoAGEAcgBpAGEAIAAoADIAMAAxADAAYQApACAALQAgAFMAcABhAHIAawAgAGMAbAB1AHMAdABlAHIAIABjAG8AbQBwAHUAdABpAG4AZwAgAHcAaQB0AGgAIAB3AG8AcgBrAGkAbgBnACAAcwBlAHQAcwAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAaFVzZXJzL3RpbGwvRHJvcGJveC9saWJyYXJ5L2ZpbGVzL1phaGFyaWEvWmFoYXJpYSAoMjAxMGEpIC0gU3BhcmsgY2x1c3RlciBjb21wdXRpbmcgd2l0aCB3b3JraW5nIHNldHMucGRmABMAAS8AABUAAgAL//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4A3gDjAOsDQwNFA0oDVQNeA2wDcAN3A4ADhQOSA5UDpwOqA68AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAADsQ==}}
+
+
+@inproceedings{battre:2010a,
+	Annote = {Presentation of PACTs and the Nephele execution engine. Explanation of the PACT programming model, which is an extension of the MapReduce framework. It is more versatile by introducing new input contracts, such as Cross, Match and CoGroup operations. Furthermore, it introduces output contracts which are used for the dataflow optimization. An advantage over the MapReduce framework is its flexibility concerning the data flow. It supports multiple inputs and a flexible pipeline which allows the combination of arbitrary operations without materializing the data. Good paper with a thorough introduction into the PACT programming model and the Nephele execution engine.},
+	Author = {Battr{\'e}, Dominic and Ewen, Stephan and Hueske, Fabian and Kao, Odej and Markl, Volker and Warneke, Daniel},
+	Booktitle = {Proceedings of the 1st ACM symposium on Cloud computing},
+	Date-Added = {2014-01-07 16:23:25 +0000},
+	Date-Modified = {2014-01-07 21:29:11 +0000},
+	Keywords = {Stratosphere, Programming model, Parallel dataflow, Distributed computing},
+	Organization = {ACM},
+	Pages = {119--130},
+	Rating = {5},
+	Read = {1},
+	Title = {Nephele/PACTs: a programming model and execution framework for web-scale analytical processing},
+	Year = {2010},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YW8QgQBmAGkAbABlAHMALwBCAGEAdAB0AHIAZQMBAC8AQgBhAHQAdAByAGUDAQAgACgAMgAwADEAMABhACkAIAAtACAATgBlAHAAaABlAGwAZQAtAFAAQQBDAFQAcwAgAGEAIABwAHIAbwBnAHIAYQBtAG0AaQBuAGcAIABtAG8AZABlAGwAIABhAG4AZAAgAGUAeABlAGMAdQB0AGkAbwBuACAAZgByAGEAbQBlAHcAbwByAGsAIABmAG8AcgAgAHcAZQBiAC0AcwBjAGEAbABlACAAYQBuAGEAbAB5AHQAaQBjAGEAbAAgAHAAcgBvAGMAZQBzAHMAaQBuAGcALgBwAGQAZtIXCxgZV05TLmRhdGFPEQLuAAAAAALuAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADOl7nTSCsAAABCrwcfQmF0dHKOICgyMDEwYSkgLSBOZXAjNDNBRDA5LnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEOtCc7nArBQREYgAAAAAAABAAQAAAkgAAAAAAAAAAAAAAAAAAAABkJhdHRyjgAQAAgAAM6Xq8MAAAARAAgAAM7m9KAAAAABABgAQq8HAEJgHQBCW6IACU6VAAj6UgACZI4AAgBaTWFjaW50b3NoIEhEOlVzZXJzOgB0aWxsOgBEcm9wYm94OgBsaWJyYXJ5OgBmaWxlczoAQmF0dHKOOgBCYXR0co4gKDIwMTBhKSAtIE5lcCM0M0FEMDkucGRmAA4A6ABzAEIAYQB0AHQAcgBlAwEAIAAoADIAMAAxADAAYQApACAALQAgAE4AZQBwAGgAZQBsAGUALQBQAEEAQwBUAHMAIABhACAAcAByAG8AZwByAGEAbQBtAGkAbgBnACAAbQBvAGQAZQBsACAAYQBuAGQAIABlAHgAZQBjAHUAdABpAG8AbgAgAGYAcgBhAG0AZQB3AG8AcgBrACAAZgBvAHIAIAB3AGUAYgAtAHMAYwBhAGwAZQAgAGEAbgBhAGwAeQB0AGkAYwBhAGwAIABwAHIAbwBjAGUAcwBzAGkAbgBnAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgCeVXNlcnMvdGlsbC9Ecm9wYm94L2xpYnJhcnkvZmlsZXMvQmF0dHJlzIEvQmF0dHJlzIEgKDIwMTBhKSAtIE5lcGhlbGUtUEFDVHMgYSBwcm9ncmFtbWluZyBtb2RlbCBhbmQgZXhlY3V0aW9uIGZyYW1ld29yayBmb3Igd2ViLXNjYWxlIGFuYWx5dGljYWwgcHJvY2Vzc2luZy5wZGYAEwABLwAAFQACAAv//wAAgAbSGxwdHlokY2xhc3NuYW1lWCRjbGFzc2VzXU5TTXV0YWJsZURhdGGjHR8gVk5TRGF0YVhOU09iamVjdNIbHCIjXE5TRGljdGlvbmFyeaIiIF8QD05TS2V5ZWRBcmNoaXZlctEmJ1Ryb290gAEACAARABoAIwAtADIANwBAAEYATQBVAGAAZwBqAGwAbgBxAHMAdQB3AIQAjgGTAZgBoASSBJQEmQSkBK0EuwS/BMYEzwTUBOEE5AT2BPkE/gAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAAUA}}
