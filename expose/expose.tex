@@ -24,7 +24,7 @@
 
 % ****************** TITLE ****************************************
 
-\title{Gilbert: A distributed sparse linear algebra system to do machine learning on web-scale data.}
+\title{Gilbert: A distributed sparse linear algebra system for machine learning on web-scale data.}
 \subtitle{Exposé master's thesis}
 
 % ****************** AUTHORS **************************************
@@ -250,7 +250,15 @@ Consequently, Pegasus implements it on top of Hadoop.
 The proposed system is supposed to contain the GIM-V operation and will not only consider the operation itself for optimization purposes but also its context of previous and succeeding operations.
 Therefore, Gilbert should be a generalization of Pegasus.
 
-Datalog~\cite{bu:apa2012a}
+Y.~Bu et al.~\cite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
+All of these systems exhibit a tight coupling of a solution's logical representation and physical representation.
+This renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
+Moreover, the systems are mostly disjoint which that each framework has to be updated in order to profit from a new optimization.
+As a solution the authors propose to employ Datalog as a declarative language for the specification of higher level programming models such as iterative MapReduce or Pregel.
+Standard query optimization techniques are applied on this common representation and then it is transformed into a physical execution plan.
+This plan is executed by Hyracks~\cite{borkar:2011a}, a data-parallel platform.
+This approach has the advantage that a wider class of machine learning algorithms are efficiently supported within the same system.
+However, at the moment the physical plans are still created by hand which makes the framework not applicable yet.
 
 L. Hendren~\cite{hendren:2011a} developed a static typing system for Matlab.
 Types are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.
