@@ -1,0 +1,288 @@
+% THIS IS AN EXAMPLE DOCUMENT DEMONSTRATING THE DIMA DOCUMENT STYLE
+% based on Gerald Webers' <gerald@cs.auckland.ac.nz>
+% modified version of ACM SIGPROC-SP.TEX VERSION 2.7
+%
+% DIMA URL    http://www.dima.tu-berlin.de/
+% ACM FAQ     http://www.acm.org/sigs/publications/sigfaq
+%
+% Erik Nijkamp October 14th. 2009
+%
+%  UPDATES
+%    - polished 'alignauthor' macro (texclipse failed)
+%    - added *.eps image files (required by latex+dvips+ps2pdf chain)
+%    - added additional packages to support german umlauts
+
+\documentclass{dima}
+
+\usepackage[binary-units=true]{siunitx}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
+\usepackage{breakurl}
+\usepackage[breaklinks]{hyperref}
+
+\begin{document}
+
+% ****************** TITLE ****************************************
+
+\title{Gilbert: A sparse linear algebra environment for machine learning on web-scale data.}
+\subtitle{Exposé master's thesis}
+
+% ****************** AUTHORS **************************************
+
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{1} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor{Till Rohrmann\\
+\affaddr{Technical University of Berlin, Germany}\\
+\email{till.rohrmann@mailbox.tu-berlin.de}}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+
+
+\date{\today}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+
+\maketitle
+
+% ****************** TEXT **************************************
+
+% \begin{abstract}
+% Abstract
+% \end{abstract}
+
+\section{Introduction}
+Nowadays, computing devices are almost ubiquitous in our daily lives.
+They ceaselessly gather, process and store information of any kind and their computing and storage capacities grow every year.
+These capacities exhibit an almost exponential growth rate~\cite{hilbert:s2011a} like the growth of the number of components on integrated circuits~\cite{moore:1965a}, known as Moore's law.
+Nowadays, it is estimated that $\SI{2.5}{\zetta\byte}$ of data is created each day and this number is supposed to rise up to $\SI{40}{\zetta\byte}$ by the year of $\num{2020}$~\cite{ibm:2014a}.
+
+With the increase of data, people became aware of its usefulness and thus the demand for analyzing tools, able to exploit the gathered data, increased as well.
+Currently, insights gained from collected data already helps to improve a variety of processes.
+For example, retail stores analyze their sales, customer, pricing and weather data in order to decide which products to offer or  when to do a discount sale. 
+Police departments try to detect probable crime locations by extracting patterns from previously recorded criminal acts and then  reinforce the policemen in  this region~\cite{lohr:yt2012a}. 
+Hospitals analyze their patients' records and scientific studies in order to find the cancer treatment best complying with the  specifics of the patient and thus having the highest chance of cure~\cite{mskcc:2013a}. 
+These examples underline the importance and utility of data analysis tools. 
+The majority of these tools are based on statistic techniques. 
+Consequently, they can improve their descriptive and predictive results by getting fed more data.
+However, this comes at the price of an increased computing time which requires faster computer systems to make the computation feasible.
+
+Clock rates of CPUs stagnate, because technology hit the power wall.
+In order to further increase computing power though, multi-core and distributed systems were built.
+However, these systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
+Due to this, parallel program development became cumbersome and error-prone.
+Therefore, new programming models were conceived which relieve the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
+
+These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source reimplementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
+MapReduce is a programming framework for concurrent computations on vast amounts of data running on a large cluster. 
+Due to its simplicity, it is widely adopted and countless distributed applications exist using this framework.
+
+MapReduce, however, exhibits also some deficiencies in realizing common sub-tasks such as joining two datasets.
+These deficiencies result from the strict programming model and cause some serious performance losses.
+There are some other distributed programming models such as Stratosphere~\cite{battre:2010a} and Spark~\cite{zaharia:2010a} which try to tackle these problems.
+They both support iterative algorithms which is a necessary requisite for many data analytical algorithms.
+Furthermore, they both offer a more flexible pipeline not requiring to store intermediate results always to hard disks.
+
+But still, these frameworks force the user to express the program in a certain way, which is often not natural or intuitive for a user coming from a different domain.
+This implies that one has to overcome a particular entry-barrier to use the system and this might already be too high for some users.
+Furthermore, the actual program might become lengthy and complicated expressed within the programming model.
+This makes developing and debugging the program difficult as well as time-consuming and thus expensive.
+Especially in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
+Therefore, systems such as Matlab and R are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
+However, these linear algebra systems lack proper support for automatic parallelization on large clusters and thus restricting the user to a single workstation.
+Therefore, the amount of processable data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
+Moreover, machine learning people are usually no experts in the field of distributed computing, and neither vice versa.
+The group of experts on both fields is negligible small.
+Consequently, it is very difficult, time-consuming and not least expensive to implement machine learning algorithms on distributed systems.
+
+This problem would be mitigated by having a distributed sparse linear algebra system supporting a Matlab- and R-like language.
+Assuming that such a system is realizable, then one could run existing Matlab- or R-code directly or at most with minor adjustments in a distributed fashion.
+Furthermore, new distributed algorithms could be quickly implemented benefiting from the expressiveness of linear algebra.
+This would drastically speed up the application of machine learning and data analysis algorithms on web-scale data.
+Therefore, I want to research and implement a distributed sparse linear algebra system, henceforth called Gilbert, in the context of my master's thesis.
+
+
+\section{Thesis Approach}
+
+Within my master's thesis I want to answer the following questions:
+\begin{itemize}
+\item Which are the language primitives of a distributed sparse linear algebra system in order to support a multitude of current machine learning algorithms?
+\item How can the supported operations be realized in a distributed system?
+\end{itemize}
+
+\subsection{Language primitives}
+
+I intend to implement an intermediate representation of a Matlab program.
+The additional abstraction layer allows language independent optimizations and makes the system independent from the actually used frontend language.
+The set of language primitives of the intermediate representation has to include the operational primitives of linear algebra as well as an iteration abstraction in order to realize algorithms based on convergence.
+Furthermore, it is of particular interest to keep this set as small as possible, because this would alleviate a possible optimization step prior to execution.
+
+\subsection{Runtime}
+
+I want to research how the most common linear algebra operations can be efficiently represented within a parallel data flow system.
+One key aspect is going to be the matrix matrix multiplication because it is one of the central operations of many machine learning algorithms and it is one of the most time consuming operations as well.
+Therefore, it is crucial to efficiently implement this operation.
+This requires a thorough investigation and evaluation of all possible implementations.
+Since this will strongly depend on the actual distributed system, I will implement and evaluate these operations within Stratosphere.
+The Stratosphere implementation acts at the same time as a proof of concept of Gilbert.
+I have chosen Stratosphere over other systems, such as Spark, because of its expressiveness and its powerful parallel data-flow optimizer.
+Last but not least, Stratosphere is developed at the chair of Prof. Markl, where I write my master's thesis.
+However, there should not be any fundamental obstacle which prevent the utilization of an other distributed computing system.
+
+\subsection{Optimization}
+
+If I have still some time left, then I will research possible optimization strategies for linear algebra programs.
+One obviously important choice of execution would be the order of subsequent matrix matrix multiplications.
+Different execution plans might emit different intermediate results which vary in size and density and thus making one of the plans favorable over the other.
+I intend to use a similar cost-based plan enumeration approach as it is used for database query optimizations.
+
+\subsection{Implementation}
+
+The distributed sparse linear algebra system shall have a Matlab- or R-like language frontend.
+For the sake of simplicity, I will implement a subset of the Matlab language.
+In order to support this subset, a Matlab parser has to be implemented.
+Additionally to the parser, I will also implement a static typing mechanism so that possible errors resulting from incompatible types are already caught at compile time.
+I will use Scala for all implementations tasks, because it nicely integrates in the Java ecosystem and at the same time enriches it with valuable additions like functional programming support and parser combinators.
+
+\subsection{Evaluation}
+
+I want to demonstrate the proper functioning and potential of Gilbert by comparing the runtime of different machine learning algorithms implemented in this system with those implemented in a traditional MapReduce framework.
+Hopefully, the results of the automatically parallelized algorithms are comparable to the hand-tuned versions.
+Furthermore, I like to show the applicability of the proposed system to web-scale analytical processing.
+This will require a thorough examination of its scalability behavior.
+As benchmarking algorithms I intend to implement the PageRank~\cite{page:1999a}, non-negative matrix factorization~\cite{seung:anips2001a} and k-means~\cite{macqueen:1967a} algorithm.
+These algorithms entail to support the basic linear algebra operations as well as an iteration mechanism.
+Furthermore, they are examples of widely used algorithms and thus they emphasize the relevance of the developed system.
+
+\section{Schedule}
+
+My schedule for the remaining things to do looks the following:
+First, I will finish the implementation of Gilbert.
+At the moment, the system can parse and compile Matlab programs using the specified subset of the language.
+However, it cannot be executed on Stratosphere yet.
+I intend to implement the Stratosphere support in the next $1$ to $1.5$ months.
+
+After this is done, I will start with the evaluation of the system.
+For this purpose, I will implement the benchmark algorithms and investigate their behavior with respect to varying input and cluster sizes.
+Since I assume that some unrecognized problems will surface in the context of this evaluation, I plan $1$ month for the evaluation tasks.
+In the case that there are some grievous errors in the implementation, I schedule another $0.5$ month for reworking purposes.
+
+Last but not least, I will finish my thesis by compiling the findings of my work.
+Since thesis writing is an iterative process I calculate $1.5$ months for it to be done.
+In order to minimize the work load at the end, I try to start writing after I have finished my implementation. 
+
+\section{Related Work}
+
+The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed machine learning to subdue the data flood.
+Consequently, several frameworks and programming models have been proposed to tackle the aforementioned problems.
+One inspiring approach is SystemML~\cite{ghoting:2011a}.
+SystemML provides a declarative higher-level language for expressing linear algebra operations.
+These operations are then mapped onto MapReduce tasks.
+It further applies several optimization strategies such as blocking, dynamic block-level operations, piggybacking to reduce the number of MapReduce tasks and local aggregation within the reducers.
+The system can evaluate different execution plans depending on the size of its inputs and its blocking strategy.
+It selects the most cost-efficient plan based on the network costs.
+SystemML is similar to the proposed approach, however it has no proper iteration mechanism besides of simple loop unrolling.
+Furthermore, it relies on the MapReduce framework with all of its deficiencies compared to the more powerful distributed computing system Stratosphere.
+The declarative language of SystemML is not a subset of Matlab or R and thus it cannot directly be used by native Matlab or R users.
+
+Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
+It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
+Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties.
+These properties are exploited by the compiler to select the best execution plan.
+Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}.
+However, it still lacks an easy to use language for the development of machine learning algorithms.
+
+Another distributed computing framework is Spark~\cite{zaharia:2010a} which can be seen as an extension of MapReduce with iteration support.
+Spark performs its computation on resilient distributed datasets (RDD) which can be kept in memory during computations.
+This allows to efficiently realize iterations within in the framework.
+Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
+
+Apache Mahout~\cite{apache:a2011} is a project offering a library of scalable machine learning algorithms.
+Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
+However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
+By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
+
+Pegasus~\cite{kang:2009a} is a programming model mainly intended for graph mining purposes.
+It is centered around the abstraction of a generalized iterative matrix vector multiplication (GIM-V), which can be found in many graph algorithms.
+The GIM-V operation can be represented by a map and reduce operation.
+Consequently, Pegasus implements it on top of Hadoop.
+Gilbert is supposed to contain the GIM-V operation and will not only consider the operation itself for optimization purposes but also its context of previous and succeeding operations.
+Therefore, Gilbert should be a generalization of Pegasus.
+
+Y.~Bu et al.~\cite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
+All of these systems exhibit a tight coupling of a solution's logical representation and physical representation.
+This renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
+Moreover, the systems are mostly disjoint which implies that each framework has to be updated in order to profit from new optimization strategies.
+As a solution the authors propose to employ Datalog as a declarative language for the specification of higher level programming models such as iterative MapReduce or Pregel~\cite{malewicz:2010a} within their system.
+Standard query optimization techniques are applied on this common intermediate representation and then it is transformed into a physical execution plan.
+This plan is executed by Hyracks~\cite{borkar:2011a}, a data-parallel platform for data-intensive tasks.
+This approach has the advantage that a wider class of machine learning algorithms are efficiently supported within the same system, thus profiting from the same underlying infrastructure.
+However, at the moment the physical plans are still created by hand which makes the framework not applicable yet.
+
+L. Hendren~\cite{hendren:2011a} developed a static typing system for Matlab.
+Types are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.
+The defined types can then be used by the compiler to generate more efficient code and to check runtime types against their specifications.
+Furthermore this contributes to a better documentation of code and makes understanding easier.
+
+
+% \section{Conclusions}
+%\end{document}  % This is where a 'short' article might terminate
+
+%ACKNOWLEDGMENTS are optional
+% \section{Acknowledgments}
+
+
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{references}  % references.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+
+
+\end{document}
