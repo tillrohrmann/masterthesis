@@ -110,8 +110,8 @@ Consequently, they can improve their descriptive and predictive results by getti
 However, this comes at the price of an increased computing time which requires faster computer systems to make the computation feasible.
 
 Clock rates of CPUs stagnate, because technology hit the power wall.
-In order to further increase computing power though, multi-core and distributed systems were built.
-However, these systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
+In order to further increase computing power, though, multi-core and distributed systems were built.
+These systems, however, pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
 Due to this, parallel program development became cumbersome and error-prone.
 Therefore, new programming models were conceived which relieve the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
 
@@ -148,7 +148,7 @@ Therefore, I want to research and implement a distributed sparse linear algebra 
 
 Within my master's thesis I want to answer the following questions:
 \begin{itemize}
-\item Which are the language primitives of a distributed sparse linear algebra system in order to support a multitude of current machine learning algorithms?
+\item Which are the language primitives of a sparse linear algebra environment in order to support a multitude of current machine learning algorithms?
 \item How can the supported operations be realized in a distributed system?
 \end{itemize}
 
@@ -169,7 +169,7 @@ Since this will strongly depend on the actual distributed system, I will impleme
 The Stratosphere implementation acts at the same time as a proof of concept of Gilbert.
 I have chosen Stratosphere over other systems, such as Spark, because of its expressiveness and its powerful parallel data-flow optimizer.
 Last but not least, Stratosphere is developed at the chair of Prof. Markl, where I write my master's thesis.
-However, there should not be any fundamental obstacle which prevent the utilization of an other distributed computing system.
+However, there should not be any fundamental obstacle which prevent the utilization of another distributed computing system.
 
 \subsection{Optimization}
 
@@ -198,7 +198,7 @@ Furthermore, they are examples of widely used algorithms and thus they emphasize
 
 \section{Schedule}
 
-My schedule for the remaining things to do looks the following:
+My schedule for the remaining things to do is the following:
 First, I will finish the implementation of Gilbert.
 At the moment, the system can parse and compile Matlab programs using the specified subset of the language.
 However, it cannot be executed on Stratosphere yet.
@@ -211,7 +211,8 @@ In the case that there are some grievous errors in the implementation, I schedul
 
 Last but not least, I will finish my thesis by compiling the findings of my work.
 Since thesis writing is an iterative process I calculate $1.5$ months for it to be done.
-In order to minimize the work load at the end, I try to start writing after I have finished my implementation. 
+In order to minimize the work load at the end, I try to start writing after I have finished my implementation and alongside the evaluation phase.
+Consequently, I intend to submit my thesis at the end of May.
 
 \section{Related Work}
 
@@ -264,7 +265,7 @@ However, at the moment the physical plans are still created by hand which makes 
 L. Hendren~\cite{hendren:2011a} developed a static typing system for Matlab.
 Types are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.
 The defined types can then be used by the compiler to generate more efficient code and to check runtime types against their specifications.
-Furthermore this contributes to a better documentation of code and makes understanding easier.
+Furthermore this contributes to a better documentation of code and makes the understanding easier.
 
 
 % \section{Conclusions}
