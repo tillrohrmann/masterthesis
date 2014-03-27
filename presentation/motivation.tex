@@ -1,0 +1,58 @@
+\section{Motivation}
+
+\begin{frame}
+	\frametitle{Demand for big data analytics}
+	\begin{itemize}
+		\item More and more data gathered
+		\item Companies want to exploit the gathered data to obtain new insights
+		\begin{itemize}
+			\item Crime site prediction
+			\item Recommender systems
+		\end{itemize}
+		\item Data grows exponentially
+		\item Analytic methods have to scale up as well
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Ways to scale up}
+	\begin{enumerate}
+		\item Develop new algorithm
+		\item Increase computer performance
+		\item Run in parallel
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data analytic methods}
+	\begin{itemize}
+		\item Many data analytic and machine learning algorithms based on linear algebra
+		\item Developed with linear algebra systems, such as Matlab, R, Octacve, etc.
+		\begin{itemize}
+			\item + Easy to code and test -> Quick development
+			\item + Huge existing code base
+			\item - Explicit parallelization
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Distributed computing systems}
+	\begin{itemize}
+		\item Explicit parallelization, such as OpenMP and MPI, tedious and error-prone
+		\item New parallel programming paradigms emerged, MapReduce, Spark, Stratosphere, Pregel, etc.
+		\item Frees from low-level parallelization tasks
+		\item Requires to adhere to a certain programming model
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Distributed computing systems and data analytics}
+	\begin{itemize}
+		\item Intersection of people familiar with both domains is really small
+		\item Laborious to become acquainted with new domain
+		\item Tedious to transform existing algorithms to new programming model
+		\item Can't we bring both worlds together?
+		\item Solution: Gilbert
+	\end{itemize}
+\end{frame}

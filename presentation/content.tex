@@ -1,0 +1,38 @@
+\usetheme{Berlin}
+\usecolortheme{beaver}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{labelformat=empty,labelsep=none}
+
+\usepackage{color}
+\newcommand{\hilight}[1]{\colorbox{yellow}{#1}}
+
+\newcommand{\norm}[1]{\lVert#1\rVert}
+
+\title{Intermediate presentation\\
+Gilbert: A sparse linear algebra environment}
+\author[T. Rohrmann]{Till Rohrmann\\
+\texttt{till.rohrmann@campus.tu-berlin.de}}
+\institute[TUB]{Technische Universität Berlin}
+\date{\today}
+\subject{Gilbert: A sparse linear algebra environment}
+
+\begin{document}
+		\frame{\titlepage}
+		\begin{frame}
+			\frametitle{Table of Contents}
+			\tableofcontents
+		\end{frame}
+		\input{motivation}
+		\input{gilbert}
+		\input{approach}
+		\input{currentState}		
+		\input{outlook}
+		\input{bibliography}
+\end{document}

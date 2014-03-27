@@ -8,6 +8,10 @@
 				"item	Itemize"
 			],
 			[
+				"item",
+				"itemize"
+			],
+			[
 				"it",
 				"item	Itemize"
 			]
@@ -19,7 +23,15 @@
 			"file": "expose.tex",
 			"settings":
 			{
-				"buffer_size": 21716,
+				"buffer_size": 22626,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/till/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 29349,
 				"line_ending": "Unix"
 			}
 		},
@@ -76,10 +88,10 @@
 	},
 	"file_history":
 	[
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.sublime-workspace",
 		"/Users/till/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/references.bib",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.txt",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.tex",
@@ -112,6 +124,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ctrl+alt",
+			"ctrl+alt+d",
+			"itemize",
+			"}\n",
 			"mapreduce",
 			" \n",
 			"map",
@@ -160,15 +176,15 @@
 					"file": "expose.tex",
 					"settings":
 					{
-						"buffer_size": 21716,
+						"buffer_size": 22626,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12514,
-								12514
+								16289,
+								16289
 							]
 						],
 						"settings":
@@ -179,13 +195,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2757.0,
+						"translation.y": 4096.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "/Users/till/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+					"settings":
+					{
+						"buffer_size": 29349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27815,
+								27815
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8610.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "references.bib",
 					"settings":
 					{
@@ -212,7 +255,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "expose.sublime-project",
 					"settings":
 					{

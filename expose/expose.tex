@@ -24,7 +24,7 @@
 
 % ****************** TITLE ****************************************
 
-\title{Gilbert: A distributed sparse linear algebra system for machine learning on web-scale data.}
+\title{Gilbert: A sparse linear algebra environment for machine learning on web-scale data.}
 \subtitle{Exposé master's thesis}
 
 % ****************** AUTHORS **************************************
@@ -166,7 +166,6 @@ Within my master's thesis I want to answer the following questions:
 \begin{itemize}
 \item Which are the language primitives of a distributed sparse linear algebra system in order to support a multitude of current machine learning algorithms?
 \item How can the supported operations be realized in a distributed system?
-\item What kind of automatic optimization can be applied to the program in order to speed it up?
 \end{itemize}
 
 \subsection{Language primitives}
@@ -178,7 +177,7 @@ Furthermore, it is of particular interest to keep this set as small as possible,
 
 \subsection{Runtime}
 
-I want to research how the most common linear algebra operations can be efficiently represented within a MapReduce-like system.
+I want to research how the most common linear algebra operations can be efficiently represented within a parallel data flow system.
 One key aspect is going to be the matrix matrix multiplication because it is one of the central operations of many machine learning algorithms and it is one of the most time consuming operations as well.
 Therefore, it is crucial to efficiently implement this operation.
 This requires a thorough investigation and evaluation of all possible implementations.
@@ -244,7 +243,7 @@ SystemML is similar to the proposed approach, however it has no proper iteration
 Furthermore, it relies on the MapReduce framework with all of its deficiencies compared to the more powerful distributed computing system Stratosphere.
 The declarative language of SystemML is not a subset of Matlab or R and thus it cannot directly be used by native Matlab or R users.
 
-Stratosphere~\cite{battre:2010a} is a distributed computing framework which is a generalization of MapReduce.
+Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
 It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
 Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties.
 These properties are exploited by the compiler to select the best execution plan.

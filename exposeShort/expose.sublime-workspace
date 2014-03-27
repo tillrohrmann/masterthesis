@@ -19,7 +19,7 @@
 			"file": "expose.tex",
 			"settings":
 			{
-				"buffer_size": 21716,
+				"buffer_size": 20337,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "references.bib",
 			"settings":
 			{
-				"buffer_size": 36174,
+				"buffer_size": 38268,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,7 +35,7 @@
 			"file": "expose.sublime-project",
 			"settings":
 			{
-				"buffer_size": 237,
+				"buffer_size": 242,
 				"line_ending": "Unix"
 			}
 		}
@@ -112,6 +112,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"data parallel",
+			"data",
+			"comparing",
 			"mapreduce",
 			" \n",
 			"map",
@@ -160,15 +163,15 @@
 					"file": "expose.tex",
 					"settings":
 					{
-						"buffer_size": 21716,
+						"buffer_size": 20337,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12514,
-								12514
+								878,
+								878
 							]
 						],
 						"settings":
@@ -179,7 +182,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2757.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -189,15 +192,15 @@
 					"file": "references.bib",
 					"settings":
 					{
-						"buffer_size": 36174,
+						"buffer_size": 38268,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12634,
-								12634
+								38266,
+								38266
 							]
 						],
 						"settings":
@@ -206,7 +209,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2250.0,
+						"translation.y": 6885.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -216,15 +219,15 @@
 					"file": "expose.sublime-project",
 					"settings":
 					{
-						"buffer_size": 237,
+						"buffer_size": 242,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								234,
-								234
+								0,
+								0
 							]
 						],
 						"settings":

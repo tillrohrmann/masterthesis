@@ -1,0 +1,40 @@
+\section{Approach}
+
+\begin{frame}
+	\frametitle{Approach}
+	\begin{enumerate}
+		\item Compiling Matlab code into intermediate representation
+		\item Intermediate representation: Abstraction to apply transformations independently of distributed computing system
+		\item Execution on specific distributed computing system
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Language}
+	\begin{itemize}
+		\item Matlab clone
+		\item Support of basic linear algebra operations
+		\item Some built-in functions, repmat, linspace, pdist2
+		\item Loop support, fixpoint-Iteration
+		\item Language expressive enough to support variety of algorithms, Pagerank, k-means, NNMF
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Compilation}
+	\begin{itemize}
+		\item Scala's combinator parsing utility -> Creates backtracking parser
+		\item Powerful enough for our language
+		\item Matlab is dynamically typed
+		\item Execution on Stratosphere requires type knowledge at compilation time
+		\item Hindley-Milner type inference algorithm to infer types and dimensions
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Runtime}
+	\begin{itemize}
+		\item Translation into runtime specific execution format
+		\item Support of Stratosphere, (maybe Spark)
+	\end{itemize}
+\end{frame}
