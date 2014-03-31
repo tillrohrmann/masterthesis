@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation",
+			"file_exclude_patterns":[
+				"*.aux",
+				"*.bbl",
+				"*.blg",
+				"*.log",
+				"*.pdf",
+				"*.fdb_latexmk",
+				"*.synctex.gz",
+				"*.out",
+				"*.snm",
+				"*.toc",
+				"*.nav"
+			]
+		}
+	]
+}

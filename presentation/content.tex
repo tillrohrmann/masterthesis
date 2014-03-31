@@ -1,3 +1,4 @@
+%!TEX root = presentation.tex
 \usetheme{Berlin}
 \usecolortheme{beaver}
 
@@ -5,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{caption}
@@ -13,9 +15,34 @@
 \usepackage{color}
 \newcommand{\hilight}[1]{\colorbox{yellow}{#1}}
 
-\newcommand{\norm}[1]{\lVert#1\rVert}
+\usepackage[backend=bibtex, 
+firstinits=true,
+style=numeric]{biblatex}
+\addbibresource{bibliography.bib}
 
-\title{Intermediate presentation\\
+\setbeamertemplate{bibliography item}{%
+  \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+    or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+    or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+    {\setbeamertemplate{bibliography item}[book]}
+    {\ifentrytype{online}
+       {\setbeamertemplate{bibliography item}[online]}
+       {\setbeamertemplate{bibliography item}[article]}}%
+  \usebeamertemplate{bibliography item}}
+
+\defbibenvironment{bibliography}
+  {\list{}
+     {\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}}
+  {\endlist}
+  {\item}
+
+
+\title{Presentation\\
 Gilbert: A sparse linear algebra environment}
 \author[T. Rohrmann]{Till Rohrmann\\
 \texttt{till.rohrmann@campus.tu-berlin.de}}
@@ -34,5 +61,7 @@ Gilbert: A sparse linear algebra environment}
 		\input{approach}
 		\input{currentState}		
 		\input{outlook}
+		\input{relatedWork}
 		\input{bibliography}
+		\input{matrixMult}
 \end{document}

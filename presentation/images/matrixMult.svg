@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg5275"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="matrixMult.svg">
+  <defs
+     id="defs5277">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path6294"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="302.5082"
+     inkscape:cy="713.4699"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1399"
+     inkscape:window-height="856"
+     inkscape:window-x="41"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5283" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5280">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.37880722;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 420.90542,442.14153 c -0.66765,-0.14974 -1.63227,-0.99721 -2.08786,-1.83427 -0.1844,-0.33881 -0.39492,-0.98363 -0.46781,-1.43295 -0.0892,-0.55007 -0.13214,-8.65408 -0.13131,-24.80806 0.001,-25.3971 -0.008,-24.96639 0.56334,-26.07122 0.31389,-0.60701 1.06326,-1.37973 1.63461,-1.68555 l 0.51369,-0.27497 27.24255,-0.0333 27.24255,-0.0333 0,28.1597 0,28.15969 -26.99001,-0.0135 c -16.35084,-0.008 -27.19883,-0.0604 -27.51975,-0.13233 l 0,0 z"
+       id="path6148"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.37880722;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 477.68803,414.1308 0,-28.15942 26.7518,0 c 17.60627,0 26.98332,0.0439 27.42901,0.12843 1.2202,0.2314 2.07173,1.03098 2.66773,2.50493 l 0.28821,0.71277 0.0358,24.05426 c 0.0224,15.04392 -0.0102,24.43264 -0.087,25.06441 -0.20298,1.66929 -0.9306,2.89422 -2.08682,3.51311 l -0.51369,0.27496 -27.24255,0.033 -27.24255,0.033 0,-28.15941 z"
+       id="path6150"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:0.37880722;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 687.79641,444.64232 c -1.34452,-0.29173 -2.39122,-1.39714 -2.6404,-2.7885 -0.2132,-1.19049 -0.18003,-50.14585 0.0347,-51.17024 0.2909,-1.38791 1.29656,-2.4068 2.65249,-2.68735 0.45185,-0.0935 8.41693,-0.12446 26.03115,-0.1012 l 25.38008,0.0335 0.72025,0.35369 c 0.80242,0.39404 1.2736,0.88288 1.66727,1.72975 l 0.26413,0.56821 0,25.75889 0,25.75889 -0.26803,0.5795 c -0.34205,0.7395 -1.06462,1.46207 -1.80412,1.80412 l -0.5795,0.26803 -25.38008,0.022 c -19.3281,0.0168 -25.54648,-0.014 -26.07791,-0.12936 z"
+       id="path6152"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#00ff00;stroke:#00ff00;stroke-width:0.75761443;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 206.7716,444.09814 c -1.68824,-1.02937 -1.59063,0.67605 -1.59063,-27.78941 0,-28.46546 -0.0976,-26.76004 1.59063,-27.78942 0.78798,-0.48046 1.46496,-0.49297 26.69364,-0.49297 25.21273,0 25.90613,0.0128 26.69219,0.49208 0.44386,0.27064 1.01207,0.80496 1.26269,1.18738 0.43001,0.65615 0.45998,2.08952 0.53237,25.45527 0.0422,13.61799 0.003,25.38122 -0.0881,26.14052 -0.13722,1.1491 -0.32503,1.54071 -1.12029,2.33598 l -0.95543,0.95543 -26.10427,-0.001 c -25.44513,-10e-4 -26.12469,-0.0134 -26.91276,-0.49391 l 0,6e-5 z"
+       id="path6140"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#00ff00;stroke:#00ff00;stroke-width:0.75761443;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m -2.152837,414.16764 0,-28.16349 26.958447,3.9e-4 c 30.306344,4.4e-4 28.143577,-0.1394 29.286463,1.89365 l 0.567863,1.01015 0.0042,25.20074 c 0.004,24.45762 -0.0103,25.22909 -0.486374,26.16225 -0.269791,0.52884 -0.809592,1.17775 -1.199556,1.44204 -0.684492,0.46389 -1.650667,0.48289 -27.920013,0.54914 l -27.210997,0.0686 0,-28.16349 z"
+       id="path6136"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#00ff00;stroke:#00ff00;stroke-width:0.75761443;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m -59.142382,442.04305 c -1.001584,-0.28998 -2.010414,-1.46654 -2.355127,-2.74671 -0.17745,-0.659 -0.241738,-9.08145 -0.196045,-25.68427 0.06656,-24.18599 0.07857,-24.7217 0.573063,-25.56122 0.277792,-0.47161 0.825899,-1.09665 1.218016,-1.38896 l 0.71294,-0.53147 27.255659,-0.0665 27.255658,-0.0665 0,28.16134 0,28.16134 -26.832177,-0.0228 c -15.441228,-0.0131 -27.171717,-0.12108 -27.631987,-0.25433 z"
+       id="path6134"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="290"
+       y="167.36218"
+       id="text5823"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan5825"
+         x="290"
+         y="167.36218">*</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="385"
+       y="162.36218"
+       id="text5862"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan5864"
+         x="385"
+         y="162.36218">=</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5913"
+       width="60"
+       height="120"
+       x="420"
+       y="92.362183"
+       ry="5"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 420,152.36218 60,0"
+       id="path5915"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g5981"
+       style="fill:#00ff00;stroke:#000000"
+       transform="translate(78,2)"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         id="g6013"
+         transform="translate(-78.25118,-2.3254444)">
+        <rect
+           style="fill:#ffffff;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+           id="rect5285"
+           width="120"
+           height="120"
+           x="160"
+           y="92.362183"
+           ry="5" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path6002"
+           d="m 161.58663,124.24577 c 0,-16.37072 0.13524,-27.475304 0.3412,-28.017036 0.18766,-0.493586 0.78317,-1.187084 1.32335,-1.541107 0.92113,-0.603684 2.67515,-0.649761 28.23023,-0.741586 l 27.24808,-0.09791 0,28.758629 0,28.75862 -28.57143,0 -28.57143,0 0,-27.11961 z"
+           style="fill:#00ff00;stroke:#00ff00;stroke-width:0.71428573;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path6004"
+           d="m 221.22949,122.60676 0,-28.758627 27.24808,0.09791 c 25.55508,0.09183 27.3091,0.137902 28.23023,0.741586 0.54017,0.354023 1.13568,1.047521 1.32334,1.541107 0.20597,0.541732 0.34121,11.646314 0.34121,28.017034 l 0,27.11961 -28.57143,0 -28.57143,0 0,-28.75862 z"
+           style="fill:#00ff00;stroke:#00ff00;stroke-width:0.71428573;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5998"
+           d="m 163.41166,210.1527 c -1.84877,-1.0247 -1.7988,-0.21381 -1.81237,-29.41232 l -0.0127,-27.23215 28.57143,0 28.57143,0 0,28.57143 0,28.57143 -27.23214,-0.0126 c -21.91795,-0.0102 -27.39871,-0.10499 -28.08569,-0.48575 z"
+           style="fill:#ff0000;stroke:#ff0000;stroke-width:0.71428573;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path6000"
+           d="m 221.22949,182.07966 0,-28.57143 28.57143,0 28.57143,0 0,27.1606 c 0,29.61841 0.0514,28.85877 -2.00465,29.64046 -0.54377,0.20674 -11.61479,0.3418 -28.0186,0.3418 l -27.11961,0 0,-28.57143 z"
+           style="fill:#ff0000;stroke:#ff0000;stroke-width:0.71428573;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+        <path
+           style="fill:#00ff00;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 160,152.36218 120,0"
+           id="path5795"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:#00ff00;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           d="m 220,92.362183 0,119.999997"
+           id="path5797"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <path
+       style="fill:#00ff00;stroke:#00ff00;stroke-width:1.42857146;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 421.60771,124.12986 c 0,-22.94327 0.15382,-26.846399 1.11193,-28.21429 l 1.11193,-1.587504 26.24521,0 c 19.46057,0 26.4668,0.22158 27.10236,0.857142 0.63683,0.636827 0.85714,7.888892 0.85714,28.214282 l 0,27.35715 -28.21428,0 -28.21429,0 0,-26.62678 z"
+       id="path6026"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#ff0000;stroke:#ff0000;stroke-width:1.42857146;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 423.03628,209.32807 c -1.37844,-1.37845 -1.42857,-2.38096 -1.42857,-28.57143 l 0,-27.14286 28.21429,0 28.21428,0 0,27.4595 0,27.45949 -1.5875,1.11194 c -1.36399,0.95537 -5.13542,1.11193 -26.78572,1.11193 -24.24583,0 -25.2522,-0.054 -26.62678,-1.42857 z"
+       id="path6028"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g6046"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="5"
+         y="92.362183"
+         x="315"
+         height="120"
+         width="60"
+         id="rect5827"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5829"
+         d="m 315,152.36218 60,0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6030"
+         d="m 316.53728,124.31914 c 7e-4,-18.97459 0.059,-27.22141 0.1961,-27.723217 0.2636,-0.964997 0.92897,-1.804516 1.77042,-2.233792 0.6862,-0.350075 1.08899,-0.355494 26.42396,-0.355494 22.74811,0 25.80325,0.03181 26.38451,0.274667 0.85225,0.356093 1.24641,0.723636 1.71623,1.600333 l 0.38278,0.714286 0.048,27.366067 0.048,27.36608 -28.48547,0 -28.48546,0 10e-4,-27.00893 z"
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6032"
+         d="m 318.53304,210.32866 c -0.69083,-0.34425 -1.05633,-0.67773 -1.41899,-1.29464 l -0.48848,-0.83095 -0.0474,-27.36608 -0.0474,-27.36607 28.48825,0 28.48826,0 -0.048,27.27679 c -0.0388,22.0532 -0.0929,27.37938 -0.28254,27.8125 -0.33737,0.77046 -1.08516,1.5125 -1.90829,1.8936 -0.6846,0.31696 -1.77582,0.33086 -26.25958,0.33462 l -25.54529,0.004 -0.93051,-0.46369 z"
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+    <g
+       id="g6062"
+       transform="matrix(1,0,0,1.1928685,-103.46272,83.28425)"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="5"
+         y="252.36218"
+         x="40"
+         height="50"
+         width="120"
+         id="rect6034"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6038"
+         d="m 100,252.36218 0,50"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g6052"
+       transform="translate(-215,260)"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect6054"
+         width="60"
+         height="120"
+         x="315"
+         y="92.362183"
+         ry="5" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 315,152.36218 60,0"
+         id="path6056"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         d="m 316.53728,124.31914 c 7e-4,-18.97459 0.059,-27.22141 0.1961,-27.723217 0.2636,-0.964997 0.92897,-1.804516 1.77042,-2.233792 0.6862,-0.350075 1.08899,-0.355494 26.42396,-0.355494 22.74811,0 25.80325,0.03181 26.38451,0.274667 0.85225,0.356093 1.24641,0.723636 1.71623,1.600333 l 0.38278,0.714286 0.048,27.366067 0.048,27.36608 -28.48547,0 -28.48546,0 10e-4,-27.00893 z"
+         id="path6058"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         d="m 318.53304,210.32866 c -0.69083,-0.34425 -1.05633,-0.67773 -1.41899,-1.29464 l -0.48848,-0.83095 -0.0474,-27.36608 -0.0474,-27.36607 28.48825,0 28.48826,0 -0.048,27.27679 c -0.0388,22.0532 -0.0929,27.37938 -0.28254,27.8125 -0.33737,0.77046 -1.08516,1.5125 -1.90829,1.8936 -0.6846,0.31696 -1.77582,0.33086 -26.25958,0.33462 l -25.54529,0.004 -0.93051,-0.46369 z"
+         id="path6060"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="68.507294"
+       y="426.32809"
+       id="text6066"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6068"
+         x="68.507294"
+         y="426.32809">*</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="168.50728"
+       y="421.32809"
+       id="text6070"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6072"
+         x="168.50728"
+         y="421.32809">=</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect6074"
+       width="60"
+       height="60"
+       x="203.50728"
+       y="386.32809"
+       ry="5"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       transform="matrix(1,0,0,1.1928685,376.53728,83.284252)"
+       id="g6102"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect6104"
+         width="120"
+         height="50"
+         x="40"
+         y="252.36218"
+         ry="5" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 100,252.36218 0,50"
+         id="path6106"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       transform="translate(265,260)"
+       id="g6108"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         ry="5"
+         y="92.362183"
+         x="315"
+         height="120"
+         width="60"
+         id="rect6110"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6112"
+         d="m 315,152.36218 60,0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6114"
+         d="m 316.53728,124.31914 c 7e-4,-18.97459 0.059,-27.22141 0.1961,-27.723217 0.2636,-0.964997 0.92897,-1.804516 1.77042,-2.233792 0.6862,-0.350075 1.08899,-0.355494 26.42396,-0.355494 22.74811,0 25.80325,0.03181 26.38451,0.274667 0.85225,0.356093 1.24641,0.723636 1.71623,1.600333 l 0.38278,0.714286 0.048,27.366067 0.048,27.36608 -28.48547,0 -28.48546,0 10e-4,-27.00893 z"
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path6116"
+         d="m 318.53304,210.32866 c -0.69083,-0.34425 -1.05633,-0.67773 -1.41899,-1.29464 l -0.48848,-0.83095 -0.0474,-27.36608 -0.0474,-27.36607 28.48825,0 28.48826,0 -0.048,27.27679 c -0.0388,22.0532 -0.0929,27.37938 -0.28254,27.8125 -0.33737,0.77046 -1.08516,1.5125 -1.90829,1.8936 -0.6846,0.31696 -1.77582,0.33086 -26.25958,0.33462 l -25.54529,0.004 -0.93051,-0.46369 z"
+         style="fill:#0000ff;stroke:#0000ff;stroke-width:0.35714287;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text6118"
+       y="426.32806"
+       x="548.50726"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="426.32806"
+         x="548.50726"
+         id="tspan6120"
+         sodipodi:role="line">*</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text6122"
+       y="421.32806"
+       x="648.50726"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="421.32806"
+         x="648.50726"
+         id="tspan6124"
+         sodipodi:role="line">=</tspan></text>
+    <rect
+       ry="5"
+       y="386.32806"
+       x="683.50726"
+       height="60"
+       width="60"
+       id="rect6126"
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="165"
+       y="132.36218"
+       id="text6154"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6156"
+         x="165"
+         y="132.36218">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6158">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="225"
+       y="132.36218"
+       id="text6160"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6162"
+         x="225"
+         y="132.36218">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6164">0,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="165"
+       y="192.36218"
+       id="text6166"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6168"
+         x="165"
+         y="192.36218">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6170">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="225"
+       y="192.36218"
+       id="text6172"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6174"
+         x="225"
+         y="192.36218">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6176">1,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="327.14285"
+       y="133.07648"
+       id="text6178"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6180"
+         x="327.14285"
+         y="133.07648">B<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6182">0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="327.5"
+       y="193.79076"
+       id="text6184"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6186"
+         x="327.5"
+         y="193.79076">B<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6190">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="435"
+       y="132.36218"
+       id="text6192"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6194"
+         x="435"
+         y="132.36218">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6198">0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="435"
+       y="192.36218"
+       id="text6200"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6202"
+         x="435"
+         y="192.36218">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6204">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="111.53728"
+       y="394.31915"
+       id="text6206"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6208"
+         x="111.53728"
+         y="394.31915">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6210">0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="111.53728"
+       y="444.31915"
+       id="text6212"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6214"
+         x="111.53728"
+         y="444.31915">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6216">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="593.50378"
+       y="394.36212"
+       id="text6218"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6220"
+         x="593.50378"
+         y="394.36212">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6222">0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="593.50378"
+       y="454.36212"
+       id="text6224"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6226"
+         x="593.50378"
+         y="454.36212">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6228">1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-58.462719"
+       y="424.31915"
+       id="text6230"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6232"
+         x="-58.462719"
+         y="424.31915">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6234">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="1.5372803"
+       y="424.31915"
+       id="text6236"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6238"
+         x="1.5372803"
+         y="424.31915">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6240">0,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="221.53726"
+       y="424.31915"
+       id="text6242"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6244"
+         x="221.53726"
+         y="424.31915">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6246">0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="423.50378"
+       y="424.36212"
+       id="text6248"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6250"
+         x="423.50378"
+         y="424.36212">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6252">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="483.02167"
+       y="425.13351"
+       id="text6254"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6256"
+         x="483.02167"
+         y="425.13351">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6258">1,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="703.50378"
+       y="424.36212"
+       id="text6260"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6262"
+         x="703.50378"
+         y="424.36212">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan6264">1</tspan></tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:2.41273236;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect6266"
+       width="380"
+       height="200"
+       x="-95.194389"
+       y="286.00455"
+       ry="4"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-85.194389"
+       y="316.00455"
+       id="text6268"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan6270"
+         x="-85.194389"
+         y="316.00455">Node 1</tspan></text>
+    <rect
+       ry="3.9999998"
+       y="285.97137"
+       x="384.64288"
+       height="200"
+       width="380"
+       id="rect6272"
+       style="fill:none;stroke:#000000;stroke-width:2.41273236;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text6274"
+       y="315.97137"
+       x="394.43982"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="315.97137"
+         x="394.43982"
+         id="tspan6276"
+         sodipodi:role="line">Node 2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       d="m 260,232.36218 -80,40"
+       id="path6278"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       d="m 400,232.36218 80,40"
+       id="path6280"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/images/rmm.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>
