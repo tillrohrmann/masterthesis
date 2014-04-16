@@ -1,0 +1,55 @@
+\chapter{Related Work}
+\label{cha:relatedwork}
+
+he challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed machine learning to subdue the data flood.
+Consequently, several frameworks and programming models have been proposed to tackle the aforementioned problems.
+One inspiring approach is SystemML~\cite{ghoting:2011a}.
+SystemML provides a declarative higher-level language for expressing linear algebra operations.
+These operations are then mapped onto MapReduce tasks.
+It further applies several optimization strategies such as blocking, dynamic block-level operations, piggybacking to reduce the number of MapReduce tasks and local aggregation within the reducers.
+The system can evaluate different execution plans depending on the size of its inputs and its blocking strategy.
+It selects the most cost-efficient plan based on the network costs.
+SystemML is similar to the proposed approach, however it has no proper iteration mechanism besides of simple loop unrolling.
+Furthermore, it relies on the MapReduce framework with all of its deficiencies compared to the more powerful distributed computing system Stratosphere.
+The declarative language of SystemML is not a subset of Matlab or R and thus it cannot directly be used by native Matlab or R users.
+
+Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
+It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
+Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties.
+These properties are exploited by the compiler to select the best execution plan.
+Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}.
+However, it still lacks an easy to use language for the development of machine learning algorithms.
+
+Another distributed computing framework is Spark~\cite{zaharia:2010a} which can be seen as an extension of MapReduce with iteration support.
+Spark performs its computation on resilient distributed datasets (RDD) which can be kept in memory during computations.
+This allows to efficiently realize iterations within in the framework.
+Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
+
+Apache Mahout~\cite{apache:a2011} is a project offering a library of scalable machine learning algorithms.
+Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
+However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
+By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
+
+Pegasus~\cite{kang:2009a} is a programming model mainly intended for graph mining purposes.
+It is centered around the abstraction of a generalized iterative matrix vector multiplication (GIM-V), which can be found in many graph algorithms.
+The GIM-V operation can be represented by a map and reduce operation.
+Consequently, Pegasus implements it on top of Hadoop.
+Gilbert is supposed to contain the GIM-V operation and will not only consider the operation itself for optimization purposes but also its context of previous and succeeding operations.
+Therefore, Gilbert should be a generalization of Pegasus.
+
+Y.~Bu et al.~\cite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
+All of these systems exhibit a tight coupling of a solution's logical representation and physical representation.
+This renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
+Moreover, the systems are mostly disjoint which implies that each framework has to be updated in order to profit from new optimization strategies.
+As a solution the authors propose to employ Datalog as a declarative language for the specification of higher level programming models such as iterative MapReduce or Pregel~\cite{malewicz:2010a} within their system.
+Standard query optimization techniques are applied on this common intermediate representation and then it is transformed into a physical execution plan.
+This plan is executed by Hyracks~\cite{borkar:2011a}, a data-parallel platform for data-intensive tasks.
+This approach has the advantage that a wider class of machine learning algorithms are efficiently supported within the same system, thus profiting from the same underlying infrastructure.
+However, at the moment the physical plans are still created by hand which makes the framework not applicable yet.
+
+L. Hendren~\cite{hendren:2011a} developed a static typing system for Matlab.
+Types are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.
+The defined types can then be used by the compiler to generate more efficient code and to check runtime types against their specifications.
+Furthermore this contributes to a better documentation of code and makes understanding easier.
+
+

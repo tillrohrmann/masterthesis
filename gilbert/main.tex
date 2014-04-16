@@ -1,0 +1,81 @@
+% v1.6 - 2013-05-13
+% - bibliography headers fixed - thanx lorenz lehmann
+% - high quality titlepage - thanx thomas graf
+% - removed separation of online and offline references -> style 1.4a
+% v1.5 - 2013-01-16
+
+\documentclass[twoside,11pt,titlepage,a4paper,english,bibliography=totocnumbered,listof=numbered]{scrbook}
+
+% Template Style
+\include{style}
+
+% custom hyphenation					% add words to this list to prevent hyphenation
+\hyphenation{
+ASCII
+TCP
+}
+
+%make readable references
+\usepackage[pdftex,pdfpagelabels=true]{hyperref}
+\hypersetup{%
+	pdftitle={Thesis Title},
+	pdfauthor={Thesis Author},
+	pdfkeywords={key1, key2, key3},
+	pdfsubject={Thesis Subject}
+}
+
+\usepackage[binary-units=true]{siunitx}
+
+\begin{document}
+
+%--------------------------------------------------------------
+\frontmatter
+
+\input{000_titlepage}
+
+\input{001_disclaimer}
+
+\input{002_acknowledgements}
+
+\input{003_abstract}
+
+\input{004_zusammenfassung}
+
+\tableofcontents{\thispagestyle{empty}}
+
+\input{005_outline}
+
+%--------------------------------------------------------------
+\mainmatter
+
+%\part{}						% optional: use parts to structure your thesis
+\input{01_introduction}
+\input{02_related_work}
+\input{03_concept_and_design}
+\input{04_implementation}
+\input{05_evaluation}
+\input{06_conclusion}
+
+%--------------------------------------------------------------
+\backmatter
+
+\listoftables
+\listoffigures
+
+\setwidesite{}						% Set page to be wider for bibliography
+
+%\chapter*{Bibliography} % (fold)
+%\label{cha:bibliography}
+%\markboth{Bibliography}{Bibliography}
+%\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+%\printbibliography[heading=offline,filter=offline]
+%\printbibliography[heading=online,filter=online]
+
+\begin{appendices}
+
+\input{a01_listings}
+
+\end{appendices}
+
+\end{document}

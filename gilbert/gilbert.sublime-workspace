@@ -1,0 +1,315 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Binary",
+				"BinaryUpdateRegistry"
+			],
+			[
+				"Bree",
+				"BreezeMatrixRegistries"
+			],
+			[
+				"Opa",
+				"OpAnd"
+			],
+			[
+				"ite",
+				"item	Itemize"
+			],
+			[
+				"it",
+				"item	Itemize"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "{\n	\"folders\":\n	[\n		{\n			\"path\": \"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert\",\n		}\n	]\n}\n",
+			"file": "gilbert.sublime-project",
+			"file_size": 285,
+			"file_write_time": 1397641076000000,
+			"settings":
+			{
+				"buffer_size": 99,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"jump",
+				"LaTeXTools: Jump to PDF"
+			],
+			[
+				"latexTools",
+				"LaTeXTools: Jump to PDF"
+			],
+			[
+				"migrat",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 429.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/bibliography.tex",
+		"/Users/till/uni/ss13/Learning Theory Seminar/edu-tub-learningtheory/presentation/bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.sublime-project",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/exposeShort/references.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.bbl",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/outlook.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.tex",
+		"/Users/till/uni/ss13/Learning Theory Seminar/edu-tub-learningtheory/presentation/presentation2.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/SubmatrixOps.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/GilbertMatrixOps.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/Bitmatrix.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/BreezeMatrixRegistries.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/GilbertMatrix.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/BitmatrixOps.scala",
+		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/BreezeMatrixOps.scala",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/Maven/config_generator.pyc",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/LaTeXTools/README.markdown",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.sublime-workspace",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/till/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/references.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.txt",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/expose/expose.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/flies-eps-converted-to.pdf",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/expose.sublime-project",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/references.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/expose.aux",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/expose.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/dima_sample.pdf",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/dima.cls",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/flies.eps",
+		"/Users/till/uni/ws14/dima/mastersthesis/expose/dima_sample.aux",
+		"/Users/till/uni/ws14/dima/mastersthesis/resources/dima/Dima_Latex_Oct_09/DimaDocTemplate/dima_sample.tex",
+		"/Users/till/Downloads/solarized/osx-terminal.app-colors-solarized/README.md",
+		"/Users/till/test.cpp"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"mahout",
+			"spark",
+			"ITCase",
+			"JobManagerI",
+			"step",
+			"size",
+			"pom",
+			"is_ena",
+			"Received End",
+			"data parallel",
+			"data",
+			"comparing",
+			"mapreduce",
+			" \n",
+			"map",
+			"we",
+			"ctrl+super",
+			"super+ctr",
+			"growth",
+			"d",
+			"itemize",
+			"}\n",
+			" \n",
+			"}\n",
+			"epsfig",
+			"footnot",
+			"we",
+			"We",
+			"we",
+			"We",
+			"we",
+			"keep",
+			"focus",
+			"the",
+			"		\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "gilbert.sublime-project",
+					"settings":
+					{
+						"buffer_size": 99,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								89,
+								89
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"expose.tex"
+			],
+			[
+				"flies",
+				"flies.eps"
+			],
+			[
+				"t",
+				"/Users/till/test.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 290.0,
+	"status_bar_visible": true
+}

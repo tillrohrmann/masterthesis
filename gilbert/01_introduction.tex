@@ -1,0 +1,70 @@
+%!TEX root=main.tex
+\chapter{Introduction}
+\label{cha:introduction}
+
+\chapterquote{I'm awesome!}{Barney Stinson, WIRED magazine, 19.1.2009}
+
+Since the beginning of the information age, our environment became more and more infused with digital technology gathering, processing, storing and broadcasting information of various kinds.
+Nowadays, computing devices are almost ubiquitous in our daily lives and many can hardly imagine a world without them anymore.
+We can find information technology in our cars making our ride safer, in our washing machines controlling the proper cleansing and in our mobile phones acting as our personal assistant just to name a few.
+Apart from the personal use, digital devices found their way into almost all important branches of science and industry such as finance, engineering, health, commerce, etc.
+
+The information technology's key to success and the reason for its quick adoption is its unprecedented amplification in computing, storage and telecommunication capacity over the last couple of decades.
+The growth has been mainly spurred by the technological progress on the fields of integrated circuits, broadcasting technology and algorithms.
+Since digital devices are strongly linked to the semiconductor technology, the aforementioned capacities exhibit a similar exponential growth rate~\cite{hilbert:s2011a} as Moore~\cite{moore:1965a} predicted for the number of components on integrated circuits.
+Nowadays, it is estimated that $\SI{2.5}{\zetta\byte}$ are produced each day and this number is supposed to rise up to $\SI{40}{\zetta\byte}$ by the year of $\num{2040}$~\cite{ibm:2014a}.
+
+With the increase of data, people became aware of its usefulness and thus the demand for analyzing tools, able to exploit the gathered data, increased as well.
+Currently, insights gained from collected data already helps to improve a variety of processes.
+For example, retail stores analyze their sales, customer, pricing and weather data in order to decide which products to offer or  when to do a discount sale. 
+Police departments try to detect probable crime locations by extracting patterns from previously recorded criminal acts and then  reinforce the policemen in  this region~\cite{lohr:yt2012a}. 
+Hospitals analyze their patients' records and scientific studies in order to find the cancer treatment best complying with the  specifics of the patient and thus having the highest chance of cure~\cite{mskcc:2013a}. 
+These examples underline the importance and utility of data analysis tools. 
+The majority of these tools are based on statistic techniques. 
+Consequently, they can improve their descriptive and predictive results by getting fed more data.
+However, this comes at the price of an increased computing time which requires fast computer systems to make the computation feasible.
+
+In recent years, we have seen that clock rates of CPUs stagnated.
+Before, there was a simple receipt to increase the computing power of micro-controllers; increase the clock rate, which demands more power, and shrink the technology to mitigate for the increased power consumption.
+However, the shrinkage induce the problem of leakage, which increases the power demand again.
+The consumed power is limited by the amount of energy you can dissipate and thus there is a technological limit for the increase of clock rate.
+When it became clear that the micro-controller would hit this so-called power wall, one duplicated the micro-controller's functionality to support simultaneous execution of multiple applications and to harness the inherent parallelism of programs.
+
+The emerging multi-core and distributed systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
+Due to this, parallel program development became cumbersome and error-prone.
+Therefore, new programming models are conceived which relieve the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
+Instead, the programmer can concentrate on the actual algorithm and the goal he wants to achieve.
+
+These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source reimplementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
+MapReduce is a programming framework for concurrent computations on vast amounts of data running on a large cluster. 
+Originally, it is inspired by the often in the context of functional programming occurring functions \emph{map} and \emph{reduce}.
+Each MapReduce program is separated into a map-phase and a reduce-phase for which the user has to provide each a user-defined function.
+The input of the program is split up into key-value pairs and each pair is fed to the map operation which applies the user-defined map-function to it.
+This operation can be run completely in parallel since each call to the map-function is independent of the other calls.
+Each map-function produces a list of new key-value pairs which are then grouped according to their key value.
+Pairs with the same key are then given to the reduce-function which then produces a new list of key-value pairs.
+Again, each call of the reduce function can be run in parallel since there is no dependency. \footnote{foobar foobar}
+
+MapReduce, however, exhibits also some deficiencies in realizing common sub-tasks such as joining two datasets.
+These deficiencies result from the strict programming model and cause some serious performance losses.
+There are some other distributed programming models such as Stratosphere~\cite{battre:2010a} and Spark~\cite{zaharia:2010a} which try to tackle these problems.
+They both support iterative algorithms which is a necessary requisite for many data analytical algorithms.
+Furthermore, they both offer a more flexible pipeline not requiring to store intermediate results always to hard disks.
+
+But still, these frameworks force the user to express the program in a certain way, which is often not natural or intuitive for a user coming from a different domain.
+This implies that one has to overcome a particular entry-barrier to use the system and this might already be too high for some users.
+Furthermore, the actual program might become lengthy and complicated expressed within the programming model.
+This makes developing and debugging the program difficult as well as time-consuming and thus expensive.
+Especially in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
+Therefore, systems such as Matlab and R are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
+However, these linear algebra systems lack proper support for automatic parallelization on large clusters and thus restricting the user to a single workstation.
+Therefore, the amount of processable data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
+Moreover, machine learning people are usually no experts in the field of distributed computing, and neither vice versa.
+The group of experts on both fields is negligible small.
+Consequently, it is very difficult, time-consuming and not least expensive to implement machine learning algorithms on distributed systems.
+
+This problem would be mitigated by having a distributed sparse linear algebra system supporting a Matlab- and R-like language.
+Assuming that such a system is realizable, then one could run existing Matlab- or R-code directly or at most with minor adjustments in a distributed fashion.
+Furthermore, new distributed algorithms could be quickly implemented benefiting from the expressiveness of linear algebra.
+This would drastically speed up the application of machine learning and data analysis algorithms on web-scale data.
+Therefore, I want to research and implement a distributed sparse linear algebra system, henceforth called Gilbert, in the context of my master's thesis.
