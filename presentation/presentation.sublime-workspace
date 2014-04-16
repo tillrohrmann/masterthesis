@@ -27,13 +27,114 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "presentation.tex",
+			"settings":
+			{
+				"buffer_size": 191,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "presentation.vrb",
+			"settings":
+			{
+				"buffer_size": 251,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "content.tex",
+			"settings":
+			{
+				"buffer_size": 1870,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "matrixMult.tex",
+			"settings":
+			{
+				"buffer_size": 1397,
+				"line_ending": "Unix",
+				"name": "%!TEX root=presentation.tex"
+			}
+		},
+		{
+			"file": "relatedWork.tex",
+			"settings":
+			{
+				"buffer_size": 934,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "motivation.tex",
+			"settings":
+			{
+				"buffer_size": 1128,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "outlook.tex",
+			"settings":
+			{
+				"buffer_size": 572,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "currentState.tex",
+			"settings":
+			{
+				"buffer_size": 643,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "approach.tex",
+			"settings":
+			{
+				"buffer_size": 2671,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "gilbert.tex",
+			"settings":
+			{
+				"buffer_size": 442,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bibliography.tex",
+			"settings":
+			{
+				"buffer_size": 136,
+				"line_ending": "Unix"
+			}
+		}
 	],
-	"build_system": "",
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 317.0,
+		"height": 47.0,
 		"selected_items":
 		[
+			[
+				"jump",
+				"LaTeXTools: Jump to PDF"
+			],
+			[
+				"latexTools",
+				"LaTeXTools: Jump to PDF"
+			],
+			[
+				"migrat",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
@@ -76,6 +177,13 @@
 	},
 	"file_history":
 	[
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/bibliography.tex",
+		"/Users/till/uni/ss13/Learning Theory Seminar/edu-tub-learningtheory/presentation/bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.sublime-project",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/exposeShort/references.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.bbl",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/outlook.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/presentation/presentation.tex",
 		"/Users/till/uni/ss13/Learning Theory Seminar/edu-tub-learningtheory/presentation/presentation2.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/workspace/gilbert/runtimeMacros/src/main/scala/org/gilbertlang/runtimeMacros/linalg/operators/SubmatrixOps.scala",
@@ -124,6 +232,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mahout",
+			"spark",
 			"ITCase",
 			"JobManagerI",
 			"step",
@@ -174,8 +284,319 @@
 	"groups":
 	[
 		{
+			"selected": 9,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "presentation.tex",
+					"settings":
+					{
+						"buffer_size": 191,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"keep focus": false,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "presentation.vrb",
+					"settings":
+					{
+						"buffer_size": 251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "content.tex",
+					"settings":
+					{
+						"buffer_size": 1870,
+						"regions":
+						{
+							"bookmarks":
+							{
+								"flags": 144,
+								"icon": "bookmark",
+								"regions":
+								[
+									[
+										39,
+										39
+									]
+								],
+								"scope": "bookmarks"
+							}
+						},
+						"selection":
+						[
+							[
+								1367,
+								1367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "matrixMult.tex",
+					"settings":
+					{
+						"buffer_size": 1397,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"auto_name": "%!TEX root=presentation.tex",
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "relatedWork.tex",
+					"settings":
+					{
+						"buffer_size": 934,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "motivation.tex",
+					"settings":
+					{
+						"buffer_size": 1128,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29,
+								29
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "outlook.tex",
+					"settings":
+					{
+						"buffer_size": 572,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29,
+								29
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "currentState.tex",
+					"settings":
+					{
+						"buffer_size": 643,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								483,
+								483
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "approach.tex",
+					"settings":
+					{
+						"buffer_size": 2671,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1257,
+								1257
+							]
+						],
+						"settings":
+						{
+							"keep focus": false,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "gilbert.tex",
+					"settings":
+					{
+						"buffer_size": 442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								123,
+								123
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "bibliography.tex",
+					"settings":
+					{
+						"buffer_size": 136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

@@ -1,3 +1,4 @@
+%!TEX root=presentation.tex
 \section{Approach}
 
 \begin{frame}
@@ -26,7 +27,7 @@
 \begin{frame}[fragile]
 	\frametitle{Language}
 	\begin{columns}
-		\begin{column}{0.65\textwidth}
+		\begin{column}{0.60\textwidth}
 			\begin{itemize}
 				\item Matlab-like language
 				\item Support of basic linear algebra operations
@@ -35,15 +36,15 @@
 				\item Language expressive enough to support variety of algorithms, Pagerank, K-means, NNMF
 			\end{itemize}
 		\end{column}
-		\begin{column}{0.35\textwidth}
-			\begin{lstlisting}[basicstyle=\scriptsize]
+		\begin{column}{0.4\textwidth}
+			\begin{lstlisting}[basicstyle=\scriptsize, numbers=left, stepnumber=2]
 A'*B
 
-f=@(x) x.^2.0
+f = @(x) x.^2.0
 
 eps = 0.1
 
-c=@(p,c) norm(p-c,2) < eps
+c = @(p,c) norm(p-c,2) < eps
 
 fixpoint(1/2, f, 10, c)
 			\end{lstlisting}
@@ -103,6 +104,6 @@ MatrixMult(
 \begin{frame}
 	\frametitle{Example: Stratosphere execution plan}
 	\begin{center}
-		\includegraphics[height=0.9\textheight]{images/matrixMultDataflow.png}
+		\includegraphics[height=0.85\textheight]{images/matrixMultDataflow.png}
 	\end{center}
 \end{frame}

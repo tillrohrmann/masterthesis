@@ -155,7 +155,6 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
 				{
@@ -170,8 +169,8 @@
 						"selection":
 						[
 							[
-								878,
-								878
+								16768,
+								16768
 							]
 						],
 						"settings":
@@ -182,7 +181,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3062.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -209,7 +208,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6885.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -226,8 +225,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								236,
+								236
 							]
 						],
 						"settings":
