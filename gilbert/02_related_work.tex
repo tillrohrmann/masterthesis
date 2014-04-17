@@ -1,3 +1,4 @@
+%!TEX root=main.tex
 \chapter{Related Work}
 \label{cha:relatedwork}
 
@@ -25,7 +26,7 @@ Spark performs its computation on resilient distributed datasets (RDD) which can
 This allows to efficiently realize iterations within in the framework.
 Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
 
-Apache Mahout~\cite{apache:a2011} is a project offering a library of scalable machine learning algorithms.
+Apache Mahout~\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.
 Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
 However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
 By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.

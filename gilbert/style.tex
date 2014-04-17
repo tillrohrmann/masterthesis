@@ -57,6 +57,7 @@
 \definecolor{LightBlue}{rgb}{0.55,0.55,1}
 \definecolor{DarkBlue}{rgb}{0.2,0.2,0.5}
 \definecolor{DarkRed}{rgb}{0.71,0.12,0.07}
+\definecolor{TURed}{rgb}{0.61,0.062745,0.023529}
 
 % =========================================================================
 % = PAGE LAYOUT
@@ -304,21 +305,21 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 % ========================================================================
 
 % change color of item list
-\renewcommand{\labelitemi}{\color{DarkRed}$\bullet$}
-\renewcommand{\labelitemii}{\color{DarkRed}$\circ$}
-\renewcommand{\labelitemiii}{\color{DarkRed}$\ast$}
-\renewcommand{\labelitemiv}{\color{DarkRed}$\diamond$}
+\renewcommand{\labelitemi}{\color{TURed}$\bullet$}
+\renewcommand{\labelitemii}{\color{TURed}$\circ$}
+\renewcommand{\labelitemiii}{\color{TURed}$\ast$}
+\renewcommand{\labelitemiv}{\color{TURed}$\diamond$}
 
 % change color of enum list
-\renewcommand{\labelenumi}{\color{DarkRed}\arabic{enumi}.}
-\renewcommand{\labelenumii}{\color{DarkRed}\alph{enumii})}
-\renewcommand{\labelenumiii}{\color{DarkRed}\roman{enumiii}.}
-\renewcommand{\labelenumiv}{\color{DarkRed}\Alph{enumiv}.}
+\renewcommand{\labelenumi}{\color{TURed}\arabic{enumi}.}
+\renewcommand{\labelenumii}{\color{TURed}\alph{enumii})}
+\renewcommand{\labelenumiii}{\color{TURed}\roman{enumiii}.}
+\renewcommand{\labelenumiv}{\color{TURed}\Alph{enumiv}.}
 
 % change color of description list
 \usepackage{enumitem}
-\setdescription{font=\color{DarkRed}\rm\itshape}
-% \renewenvironment{description}{\list{font=\color{DarkRed}\itshape}}{\endlist}
+\setdescription{font=\color{TURed}\rm\itshape}
+% \renewenvironment{description}{\list{font=\color{TURed}\itshape}}{\endlist}
 
 
 % ========================================================================
@@ -326,7 +327,7 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 % ========================================================================
 
 % change color of footnotes
-\renewcommand{\thefootnote}{\color{DarkRed}\arabic{footnote}}
+\renewcommand{\thefootnote}{\color{TURed}\arabic{footnote}}
 
 % use nice footnote indentation
 \deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
@@ -379,7 +380,7 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 \fancyhfoffset[RO,LE]{0.1cm} %{\marginparsep+\marginparwidth}
 \fancyhfoffset[RE,LO]{0.1cm}
 %\fancyheadoffset[RE,LO]{\hoffset + \oddsidemargin}
-\renewcommand{\headrule}{{\color{DarkRed}% 
+\renewcommand{\headrule}{{\color{TURed}% 
   \hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
 \fancyhf{}
 \fancyhead[LE]{\slshape \nouppercase{\leftmark}}    % Even page header: "page   chapter"
@@ -387,21 +388,21 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 
 %- \fancyfoot[LE]{\STYLEleftpicture}
 %- \fancyfoot[RO]{\STYLErightpicture}
-\renewcommand{\footrule}{{\color{DarkRed}% 
-  \hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}}
+\renewcommand{\footrule}{{\color{TURed}% 
+  \hrule width\headwidth height\footrulewidth \vskip-\footrulewidth}}
 
 \fancyfoot[RO,LE]{\bfseries \thepage}
 
 \renewcommand{\headrulewidth}{1pt}    % Underline headers
-\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\footrulewidth}{1pt}
 
 % Change Chapter/Section styles
 
 \usepackage{titlesec}
 
-\newcommand{\allsectionformat}{\color{DarkRed}\rmfamily\normalfont}
+\newcommand{\allsectionformat}{\color{TURed}\rmfamily\normalfont}
 
-\titleformat{\part}{\Huge}{\thispagestyle{empty}\color{DarkRed}\rmfamily\normalfont\partname{ }\thepart}{1pc}{\center\Huge\color{DarkRed}\scshape}
+\titleformat{\part}{\Huge}{\thispagestyle{empty}\color{TURed}\rmfamily\normalfont\partname{ }\thepart}{1pc}{\center\Huge\color{TURed}\scshape}
 
 \addtokomafont{section}{\allsectionformat}
 \addtokomafont{subsection}{\allsectionformat}
@@ -410,7 +411,7 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 \addtokomafont{subparagraph}{\allsectionformat}
 
 \titlespacing*{\section}{0pt}{0pt}{0pt}
-\titleformat{\chapter}{\Huge}{\color{DarkRed}\thechapter}{1pc}{\Huge\color{DarkRed}\rmfamily\normalfont}
+\titleformat{\chapter}{\Huge}{\color{TURed}\thechapter}{1pc}{\Huge\color{TURed}\rmfamily\normalfont}
 
 
 % =========================================================================
@@ -448,9 +449,9 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 }
 
 %large heading
-\newcommand{\lheading}[1]{{\Large \bf \color{DarkRed} #1}}
+\newcommand{\lheading}[1]{{\Large \bf \color{TURed} #1}}
 %huge heading
-\newcommand{\hheading}[1]{{\huge \bf \color{DarkRed} #1}}
+\newcommand{\hheading}[1]{{\huge \bf \color{TURed} #1}}
 
 %page clearing
  \newcommand{\clearemptydoublepage}{%
