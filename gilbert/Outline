@@ -1,0 +1,40 @@
+Outline
+
+1. Introduction & Related Work
+	- Introduction
+	- Thesis questions
+	- Related Work 
+
+2. Theory & Concept
+	- Gilbert language
+		- Types
+		- Grammar
+		- Lexer/Parser
+	- Gilbert Typing
+		- Static typing vs. dynamic typing
+		- Hindley-Milner type inference
+	- Intermediate representation
+		- Specification
+	- Execution
+		- Matrix partitioning
+		- Linear algebra operations
+
+3. Architecture & Implementation
+	- Architecture
+		- Language layer
+		- Runtime layer
+		- Execution layer
+	- Implementation
+		- Specifics
+		- Math-backend
+		- Execution engines
+
+4. Evaluation & Conclusion
+	- Evaluation
+		- Scalability
+		- Comparison of different execution engines
+		- Specialized vs. non-specialized algorithms
+		- Mahout vs. Breeze comparison
+	- Conclusion
+		- Summary of work
+		- Outlook

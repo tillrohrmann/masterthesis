@@ -1,8 +1,0 @@
-\chapter{Implementation}
-\label{cha:implementation}
-
-The distributed sparse linear algebra system shall have a Matlab- or R-like language frontend.
-For the sake of simplicity, I will implement a subset of the Matlab language.
-In order to support this subset, a Matlab parser has to be implemented.
-Additionally to the parser, I will also implement a static typing mechanism so that possible errors resulting from incompatible types are already caught at compile time.
-I will use Scala for all implementations tasks, because it nicely integrates in the Java ecosystem and at the same time enriches it with valuable additions like functional programming support and parser combinators.

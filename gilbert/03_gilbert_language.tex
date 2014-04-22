@@ -1,0 +1,41 @@
+%!TEX root=main.tex
+\chapter{Gilbert Language}
+\label{cha:gilbertlanguage}
+
+\begin{itemize}
+	\item Motivation for Matlab
+	\begin{itemize}
+		\item Huge library of existing code base
+		\item Industry standard
+		\item Similar to R
+		\item Data scientists familiar with Matlab $\Rightarrow$ no readapting necessary
+	\end{itemize}
+	\item Language specification
+	\begin{itemize}
+		\item Subset of Matlab
+		\item fixpoint operation for iterations, convergence criterion
+	\end{itemize}
+	\item Primitive types
+	\begin{itemize}
+		\item Matrices as main type
+		\item Scalars and Booleans for convergence criterion
+		\item Cell arrays
+	\end{itemize}
+	\item Parser
+	\begin{itemize}
+		\item Which parser type is powerful enough to parse our specified language? LL parser because there is no left recursion
+	\end{itemize}
+\end{itemize}
+
+Pages $\approx$ 5-8
+
+\section{Language Grammar}
+\section{Language Types}
+\section{Parser}
+
+\section{Intermediate Representation}
+
+I intend to implement an intermediate representation of a Matlab program.
+The additional abstraction layer allows language independent optimizations and makes the system independent from the actually used frontend language.
+The set of language primitives of the intermediate representation has to include the operational primitives of linear algebra as well as an iteration abstraction in order to realize algorithms based on convergence.
+Furthermore, it is of particular interest to keep this set as small as possible, because this would alleviate a possible optimization step prior to execution.

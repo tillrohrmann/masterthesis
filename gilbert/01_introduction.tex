@@ -4,6 +4,24 @@
 
 \chapterquote{I'm awesome!}{Barney Stinson, WIRED magazine, 19.1.2009}
 
+\begin{itemize}
+	\item Underline importance of means to analyze big volumes of data
+	\begin{itemize}
+		\item Information age $\Rightarrow$ more and more data is gathered
+		\item Examples of using big data analytics: Recommender systems, crime site prediction, etc.
+		\item Problem: How to deal with massive amounts of data?
+		\item 3 ways of scaling up: New algorithms, faster computers, parallelization
+		\item Challenges of parallelization
+		\item $Rightarrow$ need easy to use environment
+		\item Underline importance of linear algebra for data analytics
+		\item Give some famous examples, pagerank maybe?
+		\item Show that we need a linear algebra environment with support for seamless integration of parallel execution $Rightarrow$ Gilbert
+		\item Emphasize research questions: Which language primitives do we have to support, how can the operations be realized within a distributed system?
+	\end{itemize}
+\end{itemize}
+
+Pages $\approx$ 3-4
+
 Since the beginning of the information age, our environment became more and more infused with digital technology gathering, processing, storing and broadcasting information of various kinds.
 Nowadays, computing devices are almost ubiquitous in our daily lives and many can hardly imagine a world without them anymore.
 We can find information technology in our cars making our ride safer, in our washing machines controlling the proper cleansing and in our mobile phones acting as our personal assistant just to name a few.
@@ -43,7 +61,7 @@ The input of the program is split up into key-value pairs and each pair is fed t
 This operation can be run completely in parallel since each call to the map-function is independent of the other calls.
 Each map-function produces a list of new key-value pairs which are then grouped according to their key value.
 Pairs with the same key are then given to the reduce-function which then produces a new list of key-value pairs.
-Again, each call of the reduce function can be run in parallel since there is no dependency. \footnote{foobar foobar}
+Again, each call of the reduce function can be run in parallel since there is no dependency.
 
 MapReduce, however, exhibits also some deficiencies in realizing common sub-tasks such as joining two datasets.
 These deficiencies result from the strict programming model and cause some serious performance losses.

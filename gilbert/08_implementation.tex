@@ -1,0 +1,32 @@
+\chapter{Implementation}
+\label{cha:implementation}
+
+\begin{itemize}
+	\item Implemented in Scala
+	\item Parser combinators used for parser
+	\item Encountered problems
+	\begin{itemize}
+		\item Distinguish string literals from transpose operation
+		\item Implement cell arrays, which have to be constructed while typing the program
+	\end{itemize}
+	\item Math backend
+	\begin{itemize}
+		\item Breeze
+		\item Mahout
+	\end{itemize}
+	\item Stratosphere related problems
+	\begin{itemize}
+		\item Fix of compilation logic to support reuse of expressions
+		\item Explicit representation of boolean matrix because the framework does not support implicits which are necessary to realize a generic matrix
+	\end{itemize}
+\end{itemize}
+
+Pages $\approx$ 2-3
+
+\section{Math-Backend}
+
+\section{Execution Engines}
+
+\subsection{Stratosphere}
+
+\subsection{Spark}
