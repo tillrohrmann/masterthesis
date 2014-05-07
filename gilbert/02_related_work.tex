@@ -6,6 +6,9 @@
 	\item Distributed linear algebra systems
 	\begin{itemize}
 		\item SystemML
+		\item Ricardo
+		\item pR
+		\item RHIPE
 	\end{itemize}
 	\item Parallel dataflow systems
 	\begin{itemize}
@@ -21,6 +24,11 @@
 		\item Hyracks
 		\item Apache Hama
 	\end{itemize}
+	\item DBMS
+	\begin{itemize}
+		\item RIOT I/O
+		\item SciDB
+	\end{itemize}
 	\item Matlab parallelization
 	\item Specialized algorithms
 	\begin{itemize}
@@ -30,17 +38,11 @@
 
 Pages $\approx$ 10 - 15
 
-The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed machine learning to subdue the data flood.
-Consequently, several frameworks and programming models have been proposed to tackle the aforementioned problems.
-One inspiring approach is SystemML~\cite{ghoting:2011a}.
-SystemML provides a declarative higher-level language for expressing linear algebra operations.
-These operations are then mapped onto MapReduce tasks.
-It further applies several optimization strategies such as blocking, dynamic block-level operations, piggybacking to reduce the number of MapReduce tasks and local aggregation within the reducers.
-The system can evaluate different execution plans depending on the size of its inputs and its blocking strategy.
-It selects the most cost-efficient plan based on the network costs.
-SystemML is similar to the proposed approach, however it has no proper iteration mechanism besides of simple loop unrolling.
-Furthermore, it relies on the MapReduce framework with all of its deficiencies compared to the more powerful distributed computing system Stratosphere.
-The declarative language of SystemML is not a subset of Matlab or R and thus it cannot directly be used by native Matlab or R users.
+The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.
+In recent years a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.
+The different trends can be subsumed into the following categories: Data processing systems, distributed numerical computing systems, specialized distributed computing frameworks, database management systems, explicit parallelization and specialized algorithms.
+
+\section{Data processing systems}
 
 Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
 It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
@@ -53,6 +55,158 @@ Another distributed computing framework is Spark~\cite{zaharia:2010a} which can 
 Spark performs its computation on resilient distributed datasets (RDD) which can be kept in memory during computations.
 This allows to efficiently realize iterations within in the framework.
 Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
+
+\section{Distributed numerical computing systems}
+
+SystemML~\cite{ghoting:2011a} has the aim to make machine learning algorithms run on massive datasets without burdening the user with low-level implementation details and tedious hand-tuning.
+In order to achieve this, it provides a declarative higher-level language, called Declarative Machine learning Language (\emph{DML}), for linear algebra operations which is automatically executed in a distributed fashion.
+DML is inspired by the R~\cite{r:1993a} language which is the quasi standard among data scientists and statisticians.
+The language supports matrices and scalars as basic types which is the basis of a wide variety of supervised and unsupervised machine learning algorithms.
+
+The linear algebra operations are translated into a directed acyclic graph of high-level operators (\emph{HOP-DAG}).
+This abstract representation allows to apply several optimizations such as algebraic rewrites, choice of internal matrix representation and cost-based selection of the best execution plan.
+
+Matrices are separated into quadratic blocks whereas each block is uniquely identified by its row and column index.
+The block representation has the advantage to reduce the overhead inflicted by a cell-wise representation where for each entry a pair of indices has to be stored additionally.
+Assuming an entry is stored as a double requiring 8 bytes and 2 integers for the indices requiring 4 bytes each, this scheme would double the memory footprint of a matrix.
+This would cause serious memory shortages and is thus not feasible.
+Furthermore, the block representation allows to choose an memory-efficient internal representation depending on its sparsity.
+If a block has only few non-zero entries, then it is stored in sparse matrix, otherwise a dense matrix is employed.
+Depending on the choice of the internal matrix representation, SystemML picks the right block-level operations for best performance.
+
+A crucial operation which appears in many machine learning algorithms and often inflicts the highest runtime costs is the matrix-matrix multiplication.
+Therefore, SystemML offers two different execution strategies.
+The replication based strategy broadcasts the smaller matrix to all worker nodes having a block of the bigger matrix.
+Then the result block can be computed with these information.
+The other strategy is based on the outer-product representation of a matrix-matrix multiplication.
+Here, the columns of the left matrix are joined with the rows of the right matrix.
+The outer-product computes a set of intermediate matrices which have to be summed up to deliver the final result.
+Both strategies exhibit different runtime characteristics with respect to the file system and network costs.
+File system costs are caused by reading and writing to the distributed filesystem which occurs at the beginning and ending of each map- and reduce-phase of a MapReduce job.
+Network costs are the dominant factor and thus the system chooses the best matrix-matrix multiplication strategy with respect to the estimated network costs.
+
+Once these optimizations are applied, the HOP-DAG is translated into a directed acyclic graph of low-level operators (\emph{LOP-DAG}).
+These low-level operators can directly be mapped onto MapReduce jobs which represent the final execution format.
+Between two MapReduce jobs the output of the former, which is often the input of the latter, is written to disk and then read again.
+This causes a considerable performance loss and therefore SystemML tries to minimize the number of jobs.
+It uses piggybacking to aggregate the low-level operators into as few as possible map- and reduce-phases.
+Additionally, the system employs \emph{local aggregators} which reduce data in the reducer by combining produced results.
+The idea is similar to the \emph{combiner}~\cite{dean:c2008a} concept and also reduces the amount of disk I/O.
+
+SystemML proves to scale well with an increasing number of worker nodes and an increasing amount of data.
+However, it lacks a proper iteration mechanism which is hardly described in the paper.
+It is not specified whether only loops with a static termination criterion, such as a maximum number of iterations, or also dynamic termination criterions are supported.
+In either case, the iterations have to realized within distinct MapReduce jobs.
+This makes the loop very inefficient, because for each iteration the loop data has to be written to and read from disk.
+Furthermore, SystemML relies on the MapReduce framework with all of its deficiencies compared to the more powerful parallel dataflow system Stratosphere or Spark.
+Stratosphere and Spark support in memory storage of intermediate results which significantly speeds up loop processing for example.
+But still, SystemML is a very promising project heading in the right direction to make web-scale data analytics accessible for people not familiar with distributed computing.
+
+Ricardo~\cite{das:2010a} is part of the eXtreme Analytics Platform~\cite{balmin:jrd2013a} (\emph{XAP}) developed at IBM.
+XAP is developed with the intention to support deep analytics on large-scale data and comprises several modules.
+Ricardo uses existing technologies to implement a scalable system for statistical analysis.
+The statistical computations are done within the R ecosystem, because it has a rich library of analytical methods and a close-knit community of statisticians, which is not eager to adopt a completely new system.
+The problem, however, is that R works only on data which is stored in the computer's main memory.
+Hadoop~\cite{hadoop:2008a}, an open-source implementation of MapReduce, is a data processing system which does not suffer from this problem.
+Yet it lacks the statistical functionality of R.
+Thus, in order to create an anlytical system which scales to tera- or even petabytes of data, the authors combine the two systems so that one system benefits from the strengths of the other system.
+The idea is that the data shipment is done by Hadoop and the actual analytic computation by R.
+For the integration of both systems, Jaql (JavaScript Object Notation query language), which is part of XAP, is used.
+
+Jaql constitutes a declarative high-level language for data-processing on Hadoop.
+Jaql provides a rich set of high-level operators such as \emph{join}, \emph{group by} and \emph{transform} with which it is possible to easily and quickly define data-flows.
+Furthermore, it still gives you access to the underlying MapReduce code when needed.
+Therefore, it is flexible and powerful enough to be used as an interface between R and Hadoop.
+
+The system is controlled from within a R driver process.
+By using Jaql as a R-Hadoop bridge, the user can initiate the distribution, transformation and aggregation of data within Hadoop.
+Furthermore, the system supports to run R code on the worker nodes as data transformations.
+The calculated Hadoop results can also be collected at the R driver process once they have an appropriate size.
+This makes it possible to apply statistical computations to large-scale data.
+Since all is done from within R, the user does noth have to re-adapt and can profit from a huge code base of sophisticated statistical algorithms.
+
+Ricardo implements a scalable system for deep analytics by combining the strengths of two well established systems, namely R and Hadoop.
+The combination approach enables the authors to quickly come up with a working system without reinventing the wheel.
+However, Hadoop is not integrated transparently into R.
+The user still has to specify explicitely which data to distribute when within the cluster and how the processing data-flow looks like.
+This requires a substantial understanding of the working principles of MapReduce and the applied method.
+Only then the user can efficiently distinguish between parallelizable and serial parts of the algorithm.
+Therefore, the system is not well suited for people only familiar with R.
+
+Another project which tries to extend R to scale to petabytes of data is RHIPE~\cite{guha:s2012a}.
+RHIPE follows the new statistical approach of divide and recombine (\emph{R\&D}).
+The idea is to split the examined data up into several chunks so that they fit in the memory of a single computer (\emph{S-Step}).
+Then a collection of analytical methods is applied to each chunk without communication with any other computer (\emph{W-Step}).
+This makes the computation embarrassingly parallel, the simplest parallel processing.
+After each chunk is evaluated, the results will be recombined in an aggregation step to create the overall analytical result (\emph{B-Step}).
+
+This methodology strongly resembles the MapReduce principle and thus it is not surprising that the authors use the Hadoop system to execute the RHIPE program.
+In fact, the W- and B-Step can be directly mapped to map and reduce tasks respectively.
+The actual statistical analysis is done by R.
+The user has to define for each step R code.
+First, the R code is used to split the data into chunks for the S-Step.
+This data is then distributed to the Hadoop worker nodes using the HDFS.
+On the worker nodes the R code for the W-Step is executed in the map tasks.
+This places the whole analytical power of the R system with all its proven libraries at the analyst's disposal.
+And finally, the recombination in the B-Step is carried out by applying the analyst provided R code on the intermediate results of the W-Step.
+
+The approach of RHIPE has the charm to be perfectly executable parallely due to its R\&D paradigm.
+However, this strict execution pipeline constrains the analysis process considerably.
+First of all, the statistical method the analyst wants to apply has to be suitable to be split up into a map phase where subsets of the data are processed independently and a reduce phase where the final result is processed from the intermediate results.
+For example, it works for the mean calculation of a data set if the chunks are of equal size.
+Yet, as soon as you need access to the whole data set to compute the exact result, as it is, e.g., the case for linear regression, one can in general only compute an approximation.
+This might still be enough for most cases since statistics itself is by its definition an approximation.
+But first, the user has to conceive the data division, the data processing and the final recombination step.
+This strongly resembles programming a MapReduce job.
+Since not many data analysts are familiar with the concepts of MapReduce, it might hinder them to utilize the system.
+
+A system which integrates more seamlessly into the R ecosystem is pR~\cite{samatova:2009a} (parallel R).
+Again, the goal of pR is to let the statistician compute large-scale data without requiring him to learn a new system.
+pR achieves this by providing a set of specialized libraries which offer parallelized versions of different algorithms.
+In this way, the user only has to switch the used library and can directly benefit from the parallel processing power.
+Thus the adoption requires only little code changes which makes it cost- and labour-efficient.
+
+For the parallelization pR utilizes several methods.
+One approach is to integrate \nth{3} party libraries containing specialized code into the R session.
+Often high performance computing (HPC) code is used, which is parallelized by using a message-passing system such as MPI.
+This has the advantage to have well tested and efficient code.
+But MPI requires to have an HPC cluster with a high throughput network to run efficiently~\cite{sur:2006a}.
+Furthermore, it assumes to have exclusive access to the computing resources, which is usually not guaranteed in a multi-user environment.
+Therefore, this approach is unsuitable to be used on a shared commodity cluster.
+
+pR also offers parallelization for the \emph{lapply} method of R.
+R's lapply method takes a list of values and a user-defined function and applies this function on the list of values.
+Since this operation is embarrassingly parallel, it is a natural candidate for automatic parallelization.
+The parallelization is again achieved by using MPI to orchestrate the distributed execution.
+
+pR impresses with its seamless integration into R so that the parallel execution of R code comes almost for free.
+The user neither has to learn a new system nor does he have to change a lot of code.
+But the downside is that not all operations in R are supported to be run distributedly.
+Moreover, MPI is used for the parallelization.
+MPI is well suited for HPC where a single large job is execlusively run on a set of machines.
+But nowadays, many data analysts share a cluster of commodity hardware and run several jobs concurrently, some of which are interactive and others take a long time to finish.
+This interferes with the design of MPI.
+Furthermore, MPI inherently lacks often requested properties such as fault-tolerance, elasticity and reliability.
+
+\section{Database systems}
+
+As the statistics community tries to enrich systems like R with massive data processing capabilities, the database community tries to extend database management systems (\emph{DBMS}) with analytical functionality.
+It is already the case that the current SQL standard supports simple statistical computations such as linear regression, correlation coefficient and T-test functions.
+However, the system quickly reaches its limits, as soon as you try to solve slightly more complex problems, for example, classification.
+Therefore, \textcite{cohen:pve2009a} devised a set of properties a modern DBMS has to satisfy in order to meet the requirements of Big Data analysts.
+In order to further integrate statistical computations into the DBMS, they showed how to implement a matrix type and the corresponding matrix operations with SQL.
+Additionally, they implemented examplarily the conjugate gradient method and Mann-Whitney U test.
+Due to the matrix operations the implementation is more elegant than with pure SQL.
+But still, the definition of statistical functions within this system is laborious and complex compared to R.
+Furthermore, there is no easy way to migrate existing R code.
+This implies a huge amount of work to reimplement the algorithms statisticians are used to work with.
+For these reasons, it is doubtful whether the statistics community will adapt this approach to realize large-scale data analytics.
+
+\Textcite{stonebraker:2009a} have embarked on a similar path as \citeauthor{cohen:pve2009a} in the sense that they first attempted to specify the requirements for a science database, called \emph{SciDB}.
+They identified support of multi-dimensional arrays to be essential for many scientific and industrial use cases.
+Therefore, they constructed SciDB around this concept as its integral data type.
+
+\section{Specialized distributed computing frameworks}
 
 Apache Mahout~\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.
 Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
