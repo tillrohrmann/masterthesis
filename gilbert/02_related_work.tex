@@ -3,13 +3,6 @@
 \label{cha:relatedwork}
 
 \begin{itemize}
-	\item Distributed linear algebra systems
-	\begin{itemize}
-		\item SystemML
-		\item Ricardo
-		\item pR
-		\item RHIPE
-	\end{itemize}
 	\item Parallel dataflow systems
 	\begin{itemize}
 		\item MapReduce
@@ -24,25 +17,16 @@
 		\item Hyracks
 		\item Apache Hama
 	\end{itemize}
-	\item DBMS
-	\begin{itemize}
-		\item RIOT I/O
-		\item SciDB
-	\end{itemize}
 	\item Matlab parallelization
-	\item Specialized algorithms
-	\begin{itemize}
-		\item Mahout
-	\end{itemize}
 \end{itemize}
 
 Pages $\approx$ 10 - 15
 
 The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.
 In recent years a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.
-The different trends can be subsumed into the following categories: Data processing systems, distributed numerical computing systems, specialized distributed computing frameworks, database management systems, explicit parallelization and specialized algorithms.
+The different trends can be subsumed into the following categories: Distributed data processing systems, distributed numerical computing systems, database management systems, specialized distributed computing frameworks and explicit parallelization.
 
-\section{Data processing systems}
+\section{Distributed data processing systems}
 
 Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
 It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
@@ -205,22 +189,76 @@ For these reasons, it is doubtful whether the statistics community will adapt th
 \Textcite{stonebraker:2009a} have embarked on a similar path as \citeauthor{cohen:pve2009a} in the sense that they first attempted to specify the requirements for a science database, called \emph{SciDB}.
 They identified support of multi-dimensional arrays to be essential for many scientific and industrial use cases.
 Therefore, they constructed SciDB around this concept as its integral data type.
+This makes it more natural to implement linear algebra operations within this system.
+SciDB tries to push computations to the data to improve its scalability.
+\citeauthor{stonebraker:2009a} stress similar to \citeauthor{cohen:pve2009a} the importance to operate on ``in situ'' data.
+This feature is very helpful for the analyst to directly start working on the data.
+Usually he has to waste time with tedious data preprocessing in order to load the data in the database.
+
+The ideas proposed by \citeauthor{stonebraker:2009a} for a scientific database seem to be very promising.
+It will be interesting to see how the multi-dimensional array data model performs in real world scenarios.
+However, in the meantime it is important to further extend the statistical functionality.
+Only then, the system can get adopted by the statistics community.
+
+The RIOT~\cite{zhang:apa2009a} (R with I/O Transparency) project is aimed to incorporate the advantages of a DBMS into R.
+The authors \citeauthor{zhang:apa2009a} have discovered that inefficient I/O of R causes a substantial performance loss when applied to large data sets.
+Since R loads all its data into main memory, the virtual memory mechanism has to swap data to and from local disk as soon as the data amount exceeds the memory limit.
+This can cause thrashing of the system which ultimately leads to poor performance.
+The first approach to cope with this problem is to hand-tune the critical code sections which, however, burdens the programmer.
+A second solution is to use I/O optimized libraries which tackle the problem at the intra-operational level.
+This method, though, leaves out valuable chances for inter-operation optimizations.
+
+DBMS offer I/O-efficiency and have with their query optimizer a powerful tool at hand to optimize code on an inter-operation level.
+Therefore, the authors chose to solve the aforementioned problems by utilizing a DBMS, which they call RIOT-DB.
+To guarantee a quick and wide adoption among R users, they paid explicit attention to a seamless integration into the R environment.
+They implemented the RIOT-DB as an R package, which can be dynamically plugged in.
+Furthermore it does not require any user code changes to benefit from its features.
+RIOT provides the basic set of R types: Matrices, vectors and arrays.
+They are implemented within the database as key-value pairs.
+Furthermore, the primitive matrix and vector operations are provided so that the R user never has to face any SQL code.
+
+The authors identified the following I/O-inefficiencies in R which can be mitigated by RIOT:
+R programs consist of a set of statements which each produce a result.
+Usually these results are the input for latter statements and thus need to be stored as intermediate results.
+As long as the memory can hold all these values, then there is no problem.
+However, if not, then the data has to materialized on disk, which is expensive.
+By compiling the whole program into a database query, it can be efficiently pipelined.
+The inputs for each operator are computed when needed and thus the unnecessary materialization of intermediate results is avoided.
+
+Another inefficiency are unneeded computations which always appear if one continues the computation with a subset of the former result.
+By deferring the computations until it is clear which elements have to be computed and a subsequent selective evaluation, the system does not waste any resources.
+This feature is almost naturally achieved by using database views during the query construction and thus postponing the evaluation.
+
+Data layout and consequently data access patterns constitute a further inefficiency.
+In R the access patterns are inherently sequential and data layouts are static.
+Yet it may be faster for certain operations, such as a matrix-matrix multipliation, to have, for example, a column- instead of a row-wise partition for the right matrix.
+This would significantly reduce the number of page faults.
+Unfortunately, the RIOT-DB implementation is not yet capable to apply these optimizations.
+
+An extra improvement is the reordering of computations.
+Considering a threefold matrix multiplication, it is important to choose the right execution order.
+Depending on the size of the intermediate matrix, one or the other order might be infeasible to execute.
+An efficient system has to able to make these kind of optimization decisions, which are similar to database query optimizations.
+But again, the current RIOT-DB is not capable of doing it.
+
+Even though matrix representations in a relational database as a set of indices and a value are inherently inefficient as shown in \cite{stonebraker:2007a}, the pipelined execution and the inter-operation level optimization of the DBMS makes RIOT in many cases faster than R.
+Considerung current developments of the statistical capabilities of DBMS as well as support for matrices and vectors, it is not far-fetched to believe that RIOT will significantly improve its performance in the future.
+But the system suffers currently from a non-negligible disadvantage when it comes to state of the art machine learning algorithms: Namely iteration support.
+There is no way described how to efficiently realize loops.
 
 \section{Specialized distributed computing frameworks}
 
-Apache Mahout~\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.
-Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
-However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
-By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
+Apart from these more general approaches to distributed data processing and numerical computing systems, there emerged also quite a lot of specialized systems.
+By restricting oneself to a more confined domain, it is often possible to find more efficient ways to solve a problem at the expense of generality.
 
 Pegasus~\cite{kang:2009a} is a programming model mainly intended for graph mining purposes.
 It is centered around the abstraction of a generalized iterative matrix vector multiplication (GIM-V), which can be found in many graph algorithms.
-The GIM-V operation can be represented by a map and reduce operation.
+The GIM-V operation can be efficiently represented by a map and a reduce task.
 Consequently, Pegasus implements it on top of Hadoop.
 Gilbert is supposed to contain the GIM-V operation and will not only consider the operation itself for optimization purposes but also its context of previous and succeeding operations.
 Therefore, Gilbert should be a generalization of Pegasus.
 
-Y.~Bu et al.~\cite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
+\Textcite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
 All of these systems exhibit a tight coupling of a solution's logical representation and physical representation.
 This renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
 Moreover, the systems are mostly disjoint which implies that each framework has to be updated in order to profit from new optimization strategies.
@@ -230,9 +268,9 @@ This plan is executed by Hyracks~\cite{borkar:2011a}, a data-parallel platform f
 This approach has the advantage that a wider class of machine learning algorithms are efficiently supported within the same system, thus profiting from the same underlying infrastructure.
 However, at the moment the physical plans are still created by hand which makes the framework not applicable yet.
 
-L. Hendren~\cite{hendren:2011a} developed a static typing system for Matlab.
-Types are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.
-The defined types can then be used by the compiler to generate more efficient code and to check runtime types against their specifications.
-Furthermore this contributes to a better documentation of code and makes understanding easier.
+Apache Mahout~\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.
+Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
+However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
+By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
 
-
+\section{Explicit parallelization}
