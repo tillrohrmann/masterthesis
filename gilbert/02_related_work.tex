@@ -28,15 +28,74 @@ The different trends can be subsumed into the following categories: Distributed 
 
 \section{Distributed data processing systems}
 
-Stratosphere~\cite{battre:2010a} is a distributed computing framework which employs PACTs~\cite{alexandrov:2011a}, a generalization of MapReduce.
-It adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \emph{match}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
-Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties.
-These properties are exploited by the compiler to select the best execution plan.
-Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}.
+In the last decade, MapReduce~\cite{dean:c2008a}, created by Google, has been one of the most influential developments in the domain of distributed data processing systems.
+Their novel approach to look at the problem of parallelizing programs was so intriguing and successful that a whole bunch of researchers and engineers jumped on the bandwagon and spurred a whole new area of research.
+Initially, MapReduce was created because of the need to process a constantly increasing amount of data.
+Before, the common way to do processing tasks, such as index generation, data-mining and web log parsing, was to write specialized programs.
+Often, these programs needed to be parallelized, fault-tolerant, support load-balancing and data-distribution to work properly.
+Not only does this require a high level of expertise but it also inflicts significant costs in terms of labour and time.
+Therefore \textcite{dean:c2008a} conceived MapReduce.
+
+MapReduce is inspired by the higher-order functions \emph{map} and \emph{reduce} which can be found in many functional programming languages.
+In the MapReduce framework, the user only has to provide code for the map and the reduce function.
+The description for the map and reduce function as well as the input data constitute a MapReduce job.
+The semantics is the following:
+Given a set of key-value pairs, map is called for each pair indenpendently and produces a set of intermediate key-value pairs.
+How this set is generated is defined by a user defined function (\emph{UDF}).
+After the map call, all key-value pairs are grouped by their key value.
+Reduce is then called for each of these groups and generates a set of result key-value pairs.
+Even though this abstraction appears to be quite simple it is surprisingly powerful and a lot of algorithms can be expressed this way.
+
+The execution model works as follows:
+The input data is stored in the Google file system~\cite{ghemawat:2003a} (\emph{GFS}), a distributed file system.
+Internally the data is divided input splits which are stored replicatedly across the worker nodes.
+Each input split is processed by a map task.
+The map tasks are assigned to worker nodes which have free mapper slots.
+Since the worker nodes also contain the input data, the MapReduce scheduler tries to assign the tasks to worker nodes storing the input split.
+If this is not possible, the scheduler tries to select a node which is as close as possible to the data with respect to the network topology.
+Thereby, the required network communication will be minimized.
+
+Once the map task is finished it has produced a set of intermediate results which is partitioned according to a given hash function.
+Each partition is stored locally in a temporary file and serves as the input of a reduce task.
+A reduce task which is spawned on a worker node retrieves its partitions from all map tasks.
+This shuffle step inflicts considerable network communication overhead.
+Then the key-value pairs are sorted with respect to the key value.
+And finally the reduce function will be called on each group of key-value pairs.
+The result of the reduce tasks will be written to the distributed file system from where it can be used for another MapReduce job.
+
+Each map call is executed independently and thus the map phase is embarrassingly parallel.
+Once the shuffle phase is done, the reduce functions can also be executed in parallel.
+Therefore, it is possible to automatically parallelize the execution of a MapReduce job and thus freeing the user from this tedious and cumbersome task.
+By having more map and reduce tasks than worker nodes, the framework achieves good load balancing, because the system can spread them evenly across all nodes.
+Furthermore, one can even achieve a high flexibility by defining many but short lasting tasks.
+The data distribution is controlled by GFS and thus it is no longer a concern of the user.
+Yet, it can be influenced indirectly by specifying the replication factor, for example.
+MapReduce also implements fault-tolerance by re-executing the failed tasks and those tasks whose input data is needed again but not retrievable.
+The system detects task failures by maintaining for each task an internal state.
+Moreover, it recurrently pings the worker nodes to check their health.
+If a worker nodes does not respond in a certain amount of time, all tasks scheduled to this worker node will be set to failed and eventually rescheduled.
+
+MapReduce is a renunciation from the common programming paradigm by confining the user to the map and reduce function.
+The restricted model allows \textcite{dean:c2008a} to efficiently encapsulate automatic parallelization, load balancing, data distribution and fault-tolerance in the framework.
+Therefore, the user no longer has to struggle with these technicalities and can instead concentrate on writing productive code.
+The ease of use and the fact that MapReduce scales well to clusters of thousands of machines are the reason why the concept is so appealing.
+
+However, there are also some deficiencies.
+MapReduce only offers map and reduce as higher-order functions.
+Several operations, for example, a join between two data sets, are complicated to express with only these two functions.
+Furthermore, writing all results between two distinct phases to disk causes a lot of I/O, which is slow compared to keeping the results in memory.
+This becomes explicitely apparent if one operates on a data set in an iterative manner.
+
+Due to these problems a new class of systems have recently been developed which can be considered as generalizations of MapReduce.
+One of them is Stratosphere~\cite{battre:2010a}, a distributed computing framework which employs PACTs~\cite{alexandrov:2011a} (parallel contracts).
+Stratosphere adds additional $2^{nd}$ level functions, which are called input contracts, such as \emph{join}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
+Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties, such as key uniqueness, record cardinality or constant fields.
+These properties are exploited by the cost-based optimizer to select the best suiting execution plan.
+Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}, which makes it applicable for machine learning of complex data analysis tasks.
 However, it still lacks an easy to use language for the development of machine learning algorithms.
 
 Another distributed computing framework is Spark~\cite{zaharia:2010a} which can be seen as an extension of MapReduce with iteration support.
-Spark performs its computation on resilient distributed datasets (RDD) which can be kept in memory during computations.
+Spark performs its computation on resilient distributed datasets~\cite{zaharia:2012a} (RDD) which can be kept in memory during computations.
 This allows to efficiently realize iterations within in the framework.
 Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
 
