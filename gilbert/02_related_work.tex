@@ -34,7 +34,7 @@ Initially, MapReduce was created because of the need to process a constantly inc
 Before, the common way to do processing tasks, such as index generation, data-mining and web log parsing, was to write specialized programs.
 Often, these programs needed to be parallelized, fault-tolerant, support load-balancing and data-distribution to work properly.
 Not only does this require a high level of expertise but it also inflicts significant costs in terms of labour and time.
-Therefore \textcite{dean:c2008a} conceived MapReduce.
+Therefore \citeauthor{dean:c2008a} conceived MapReduce.
 
 MapReduce is inspired by the higher-order functions \emph{map} and \emph{reduce} which can be found in many functional programming languages.
 In the MapReduce framework, the user only has to provide code for the map and the reduce function.
@@ -76,7 +76,7 @@ Moreover, it recurrently pings the worker nodes to check their health.
 If a worker nodes does not respond in a certain amount of time, all tasks scheduled to this worker node will be set to failed and eventually rescheduled.
 
 MapReduce is a renunciation from the common programming paradigm by confining the user to the map and reduce function.
-The restricted model allows \textcite{dean:c2008a} to efficiently encapsulate automatic parallelization, load balancing, data distribution and fault-tolerance in the framework.
+The restricted model allows \citeauthor{dean:c2008a} to efficiently encapsulate automatic parallelization, load balancing, data distribution and fault-tolerance into the framework.
 Therefore, the user no longer has to struggle with these technicalities and can instead concentrate on writing productive code.
 The ease of use and the fact that MapReduce scales well to clusters of thousands of machines are the reason why the concept is so appealing.
 
@@ -88,16 +88,83 @@ This becomes explicitely apparent if one operates on a data set in an iterative 
 
 Due to these problems a new class of systems have recently been developed which can be considered as generalizations of MapReduce.
 One of them is Stratosphere~\cite{battre:2010a}, a distributed computing framework which employs PACTs~\cite{alexandrov:2011a} (parallel contracts).
-Stratosphere adds additional $2^{nd}$ level functions, which are called input contracts, such as \emph{join}, \emph{cross} and \emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.
+Stratosphere adds additional $2^{nd}$ level functions, which are called input contracts, in order to improve the expressiveness and efficiency of the MapReduce paradigm.
 Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties, such as key uniqueness, record cardinality or constant fields.
-These properties are exploited by the cost-based optimizer to select the best suiting execution plan.
-Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}, which makes it applicable for machine learning of complex data analysis tasks.
-However, it still lacks an easy to use language for the development of machine learning algorithms.
+These properties are exploited by a cost-based optimizer to select the most efficient execution plan.
+Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}, which makes it applicable for machine learning and complex data analysis tasks.
 
-Another distributed computing framework is Spark~\cite{zaharia:2010a} which can be seen as an extension of MapReduce with iteration support.
-Spark performs its computation on resilient distributed datasets~\cite{zaharia:2012a} (RDD) which can be kept in memory during computations.
+The new higher-level functions are \emph{join}, \emph{cross} and \emph{coGroup}.
+The join operator joins two multisets of inputs $A$ and $B$ with respect to a key value.
+This means that a UDF is called for each pair $(a,b)$ with $a\in A$ and $b\in B$ with $key(a)=key(b)$.
+The cross operator can be understood as the cartesian product.
+Given two input multisets $A$ and $B$, cross calls the UDF for each pair $(a,b)$ with $a\in A$ and $b\in B$.
+The coGroup operator acts a little bit differently.
+It also takes 2 input multisets $A$ and $B$.
+The operator groups the elements of $A$ and $B$ according to their keys and joins the grouped submultisets.
+In other words, the UDF is called for each pair of multisets $(A^\prime, B^\prime)$ with $A^\prime \subseteq A \wedge B^\prime \subseteq B \wedge |keyset(A^\prime \cup B^\prime)| = 1$ and $keyset(A^\prime \cup B^\prime) \cap keyset((A \cup B) \setminus (A^\prime \cup B^\prime)) = \emptyset$.
+The function $keyset$ is the set of appearing keys in a set: $keyset(X) \coloneqq \{ key(x) \mid x \in X \}$.
+
+These operators allow to express certain problems occurring in data analysis more elegantly and succintly.
+Additionally it gives the system a higher level of abstraction on which it can apply optimizations.
+Consider, for example, the join operator.
+In MapReduce the straightforward implementation is the following:
+First one has to unify both input sources in the map phase, adding a tag in order to distinguish them in the reduce phase.
+In the reduce UDF, the input sources are separated according to these auxiliary variables and then joined manually.
+For the join operation all entries with the same key have to loaded into memory because, a priori, the entries are not sorted according to their keys.
+This can cause some serious thrashing.
+Since the join logic is hidden within the UDFs, there is no way for the system to automatically optimize for this operation.
+Yet, there are possibilities to optimize join~\cite{blanas:2010a} and multiway join~\cite{afrati:2010a} operations on MapReduce.
+But they either require extensive hand-tuning by the user or extensions to the MapReduce programming model to work.
+In contrast, the Stratosphere system is aware of the join operation and can choose the best execution plan for it.
+Depending on the input sizes of the inputs, either the sort-merge join or the hash join algorithm performs better.
+
+Stratosphere is programed by using the native Java or Scala API to specify a dataflow.
+It is the representation of a computation at the operator-level of the system.
+A dataflow is an directed acyclic graph (DAG) whose nodes are the operators and edges are the input dependencies between the operators.
+A transformed version of the DAG is then given to Nephele~\cite{warneke:2009a}, the execution engine, which is responsible for parallel execution.
+
+An outstanding property of Stratosphere is that it uses database-inspired pipelining to reduce data materialization and thus costly I/O.
+First of all, it chains as many operators as possible.
+Chaining means that multiple operators are packed into one task so that intermediate results are directly fed to a subsequent operator on the same worker node.
+For example, multiple map operations can be smoothly chained.
+Furthermore, the system always tries to have deployed succeeding tasks so that the intermediate results can directly be forwarded.
+In the event of memory shortage, intermediate results will be gently spilled to disk.
+Additionally, Stratosphere support out-of-core algorithms such as external sort or hybridhash join to deal with massive amounts of data.
+
+Stratosphere offers a powerful programming abstraction to easily implement parallel programs.
+The extension of the MapReduce paradigm and the integration of database features make it a promising candidate to supersede MapReduce as the prevalent distributed data processing system in the future.
+Also the iteration support helps to make Stratosphere a more general purpose processing system than MapReduce currently is.
+However, there are still some aspects which have to be improved.
+First of all, Stratosphere lacks at the time of writing this thesis a proper fault tolerance.
+Secondly, it is not well geared towards supporting multi jobs and multi user scenarios.
+And last but not least, the system lacks the primitives, such as linear algebra data types and their operations, to easily implement data mining and machine learning algorithms based on linear algebra.
+
+Another distributed data processing system is Spark~\cite{zaharia:2010a}.
+Spark was developed to tackle the blind spot of MapReduce, its inefficiency when it comes to iterative computations.
+The system is build around resilient distributed datasets~\cite{zaharia:2012a} (RDD), a distributed memory abstraction.
+It allows programmers to execute in-memory computations on a large cluster with fault-tolerance.
+
+
 This allows to efficiently realize iterations within in the framework.
 Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
+
+There are also other notable projects trying to amend the deficiencies of MapReduce.
+The HaLoop~\cite{bu:pve2010a} project adds loop support to Hadoop.
+In order to speed up the iterations, it allows to cache loop invariant data.
+Furthermore, it makes the task scheduler iteration-aware so that tasks of subsequent iterations are scheduled on the same worker node as their predecessors
+This increases data localilty and consequently decreases the communication overhead.
+This all comes with the same fault-tolerance support like the original Hadoop implementation.
+
+A similar project is Twister~\cite{ekanayake:2010a}, which also adds loop support to the MapReduce framework.
+In contrast to HaLoop, Twister support in-memory storage of intermediate data of iterations.
+Furthermore, it distinguishes between static and dynamic data.
+The static data does not have to be loaded from their producers for each iteration again, thus decreasing the communication overhead.
+Another extension is the additional reduction phase ``combine''.
+Combine can be called after a reducer to reduce the produced results into a single value, which is accessible by the user program.
+This collective output can be used to steer the termination of a loop, for example.
+In contrast to the distributed filesystem based communication scheme in Hadoop and MapReduce, Twister relies on a publish-subscribe system for data and communication transfer.
+This further decreases the I/O overhead of storing data to disk and allows to directly send produced results from a mapper to a reducer.
+However, Twister does not yet support a full functional fault-tolerance.
 
 \section{Distributed numerical computing systems}
 
@@ -156,7 +223,7 @@ Thus, in order to create an anlytical system which scales to tera- or even petab
 The idea is that the data shipment is done by Hadoop and the actual analytic computation by R.
 For the integration of both systems, Jaql (JavaScript Object Notation query language), which is part of XAP, is used.
 
-Jaql constitutes a declarative high-level language for data-processing on Hadoop.
+Jaql~\cite{beyer:2011a} constitutes a declarative high-level language for data-processing on Hadoop.
 Jaql provides a rich set of high-level operators such as \emph{join}, \emph{group by} and \emph{transform} with which it is possible to easily and quickly define data-flows.
 Furthermore, it still gives you access to the underlying MapReduce code when needed.
 Therefore, it is flexible and powerful enough to be used as an interface between R and Hadoop.
