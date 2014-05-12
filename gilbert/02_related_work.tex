@@ -3,12 +3,6 @@
 \label{cha:relatedwork}
 
 \begin{itemize}
-	\item Parallel dataflow systems
-	\begin{itemize}
-		\item MapReduce
-		\item Stratosphere
-		\item Spark
-	\end{itemize}
 	\item Specialized distributed computing frameworks
 	\begin{itemize}
 		\item Pegasus
@@ -17,7 +11,6 @@
 		\item Hyracks
 		\item Apache Hama
 	\end{itemize}
-	\item Matlab parallelization
 \end{itemize}
 
 Pages $\approx$ 10 - 15
@@ -323,7 +316,7 @@ Thus the adoption requires only little code changes which makes it cost- and lab
 
 For the parallelization pR utilizes several methods.
 One approach is to integrate \nth{3} party libraries containing specialized code into the R session.
-Often high performance computing (HPC) code is used, which is parallelized by using a message-passing system such as MPI.
+Often high performance computing (HPC) code is used, which is parallelized by using a message-passing system such as MPI~\cite{gropp:pc1996a,lusk:2009a}.
 This has the advantage to have well tested and efficient code.
 But MPI requires to have an HPC cluster with a high throughput network to run efficiently~\cite{sur:2006a}.
 Furthermore, it assumes to have exclusive access to the computing resources, which is usually not guaranteed in a multi-user environment.
@@ -445,3 +438,42 @@ However, Mahout offers no easy way to write new algorithms by using a declarativ
 By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
 
 \section{Explicit parallelization}
+
+A popular approach to develop parallel programs running on a large cluster of computers is to employ message passing.
+A message passing library offers primitives to send and receive messages to and from a remote host while hiding the used communication infrastructure.
+This allows to interconnect a collection of possibly heterogenous machines to a coherent computation unit, thus allowing to solve large computation problems in a cost-efficient manner.
+Message passing implementations usually support inter- as well as intra-node communication.
+The used transfer channel, for example, ethernet, InfiniBand, Myrinet or shared memory, is chosen transparently by the library.
+
+The message passing itself happens synchronously or asynchronously and the message can contain arbitrary data.
+However, the user has to specify explicitely which data shall be send when to which host.
+Thus, he is fully in charge for the communication pattern.
+It implies that the user needs a thorough understanding of the algorithm in order to identify which code sections can be parallelized.
+Moreover, he has to make sure that there are not any deadlocks or race conditions between multiple parallel instances.
+In order to implement desirable properties such as fault-tolerance, load balancing or elasticity, the programmer even has to add more code.
+Message passing only gives you the tools at hand to implement these features.
+This makes parallelisation with message passing a very cumbersome and error-prone task which requires a highly trained professional.
+
+There are several implementations of a message passing system.
+One of them is Parallel Virtual Machine~\cite{geist:1994a} (PVM), available for a wide variety of computer architectures.
+Another popular message passing system, which later supplanted PVM, is Message Passing Interface~\cite{lusk:2009a} (MPI).
+Usually these libraries are used with languages such as C/C++ or Fortran.
+But there are also bindings for R, namely rmpi~\cite{rmpi} and rpvm~\cite{rpvm}.
+Since they are only wrappers for the respective MPI and PVM calls, they also suffer from the aforementioned problems.
+
+Matlab users are not trained to program parallel programs and therefore only few can take advantage of rmpi and rpvm.
+In order to alleviate this problem, Simple Network of Workstations~\cite{tierney:pv0hros2008a} (SNOW) was developed.
+SNOW is built on top of message passing and achieves task- and data-parallelism.
+At the same time, it offers a more high-level interface for initiating parallel computations and thus is more user-friendly.
+The system is controlled from a R session which is executed on a master node.
+From there, the user can start parallel tasks on the worker nodes.
+The result of the computation is then transferred back to the master node.
+Even though the user does not have to program at the level of message passing, it still needs a considerable effort to parallelize code.
+At first, the user has to identify which code sections are task- or data-parallel.
+Then he has to add SNOW functions to implement the parallel execution.
+If he requires advanced features such as elasticity or fault-tolerance, then the user has to even further bloat his code.
+
+For the other popular numerical computing environment out there, namely Matlab, exists also a set of parallelization tools.
+The most popular are the Matlab Parallel Computing Toolbox~\cite{parallelComputingToolbox} and Matlab Distributed Computing Server~\cite{distributedComputingServer} which are developed by MathsWorks.
+The former permits to parallelize Matlab code on a multi-core computer and the latter scales the parallelized code up to large cluster of computing machines.
+They combine several paradigms for parallelization~\cite{sharma:ijpp2009a}.
