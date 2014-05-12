@@ -118,7 +118,7 @@ But they either require extensive hand-tuning by the user or extensions to the M
 In contrast, the Stratosphere system is aware of the join operation and can choose the best execution plan for it.
 Depending on the input sizes of the inputs, either the sort-merge join or the hash join algorithm performs better.
 
-Stratosphere is programed by using the native Java or Scala API to specify a dataflow.
+Stratosphere is programmed by using the native Java or Scala API to specify a dataflow.
 It is the representation of a computation at the operator-level of the system.
 A dataflow is an directed acyclic graph (DAG) whose nodes are the operators and edges are the input dependencies between the operators.
 A transformed version of the DAG is then given to Nephele~\cite{warneke:2009a}, the execution engine, which is responsible for parallel execution.
@@ -128,6 +128,8 @@ First of all, it chains as many operators as possible.
 Chaining means that multiple operators are packed into one task so that intermediate results are directly fed to a subsequent operator on the same worker node.
 For example, multiple map operations can be smoothly chained.
 Furthermore, the system always tries to have deployed succeeding tasks so that the intermediate results can directly be forwarded.
+Since Stratosphere runs in a JVM, excessive object creation can cause a significant performance loss due to the necessary garbage collection.
+Therefore, the system reuses existing objects wherever possible, thus keeping the created objects low.
 In the event of memory shortage, intermediate results will be gently spilled to disk.
 Additionally, Stratosphere support out-of-core algorithms such as external sort or hybridhash join to deal with massive amounts of data.
 
@@ -143,10 +145,53 @@ Another distributed data processing system is Spark~\cite{zaharia:2010a}.
 Spark was developed to tackle the blind spot of MapReduce, its inefficiency when it comes to iterative computations.
 The system is build around resilient distributed datasets~\cite{zaharia:2012a} (RDD), a distributed memory abstraction.
 It allows programmers to execute in-memory computations on a large cluster with fault-tolerance.
+A Spark application is realized as a driver program which executes parallel operations on a cluster.
 
+The programming API offers similar higher-level functions to manipulate the underlying RDD like Stratosphere.
+The operations can be distinguished into transformations and actions.
+Transformations take an existing RDD and creates a new one whose execution is deferred until an action is called.
+Internally, transformations construct a directed acyclic graph (DAG) which is used for parallel execution later on.
+Amongst others, \emph{map}, \emph{join} and \emph{cartesian} belong to the group of transformations.
+Actions return a value to the driver program which can be the cardinality of the RDD or the result of writing the RDD to disk, for example.
 
-This allows to efficiently realize iterations within in the framework.
-Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
+Spark also supports two restricted forms of shared variables.
+Broadcast variables are used to send and store read-only data to worker nodes so that it does not have to shipped with the tasks.
+This reduces the communication overhead if the broadcast variable is used across several tasks.
+For example, the data points in a k-means clustering algorithm should be broadcasted because it stays constant within the loop.
+Another type of shared variables are accumulators.
+Accumulators can only be changed by applying an associative operation.
+Therefore, they can easily be implemented in parallel.
+An example would be a counter which each worker node increments when it processes a certain input item.
+
+Spark was constructed with an efficient iteration mechanism in mind.
+Therefore, the system offers a flexible execution pipeline which can contain an arbitrary sequence of RDD operations.
+This is unlike MapReduce where a single job can only contain a mapper and a reducer.
+Moreover, all its distributed data is represented by a RDD, which are kept inherently in memory.
+All the loop's computations are realized with RDDs and thus the loop's state is kept in memory between subsequent iterations.
+This frees the loop from costly I/O as it would happen in MapReduce where each iteration would be an individual job.
+
+Fault-tolerance is implemented by storing the lineage of each RDD.
+The lineage is the information how to build the RDD from its predecessors.
+This means that in case of a lost RDD due to a machine outage, the system backtracks the RDDs which were used to construct the lost RDD.
+Once it found a retrievable state the computation is reissued from this point on.
+Compared to checkpointing, which stores the states at a specific moment, lineage has far smaller memory footprint.
+But Spark also supports traditional checkpointing which can be triggered by the user.
+
+Spark does not only offer a native Scala API but also higher level languages which are built on top of it.
+Similar to Apache Hive~\cite{hive}, which allows to query data stored in the Hadoop distributed file system with a SQL-like language, Apache Shark~\cite{xin:2013a} does the same, just on Spark.
+This allows people only acquainted with SQL to employ the Spark system.
+
+The Spark project is revolutionary, because it adds efficient loop support by means of RDDs to the MapReduce world.
+This makes it well suited for a wide variety of domains where complex tasks, such as data mining, machine learning or statistics, have to be performed.
+For example, logistic regression is executed up to $100$ times faster than on Hadoop.
+Additionally, Spark supports full functional fault-tolerance which can be geared towards the requirements of the user.
+It can either be lightweight storing only the lineage information or heavy in the sense that it copies the whole system state.
+However, Spark also have some weak points.
+Unlike Stratosphere, it does not have a cost-based optimizer which can select execution plans depending on the applied strategies.
+Furthermore, the system lacks support for out of core operations and does not spill data to disk in case that it runs out of memory.
+This implies that the maximal size of data a job can process is limited by the amount of availabe main memory.
+Since the hard disk space is usually several magnitudes greater, one unnecessarily limits the set of solvable problems.
+Finally, Spark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.
 
 There are also other notable projects trying to amend the deficiencies of MapReduce.
 The HaLoop~\cite{bu:pve2010a} project adds loop support to Hadoop.
