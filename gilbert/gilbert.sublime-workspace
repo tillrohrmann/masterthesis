@@ -28,109 +28,42 @@
 	"buffers":
 	[
 		{
-			"file": "04_gilbert_typing.tex",
-			"settings":
-			{
-				"buffer_size": 622,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "05_intermediate_representation.tex",
-			"settings":
-			{
-				"buffer_size": 660,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "07_architecture.tex",
-			"settings":
-			{
-				"buffer_size": 789,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "08_implementation.tex",
-			"settings":
-			{
-				"buffer_size": 842,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "09_evaluation.tex",
-			"settings":
-			{
-				"buffer_size": 1560,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "01_introduction.tex",
-			"settings":
-			{
-				"buffer_size": 9064,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "%!TEX root=main.tex\n\\chapter{Related Work}\n\\label{cha:relatedwork}\n\n\\begin{itemize}\n	\\item Distributed linear algebra systems\n	\\begin{itemize}\n		\\item SystemML\n		\\item Ricardo\n		\\item pR\n	\\end{itemize}\n	\\item Parallel dataflow systems\n	\\begin{itemize}\n		\\item MapReduce\n		\\item Stratosphere\n		\\item Spark\n	\\end{itemize}\n	\\item Specialized distributed computing frameworks\n	\\begin{itemize}\n		\\item Pegasus\n		\\item Datalog\n		\\item Pregel\n		\\item Hyracks\n		\\item Apache Hama\n	\\end{itemize}\n	\\item DBMS\n	\\begin{itemize}\n		\\item RIOT I/O\n		\\item SciDB\n	\\end{itemize}\n	\\item Matlab parallelization\n	\\item Specialized algorithms\n	\\begin{itemize}\n		\\item Mahout\n	\\end{itemize}\n\\end{itemize}\n\nPages $\\approx$ 10 - 15\n\nThe challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.\nIn recent years a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.\nThe different trends can be subsumed into the following categories: Distributed numerical computing systems, parallel dataflow systems, specialized distributed computing frameworks, database management systems, explicit parallelization and specialized algorithms.\n\n\\section{Distributed numerical computing systems}\n\nSystemML~\\cite{ghoting:2011a} has the aim to make machine learning algorithms run on massive datasets without burdening the user with low-level implementation details and tedious hand-tuning.\nIn order to achieve this, it provides a declarative higher-level language, called Declarative Machine learning Language (DML), for linear algebra operations which is automatically executed in a distributed fashion.\nDML is inspired by the R~\\cite{r:1993a} language which is the quasi standard among data scientists and statisticians.\nThe language supports matrices and scalars as basic types which is the basis of a wide variety of supervised and unsupervised machine learning algorithms.\nThe distributed execution is achieved by compiling the linear algebra operations to MapReduce tasks.\n\n\n\nOne inspiring approach is SystemML~\\cite{ghoting:2011a}.\nSystemML provides a declarative higher-level language for expressing linear algebra operations.\nThese operations are then mapped onto MapReduce tasks.\nIt further applies several optimization strategies such as blocking, dynamic block-level operations, piggybacking to reduce the number of MapReduce tasks and local aggregation within the reducers.\nThe system can evaluate different execution plans depending on the size of its inputs and its blocking strategy.\nIt selects the most cost-efficient plan based on the network costs.\nSystemML is similar to the proposed approach, however it has no proper iteration mechanism besides of simple loop unrolling.\nFurthermore, it relies on the MapReduce framework with all of its deficiencies compared to the more powerful distributed computing system Stratosphere.\nThe declarative language of SystemML is not a subset of Matlab or R and thus it cannot directly be used by native Matlab or R users.\n\nStratosphere~\\cite{battre:2010a} is a distributed computing framework which employs PACTs~\\cite{alexandrov:2011a}, a generalization of MapReduce.\nIt adds additional $2^{nd}$ level functions, which are called input contracts in the context of Stratosphere, such as \\emph{match}, \\emph{cross} and \\emph{coGroup} in order to improve the expressiveness and efficiency of the MapReduce paradigm.\nFurthermore, it adds the concept of output contracts which annotate input contracts with certain properties.\nThese properties are exploited by the compiler to select the best execution plan.\nRecently, the framework has been extended to support bulk and incremental iterations~\\cite{ewen:pve2012a}.\nHowever, it still lacks an easy to use language for the development of machine learning algorithms.\n\nAnother distributed computing framework is Spark~\\cite{zaharia:2010a} which can be seen as an extension of MapReduce with iteration support.\nSpark performs its computation on resilient distributed datasets (RDD) which can be kept in memory during computations.\nThis allows to efficiently realize iterations within in the framework.\nSpark lacks an intuitive Matlab-like language frontend and thus it requires a considerable expertise to code well performing algorithms.\n\nApache Mahout~\\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.\nMany algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.\nHowever, Mahout offers no easy way to write new algorithms by using a declarative language for example.\nBy using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.\n\nPegasus~\\cite{kang:2009a} is a programming model mainly intended for graph mining purposes.\nIt is centered around the abstraction of a generalized iterative matrix vector multiplication (GIM-V), which can be found in many graph algorithms.\nThe GIM-V operation can be represented by a map and reduce operation.\nConsequently, Pegasus implements it on top of Hadoop.\nGilbert is supposed to contain the GIM-V operation and will not only consider the operation itself for optimization purposes but also its context of previous and succeeding operations.\nTherefore, Gilbert should be a generalization of Pegasus.\n\nY.~Bu et al.~\\cite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.\nAll of these systems exhibit a tight coupling of a solution's logical representation and physical representation.\nThis renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.\nMoreover, the systems are mostly disjoint which implies that each framework has to be updated in order to profit from new optimization strategies.\nAs a solution the authors propose to employ Datalog as a declarative language for the specification of higher level programming models such as iterative MapReduce or Pregel~\\cite{malewicz:2010a} within their system.\nStandard query optimization techniques are applied on this common intermediate representation and then it is transformed into a physical execution plan.\nThis plan is executed by Hyracks~\\cite{borkar:2011a}, a data-parallel platform for data-intensive tasks.\nThis approach has the advantage that a wider class of machine learning algorithms are efficiently supported within the same system, thus profiting from the same underlying infrastructure.\nHowever, at the moment the physical plans are still created by hand which makes the framework not applicable yet.\n\nL. Hendren~\\cite{hendren:2011a} developed a static typing system for Matlab.\nTypes are defined by a special keyword so that the system needs a weaver to convert the typing statements into valid Matlab code.\nThe defined types can then be used by the compiler to generate more efficient code and to check runtime types against their specifications.\nFurthermore this contributes to a better documentation of code and makes understanding easier.\n\n\n",
 			"file": "02_related_work.tex",
-			"file_size": 7210,
-			"file_write_time": 1399301440000000,
 			"settings":
 			{
-				"buffer_size": 7211,
+				"buffer_size": 49306,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "10_conclusion.tex",
+			"file": "b01_bibliography.bib",
 			"settings":
 			{
-				"buffer_size": 313,
+				"buffer_size": 14608,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "005_outline.tex",
-			"settings":
-			{
-				"buffer_size": 1008,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/main.tex",
-			"settings":
-			{
-				"buffer_size": 3601,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/components/outline.tex",
-			"settings":
-			{
-				"buffer_size": 3225,
-				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "main.tex",
 			"settings":
 			{
-				"buffer_size": 2149,
+				"buffer_size": 2232,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "011_problem_statement.tex",
+			"file": "style.tex",
 			"settings":
 			{
-				"buffer_size": 168,
+				"buffer_size": 21862,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "a01_listings.tex",
+			"settings":
+			{
+				"buffer_size": 276,
 				"line_ending": "Unix"
 			}
 		}
@@ -196,11 +129,21 @@
 	"file_history":
 	[
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/04_gilbert_typing.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/07_architecture.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/09_evaluation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/10_conclusion.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/005_outline.tex",
+		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/main.tex",
+		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/components/outline.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/011_problem_statement.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/style.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/02_related_work.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.bbl",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/003_abstract.tex",
@@ -210,7 +153,6 @@
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_listings.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_evaluation.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/002_acknowledgements.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/005_outline.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/001_disclaimer.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/titlepage.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_conclusion.tex",
@@ -274,6 +216,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"usepackage",
+			"caption",
+			"\\th",
+			"th",
+			"mpi",
+			"hadoop",
+			"newcomman",
+			"UDF",
+			"free",
+			"modle",
+			"riot",
+			"elas",
+			"elasti",
+			"fault",
+			"understanding",
 			"mapredu",
 			"apache",
 			"Month",
@@ -350,55 +307,57 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "04_gilbert_typing.tex",
+					"file": "02_related_work.tex",
 					"settings":
 					{
-						"buffer_size": 622,
+						"buffer_size": 49306,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								488,
-								488
+								31873,
+								31875
 							]
 						],
 						"settings":
 						{
+							"forward_sync": true,
+							"keep focus": true,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4316.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "05_intermediate_representation.tex",
+					"file": "b01_bibliography.bib",
 					"settings":
 					{
-						"buffer_size": 660,
+						"buffer_size": 14608,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								624,
-								624
+								223,
+								223
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -409,24 +368,23 @@
 				},
 				{
 					"buffer": 2,
-					"file": "07_architecture.tex",
+					"file": "main.tex",
 					"settings":
 					{
-						"buffer_size": 789,
+						"buffer_size": 2232,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								772,
-								772
+								784,
+								784
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -436,258 +394,46 @@
 				},
 				{
 					"buffer": 3,
-					"file": "08_implementation.tex",
+					"file": "style.tex",
 					"settings":
 					{
-						"buffer_size": 842,
+						"buffer_size": 21862,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								731,
-								731
+								18673,
+								18673
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4992.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "09_evaluation.tex",
+					"file": "a01_listings.tex",
 					"settings":
 					{
-						"buffer_size": 1560,
+						"buffer_size": 276,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								447,
-								447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "01_introduction.tex",
-					"settings":
-					{
-						"buffer_size": 9064,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2668,
-								2668
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "02_related_work.tex",
-					"settings":
-					{
-						"buffer_size": 7211,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								746,
-								746
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 208.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "10_conclusion.tex",
-					"settings":
-					{
-						"buffer_size": 313,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								313,
-								313
-							]
-						],
-						"settings":
-						{
-							"keep focus": false,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "005_outline.tex",
-					"settings":
-					{
-						"buffer_size": 1008,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								993,
-								993
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/main.tex",
-					"settings":
-					{
-						"buffer_size": 3601,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 661.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/components/outline.tex",
-					"settings":
-					{
-						"buffer_size": 3225,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								328,
-								270
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "main.tex",
-					"settings":
-					{
-						"buffer_size": 2149,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1329,
-								1329
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 110.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "011_problem_statement.tex",
-					"settings":
-					{
-						"buffer_size": 168,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								19,
-								19
+								184,
+								163
 							]
 						],
 						"settings":
@@ -775,6 +521,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 169.0,
 	"status_bar_visible": true
 }

@@ -355,7 +355,10 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
 %\floatplacement
 
 \renewcommand{\floatpagefraction}{0.85}		% if a figure takes more than 85% of a page it will be typeset on a separate page
-\usepackage[it,bf,tight,hang,raggedright]{subfigure}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
 
 %\numberwithin{figure}{section}
 %\numberwithin{table}{section}
@@ -459,3 +462,22 @@ sensitive=false, morecomment=[s]{<!--}{-->}, morestring=[b]", morestring=[d]'}
     {\clearpage}}
 
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext=lol,
+  name=Listing
+]{listing}
+
+\DeclareCaptionSubType{listing}
+\renewcommand\thesublisting{(\alph{sublisting})}
+
+\usepackage{fancybox}
+
+\makeatletter
+\newenvironment{CenteredBox}{% 
+\begin{Sbox}}{% Save the content in a box
+\end{Sbox}\centerline{\parbox{\wd\@Sbox}{\TheSbox}}}% And output it centered
+\makeatother

@@ -2,6 +2,8 @@
 \chapter{Related Work}
 \label{cha:relatedwork}
 
+\chapterquote{If I have seen further than others, it is by standing upon the shoulders of giants.}{Isaac Newton, (1642 - 1727)}
+
 \begin{itemize}
 	\item Specialized distributed computing frameworks
 	\begin{itemize}
@@ -453,6 +455,7 @@ Moreover, he has to make sure that there are not any deadlocks or race condition
 In order to implement desirable properties such as fault-tolerance, load balancing or elasticity, the programmer even has to add more code.
 Message passing only gives you the tools at hand to implement these features.
 This makes parallelisation with message passing a very cumbersome and error-prone task which requires a highly trained professional.
+In other words, message passing can be seen as the assembler language of parallel programming.
 
 There are several implementations of a message passing system.
 One of them is Parallel Virtual Machine~\cite{geist:1994a} (PVM), available for a wide variety of computer architectures.
@@ -476,4 +479,53 @@ If he requires advanced features such as elasticity or fault-tolerance, then the
 For the other popular numerical computing environment out there, namely Matlab, exists also a set of parallelization tools.
 The most popular are the Matlab Parallel Computing Toolbox~\cite{parallelComputingToolbox} and Matlab Distributed Computing Server~\cite{distributedComputingServer} which are developed by MathsWorks.
 The former permits to parallelize Matlab code on a multi-core computer and the latter scales the parallelized code up to large cluster of computing machines.
-They combine several paradigms for parallelization~\cite{sharma:ijpp2009a}.
+In combination, they offer a flexible way to specify parallelism in Matlab code.
+They combine several paradigms for parallelization~\cite{sharma:ijpp2009a} with the intent to require only few changes to existing code.
+
+Several Matlab functions are extended to run in parallel on a mutli-core or multi-processor system by supporting multi-threading.
+The degree of parallelism is controlled by the user through a Matlab function.
+However, multi-threading is limited to a single machine.
+Since the prevailing trend is to employ large shared nothing clusters to solve computing intensive tasks, the authors implemented other parallelization means, too.
+
+One of them is the exposure of MPI to the user.
+Because this gives users great power at hand, it also requires great responsibility of them.
+But Matlab offers MPI's functionality through a simplified and easily usable form, which assists the user in writing error free code.
+The Matlab MPI functions encapsulate deadlock and mismatched communication detection.
+A mismatched communication occurs if there is sender or receiver whose communication counterpart (receiver or sender respectively) is missing.
+Yet, the MPI functions offer only a very low-level approach to parallelizing code.
+Therefore, the Matlab authors devised some higher-level constructs, too.
+
+Distributed arrays are used to abstract the communication details of parallel computations on arrays.
+Distributed arrays are conceptually equal to usual arrays, just with the slight difference that the applied operations are automatically executed in parallel.
+Most of the built-in functions are adapted to distributed arrays.
+Internally, they are built on top of MPI and the user only gets a coherent logical view of the complete array.
+The distributed arrays and their parallel executed operations are an example of how to exploit data parallelism.
+
+Another type of parallelism is the task parallelism where independent tasks are exploited to be run in parallel.
+The for-drange mechanism allows to specify parallel for loops over distributed arrays.
+The for loop assigns iteration ranges to the individual workers.
+But the user has to make sure that the needed data by the iteration is stored on the respective worker node.
+A requirement is that the iterations are independent and no communication between different workers occurs.
+Thus the tasks to be executed have to be embarrassingly parallel.
+
+A more sophisticated mechanism is the parallel for loop (parfor).
+The parfor is similar to the parallel for loop in OpenMP~\cite{dagum:csei1998a}.
+It transparently distributes work, iterations in the case of a for loop, among the available workers.
+Unlike OpenMP whose parallel for loop spawns multiple threads for each chunk of iterations, Matlab spawns separate processes.
+This permits to let the different iterations run on different machines and thus supporting NUMA (non-uniform memory architecture) systems.
+
+The Matlab Distributed Computing Server provides the infrastructure to run Matlab code in parallel on a large set of workers.
+For this purpose, a scheduler based on the JINI/RMI framework was developed.
+The scheduler takes a Matlab job, comprising of a command set, and assigns it to an idling worker.
+The authors decided against the support of distributed filesystems and instead chose a relational database to store and communicate task related data.
+Furthermore, the whole infrastructure was developed having small clusters, with up to $128$ nodes, in mind.
+
+Therefore, nothing was said about how well the Matlab system scales to clusters with more than $128$ nodes.
+Moreover, it was not stated whether the system supports a fault-tolerance mechanism or not.
+Supposedly, this can be achieved by using the relational database for checkpointing.
+But there might be scenarios for which this is not applicable, for example, if the memory footprint of the program is huge.
+For long running jobs it is crucial to recover automatically from a machine failure without user interference.
+
+Besides Matlab Parallel Computing Toolbox there are also other projects which try to parallelize Matlab code.
+The most noteworthy candidates are pMatlab~\cite{bliss:ijhpca2007a} and MatlabMPI~\cite{kepner:jpdc2004a} which shall be named here for the sake of completeness.
+Furthermore, they are non-commercial and thus they stand out against MathsWorks product.
