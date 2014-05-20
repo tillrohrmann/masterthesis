@@ -19,6 +19,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {listing}{\numberline {5.1}{\ignorespaces In order to type this code fragment, the typer has solve the halting problem.\relax }}{34}{listing.caption.11}
+\contentsline {listing}{\numberline {5.2}{\ignorespaces Type annotations in Java.\relax }}{34}{listing.caption.12}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

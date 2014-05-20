@@ -4,15 +4,6 @@
 
 \chapterquote{The limits of my language means the limits of my world.}{Ludwig Wittgenstein, (1889 - 1951)}
 
-\begin{itemize}
-	\item Parser
-	\begin{itemize}
-		\item Which parser type is powerful enough to parse our specified language? LL parser because there is no left recursion
-	\end{itemize}
-\end{itemize}
-
-Pages $\approx$ 5-8
-
 Prior to the development start of Gilbert, we came across the decision which higher-level language we actually wanted to support.
 Since Gilbert has the aim to be a sparse linear algebra environment, R and Matlab are the natural candidates to be the inspiration for it.
 In fact, R and Matlab are quite similar and they both are widely used in academics as well as the industry to develop mathematical programs.
@@ -29,6 +20,9 @@ We think that this is a crucial property of Gilbert to be successfully adopted b
 Furthermore, a neat side effect is that existing Matlab code can almost seamlessly be ported to Gilbert and thus benefit instantaneously from the computational power of a large shared nothing cluster.
 This becomes particularly relevant against the background of having this huge existing code base.
 Recoding parts of it would be prohibitive, because of the required labour and provoked costs.
+
+In the following sections, we will describe the key aspects of Gilbert's language explaining the taken desing decisions.
+Subsequently, we will give a formal specification of Gilbert's language and describe the parser which is used to parse it.
 
 \section{Language Features}
 
@@ -137,7 +131,7 @@ for i = 1:10
 end
 		\end{lstlisting}
 		\caption{For loop}
-		\label{fig:for2Fixpoint:for}
+		\label[listing]{fig:for2Fixpoint:for}
 	\end{sublisting}
 	\begin{sublisting}{.5\linewidth}
 			\begin{lstlisting}[language=Matlab]
@@ -147,7 +141,7 @@ r = fixpoint({0,1}, f, 10);
 A = r{1};
 		\end{lstlisting}
 		\caption{Fixpoint}
-		\label{fig:for2Fixpoint:fixpoint}
+		\label[listing]{fig:for2Fixpoint:fixpoint}
 	\end{sublisting}
 	\caption{Transformation from Matlab for loop \subref{fig:for2Fixpoint:for} to Gilbert fixpoint \subref{fig:for2Fixpoint:fixpoint} formulation. Essentially, all iteration data is combined and passed as a cell array value to the update function.}
 	\label{fig:for2Fixpoint}
@@ -156,13 +150,170 @@ A = r{1};
 \section{Language Grammar}
 \label{sec:languageGrammar}
 
+As noted above, Gilbert's language is inspired by Matlab and in fact shall copy it.
+However, we could not find an official specification of the Matlab language.
+Therefore, we defined our own grammar with the goal to imitate Matlab as closely as possible.
+Even though we extensively tested the conformity of the language, we cannot guarantee that it is completely equivalent.
+In the following, we give the Backus-Naur form (BNF) of Gilbert's language.
 
+\setlength{\grammarindent}{12em} % increase separation between LHS/RHS
+\begin{grammar}
+<program> ::= <stmtOrFuncList>
+
+<stmtOrFuncList> ::= (<stmt> | <funcDef>)*
+
+<stmt> ::= <assignment> | <expression>
+
+<assignment> ::= <lhs> '=' <rhs>
+
+<lhs> ::= <identifier>
+
+<rhs> ::= <expression>
+
+<funcDef> ::= 'function' <funcValues>? <identifier> <funcParams> <funcBody> 'end'
+
+<funcValues> ::= <identifier> '='
+\alt '[' <identifier> (',' <identifier>)* ']' '='
+
+<funcParams> ::= '(' ')'
+\alt '(' <identifier> (',' <identifier>)* ')'
+
+<funcBody> ::= <stmtOrFuncList>
+
+<expression> ::= <aexp1>
+
+<aexp1> ::= <aexp2> ('||' <aexp2>)*
+
+<aexp2> ::= <aexp3> ('\&\&' <aexp3>)*
+
+<aexp3> ::= <aexp4> ('|' <aexp4>)*
+
+<aexp4> ::= <aexp5> ('\&' <aexp5>)*
+
+<aexp5> ::= <aexp6> (<compOp> <aexp6>)*
+
+<aexp6> ::= <aexp7> (':' <aexp7>)*
+
+<aexp7> ::= <aexp8> (<addOp> <aexp8>)*
+
+<aexp8> ::= <aexp9> (<multOp> <aexp9>)*
+
+<aexp9> ::= <prefixOp> <aexp9> | <aexp10>
+
+<aexp10> ::= <aexp11> (<expOp> <aexp11>)*
+
+<aexp11> ::= <unaryExpression> <postfixOp>?
+
+<unaryExpression> ::= <elemExpression> | '(' <expression> ')'
+
+<elemExpression> ::= <funcApplication> \alt <cellExpression> \alt <identifier> \alt <scalar> \alt <booleanLiteral> \alt <matrix> \alt <stringLiteral> \alt <anonymousFunc> \alt <funcReference>
+
+<funcApplication> ::= <identifier> '(' ')'
+\alt <identifier> '(' <expression> (',' <expression>)* ')'
+
+<funcReference> ::= '@' <identifier>
+
+<cellExpression> ::= <cellArray> | <cellArrayIndexing>
+
+<cellArray> ::= '{' <expression> (',' <expression>)* '}'
+
+<cellArrayIndexing> ::= <identifier> ('{' <numericLiteral> '}')+
+
+<scalar> ::= <numericLiteral>
+
+<matrix> ::= '[' <matrixRow> (<newlineOrSemicolon> <matrixRow>)* ']'
+
+<matrixRow> ::= <expression> (',' <expression>)*
+
+<prefixOp> ::= '+' | '-'
+
+<multOp> ::= '*' | '/' | '.*' | './'
+
+<addOp> ::= '+' | '-'
+
+<compOp> ::= "'<'" | "'<='" | "'>'" | "'>='" | "'=='" | "'~='"
+
+<postfixOp> ::= '.'' | '''
+
+<expOp> ::= '.'
+
+<newlineOrSemicolon> ::= NL | ';'
+
+\end{grammar}
+
+For the sake of simplicity, we have left out most of the whitespace and line break handling.
+Furthermore, we used notations known from regular expressions to shorten the grammar specification.
+We use parentheses to group subexpressions and apply the following multiplicity specifiers: \code{*}, \code{+} and \code{?}.
+The semantics of these specifiers can be found in \cref{tab:multiplicity}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{c|l}
+	Multiplicity specifier & Meaning\\
+	\hline
+	$\langle exp \rangle$* & $\langle exp\rangle$ can appear multiple times \\
+	$\langle exp\rangle$+ & $\langle exp\rangle$ can appear multiple times but at least once \\
+	$\langle exp\rangle$? & $\langle exp\rangle$ can appear exactly once or not at all
+	\end{tabular}
+	\caption{Multiplicity specifier used to specify Gilbert's language. They are borrowed from regular expressions.}
+	\label{tab:multiplicity}
+\end{table}
+
+The different \emph{aexp} non-terminals are used to model the precedence order of the mathematical operators.
+An overview of the precedences can be found in \cref{tab:precedences}.
+The $'$ operator denotes the transpose of the operand.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|l}
+	Operator class & Operators\\
+	\hline
+	Short circuit logial or & $||$\\
+	Short circuit logical and & $\&\&$\\
+	Logical or & $|$ \\
+	Logical and & $\&$ \\
+	Comparators & $>$, $>=$, $<$, $<=$, $==$, \textasciitilde$=$\\
+	Range operator & $:$ \\
+	Addition and Subtraction & $+$, $-$\\
+	Multiplication and Division & $*$, $/$\\
+	Prefix operator & $+$, $-$\\
+	Exponentiation & $exp$\\
+	Postfix operator & $'$
+	\end{tabular}
+	\caption{Precedence order of mathematical operators in ascending order.}
+	\label{tab:precedences}
+\end{table}
+
+The non-terminals \emph{identifier}, \emph{numericLiteral}, \emph{stringLiteral} and \emph{booleanLiteral} are tokens generated by the lexer. The corresponding tokens are defined by regular expressions and can be found in \cref{tab:tokens}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|l}
+	Token name & Regular expression\\
+	\hline
+	identifier & [a-zA-Z] [a-zA-Z0-9\_]*\\
+	numericLiteral & [+-]? [0-9]+ (.[0-9]*)? ([eE][+-]?[0-9]+)? | [+-]? .[0-9]+ ([eE][+-]?[0-9]+)? \\
+	stringLiteral & "["]*" | '[']*'\\
+	booleanLiteral & true | false
+	\end{tabular}
+	\caption{Definition of generated tokens by regular expressions.}
+	\label{tab:tokens}
+\end{table}
 
 \section{Parser}
 
-\section{Intermediate Representation}
+In order to implement Gilbert, a parser had to be selected which is powerful enough to parse Gilbert's language.
+Luckily, the language is rather simple and since none of the production rules is left recursive, we can use a simple LL(n) parser.
+This aspect becomes important when we justify our implementation choices in \cref{cha:implementation}.
 
-I intend to implement an intermediate representation of a Matlab program.
-The additional abstraction layer allows language independent optimizations and makes the system independent from the actually used frontend language.
-The set of language primitives of the intermediate representation has to include the operational primitives of linear algebra as well as an iteration abstraction in order to realize algorithms based on convergence.
-Furthermore, it is of particular interest to keep this set as small as possible, because this would alleviate a possible optimization step prior to execution.
+The attentive reader will have noticed that our language specification contains a problem.
+Consider, for example, the following valid Matlab code \code{A' + B'} where \code{A} and \code{B} are matrices.
+The code should produces the sum of two transposed matrices.
+However, on the lexer level the two transpose operators will be recognised as the enclosing apostrophes of a string literal.
+Therefore, the lexer will produce an identifier token followed by a string literal token.
+Eventually, this will cause a parser error, because there is no production rule requiring this combination of tokens.
+
+In order to solve this problem, we have to differentiate a transpose operator from an apostrophe belonging to a string literal.
+Since the transpoe operator always follows after an expression, we can check that the previously detected token was an identifier, closing parentheses, closing bracket or closing brace.
+If this is the case, then the apostrophe is considered being a transpose operator.
+Otherwise, it belongs to a string literal.
