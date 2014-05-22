@@ -128,4 +128,127 @@ Furhermore, it has proven to type several algorithms implemented within Gilbert 
 
 \section{Hindley-Milner Type Inference}
 
+The Hindley-Milner (HM) type inference assigns types to expressions.
+It was initially developed to type functional languages.
+In fact, HM type inference was first implemented as the typing part of the programming language ML.
+HM types the expressions of the lambda calculus enriched with the \code{let}-expression.
+For a detailed review of the lambda calculus, the interested reader is referred to the article of \textcite{cardone:hhl2006a}.
+
+The set of expressions $e$ contain a variable, a function application, a function abstraction and the \code{let}-expression.
+The formal definition of $e$ is
+\begin{eqnarray*}
+e &= & x\quad\text{(Variable)}\\
+&|& e\ e\quad\text{(Application)}\\
+&|& \lambda x. e\quad\text{(Abstraction)}\\
+&|& \code{let } x = e \code{ in } e
+\end{eqnarray*}
+For those unconversant with lambda expressions, we will quickly revise them.
+The function application is written as $e_1\ e_2$ whereas $e_1$ denotes a function and $e_2$ the function argument which is applied to the function body.
+The function abstraction $\lambda x.e$ is the equivalent of an anonymous function as it is known from many program languages.
+It is initiated with a $\lambda$ followed by its function parameter $x$ and the function body $e$.
+The let-expression $\code{let } x = e_1 \code{ in } e_2$ introduces a new variable $x$, having the value $e_1$, into the context $\Gamma$.
+This variable can be used within the expression $e_2$.
+The semantic of the assignment is that every occurence of $x$ in $e_2$ is replaced by $e_1$.
+The context $\Gamma$ contains all type information so far known and is a mapping from variables to types.
+A more precise definition is given in a later paragraph.
+
+One might think that the lambda calculus is only a toy language and that the set of expressions is not expressive enough to represent a common programming problem.
+However, it turned out that the lambda calculus is Turing complete and thus any programming language can be reduced to it.
+Therefore, it is enough to reason about the typing aspects of these expressions.
+
+Even though Gilbert is not a functional language, we can use the HM type inference to compute the types at compile-time.
+The only difference to the above defined set of expressions is that Gilbert does not have a \code{let}-expression.
+Instead, it has ordinary assignments of the form $x = e$.
+The notion of the assignment is similar to the \code{let}-expression.
+An assignment adds a new variable $x$ with the value $e$ to the context.
+
+HM type inference distinguishes between two sorts of types, \emph{mono}- and \emph{polytypes}.
+Monotypes $\tau$ are defined as following:
+\begin{eqnarray*}
+\tau &=& \alpha\quad\text{(Variable)}\\
+&|& D\ \tau\ \ldots \tau\quad\text{(Application)}
+\end{eqnarray*}
+A monotype always denotes a concrete type.
+If the type is known, it can be a type constant, such as \code{int}, \code{float} or \code{string}, or a parametric type.
+A parametric type takes itself type arguments to form a concrete type.
+An example of a parametric type is the \code{Set} or the \code{List} which can be instantiated with arbitrary element types.
+Type constants are a special case of the application rule with an empty list of arguments.
+If the type not yet known but it can only be a single type, then use the type variable $\alpha$.
+Often it can be the case that these type variables are replaced with known types at a later stage of the type inference.
+
+In contrast to monotypes, polytypes $\sigma$ denote multiple types.
+They are defined by
+\begin{eqnarray*}
+\sigma &=& \tau \\
+&|& \forall \alpha .\sigma
+\end{eqnarray*}
+.
+A type of the form $\forall \alpha.\sigma$ indicates the set of all types where $\alpha$ is substituted by a concrete type $\tau$ within $\sigma$.
+Consider for example the tuple access function \code{fst} which takes a tuple and returns the first entry.
+The function \code{fst} should be applicable to all different types of tuples, for example $(\code{int}, \code{int})$, $(\code{string}, \code{float})$, etc.
+Thus, \code{fst} cannot have a monotype, because then it would only work for one concrete tuple type.
+The actual type of \code{fst} is $\forall \alpha,\beta . (\alpha, \beta) \rightarrow \alpha$.
+Depending on the applied tuple argument the quantified type variables are instantiated respectively.
+Polytypes permit to implement generic functions in a type safe manner and this is called parametric polymorphism.
+
+Usually, expressions depend on other expression and thus their types, too.
+Therefore, we a kind of type dictionary where we note types of expressions we have already seen while parsing the code.
+And this is exactly what the context $\Gamma$ is used for.
+$\Gamma$ contains a list of pairs $x:\sigma$, which are called assumptions.
+The formal definition of $\Gamma$ is
+\begin{eqnarray*}
+\Gamma &=& \Gamma, x:\sigma \\
+&|& \epsilon\ \text{(empty)}
+\end{eqnarray*}
+.
+Having defined the context, expressions and types we can now specify the typing judgment $\Gamma \vdash x : \sigma$.
+It means that given the context $\Gamma$ the variable $x$ has the type $\sigma$.
+The way how to come up with these judgements is defined by deduction rules.
+Before we will take a closer look at them, we first have to introduce some auxiliary functions.
+
+An important distinction in a HM type expression is the state of the type variables.
+In general, type variables can appear as \emph{free} or as \emph{bound} variables.
+A type variable $\alpha$ is called bound if it occurs in an expression of the form $\forall \alpha. \tau$.
+This means that $\forall$ binds the subsequent variable in the context of the expression.
+All variables which are not bound are free.
+We can define a function $free$ which calculates the set of free type variables in a type expression.
+\begin{eqnarray*}
+free(\alpha) &=& \{\alpha\}\\
+free(D\ \alpha_1\ \ldots\ \alpha_n) &=& \bigcup_{i=1}^n free(\alpha_i)\\
+free(\forall \alpha. \tau) &=& free(\tau) \setminus \{\alpha\}\\
+free(\Gamma) &=& \bigcup_{x:\sigma \in \Gamma} free(\sigma)
+\end{eqnarray*}
+
+\subsection{Algorithm W}
+
+\begin{prooftree}
+	\AxiomC{$x : \sigma \in \Gamma$}
+	\AxiomC{$\tau = inst(\sigma)$}
+	\LeftLabel{Variable:\quad}
+	\BinaryInfC{$\Gamma \vdash x : \tau$}
+\end{prooftree}
+
+\begin{prooftree}
+	\AxiomC{$\Gamma \vdash e_0 : \tau_0$}
+	\AxiomC{$\Gamma \vdash e_1 : \tau_1$}
+	\AxiomC{$\tau^\prime=newvar$}
+	\AxiomC{$unify(\tau_0, \tau_1 \rightarrow \tau^\prime)$}
+	\LeftLabel{Application:\quad}
+	\QuaternaryInfC{$\Gamma \vdash e_0 e_1 : \tau^\prime$}
+\end{prooftree}
+
+\begin{prooftree}
+	\AxiomC{$\tau = newvar$}
+	\AxiomC{$\Gamma,x:\tau \vdash e : \tau^\prime$}
+	\LeftLabel{Abstraction:\quad}
+	\BinaryInfC{$\Gamma \vdash \lambda x.e:\tau \rightarrow \tau^\prime$}
+\end{prooftree}
+
+\begin{prooftree}
+	\AxiomC{$\Gamma \vdash e_0 : \tau$}
+	\AxiomC{$\Gamma, x : \overline{\Gamma}(\tau) \vdash e_1 : \tau^\prime$}
+	\LeftLabel{Assignment:\quad}
+	\BinaryInfC{$\Gamma \vdash x = e_0; e_1 : \tau^\prime$}
+\end{prooftree}
+
 \section{Matrix Dimension Inference}

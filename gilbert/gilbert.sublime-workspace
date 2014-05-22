@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"stmt",
+				"stmtOrFuncList"
+			],
+			[
 				"Binary",
 				"BinaryUpdateRegistry"
 			],
@@ -31,7 +35,7 @@
 			"file": "02_related_work.tex",
 			"settings":
 			{
-				"buffer_size": 49306,
+				"buffer_size": 49435,
 				"line_ending": "Unix"
 			}
 		},
@@ -39,7 +43,7 @@
 			"file": "b01_bibliography.bib",
 			"settings":
 			{
-				"buffer_size": 14608,
+				"buffer_size": 16564,
 				"line_ending": "Unix"
 			}
 		},
@@ -47,7 +51,7 @@
 			"file": "main.tex",
 			"settings":
 			{
-				"buffer_size": 2232,
+				"buffer_size": 2285,
 				"line_ending": "Unix"
 			}
 		},
@@ -55,7 +59,7 @@
 			"file": "style.tex",
 			"settings":
 			{
-				"buffer_size": 21862,
+				"buffer_size": 22263,
 				"line_ending": "Unix"
 			}
 		},
@@ -64,6 +68,46 @@
 			"settings":
 			{
 				"buffer_size": 276,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "01_introduction.tex",
+			"settings":
+			{
+				"buffer_size": 9064,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "05_intermediate_representation.tex",
+			"settings":
+			{
+				"buffer_size": 1260,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "000_titlepage.tex",
+			"settings":
+			{
+				"buffer_size": 973,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "04_gilbert_typing.tex",
+			"settings":
+			{
+				"buffer_size": 11430,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "03_gilbert_language.tex",
+			"settings":
+			{
+				"buffer_size": 17084,
 				"line_ending": "Unix"
 			}
 		}
@@ -216,6 +260,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			" \n",
+			"listing",
 			"usepackage",
 			"caption",
 			"\\th",
@@ -307,7 +353,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -315,15 +361,15 @@
 					"file": "02_related_work.tex",
 					"settings":
 					{
-						"buffer_size": 49306,
+						"buffer_size": 49435,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								31873,
-								31875
+								68,
+								195
 							]
 						],
 						"settings":
@@ -334,7 +380,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4316.0,
+						"translation.y": 66.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -344,15 +390,15 @@
 					"file": "b01_bibliography.bib",
 					"settings":
 					{
-						"buffer_size": 14608,
+						"buffer_size": 16564,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								223,
-								223
+								219,
+								219
 							]
 						],
 						"settings":
@@ -371,15 +417,15 @@
 					"file": "main.tex",
 					"settings":
 					{
-						"buffer_size": 2232,
+						"buffer_size": 2285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								784,
-								784
+								391,
+								391
 							]
 						],
 						"settings":
@@ -397,15 +443,15 @@
 					"file": "style.tex",
 					"settings":
 					{
-						"buffer_size": 21862,
+						"buffer_size": 22263,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18673,
-								18673
+								22251,
+								22251
 							]
 						],
 						"settings":
@@ -415,7 +461,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4992.0,
+						"translation.y": 6112.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -442,6 +488,141 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "01_introduction.tex",
+					"settings":
+					{
+						"buffer_size": 9064,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162,
+								69
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "05_intermediate_representation.tex",
+					"settings":
+					{
+						"buffer_size": 1260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1155,
+								1155
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "000_titlepage.tex",
+					"settings":
+					{
+						"buffer_size": 973,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								568,
+								568
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "04_gilbert_typing.tex",
+					"settings":
+					{
+						"buffer_size": 11430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11392,
+								11392
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1146.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "03_gilbert_language.tex",
+					"settings":
+					{
+						"buffer_size": 17084,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4324,
+								4718
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 514.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
