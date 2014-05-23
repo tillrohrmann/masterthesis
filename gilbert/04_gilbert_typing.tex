@@ -190,6 +190,10 @@ Thus, \code{fst} cannot have a monotype, because then it would only work for one
 The actual type of \code{fst} is $\forall \alpha,\beta . (\alpha, \beta) \rightarrow \alpha$.
 Depending on the applied tuple argument the quantified type variables are instantiated respectively.
 Polytypes permit to implement generic functions in a type safe manner and this is called parametric polymorphism.
+It is important to note that polytypes introduce ambiguities with respect to the calculated type.
+An expression having the type $\forall \alpha. \alpha$ also has the type $\code{int}$, for example.
+Thus, the latter type would be a valid inferred type, even though the first one is more general.
+In order to dissolve this ambiguity, the typing system always looks for the most general type.
 
 Usually, expressions depend on other expression and thus their types, too.
 Therefore, we a kind of type dictionary where we note types of expressions we have already seen while parsing the code.
@@ -211,7 +215,7 @@ In general, type variables can appear as \emph{free} or as \emph{bound} variable
 A type variable $\alpha$ is called bound if it occurs in an expression of the form $\forall \alpha. \tau$.
 This means that $\forall$ binds the subsequent variable in the context of the expression.
 All variables which are not bound are free.
-We can define a function $free$ which calculates the set of free type variables in a type expression.
+We can define a function $free$ which calculates the set of free type variables in a type expression and in the context.
 \begin{eqnarray*}
 free(\alpha) &=& \{\alpha\}\\
 free(D\ \alpha_1\ \ldots\ \alpha_n) &=& \bigcup_{i=1}^n free(\alpha_i)\\
@@ -220,6 +224,12 @@ free(\Gamma) &=& \bigcup_{x:\sigma \in \Gamma} free(\sigma)
 \end{eqnarray*}
 
 \subsection{Algorithm W}
+
+The algorithm W was initially developed by \textcite{damas:1982a} and allows to solve the HM type inference in almost linear time with respect to the size of the source code.
+Thus, it is also applicable to large programs.
+We present a modified version of the original algorithm which incorporates side effects into the deduction rules.
+Even though this contradicts the purity of logical deduction rules, it allows us to express the algorithm concisely.
+The algorithm W is defined by the following deduction rules:
 
 \begin{prooftree}
 	\AxiomC{$x : \sigma \in \Gamma$}
@@ -250,5 +260,138 @@ free(\Gamma) &=& \bigcup_{x:\sigma \in \Gamma} free(\sigma)
 	\LeftLabel{Assignment:\quad}
 	\BinaryInfC{$\Gamma \vdash x = e_0; e_1 : \tau^\prime$}
 \end{prooftree}
+.
+Each rule has the form
+\begin{tabular}{c}
+Premise\\
+\hline
+Conclusion
+\end{tabular}, which means that we have to prove the premise in order to show the conclusion.
+
+Let us go step by step through the different deduction rules of the algorithm.
+The first rule says that a variable $x$ has the type $\tau$, if we can find an assumption of $x$ in $\Gamma$ whose type $\sigma$ can be specialized to $\tau$.
+The function $inst$ does the specialization of the type.
+A type is specialized by removing all quantifiers and replacing the bound variables by fresh monotype variables.
+
+The second rule deals with function applications.
+In order to show that a function application has the type $\tau^\prime$, we first have to look at the function type $\tau_0$ and the argument type $\tau_1$.
+In order to fulfil the conclusion, we know that the type of $e_0$ has to be a function with an argument of type $\tau_1$ and some result type $\tau^\prime$.
+If the type $\tau_0$ is equivalent to this function type $\tau_1\rightarrow\tau^\prime$, we can deduce that the resulting type is $\tau^\prime$.
+The equivalence is tested by the $unify$ function.
+This function takes two types and tries to find the most general type unifying both arguments.
+
+The $unify$ function is an essential part of the typing system, since it incorporates all constraints imposed by the different expressions in order to find the most general type validating the program.
+The working principle can best understood by looking at its pseudocode in \cref{lst:unify}.
+\begin{listing}[!h]
+	\begin{CenteredBox}
+		\begin{lstlisting}[language=inform]
+def unify(typeA: Type, typeB: Type): Type = {
+	val tA = resolve(typeA)
+	val tB = resolve(typeB)
+
+	if( at least one term is a type variable){
+		return union(tA, tB)
+	}
+    else if( both type expressions are of the form D p1 ... pn with 
+		the same D and the number of arguments){
+		return D(unify(tA.p1, tB.p1), ..., unify(tA.pn, tb.pn))
+	} else{
+		return typeMismatch
+	}
+}
+		\end{lstlisting}
+	\end{CenteredBox}
+	\caption{$Unify$ function.}
+	\label{lst:unify}
+\end{listing}
+
+First of all both type expressions are resolved.
+This means that type variables contained as sub expressions are looked up in a type variable assignment dictionary.
+This dictionary maintains the current assignments between variables and their types.
+If a type variable has an assigned type, then this type is substituted for the corresponding type variable.
+If at least one of the resulting type expressions is still a type variable, then we can simply construct the union of both types.
+The union function returns the more concrete type of both arguments and updates the dictionary correspondingly.
+Thus, if both arguments are type variables, then one of them is returned.
+If only one argument is a type variable, then the other argument is returned.
+
+If none of the resolved type expressions is a type variable, then they have to be a type application.
+Applications can only be unified if they are constructed by the same function symbol and if they have the same number of arguments.
+If this condition is fulfilled, we can try to unify the arguments.
+Depending on whether the arguments are unifiable or not, the overall type application is unifiable or not.
+
+If both type expressions are constructed by different type applications, we know that the types are impossible to unify.
+Consequently, we can directly return a typeMismatch error.
+
+The fourth rule allows to type lambda abstractions or in our case concrete and anonymous functions.
+In order to show that a lambda abstraction $\lambda x.e$ has the type $\tau\rightarrow \tau^\prime$, we first define a new type variable for the unknown parameter type.
+By adding this assumption to the context, we then have to calculate the type of the function body $e$.
+If we can prove that $e$ has the type $\tau^\prime$, we can finally conclude that the lambda abstraction has the type $\tau \rightarrow \tau^\prime$.
+
+And the last deduction rule covers assignments.
+An assignment simply binds a variable name $x$ to an expression value.
+Since this expression value owns a type $\tau$, we can add a new assumption $x:\tau$ to the context.
+We continue the type inference for the subsequent expressions with this updated type context.
+That is expressed by the deduction rule.
+In fact, there is slight difference.
+Instead of adding the assignment $x:\tau$ we add $x:\overline{\Gamma}(\tau)$ to the context.
+$\overline{\Gamma}(\tau)$ calculates the generalization of $\tau$.
+This means that all free monotypes of $\tau$ not bound in $\Gamma$ are quantified.
+That way, the most general type is found.
+\begin{eqnarray*}
+	\overline{\Gamma}(\tau) &=& \forall \overline{\alpha}. \tau\\
+	\text{with}\quad\overline{\alpha} &=& free(\tau) \setminus free(\Gamma)
+\end{eqnarray*}
 
 \section{Matrix Dimension Inference}
+
+Matrices constitute the elementary data type in our linear algebra environment.
+Besides its element type, a matrix is also defined by its size.
+In the context of program execution, knowledge about matrix sizes can help a lot to optimize the evaluation.
+For instance, consider a threewise matrix multiplication $A\times B\times C$.
+The multiplication can be evaluated in two different ways: $(A\times B)\times C$ and $A\times(B\times C)$.
+For certain matrix sizes one way might be infeasible whereas the other way can be calculated efficiently due to the matrix size of the intermediate result $(A\times B)$ or $(B\times C)$.
+
+To illustrate this point, assume that $A\in \mathbb{R}^{1000\times 10}, B\in \mathbb{R}^{10\times 1000}$ and $C \in \mathbb{R}^{10\times 1000}$.
+Thus, the intermediate products are:
+\begin{eqnarray*}
+	A\times B &\in& \mathbb{R}^{1000 \times 1000}\\
+	B\times C &\in& \mathbb{R}^{10 \times 10}
+\end{eqnarray*}
+.
+In the first case we have to calculate a $1000 \times 1000$ matrix and in the second only a $10 \times 10$ matrix.
+
+By knowing the matrix sizes, we can choose the most efficient strategy to calculate the requested result.
+Another advantage is that we can decide whether to carry out the computation in-core or distributedly depending on the matrix sizes.
+Sometimes the benefit of parallel execution is smaller than the initial communication overhead and thus it would be wiser to execute the calculation locally.
+Furthermore, it can be helpful for data partioning on a large cluster and to decide on a blocking strategy with respect to the algebraic operations.
+Therefore, we extended the HM type inference to also infer matrix sizes where possible.
+
+Gilbert's matrix type is defined as 
+\begin{displaymath}
+MatrixType(\underbrace{\tau}_{\text{Element type}},\underbrace{\nu}_{\text{Number of rows}},\underbrace{\nu}_{\text{Number of columns}})
+\end{displaymath}
+with $\nu$ being the value type:
+\begin{eqnarray*}
+	\nu &=& \gamma\quad\text{(Variable)} \\
+	&|& \delta\quad\text{(Value)}
+\end{eqnarray*}
+.
+The value type can either be a value variable or a concrete value.
+
+Value variables always appear if we know that a certain relationship holds, but do not know the concrete values yet.
+For example, when we multiply two matrices $A\in\mathbb{R}^{a\times b}$ and $B\in\mathbb{R}^{b\times c}$ we know that the result is $A\times B = C \in \mathbb{R}^{a\times c}$, without having knowledge about the actual values.
+Once we have deduced the actual values for a variable we can simply replace them.
+
+One of these occasions is the definition of a matrix.
+Gilbert implements several of these functions, known from Matlab: \code{eye}, \code{zeros}, \code{ones} or the \code{load} function, reading a matrix from disk.
+All of these functions require to specify the number of rows and columns for the resulting matrix.
+These values often serve as the source of our deduction.
+Another possibility are special operations which modify the size of the matrix in a deterministic way.
+The sum operation, which calculates row or column sums respectively, will reduce the dimension which is used for the summation to $1$.
+
+The matrix size inference is incorporated into the HM type inference by adding some logic to the \code{unify} function.
+Whenever we encounter a matrix type during the unification process, we call a \code{unifyValue} function on the two row and column values.
+The \code{unifyValue} function works similarly to the \code{unify} function.
+First, the function resolves the value expression, thus substituting value variables with their assigned values.
+Then if at least one of the resolved value expressions is still a value variable, then the union is constructed and the corresponding value variable dictionary entry is updated.
+If both resolved expressions are equal, then this value is returned and otherwise a valueMismatch error is thrown.
