@@ -225,3 +225,132 @@ The list of all writing operations can be seen in \cref{tab:writingOperations}.
 
 \subsection{Compilation example}
 
+The intermediate representation is the target format of the compilation process after it has been parsed and typed.
+In order to illustrate the compilation process and to get a feeling for the intermediate representation, we will compile an example program.
+For this purpose, we have chosen the well-known PageRank algorithm~\cite{page:1999a}.
+The matlab implementation can be seen in \cref{lst:PageRank}.
+
+\begin{listing}[!h]
+	\begin{CenteredBox}
+		\begin{lstlisting}[language=Matlab]
+numVertices = 10;
+% load network matrix
+N = load("network.csv", numVertices, numVertices);
+% create the adjacency matrix
+A = spones(N);
+% outdegree per vertex
+d = sum(A, 2);
+% create the column-stochastic transition matrix
+T = (diag(1 ./ d) * A)';
+% initialize the ranks
+r_0 = ones(numVertices, 1) / numVertices;
+% compute PageRank
+e = ones(numVertices, 1) / numVertices;
+% update function
+f = @(r) (.85 * T * r + .15 * e)
+% convergence function
+eps = 0.1;
+c =  @(prev, cur) norm(prev-cur,2) <= eps
+% PageRank calculation
+fixpoint(r_0, f, 20, c);
+		\end{lstlisting}
+	\end{CenteredBox}
+	\caption{Matlab PageRank implementation.}
+	\label{lst:PageRank}
+\end{listing}
+
+We start at the fixpoint operation in line $20$ and build our intermediate representation bottom up.
+Since the fixpoint operation is given an initial matrix, it will be compiled to a \\\code{FixpointIterationMatrix} operator.
+The intermediate code can be seen in \cref{fig:irFixpoint}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.FixpointIterationMatrix r\_0 f [.scalar 20 ] c ]
+	\caption{Intermediate represenation of PageRank's fixpoint operation.}
+	\label{fig:irFixpoint}
+\end{figure}
+
+The translation from line $20$ to the intermediate code is straight forward.
+The actual compilation process would replace the variables \code{r\_0}, \code{f} and \code{c} with their actual definition.
+However, for the sake of simplicity, we have left them in place and will gradually refine them.
+
+The variable \code{r\_0} denotes the initial column vector of the PageRank iteration.
+Its resulting code from the compilation process can be seen in \cref{fig:irR0}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.MatrixScalarOperation [.ones [.scalar 10 ] [.scalar 1 ] ] [.scalar 10 ] '/' ]
+	\caption{Intermediate representation of PageRank's \code{r\_0}.}
+	\label{fig:irR0}
+\end{figure}
+
+The update function \code{f} is defined in line $15$ as an anonymous function.
+In order to represent functions in the intermediate format, we have to introduce a new operator \code{function} which takes the number of parameters and the body of the function.
+Additionally, all parameters of the function are represented by special intermediate code operators: \code{MatrixParameter}, \code{ScalarParameter}, \code{StringParameter} and \code{FunctionParameter}.
+Every parameter operator gets an index assigned which identifies the corresponding argument with which it has to replaced upon instantiation of the function.
+The compiled code of \code{f} can be found in \cref{fig:irF}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.function 1 [.CellwiseMatrixMatrixTransformation [.ScalarMatrixTransformation [.scalar .85 ] [.MatrixMult T [.MatrixParameter 0 ] ] '*' ] [.ScalarMatrixTransformation [.scalar .15 ] e '*' ] '+' ] ]
+	\caption{Intermediate representation of PageRank's \code{f}.}
+	\label{fig:irF}
+\end{figure}
+
+The matrix \code{T} is the transition matrix $T=(t)_{ij} \in \mathbb{R}^{10 \times 10}$.
+The entry $t_{ij}$ indicates the probability of going from site $j$ to site $i$ if the user is currently on site $j$.
+The dependency tree of the intermediate code of \code{T} is shown in \cref{fig:irT}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.Transpose [.MatrixMult [.diag [.ScalarMatrixTransformation [.scalar 1 ] [.sum A [.scalar 2 ] ] './' ] ] A ] ]
+	\caption{Intermediate representation of PageRank's \code{T}.}
+	\label{fig:irT}
+\end{figure}
+
+Here \code{diag} denotes a special operator which has a different behaviour depending on the given argument.
+If one provides a one-column matrix $d$ to \code{diag}, then a matrix with $d$ on its diagonal is created.
+If one provides a matrix $m$ to \code{diag}, then the diagonal of $m$ is returned.
+The operator \code{sum} takes a matrix and a dimension and computes the sums along the specified dimension.
+Thus, the row sums will be here.
+
+What is left to be compiled for \code{f} being complete is the matrix \code{A}.
+The compiled code can be seen in \cref{fig:irA}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.CellwiseMatrixTransformation [.load 'network.csv' [.scalar 10 ] [.scalar 10 ] ] 'binarize' ]
+	\caption{Intermediate representation of PageRank's \code{A}.}
+	\label{fig:irA}
+\end{figure}
+
+The Matlab function \code{spones} which replaces nonzero sparse elements with ones while preserving the sparsity structure, is compiled into a CellwiseMatrixTransformation.
+
+The \code{e} vector has the same representation as the initial PageRank vector \code{r\_0}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.MatrixScalarOperation [.ones [.scalar 10 ] [.scalar 1 ] ] [.scalar 10 ] '/' ]
+	\caption{Intermediate representation of PageRank's \code{e}.}
+	\label{fig:irE}
+\end{figure}
+
+The convergence function \code{c} is an anonymous function taking two parameters.
+Its compiled version is shown in \cref{fig:irC}
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.function [.scalar 2 ] [.ScalarScalarTransformation [.norm [.CellwiseMatrixMatrixTransformation [.MatrixParameter [.scalar 0 ] ] [.MatrixParameter [.scalar 1 ] ] '-' ] [.scalar 2 ] ] [.scalar 0.1 ] '>=' ] ]
+	\caption{Intermediate representation of PageRank's \code{c}.}
+	\label{fig:irC}
+\end{figure}
+
+The \code{norm} operator, taking as first parameter the matrix $m$ and as second the norm parameter $p$, calculates the $p$-Frobenius norm of $m$.
+Internally this is compiled to the intermediate code shown in \cref{fig:irNorm}.
+
+\begin{figure}[!h]
+	\centering
+	\Tree [.function [.scalar 2 ] [.ScalarScalarTrans [.AggregateMatrixTrans [.CellwiseMatrixTrans [.MatrixScalarTrans [.MatrixParam [.scalar 0 ] ] [.ScalarParam [.scalar 1 ] ] 'pow' ] 'abs' ] 'sumAll' ] [.ScalarScalarTrans [.scalar 1 ] [.ScalarParam [.scalar 1 ] ] '/' ] 'pow' ] ]
+	\caption{Intermediate representation of \code{norm}.}
+	\label{fig:irNorm}
+\end{figure}

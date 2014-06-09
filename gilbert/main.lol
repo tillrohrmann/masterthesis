@@ -25,6 +25,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {listing}{\numberline {6.1}{\ignorespaces Matlab PageRank implementation.\relax }}{48}{listing.caption.19}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

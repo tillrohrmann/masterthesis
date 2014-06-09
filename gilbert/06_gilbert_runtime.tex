@@ -1,22 +1,47 @@
+%!TEX root=main.tex
 \chapter{Gilbert Runtime}
 \label{cha:gilbertexecution}
 
-\begin{itemize}
-	\item How to execute the intermediate representation $\Rightarrow$ Translation into execution engine format
-	\item Support of different execution engines
-	\item Distributed matrix representation
-	\begin{itemize}
-		\item Blocked matrix
-	\end{itemize}
-	\item Operations of linear algebra
-	\begin{itemize}
-		\item Matrix multiplication
-		\item Element wise operations
-	\end{itemize}
-\end{itemize}
+\chapterquote{A really great talent finds its happiness in execution.}{Johann Wolfgang von Goethe, (1749 - 1832)}
 
-Pages $\approx$ 4-5
+The Gilbert runtime is responsible for executing the compiled Matlab code on a particular platform.
+For this purpose, it receives the intermediate representation of the code and translates it into the execution engine's specific format.
+Currently, Gilbert supports three different execution engines.
+One of them is the \code{ReferenceExeuctor}, which executes the compiled Matlab code locally.
+For the distributed execution Gilbert supports the Spark and the Stratosphere system as backends.
+
+The \code{ReferenceExecutor} is an interpreter for the intermediate code.
+It takes the dependency tree of a Matlab program and executes it by evaluating the operators bottom-up.
+In order to evaluate an operator, the system first evaluates all the operator's inputs and then executes the actual operator logic.
+Since the program is executed locally, the complete data of each operator is always accessible and thus no communication logic is required.
+All input and output files are directly written to the local hard drive.
+
+In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program distributedly.
+It takes the dependency tree of a Matlab program and translates it into a PACT plan.
+After the plan is generated, it is issued to the Stratosphere system for parallel execution.
+This approach implies that the program is not directly executed by the executor.
+Instead, the executor represents just another translation step.
+
+The PACT plans are executed in parallel.
+Consequently, we need data structures which can be distributed across several nodes and represent the commonly used linear algebra abstractions, such as vectors and matrices.
+Moreover, we have to adjust the linear algebra operations so that they keep working in a distributed environment.
+Fortunately, Stratosphere offers a rich and expressive API to easily realize distributed computations.
+The details of the distributed data structures and operations are explained in \cref{sec:DistributedMatrixRepresentation} and \cref{sec:LinearAlgebraOperations}.
+
+The \code{SparkExecutor} is the second executor for distributed computations.
+In contrast to the \code{StratosphereExecutor}, it executes the Matlab programs on top of the Spark system.
+Since Spark and Stratosphere offer a similar set of programming primitives, they can both operate on the same data structures.
+Furthermore, even most of the linear algebra operations can be implemented similarly.
+The only programming difference is the incremental plan roll out feature of Spark.
+By emitting Spark transformations and actions, the user can trigger computations in the cluster and retrieve intermediate results on the driver node.
+This allows a more interactive way of programming, manifesting in a more natural way loops are defined, for example.
+However, these differences are only subtle and do not limit or extend the expressiveness of either system.
+
+In the following section, we will discuss how Gilbert represents its matrices, allowing parallel execution.
+Moreover, we will see how the different linear algebra operations are realized within both systems.
 
 \section{Distributed Matrix Representation}
+\label{sec:DistributedMatrixRepresentation}
 
 \section{Linear Algebra Operations}
+\label{sec:LinearAlgebraOperations}
