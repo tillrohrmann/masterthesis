@@ -1,27 +1,227 @@
+%!TEX root=main.tex
 \chapter{Intermediate Representation}
 \label{cha:intermediaterepresentation}
 
-\begin{itemize}
-	\item Motivation for intermediate representation
-	\begin{itemize}
-		\item Language indenpendent representation
-		\item Enough information to perform algebraic optimizations, e.g. matrix multiplication reorganizations
-		\item Afterwards translation into execution engine's format
-		\item Specification of language primitives of intermediate representation
-		\begin{itemize}
-			\item MatrixMult
-			\item ScalarMatrixTransformation, MatrixScalarTransformation
-			\item $\vdots$
-		\end{itemize}
-	\end{itemize}
-\end{itemize}
+\chapterquote{Abstraction is real, probably more real than nature.}{Josef Albers, (1888 - 1976)}
 
-Pages $\approx$ 3-4
+After the parsing and typing of the source code is done, we have all the information needed to execute the program in a distributed fashion.
+However, we do not compile the code directly to the respective format to let it run on a parallel data processing system.
+Instead, we compile it to an intermediate representation.
+Even though, the intermediate code adds an additional representation and thus more complexity to maintain, the advantages clearly outweigh the disadvantages.
+Moreover, this approach is similar to the approach the JVM and the .Net frameworks pursue.
+The Java and .Net code, respectively, is compiled to a format which can be executed platform independently.
 
-I intend to implement an intermediate representation of a Matlab program.
-The additional abstraction layer allows language independent optimizations and makes the system independent from the actually used frontend language.
-The set of language primitives of the intermediate representation has to include the operational primitives of linear algebra as well as an iteration abstraction in order to realize algorithms based on convergence.
-Furthermore, it is of particular interest to keep this set as small as possible, because this would alleviate a possible optimization step prior to execution.
+The additional abstraction layer allows us to apply language independent optimizations in a coherent manner and independently of the actually used frontend language.
+This provides us with the flexibility to easily extend Gilbert to support other linear algebra languages as well.
+The next natural candidate for a supported frontend language would be surely R.
+Moreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimziations.
+One class of important transformations is the reordering of operations and the determination of the execution order.
+Often, they are based on the commutativity and associativity of the corresponding operations.
+An obvious optimization would be the execution order of multiple matrix multiplications as indicated in \cref{sec:MatrixDimensionInference}.
+Furthermore, the propagation and elimination of transpose operations offers further optimization potential.
 
+The intermediate representation was designed with two goals in mind:
+First of all, it has to be expressive enough to represent in a general way a wide variety of Matlab programs.
+Therefore, the intermediate format has to include the operational primitives of linear algebra as well as an iteration abstraction.
+With these building blocks at hand, it is already possible to express a multitude of iterative machine learning algorithms.
+As pointed out in \cref{sec:languageFeatures}, Gilbert does not provide a direct \code{for} or \code{while} loop, but instead the \code{fixpoint} operator.
+The second design goal was simplicity.
+It is of particular interest to keep this set of intermediate operators as small as possible, because this would alleviate a possible optimization step prior to execution.
 
 \section{Specification}
+
+The intermediate format consists of a set of operators to represent the different linear algebra operations.
+Every operator has a distinct result type and a set of parameters it requires as input.
+\Cref{fig:depTreeMMIdOnes} shows how a matrix multiplication between an identity matrix $Id \in \mathbb{R}^{10\times10}$ and a matrix $Ones \in \mathbb{R}^{10\times10}$ filled with $1$s would be represented.
+On the level of the intermediate format we distinguish between the following types: \code{MatrixType}, \code{ScalarType}, \code{CellArrayType}, \code{StringType} and \code{FunctionType}.
+
+\begin{figure}
+	\begin{center}
+		\Tree [.MatrixMult [.eye [.scalar 10 ] [.scalar 10 ] ] [.ones [.scalar 10 ] [.scalar 10 ] ] ]
+	\end{center}
+	\caption{Dependency tree of a matrix multiplication of an identity matrix with a ones matrix.}
+	\label{fig:depTreeMMIdOnes}
+\end{figure}
+
+The matrix type is the elementary type and represents all sorts of matrices.
+A matrix contains information about its size, namely the number of rows and columns, and about its element type.
+The element type can be any supported type but currently only operations for \code{double} or \code{boolean} matrices are implemented.
+
+The scalar type is a superset containing the \code{DoubleType} and \code{BooleanType}.
+Usually, the double type is used for all linear algebra operations.
+Only to support comparisons to check for convergence of an iteration, one usually uses booleans.
+
+The cell array type contains a list of types specifying the types of its cell entries.
+Cell arrays are usually used to return multiple values from a function.
+Thus, they can conceptually be seen as tuples.
+In contrast to the Matlab implementation, Gilbert only supports $1$-dimensional arrays.
+
+The string type was included to be able to load matrices from HDFS or local disk.
+In order to load a matrix, the user has to define the location of the data, given as a string.
+Besides this usage, strings are usually not necessary for linear algebra operations.
+
+Last but not least, Gilbert also supports function types.
+Function types are necessary to implement \nth{2}-order functions such as the fixpoint operator.
+The user can define functions as pass them around like any other value.
+Thus, functions are considered first-class citizens in Gilbert.
+
+The set of intermediate operators can be distinguished into three categories: \emph{Creating operators}, \emph{transforming operators} and \emph{writing operators}.
+All of these categories will be explained in the following subsections.
+
+\subsection{Creating operators}
+
+Creating operators generate or load some data depending on the user's inputs.
+A list of all supported operators with its type definition and a short explanation can be found in \cref{tab:creatingOperators}.
+Each type definition consists of the input types and the result type of an operator:
+\begin{displaymath}
+	\underbrace{type1 \times \ldots \times typeN}_{\text{Types of input parameters}} \rightarrow \underbrace{resultType}_{\text{Type of result value}}
+\end{displaymath}
+Even though the input parameters for the matrix dimensions are denoted by doubles, the user should provide integer values.
+Internally, the double parameters are converted to integers.
+The type in brackets after the matrix type indicates the element type.
+
+The \code{load} operator takes a path to a stored matrix on disk and the corresponding number of rows and columns as input parameters.
+It then reads the stored data and loads the matrix into the program context.
+The \code{eye} operator, known from Matlab, generates an identity matrix of the requested size, number of rows and columns.
+The operator also supports non quadratic result shapes.
+Another probably known operators is \code{zeros}.
+It generates a matrix of the given size which is initialized with zeros.
+And the last creating operator is \code{randn}, which generates a random matrix.
+\code{Randn} takes the number of rows and columns of the resulting matrix and the mean and the standard deviation of a Gauss distribution.
+The specified Gauss distribution is used to generate random values for the resulting matrix.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|l|l}
+	Operator & Type & Explanation\\
+	\hline
+	\code{load} & $string \times double \times double \rightarrow matrix[double]$ & Loading a matrix from disk\\
+	\code{eye} & $double \times double \rightarrow matrix[double]$& Creating an identity matrix\\
+	\code{zeros} & $double \times double \rightarrow matrix[double]$ & Creating a zero matrix\\
+	\code{randn} & $double \times double \rightarrow matrix[double]$ & Creating a random matrix
+	\end{tabular}
+	\caption{Creating operators of Gilbert, their types and a short explanation.}
+	\label{tab:creatingOperators}
+\end{table}
+
+\subsection{Transforming operators}
+
+The transforming operators constitute the main abstraction of the linear algebra operations.
+They group operations with similar properties together and thus allowing an easier reasoning and optimization of the underlying program.
+The list of all transforming operators and their types can be found in \cref{tab:transformingOperators}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|l}
+		Operator & Type\\
+		\hline
+		\code{UnaryScalarTransformation} & $scalar \times unaryScalarOp \rightarrow scalar$\\
+		\code{ScalarScalarTransformation} & $scalar \times scalar \times scalarOp \rightarrow scalar$\\
+		\code{Transpose} & $matrix \rightarrow matrix$\\
+		\code{ScalarMatrixTransformation} & $scalar \times matrix \times smOp \rightarrow matrix$ \\
+		\code{MatrixScalarTransformation} & $matrix \times scalar \times smOp \rightarrow matrix$ \\
+		\code{CellwiseMatrixTransformation} & $matrix \times unaryScalarOp \rightarrow matrix$ \\
+		\code{CellwiseMatrixMatrixTransformation}& $matrix \times matrix \times scalarOp \rightarrow matrix$ \\
+		\code{MatrixMult} & $matrix \times matrix \rightarrow matrix$\\
+		\code{VectorwiseMatrixTransformation} & $matrix \times vectorwiseOp \rightarrow matrix$ \\
+		\code{AggregateMatrixTransformation} & $matrix \times aggregateOp \rightarrow scalar$ \\
+		\code{FixpointIterationMatrix} & $matrix \times \left( matrix \rightarrow matrix \right) \times double \times$ \\
+		&$\quad \left( matrix \times matrix \rightarrow boolean \right) \rightarrow matrix$ \\
+		\code{FixpointIterationCellArray} & $cellarray \times \left( cellarray \rightarrow cellarray \right) \times double$ \\
+		&$\quad \times \left(cellarray \times cellarray \rightarrow boolean\right)$\\
+		&$\quad \rightarrow cellarray$
+	\end{tabular}
+	\caption{Transforming operators of Gilbert and their types.}
+	\label{tab:transformingOperators}
+\end{table}
+
+The \code{UnaryScalarTransformation} takes a single scalar value and applies an unary operation on it.
+The list of all supported operations can be found in \cref{tab:supportedOperations}.
+The operation $binarize$ has the following semantics:
+\begin{displaymath}
+	binarize(x) : x \mapsto 
+	\begin{cases}
+		0 &\text{if } x = 0\\
+		1 &\text{else}
+	\end{cases}
+\end{displaymath}
+
+The applicable operations to the \code{ScalarScalarTransformation} depend on the input parameter types.
+The operators $+,-,*,/,pow(\cdot, \cdot)$ take two double values and produce a new double value.
+The comparison operators, on the contrary, produce a boolean result value.
+The al operations require two boolean values and produce a boolean value as the result.
+Gilbert supports short-circuit logical operators $\&\&$ and $||$ as well as $\&$ and $|$ evaluating all of their inputs prior to computing the result.
+
+The \code{ScalarMatrixTransformation} and \code{MatrixScalarTransformation} have an almost identical support of operations.
+The only difference is that the former transformation does not allow to calculate the power of a scalar where the exponent is a matrix.
+
+The \code{VectorwiseMatrixTransformation} applies an operation on each row vector of the given matrix.
+A vectorwise operation produces a scalar value for each row vector.
+Thus, the resulting type of such an operation is an one-column matrix.
+Gilbert can currently retrieve the maximum and minimum of each row vector.
+Furthermore, one can calculate the $2$-norm of each row vector:
+\begin{displaymath}
+	\norm{\left(a_{i1}, \ldots, a_{in}\right)^T}_2 = \sqrt{\sum_{j=1}^{n} a_{ij}^2}
+\end{displaymath}
+
+Similar to the vectorwise operations, the \code{AggregateMatrixTransformation} applies an operation to all matrix entries producing a single scalar result value.
+The aggregation operation can compute the maximum, minimum and the sum of all matrix entries.
+Furthermore, it supports the Frobenius $2$-norm:
+\begin{displaymath}
+	\norm{A}_2 = \sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n} a_{ij}^2}
+\end{displaymath}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|l}
+	Operation type & Operations\\
+	\hline
+	$unaryScalarOp$ & $-$, $|\cdot|$, $binarize(\cdot)$\\
+	$scalarOp:double \times double \rightarrow double$ & $+,-,*,/,pow(\cdot, \cdot)$\\
+	$scalarOp:double \times double \rightarrow boolean$ & $>,>=,<,<=,==,$\textasciitilde$=$\\
+	$scalarOp:boolean \times boolean \rightarrow boolean$ & $\&, |, \&\&, ||$\\
+	$smOp:matrix[double] \times double \rightarrow matrix[double]$ & $+,-,*,/,pow(\cdot, \cdot)$\\
+	$smOp:matrix[double] \times double \rightarrow matrix[boolean]$ & $>,>=,<,<=,==,$\textasciitilde$=$\\
+	$smOp:matrix[boolean] \times boolean \rightarrow matrix[boolean]$ & $\&, |, \&\&, ||$\\
+	$smOp:double \times matrix[double] \rightarrow matrix[double]$ & $+,-,*,/$\\
+	$smOp:double \times matrix[double] \rightarrow matrix[boolean]$ & $>,>=,<,<=,==,$\textasciitilde$=$\\
+	$smOp:boolean \times matrix[boolean] \rightarrow matrix[boolean]$ & $\&, |, \&\&, ||$\\
+	$vectorwiseOp$ & $min, max, norm2$\\
+	$aggregateOp$ & $min, max, sumAll, norm2$
+	\end{tabular}
+	\caption{Supported transformation operations.}
+	\label{tab:supportedOperations}
+\end{table}
+
+The iteration mechanism is represented by the \code{FixpointIterationMatrix} and \\\code{FixpointIterationCellArray} operators.
+The former operator is used for a fixpoint operation on matrices and the latter on cell arrays.
+Both operators follow the semantics and have the same parameters as the fixpoint abstraction presented in \cref{eqn:fixpoint}.
+A fixpoint operator receives an initial value, an update function, the maximum number of iterations and a convergence function.
+The update function is called with the current value and returns the value for the next iteration.
+The convergence function is called with the current and the previous value.
+Based on these values it can check for convergence.
+For further details see \cref{sec:languageFeatures}.
+
+\subsection{Writing operators}
+
+The writing operators are used to make the computed results accessible to the user by writing them back to disk.
+There exists a writing operation for each supported type.
+The list of all writing operations can be seen in \cref{tab:writingOperations}.
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{l|l}
+		Operator& Explanation\\
+		\hline
+		\code{WriteMatrix} & Writes the matrix to disk\\
+		\code{WriteScalar} & Writes the scalar value to disk\\
+		\code{WriteString} & Writes the string value to disk\\
+		\code{WriteCellArray} & Writes the contents of the cell array to disk \\
+		\code{WriteFunction} & Writes the intermediate execution plan to disk
+	\end{tabular}
+	\caption{Supported writing operators.}
+	\label{tab:writingOperations}
+\end{table}
+
+\subsection{Compilation example}
+

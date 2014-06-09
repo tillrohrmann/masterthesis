@@ -25,6 +25,7 @@ In the following sections, we will describe the key aspects of Gilbert's languag
 Subsequently, we will give a formal specification of Gilbert's language and describe the parser which is used to parse it.
 
 \section{Language Features}
+\label{sec:languageFeatures}
 
 In order to not be overwhelmed by the complexity of Matlab but still support a full functional subset of it, Gilbert was restricted to support the following language features and data types.
 We decided to keep the feature set as small as possible to concentrate on the parallelization instead of maintaining hardly used language features.
@@ -39,7 +40,7 @@ Since we also want to interact with data stored on disk, Gilbert supports string
 Gilbert also implements cell array types.
 A cell array consists of indexed data containers, called cells.
 Each cell can contain an individual data type.
-Therefore, cell arrays can be used a to pass multiple data items combined as one argument to a function or to obtain multiple items from a function.
+Therefore, cell arrays can be used to pass multiple data items combined as one argument to a function or to obtain multiple items from a function.
 The latter aspect is particularly important, because currently Gilbert only supports functions with a single return value.
 A cell array is defined using curly braces and commas to separate individual values.
 The cells can be accessed by an index appended in curly braces to the cell array variable.
@@ -97,9 +98,10 @@ The user can provide a convergence function \code{c} to the fixpoint operator.
 The convergence function is called with the previous and current fixpoint value and returns a boolean, indicating whether the termination criterion has been fulfilled or not.
 Thus, the fixpoint operator terminates either if convergence was detected or the maximum number of iterations are exceeded.
 Consequently, the fixpoint operator is defined as follows:
-\begin{displaymath}
+\begin{equation}
 fixpoint: \underbrace{T}_{\text{\code{x}}} \times \left( \underbrace{T \rightarrow T}_{\text{\code{f}}} \right) \times \underbrace{\mathbb{N}}_{\text{\code{m}}} \times \left(\underbrace{T\times T \rightarrow \mathbb{B}}_{\text{\code{c}}} \right) \rightarrow T
-\end{displaymath}
+\label{eqn:fixpoint}
+\end{equation}
 with $T$ being a generic type variable.
 
 In fact, the fixpoint operator replaces iterations by recursions whereas the update function $f$ is pure.
@@ -277,7 +279,7 @@ The $'$ operator denotes the transpose of the operand.
 	Addition and Subtraction & $+$, $-$\\
 	Multiplication and Division & $*$, $/$\\
 	Prefix operator & $+$, $-$\\
-	Exponentiation & $exp$\\
+	Exponentiation & $pow$\\
 	Postfix operator & $'$
 	\end{tabular}
 	\caption{Precedence order of mathematical operators in ascending order.}
