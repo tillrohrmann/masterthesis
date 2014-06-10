@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="quadraticBlockPartitioning.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.5954316"
+     inkscape:cx="287.72516"
+     inkscape:cy="895.3951"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1398"
+     inkscape:window-height="856"
+     inkscape:window-x="42"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4008"
+       d="m 242.92638,102.76318 0,-28.536804 28.53681,0 28.53681,0 0,28.536804 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#ffff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3982"
+       d="m 182.82231,162.36218 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#ffff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3984"
+       d="m 242.92638,162.36218 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#ffff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3986"
+       d="m 302.52538,162.36218 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3988"
+       d="m 362.62946,162.36218 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3990"
+       d="m 182.82231,222.46626 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3992"
+       d="m 242.92638,222.46626 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3994"
+       d="m 302.52538,222.46626 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3996"
+       d="m 362.62946,222.46626 0,-28.53681 28.53681,0 28.53681,0 0,28.53681 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path3998"
+       d="m 184.4954,310.20525 c -1.52792,-0.97154 -1.67309,-3.54753 -1.67309,-29.6881 l 0,-26.48363 28.53681,0 28.53681,0 0,28.28427 0,28.28428 -27.40039,-0.008 c -15.07021,-0.004 -27.67028,-0.17934 -28.00014,-0.38909 l 0,0 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4000"
+       d="m 242.92638,282.31779 0,-28.28427 28.53681,0 28.53681,0 0,28.28427 0,28.28428 -28.53681,0 -28.53681,0 0,-28.28428 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4002"
+       d="m 302.52538,282.31779 0,-28.28427 28.53681,0 28.53681,0 0,28.28427 0,28.28428 -28.53681,0 -28.53681,0 0,-28.28428 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4004"
+       d="m 362.62946,282.31779 0,-28.28427 28.53681,0 28.53681,0 0,26.48363 c 0,26.14057 -0.14517,28.71656 -1.6731,29.6881 -0.32986,0.20974 -12.92992,0.38483 -28.00013,0.38908 l -27.40039,0.008 0,-28.28428 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4006"
+       d="m 182.82231,104.85885 c 0,-18.251547 0.17563,-26.944951 0.56706,-28.06779 0.32868,-0.94286 1.08562,-1.823823 1.80064,-2.095675 0.70276,-0.267186 12.73866,-0.469009 27.96975,-0.469009 l 26.73617,0 0,28.536804 0,28.53681 -28.53681,0 -28.53681,0 0,-26.44114 z"
+       style="fill:#ffff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4010"
+       d="m 302.52538,102.76318 0,-28.536804 28.53681,0 28.53681,0 0,28.536804 0,28.53681 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:connector-curvature="0"
+       id="path4012"
+       d="m 362.62946,102.76318 0,-28.536804 26.73616,0 c 15.23109,0 27.267,0.201823 27.96975,0.469009 0.71502,0.271852 1.47197,1.152815 1.80065,2.095675 0.39142,1.122839 0.56706,9.816243 0.56706,28.06779 l 0,26.44114 -28.53681,0 -28.53681,0 0,-28.53681 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:none;opacity:0.81034483" />
+    <g
+       id="g4247"
+       style="opacity:0.5"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <g
+         id="g4014"
+         transform="matrix(1,0,0,-1,-18.73267,424.93689)"
+         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
+         inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rowPartitioning.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300">
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path4016"
+           d="m 200,172.36218 240,0"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path4018"
+           d="m 200,232.36218 240,0"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path4020"
+           d="m 200,292.36218 240,0"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4022"
+           d="m 260,112.36218 0,240"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4024"
+           d="m 320,112.36218 0,240"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path4026"
+           d="m 380,112.36218 0,240"
+           style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+    <rect
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       transform="scale(1,-1)"
+       ry="5"
+       y="-312.57471"
+       x="181.26733"
+       height="240"
+       width="240"
+       id="rect4028"
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;opacity:0.5" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="142.75134"
+       y="364.82513"
+       id="text4098"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4100"
+         x="142.75134"
+         y="364.82513" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="190"
+       y="107.36218"
+       id="text4256"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4258"
+         x="190"
+         y="107.36218"
+         style="font-size:18px;fill:#333333">(0,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="250"
+       y="107.36218"
+       id="text4260"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4262"
+         x="250"
+         y="107.36218">(0,1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="310"
+       y="107.36218"
+       id="text4264"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4266"
+         x="310"
+         y="107.36218">(0,2)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="370"
+       y="107.36218"
+       id="text4268"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4270"
+         x="370"
+         y="107.36218">(0,3)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="190"
+       y="167.36218"
+       id="text4272"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4274"
+         x="190"
+         y="167.36218">(1,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="250"
+       y="167.36218"
+       id="text4276"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4278"
+         x="250"
+         y="167.36218">(1,1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="310"
+       y="167.36218"
+       id="text4280"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4282"
+         x="310"
+         y="167.36218">(1,2)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="370"
+       y="167.36218"
+       id="text4284"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4286"
+         x="370"
+         y="167.36218">(1,3)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="190"
+       y="227.36218"
+       id="text4288"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4290"
+         x="190"
+         y="227.36218">(2,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="250"
+       y="227.36218"
+       id="text4292"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4294"
+         x="250"
+         y="227.36218">(2,1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="310"
+       y="227.36218"
+       id="text4296"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4298"
+         x="310"
+         y="227.36218">(2,2)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="370"
+       y="227.36218"
+       id="text4300"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4302"
+         x="370"
+         y="227.36218">(2,3)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="190"
+       y="287.36218"
+       id="text4304"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4306"
+         x="190"
+         y="287.36218">(3,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="250"
+       y="287.36218"
+       id="text4308"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4310"
+         x="250"
+         y="287.36218">(3,1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="310"
+       y="287.36218"
+       id="text4312"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4314"
+         x="310"
+         y="287.36218">(3,2)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;font-family:Sans;opacity:0.5"
+       x="370"
+       y="287.36218"
+       id="text4316"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4318"
+         x="370"
+         y="287.36218">(3,3)</tspan></text>
+    <rect
+       style="opacity:1;fill:none;stroke:#000000;stroke-width:4.00261068;stroke-miterlimit:4;stroke-dasharray:8.00522137,8.00522137;stroke-dashoffset:0"
+       id="rect4320"
+       width="120.15668"
+       height="120"
+       x="180.98485"
+       y="72.362183"
+       ry="5"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="5"
+       y="72.362183"
+       x="301"
+       height="120"
+       width="120.15668"
+       id="rect4322"
+       style="opacity:1;fill:none;stroke:#000000;stroke-width:4.00261068;stroke-miterlimit:4;stroke-dasharray:8.00522137,8.00522137;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="opacity:1;fill:none;stroke:#000000;stroke-width:4.00261068;stroke-miterlimit:4;stroke-dasharray:8.00522137,8.00522137;stroke-dashoffset:0"
+       id="rect4324"
+       width="120.15668"
+       height="120"
+       x="180.84332"
+       y="192.36218"
+       ry="5"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="5"
+       y="192.36218"
+       x="301"
+       height="120"
+       width="120.15668"
+       id="rect4326"
+       style="opacity:1;fill:none;stroke:#000000;stroke-width:4.00261068;stroke-miterlimit:4;stroke-dasharray:8.00522137,8.00522137;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="210"
+       y="142.36218"
+       id="text4328"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4330"
+         x="210"
+         y="142.36218">(0,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="329.69135"
+       y="143.51723"
+       id="text4332"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4334"
+         x="329.69135"
+         y="143.51723">(0,1)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="210"
+       y="262.36218"
+       id="text4336"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4338"
+         x="210"
+         y="262.36218">(1,0)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="330"
+       y="262.36218"
+       id="text4340"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/quadraticBlockPartitioningDetailed.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan4342"
+         x="330"
+         y="262.36218">(1,1)</tspan></text>
+  </g>
+</svg>

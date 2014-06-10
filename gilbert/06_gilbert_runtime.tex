@@ -43,5 +43,125 @@ Moreover, we will see how the different linear algebra operations are realized w
 \section{Distributed Matrix Representation}
 \label{sec:DistributedMatrixRepresentation}
 
+One aspect of writing distributed algorithms is how the relevant data is distributed across several worker nodes.
+Since the distribution pattern directly influences the algorithms, one cannot consider one indenpendently of the other.
+In Gilbert's use case, the main data structure are matrices.
+Thus, we have to conceive partitioning for matrices which allows efficient partitioning as well as efficient algorithms working on the distributed data.
+Looking at a matrix, one easily finds a multitude of different partition schemes.
+
+A first idea could be to partition a matrix according to their rows or columns, as it is depicted in \cref{fig:rowPartitioning} and \cref{fig:columnPartitioning}.
+This scheme allows to represent a matrix as a set of vectors which are stored in a distributed fashion.
+Furthermore, it allows an efficient realization of cellwise operations, such as $+,-,/$ or $.*$.
+In order to calculate the result of such an operation, we only have to join the corresponding rows of both operands and execute the operation locally for each pair of rows.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{.3\linewidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{images/rowPartitioning.png}
+		\caption{Row partitioning}
+		\label{fig:rowPartitioning}
+	\end{subfigure}
+	\begin{subfigure}{.3\linewidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{images/columnPartitioning.png}
+		\caption{Column partitioning}
+		\label{fig:columnPartitioning}
+	\end{subfigure}
+	\begin{subfigure}{.3\linewidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{images/quadraticBlockPartitioning.png}
+		\caption{Quadratic block partitioning}
+		\label{fig:quadraticBlockPartitioning}
+	\end{subfigure}
+	\caption{Row-wise, column-wise and quadratic block-wise matrix partitioning.}
+	\label{fig:Partitionings}
+\end{figure}
+
+However, we run into trouble when we try to multiply two equally partitioned matrices $A$ and $B$ as illustrated in \cref{fig:rowPartitioningMM}.
+Here, to calculate the resulting row with index $r$, we need the row $r$ of $A$ and the complete matrix $B$.
+This implies a complete repartitioning of $B$.
+The repartitioning is especially grave, since $B$ has to be broadcasted to every row of $A$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/rowMM.png}
+	\caption{Matrix multiplication of $A$ and $B$. The required data to calculate row $r$ are highlighted.}
+	\label{fig:rowPartitioningMM}
+\end{figure}
+
+In order to quantify the repartitioning costs of such a matrix multiplication, we developed a simple cost model.
+First of all, we limit ourselves to modelling the communication costs, since network I/O usually constitutes the bottleneck of distributed systems and is thus the dominating factor.
+For the sake of simplicity, we consider the multiplication of two quadratic matrices $A \in \mathbb{R}^{n\times n}$ and $B \in \mathbb{R}^{n\times n}$ giving the matrix $C\in \mathbb{R}^{n \times n}$.
+Moreover, we assume that there are $n$ worker nodes available, each of which receiving a single row of $A$ and $B$ respectively.
+Thus, $A$ and $B$ are row-wise partitioned.
+We further assume that rows with the same index are kept on the same worker node.
+
+Each row $a_r$ requires the complete knowledge of matrix $B$ in order to produce the row $c_r$.
+Therefore, every row $b_r$ has to be sent to all other worker nodes.
+Thus, the number of rows sent by each worker node is $n-1$.
+All of the $n$ worker nodes have to do this.
+Consequently, the total number of sent messages is $n(n-1)$ and each message has a size of $n\alpha$ where $\alpha$ is the size of a matrix entry.
+Usually, each sending operation causes some constant overhead inflicted by resource allocation.
+Before we can send the actual data over the network, we have to allocate memory to transfer the data to the network interface, reserve network resources and establish a network connection with the remote peer, for example.
+This overhead is denoted by $\Delta$.
+Since all sending operations occur in parallel, the costs caused by constant overhead are $(n-1)\Delta$.
+The total amount of data which has to sent over the network is $n^2(n-1)\alpha$.
+We assume that the network interconnection guarantees every node a bandwidth $\nu$.
+Therefore, the time needed for sending the data is $\frac{n^2(n-1)\alpha}{\nu}$.
+This leads to the following repartitioning cost model:
+
+\begin{displaymath}
+	cost_{row} = \frac{n^2(n-1)\alpha}{\nu} + (n-1)\Delta
+\end{displaymath}
+
+Row and column partitioning are extreme forms of blocking.
+A less extreme form would be to split the matrix into equally sized quadratic blocks as shown in \cref{fig:quadraticBlockPartitioning}.
+In order to identify the individual blocks, each of them gets a block row and block column index assigned.
+Thus, blocking adds some memory overhead in the form of index information.
+An example of a $4\times 4$ matrix partitioned into $2\times 2$ blocks can be seen in \cref{fig:quadraticBlockPartitioningDetailed}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.25\linewidth]{images/quadraticBLockPartitioningDetailed.png}
+	\caption{Detailed quadratic block partitioning with the added block row and block column indices.}
+	\label{fig:quadraticBlockPartitioningDetailed}
+\end{figure}
+
+The blocks are distributed across the worker nodes.
+The block size directly controls the granularity of the partitioning.
+Increasing the block size will reduce the memory overhead of distributed matrices while reducing the degree of parallelism.
+Thus, the user has to adjust the block size value depending on the matrix sizes and the number of available worker nodes in order to obtain best performance.
+
+The quadratic block partitioning has similar properties as the row- and column-wise partitioning scheme when it comes to cellwise operations.
+We simply have to join corresponding blocks with respect to the pair of block row and column index and execute the operation on matching blocks locally.
+But how does this pattern performs for matrix multiplications?
+
+We make the same assumptions as before and additionally presume that $n$ is a square number.
+Since our matrices $A$, $B$ and $C$ are equally partitioned into square blocks, indices will henceforth reference the block and not the matrix entry.
+In order to calculate the block $c_{ij}$, we have to know the block row $a_{i}$ and the block column $b_{j}$.
+The resulting block will be stored on the node $node_{ij}$ which already contains the blocks $a_{ij}$ and $b_{ij}$.
+Thus, each node $node_{ij}$ has to receive the missing $2\left(\sqrt{n}-1\right)$ blocks from the block row $a_{i}$ and block column $b_{j}$.
+In total, all worker nodes have to send $2n\left(\sqrt{n}-1\right)$ blocks.
+Each block has the size $n\alpha$.
+The total communication costs comprises the transmission costs and the network overhead:
+
+\begin{displaymath}
+	cost_{squareBlock} = \frac{2n^2\left(\sqrt{n}-1\right)\alpha}{\nu} + 2\left(\sqrt{n}-1\right)\Delta
+\end{displaymath}
+
+We see that the term $(n-1)$ is replaced by $2\left(\sqrt{n}-1\right)$ in the squared block cost model.
+For $n>2$, the squared block partitioning scheme is thus superior to the row- and column-wise partitioning pattern with respect to the cost model.
+The reason for this is that the squared blocks promote more localized computations compared to the other partitionings.
+Instead of having to know the complete matrix $B$, we only have to know one block row of $A$ and one block column of $B$ to compute the final result.
+
+Due to these advantages, we decided to implement the squared block partitioning scheme in Gilbert.
+It would also be possible to combine different partitionings and select them dynamically based on the data sizes and input partitionings.
+However, for the sake of simplicity, Gilbert only supports the aforementioned partitioning.
+
 \section{Linear Algebra Operations}
 \label{sec:LinearAlgebraOperations}
+
+The other aspect of writing distributed algorithms is to think about how the algorithm works with the locally available data and which data has to be transferred in order to compute the final result.
+
+\subsection{Execution Plan Example}
