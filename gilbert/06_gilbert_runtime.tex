@@ -162,6 +162,42 @@ However, for the sake of simplicity, Gilbert only supports the aforementioned pa
 \section{Linear Algebra Operations}
 \label{sec:LinearAlgebraOperations}
 
-The other aspect of writing distributed algorithms is to think about how the algorithm works with the locally available data and which data has to be transferred in order to compute the final result.
+The other aspect of writing distributed algorithms is to think about how the algorithms work with the locally available data and which data has to be communicated in order to compute the final result.
+Stratosphere and Spark both offer a highly expressive programming API which follow and extend the well-known MapReduce paradigm~\cite{dean:c2008a}.
+Conceptually, a set of distributed data items, called \emph{DataSet} or \emph{RDD} (resilient distributed dataset) in the context of Stratosphere and Spark respectively, forms the basis of both systems.
+There are several ways to initially create such a data set, such as reading from a file or to distribute a local collection.
+Once a distributed data set is created, it can be modified by applying one of the transforming functions to it, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.
+These functions are borrowed from the world of functional programming, since they happen to be expressive enough and can serve as a utile abstraction for automatic parallelization.
+Each of these transforming functions takes one or more data sets as inputs and produces a new distributed data set.
+
+In order to understand how the different linear algebra operations are implemented, we will quickly revise the semantics of the transforming functions.
+For a more detailed explanation, the reader is referred to~\cite{zaharia:2012a,alexandrov:2011a,battre:2010a}.
+A distributed data set is a multiset of items.
+An item can have a key value which is retrieved by the $key$ function.
+Each of the transforming functions is called with a user defined function (UDF), which specifies how each item is processed and what kind of item is emitted as the result.
+In other words, it defines the program specific semantics of the transformation.
+
+\begin{description}
+	\item[map] The map operator is called with one input data set $A$ and a UDF. The UDF is called for each item $a\in A$ indenpendently, producing one result item.
+
+	\item[reduce] The reduce operator partitions the input data set $A$ into groups of items with the same key. 
+		All items of each group are handed together to a call of the UDF.
+		In other words, the UDF is called for each submultiset $A^\prime$ with $\forall a,b\in A^\prime : key(a) = key(b)$ and $\forall a \in A^\prime, b\in A \setminus A^\prime: key(a) \not = key(b)$.
+
+	\item[join] The join operator joins two data sets $A$ and $B$ with respect to a key value.
+		This means that a UDF is called for each pair $(a,b)$ with $a\in A$ and $b\in B$ with $key(a)=key(b)$.
+
+	\item[cross]The cross operator can be understood as the cartesian product.
+		Given two data sets $A$ and $B$, cross calls the UDF for each pair $(a,b)$ with $a\in A$ and $b\in B$.
+	\item[coGroup] The coGroup operator also takes 2 input data sets $A$ and $B$.
+		It groups the elements of $A$ and $B$ according to their keys and joins the grouped submultisets.
+		In other words, the UDF is called for each pair of multisets $(A^\prime, B^\prime)$ with $A^\prime \subseteq A \wedge B^\prime \subseteq B \wedge |keyset(A^\prime \cup B^\prime)| = 1$ and $keyset(A^\prime \cup B^\prime) \cap keyset((A \cup B) \setminus (A^\prime \cup B^\prime)) = \emptyset$.
+		The function $keyset$ is the set of appearing keys in a set: $keyset(X) \coloneqq \{ key(x) \mid x \in X \}$.
+\end{description}
+
+Stratosphere as well as Spark offer a similar set of $\nth{2}$-order functions comprising the abovementioned functions.
+Consequently, we can develop the linear algebra operations in a general fashion and do not have to adhere to a specific framework.
+In the following, we will outline the implementation behind the different intermediate operators with respect to the transforming functions.
+We assume that the matrices are partitioned using the squared block scheme.
 
 \subsection{Execution Plan Example}
