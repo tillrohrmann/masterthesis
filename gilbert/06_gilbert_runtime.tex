@@ -150,12 +150,12 @@ The total communication costs comprises the transmission costs and the network o
 	cost_{squareBlock} = \frac{2n^2\left(\sqrt{n}-1\right)\alpha}{\nu} + 2\left(\sqrt{n}-1\right)\Delta
 \end{displaymath}
 
-We see that the term $(n-1)$ is replaced by $2\left(\sqrt{n}-1\right)$ in the squared block cost model.
-For $n>2$, the squared block partitioning scheme is thus superior to the row- and column-wise partitioning pattern with respect to the cost model.
-The reason for this is that the squared blocks promote more localized computations compared to the other partitionings.
+We see that the term $(n-1)$ is replaced by $2\left(\sqrt{n}-1\right)$ in the square block cost model.
+For $n>2$, the square block partitioning scheme is thus superior to the row- and column-wise partitioning pattern with respect to the cost model.
+The reason for this is that the square blocks promote more localized computations compared to the other partitionings.
 Instead of having to know the complete matrix $B$, we only have to know one block row of $A$ and one block column of $B$ to compute the final result.
 
-Due to these advantages, we decided to implement the squared block partitioning scheme in Gilbert.
+Due to these advantages, we decided to implement the square block partitioning scheme in Gilbert.
 It would also be possible to combine different partitionings and select them dynamically based on the data sizes and input partitionings.
 However, for the sake of simplicity, Gilbert only supports the aforementioned partitioning.
 
@@ -201,7 +201,7 @@ In other words, it defines the program specific semantics of the transformation.
 Stratosphere as well as Spark offer a similar set of $\nth{2}$-order functions comprising the abovementioned functions.
 Consequently, we can develop the linear algebra operations in a general fashion and do not have to adhere to a specific framework.
 In the following, we will outline the implementation behind the different intermediate operators with respect to the transforming functions.
-We assume that the matrices are partitioned using the squared block scheme.
+We assume that the matrices are partitioned using the square block scheme.
 
 The \code{ScalarMatrixTransformation} and \code{MatrixScalarTransformation} work on a matrix input and a scalar input.
 The scalar input is a distributed data set with one item.
@@ -209,7 +209,7 @@ The scalar value is required at every matrix block to perform the \code{smOp} op
 Thus, we use the cross function to pair the scalar value with every matrix block.
 The resulting dataflow plan is shown in \cref{fig:planScalarMatrixTransformation}.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.35\linewidth]{images/planScalarMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{ScalarMatrixTransformation}.}
@@ -221,7 +221,7 @@ Thus, no communication is needed and the \code{unaryScalarOp} operation $f$ can 
 The transformation is implemented using the map function.
 The resulting dataflow plan is shown in \cref{fig:planCellwiseMatrixTransformation}.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.35\linewidth]{images/planCellwiseMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{CellwiseMatrixTransformation}.}
@@ -233,11 +233,57 @@ It applies an operation of type \code{scalarOp} to each pair of corresponding ce
 Therefore, we have to pair all matrix blocks which have the same block row and block column index.
 Assuming, $f$ is the function performing the cellwise operation on the given matrix blocks, the resulting dataflow plan can be seen in \cref{fig:planCellwiseMatrixMatrixTransformation}
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.45\linewidth]{images/planCellwiseMatrixMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{CellwiseMatrixMatrixTransformation}.}
 	\label{fig:planCellwiseMatrixMatrixTransformation}
 \end{figure}
 
-\subsection{Execution Plan Example}
+Matrix multiplications are probably the most performance critical operation in linear algebra programs.
+Therefore, we have to pay attention to a thorough implementation within Gilbert.
+In a MapReduce-like system there exist two distinct matrix multiplication implementations for square blocking.
+The first approach is based on replicating one of the operands and is called replication based matrix multplication (RMM).
+The other method is derived from the outer product formulation of matrix multiplications.
+It is called cross product based matrix multiplication (CPMM).
+
+RMM
+
+CPMM
+
+\code{MatrixMult}
+
+The \code{VectorwiseMatrixTransformation} operator cannot be generalized independently of the \code{vectorwiseOp} operation.
+For example, consider the maximum and the norm operation.
+The maximum is calculated by taking the maximum of each row in block.
+Afterwards, the maximum per block is grouped with respect to the block row index and the grouped blocks are reduced by taking the maximum over all group elements.
+Grouping is based on the key of each item.
+The key selected
+The corresponding dataflow plan is shown in \cref{fig:planMaximumVectorwiseTransformation}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/planMaximumVectorwiseTransformation.png}
+	\caption{Dataflow plan of the \code{VectorwiseMatrixTransformation} with the \code{max} operation.}
+	\label{fig:planMaximumVectorwiseTransformation}
+\end{figure}
+
+In contrast to that, the $2$-norm operation requires a more sophisticated implementation.
+First, the cellwise square of all matrix entries is calculated with the map function.
+Then, the partial sums of every row is computed by summing the columns of each block.
+This constitutes another map operation.
+The final row sums are calculated by grouping the partial sums with respect to their block row index and summing the items of each group up.
+After this reduce operation is done, the final result is computed by taking the cellwise square root.
+
+The \code{AggregateMatrixTransformation} operator computes an aggregate over all elements of the matrix.
+Given that the aggregate operation is combinable, meaning that the aggregation can be expressed as a fold operation in terms of functional programming, we can implement it straightforwardly.
+The only thing to do is call a reduce operation with the aggregation function $f$ as UDF.
+The respective dataflow plan can be found in \cref{fig:planAggregateMatrixTransformation}.
+In case that the aggregate is not combinable, it has to be implemented individually.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/planAggregateMatrixTransformation.png}
+	\caption{Dataflow plan of the \code{AggregateMatrixTransformation}.}
+	\label{fig:planAggregateMatrixTransformation}
+\end{figure}

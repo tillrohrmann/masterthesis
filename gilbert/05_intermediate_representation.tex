@@ -166,7 +166,7 @@ Furthermore, one can calculate the $2$-norm of each row vector:
 
 Similar to the vectorwise operations, the \code{AggregateMatrixTransformation} applies an operation to all matrix entries producing a single scalar result value.
 The aggregation operation can compute the maximum, minimum and the sum of all matrix entries.
-Furthermore, it supports the Frobenius $2$-norm:
+Furthermore, it supports the Frobenius norm:
 \begin{displaymath}
 	\norm{A}_2 = \sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n} a_{ij}^2}
 \end{displaymath}
@@ -345,7 +345,7 @@ Its compiled version is shown in \cref{fig:irC}
 	\label{fig:irC}
 \end{figure}
 
-The \code{norm} operator, taking as first parameter the matrix $m$ and as second the norm parameter $p$, calculates the $p$-Frobenius norm of $m$.
+The \code{norm} operator, taking as first parameter the matrix $m$ and as second the norm parameter $p$, calculates the $p$-norm of $m$ over all matrix elements.
 Internally this is compiled to the intermediate code shown in \cref{fig:irNorm}.
 
 \begin{figure}[!h]
