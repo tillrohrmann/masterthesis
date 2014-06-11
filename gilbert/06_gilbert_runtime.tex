@@ -169,6 +169,9 @@ There are several ways to initially create such a data set, such as reading from
 Once a distributed data set is created, it can be modified by applying one of the transforming functions to it, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.
 These functions are borrowed from the world of functional programming, since they happen to be expressive enough and can serve as a utile abstraction for automatic parallelization.
 Each of these transforming functions takes one or more data sets as inputs and produces a new distributed data set.
+The distributed data sets are not computed directly but instead they generate a dataflow plan.
+Each node of the dataflow plan constitutes a function application and consequently a new data set.
+The edges connect input data sets to output data sets and thus represent the data dependencies.
 
 In order to understand how the different linear algebra operations are implemented, we will quickly revise the semantics of the transforming functions.
 For a more detailed explanation, the reader is referred to~\cite{zaharia:2012a,alexandrov:2011a,battre:2010a}.
@@ -199,5 +202,42 @@ Stratosphere as well as Spark offer a similar set of $\nth{2}$-order functions c
 Consequently, we can develop the linear algebra operations in a general fashion and do not have to adhere to a specific framework.
 In the following, we will outline the implementation behind the different intermediate operators with respect to the transforming functions.
 We assume that the matrices are partitioned using the squared block scheme.
+
+The \code{ScalarMatrixTransformation} and \code{MatrixScalarTransformation} work on a matrix input and a scalar input.
+The scalar input is a distributed data set with one item.
+The scalar value is required at every matrix block to perform the \code{smOp} operation.
+Thus, we use the cross function to pair the scalar value with every matrix block.
+The resulting dataflow plan is shown in \cref{fig:planScalarMatrixTransformation}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.35\linewidth]{images/planScalarMatrixTransformation.png}
+	\caption{Dataflow plan of the \code{ScalarMatrixTransformation}.}
+	\label{fig:planScalarMatrixTransformation}
+\end{figure}
+
+The \code{CellwiseMatrixTransformation} operates locally on the cells of a single matrix.
+Thus, no communication is needed and the \code{unaryScalarOp} operation $f$ can be executed embarrassingly parallely.
+The transformation is implemented using the map function.
+The resulting dataflow plan is shown in \cref{fig:planCellwiseMatrixTransformation}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.35\linewidth]{images/planCellwiseMatrixTransformation.png}
+	\caption{Dataflow plan of the \code{CellwiseMatrixTransformation}.}
+	\label{fig:planCellwiseMatrixTransformation}
+\end{figure}
+
+The \code{CellwiseMatrixMatrixTransformation} operates locally on the cells of two matrices.
+It applies an operation of type \code{scalarOp} to each pair of corresponding cell entries.
+Therefore, we have to pair all matrix blocks which have the same block row and block column index.
+Assuming, $f$ is the function performing the cellwise operation on the given matrix blocks, the resulting dataflow plan can be seen in \cref{fig:planCellwiseMatrixMatrixTransformation}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\linewidth]{images/planCellwiseMatrixMatrixTransformation.png}
+	\caption{Dataflow plan of the \code{CellwiseMatrixMatrixTransformation}.}
+	\label{fig:planCellwiseMatrixMatrixTransformation}
+\end{figure}
 
 \subsection{Execution Plan Example}
