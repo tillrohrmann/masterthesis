@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg5166"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="rmm.svg">
+  <defs
+     id="defs5168">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path5965"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="592.59003"
+     inkscape:cy="582.60113"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1401"
+     inkscape:window-height="856"
+     inkscape:window-x="39"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5174" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5171">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m -126.90477,575.69552 c -0.52381,-0.52381 -0.95238,-12.7381 -0.95238,-27.14286 l 0,-26.19048 27.85715,0 27.85714,0 0,27.14286 0,27.14286 -26.90476,0 c -14.79762,0 -27.33334,-0.42857 -27.85715,-0.95238 z"
+       id="path5783"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m -67.85715,549.53589 0,-27.17371 27.88867,0 27.88866,0 -0.38866,26.78572 -0.38867,26.78571 -27.5,0.38799 -27.5,0.38799 0,-27.1737 z"
+       id="path5785"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -69.94553,519.06202 0,60"
+       id="path5781"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 122.23817,162.61564 0.13059,-27.65293 27.65292,-0.13058 27.65293,-0.13058 0,27.78351 0,27.78351 -27.78351,0 -27.78351,0 0.13058,-27.65293 z"
+       id="path5696"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 182.22029,162.48506 0,-27.78351 27.65293,0.13058 27.65293,0.13058 0.13058,27.65293 0.13058,27.65293 -27.78351,0 -27.78351,0 0,-27.78351 z"
+       id="path5698"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 122.45294,249.53085 c -0.1852,-0.18519 -0.33672,-12.57219 -0.33672,-27.52666 l 0,-27.18994 27.77919,0 27.7792,0 0,27.52666 0,27.52666 -27.44248,0 c -15.09336,0 -27.594,-0.15153 -27.77919,-0.33672 z"
+       id="path5700"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 182.22029,222.34091 0,-27.52666 27.7792,0 27.77919,0 0,27.52666 0,27.52666 -27.77919,0 -27.7792,0 0,-27.52666 z"
+       id="path5702"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 120,192.36219 120,0"
+       id="path5692"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 180,132.36219 0,120"
+       id="path5694"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5176"
+       width="120"
+       height="120"
+       x="120"
+       y="132.36218"
+       ry="3" />
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="128.85852"
+       y="168.15338"
+       id="text5704"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5706"
+         x="128.85852"
+         y="168.15338">A<tspan
+   id="tspan7662"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="189.18149"
+       y="168.15338"
+       id="text5708"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5710"
+         x="189.18149"
+         y="168.15338">A<tspan
+   id="tspan7664"
+   style="font-size:65.00091553%;baseline-shift:sub">0,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="128.86284"
+       y="228.00923"
+       id="text5712"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5714"
+         x="128.86284"
+         y="228.00923">A<tspan
+   id="tspan7666"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="189.17717"
+       y="228.00923"
+       id="text5716"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5718"
+         x="189.17717"
+         y="228.00923">A<tspan
+   id="tspan7668"
+   style="font-size:65.00091553%;baseline-shift:sub">1,1</tspan></tspan></text>
+    <path
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 342.69751,161.993 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       id="path5724"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 342.69751,221.993 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       id="path5726"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 339.99997,192.36218 60,0"
+       id="path5722"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5720"
+       width="60"
+       height="120"
+       x="340"
+       y="132.36218"
+       ry="3" />
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="347.65421"
+       y="167.66132"
+       id="text5728"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5730"
+         x="347.65421"
+         y="167.66132">B<tspan
+   id="tspan7670"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="347.65421"
+       y="227.66132"
+       id="text5732"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5734"
+         x="347.65421"
+         y="227.66132">B<tspan
+   id="tspan7672"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="279.11078"
+       y="202.36218"
+       id="text5755"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5757"
+         x="279.11078"
+         y="202.36218">x</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="437.76202"
+       y="202.36218"
+       id="text5759"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5761"
+         x="437.76202"
+         y="202.36218">=</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path5763"
+       d="m 510.00003,159.50504 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5765"
+       d="m 510.00003,219.50504 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5767"
+       d="m 507.30249,189.87422 60,0"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       ry="3"
+       y="129.87422"
+       x="507.30252"
+       height="120"
+       width="60"
+       id="rect5769"
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5771"
+       y="165.33815"
+       x="515.31073"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="165.33815"
+         x="515.31073"
+         id="tspan5773"
+         sodipodi:role="line">C<tspan
+   id="tspan7674"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5775"
+       y="225.33815"
+       x="515.31073"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="225.33815"
+         x="515.31073"
+         id="tspan5777"
+         sodipodi:role="line">C<tspan
+   id="tspan7676"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <rect
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5779"
+       width="120"
+       height="60"
+       x="-129.94553"
+       y="519.06201"
+       ry="3"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5795"
+       d="m 50,519.50504 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5797"
+       d="m 50,579.50504 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5799"
+       d="m 47.30246,549.87422 60,0"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="3"
+       y="489.87424"
+       x="47.30246"
+       height="120"
+       width="60"
+       id="rect5801"
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5811"
+       y="552.36218"
+       x="10"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         y="552.36218"
+         x="10"
+         id="tspan5813"
+         sodipodi:role="line">x</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5827"
+       y="552.36218"
+       x="130"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         y="552.36218"
+         x="130"
+         id="tspan5829"
+         sodipodi:role="line">=</tspan></text>
+    <rect
+       style="fill:#ff0000;fill-opacity:1;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5831"
+       width="60"
+       height="60"
+       x="180"
+       y="512.36218"
+       ry="3"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5837"
+       d="M 355.95238,581.40981 C 355.42857,580.886 355,568.67171 355,554.26695 l 0,-26.19048 27.85715,0 27.85714,0 0,27.14286 0,27.14286 -26.90476,0 c -14.79762,0 -27.33334,-0.42857 -27.85715,-0.95238 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5839"
+       d="m 415,555.25018 0,-27.17371 27.88867,0 27.88866,0 -0.38866,26.78572 L 470,581.6479 l -27.5,0.38799 -27.5,0.38799 0,-27.1737 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5841"
+       d="m 412.91162,524.77631 0,60"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="3"
+       y="524.77631"
+       x="352.91162"
+       height="60"
+       width="120"
+       id="rect5843"
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 532.85715,525.21933 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       id="path5853"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 532.85715,585.21933 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       id="path5855"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 530.15961,555.58851 60,0"
+       id="path5857"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect5859"
+       width="60"
+       height="120"
+       x="530.15967"
+       y="495.58853"
+       ry="3"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="492.85715"
+       y="558.07648"
+       id="text5869"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5871"
+         x="492.85715"
+         y="558.07648">x</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="612.85718"
+       y="558.07648"
+       id="text5873"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5875"
+         x="612.85718"
+         y="558.07648">=</tspan></text>
+    <rect
+       ry="3"
+       y="518.07648"
+       x="662.85718"
+       height="60"
+       width="60"
+       id="rect5877"
+       style="fill:#0000ff;fill-opacity:1;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:none;stroke:#333333;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       id="rect5883"
+       width="420"
+       height="180"
+       x="-160"
+       y="452.36218"
+       ry="2.7"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-135"
+       y="487.36218"
+       id="text5885"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5887"
+         x="-135"
+         y="487.36218">Reducer 1</tspan></text>
+    <rect
+       ry="2.7"
+       y="452.36218"
+       x="320"
+       height="180"
+       width="420"
+       id="rect5889"
+       style="fill:none;stroke:#333333;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text5891"
+       y="488.07648"
+       x="345.71429"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         y="488.07648"
+         x="345.71429"
+         id="tspan5893"
+         sodipodi:role="line">Reducer 2</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path5895"
+       d="m 122.23818,322.61562 0.13059,-27.65292 27.65292,-0.13058 27.65293,-0.13059 0,27.78351 0,27.78351 -27.78351,0 -27.78351,0 0.13058,-27.65293 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5897"
+       d="m 182.2203,322.48504 0,-27.78351 27.65293,0.13059 27.65293,0.13058 0.13058,27.65292 0.13058,27.65293 -27.78351,0 -27.78351,0 0,-27.78351 z"
+       style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5899"
+       d="m 122.45295,409.53083 c -0.1852,-0.18519 -0.33672,-12.57219 -0.33672,-27.52666 l 0,-27.18994 27.77919,0 27.7792,0 0,27.52666 0,27.52666 -27.44248,0 c -15.09336,0 -27.594,-0.15153 -27.77919,-0.33672 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5901"
+       d="m 182.2203,382.34089 0,-27.52666 27.7792,0 27.77919,0 0,27.52666 0,27.52666 -27.77919,0 -27.7792,0 0,-27.52666 z"
+       style="fill:#0000ff;fill-opacity:1;stroke:#0000ff;stroke-width:2.02030516;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5903"
+       d="m 120.00001,352.36217 120,0"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5905"
+       d="m 180.00001,292.36218 0,119.99999"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="3"
+       y="292.36218"
+       x="120"
+       height="120"
+       width="120"
+       id="rect5907"
+       style="fill:none;stroke:#999999;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5925"
+       d="m 342.69754,321.99299 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5927"
+       d="m 342.69754,381.99299 0,-27.14286 27.14285,0 27.14286,0 0,27.14286 0,27.14285 -27.14286,0 -27.14285,0 0,-27.14285 z"
+       style="fill:#00ff00;fill-opacity:1;stroke:#00ff00;stroke-width:5.71428585;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5929"
+       d="m 340,352.36217 60,0"
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="3"
+       y="292.36218"
+       x="340"
+       height="120"
+       width="60"
+       id="rect5931"
+       style="fill:none;stroke:#999999;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-size:28px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-135"
+       y="317.36218"
+       id="text5941"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan5943"
+         x="-135"
+         y="317.36218">Mapper</tspan></text>
+    <path
+       style="fill:#333333;stroke:#333333;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       d="m 250,382.36218 80,60"
+       id="path5945"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#333333;stroke:#333333;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       d="m 110,322.36218 -40,110"
+       id="path5947"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#333333;stroke:#333333;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       d="m 330,352.36218 -80,90"
+       id="path5949"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5951"
+       d="m 410,352.36218 40,80"
+       style="fill:#333333;stroke:#333333;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Mend)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       id="rect6618"
+       width="120"
+       height="60"
+       x="120"
+       y="292.36218"
+       ry="2.7"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       ry="2.7"
+       y="352.36218"
+       x="120"
+       height="60"
+       width="120"
+       id="rect6620"
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:12,12;stroke-dashoffset:8"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       id="rect6622"
+       width="60"
+       height="120"
+       x="340"
+       y="292.36218"
+       ry="3"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rmm.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text7717"
+       y="328.15335"
+       x="128.85852"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="328.15335"
+         x="128.85852"
+         id="tspan7719"
+         sodipodi:role="line">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7721">0,0</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7723"
+       y="328.15335"
+       x="189.18149"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="328.15335"
+         x="189.18149"
+         id="tspan7725"
+         sodipodi:role="line">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7727">0,1</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7729"
+       y="388.00922"
+       x="128.86284"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="388.00922"
+         x="128.86284"
+         id="tspan7731"
+         sodipodi:role="line">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7733">1,0</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7735"
+       y="388.00922"
+       x="189.17719"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="388.00922"
+         x="189.17719"
+         id="tspan7737"
+         sodipodi:role="line">A<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7739">1,1</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7741"
+       y="327.66132"
+       x="347.65424"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="327.66132"
+         x="347.65424"
+         id="tspan7743"
+         sodipodi:role="line">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7745">0,0</tspan></tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text7747"
+       y="387.66132"
+       x="347.65424"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="387.66132"
+         x="347.65424"
+         id="tspan7749"
+         sodipodi:role="line">B<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7751">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-121.03259"
+       y="555.17334"
+       id="text7773"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7775"
+         x="-121.03259"
+         y="555.17334">A<tspan
+   id="tspan7777"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-60.790798"
+       y="555.20422"
+       id="text7779"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7781"
+         x="-60.790798"
+         y="555.20422">A<tspan
+   id="tspan7783"
+   style="font-size:65.00091553%;baseline-shift:sub">0,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="54.956707"
+       y="525.17334"
+       id="text7785"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7787"
+         x="54.956707"
+         y="525.17334">B<tspan
+   id="tspan7789"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="54.956707"
+       y="582.36218"
+       id="text7791"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7793"
+         x="54.956707"
+         y="582.36218">B<tspan
+   id="tspan7795"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="188.16786"
+       y="548.19531"
+       id="text7803"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7805"
+         x="188.16786"
+         y="548.19531">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7807">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="361.82455"
+       y="560.88763"
+       id="text7809"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7811"
+         x="361.82455"
+         y="560.88763">A<tspan
+   id="tspan7813"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="422.06635"
+       y="560.91852"
+       id="text7815"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7817"
+         x="422.06635"
+         y="560.91852">A<tspan
+   id="tspan7819"
+   style="font-size:65.00091553%;baseline-shift:sub">1,1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="540"
+       y="527.36218"
+       id="text7821"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7823"
+         x="540"
+         y="527.36218">B<tspan
+   id="tspan7825"
+   style="font-size:65.00091553%;baseline-shift:sub">0,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="540"
+       y="587.36218"
+       id="text7827"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7829"
+         x="540"
+         y="587.36218">B<tspan
+   id="tspan7831"
+   style="font-size:65.00091553%;baseline-shift:sub">1,0</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="671.02502"
+       y="553.90961"
+       id="text7845"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7847"
+         x="671.02502"
+         y="553.90961">C<tspan
+   style="font-size:65.00091553%;baseline-shift:sub"
+   id="tspan7849">1,0</tspan></tspan></text>
+  </g>
+</svg>
