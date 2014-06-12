@@ -32,13 +32,10 @@
 	"buffers":
 	[
 		{
-			"contents": "\\chapter{Intermediate Representation}\n\\label{cha:intermediaterepresentation}\n\n\\begin{itemize}\n	\\item Motivation for intermediate representation\n	\\begin{itemize}\n		\\item Language indenpendent representation\n		\\item Enough information to perform algebraic optimizations, e.g. matrix multiplication reorganizations\n		\\item Afterwards translation into execution engine's format\n		\\item Specification of language primitives of intermediate representation\n		\\begin{itemize}\n			\\item MatrixMult\n			\\item ScalarMatrixTransformation, MatrixScalarTransformation\n			\\item $\\vdots$\n		\\end{itemize}\n	\\end{itemize}\n\\end{itemize}\n\nPages $\\approx$ 3-4\n\nAfter the parsing and typing of the source code is done, we have all the information needed to execute the program in a distributed fashion.\nHowever, we do not compile the code directly to the respective format to let it run on a parallel data processing system.\nInstead, we compile it to an intermediate representation.\nEven though, the intermediate code adds an additional representation and thus more complexity to maintain, the advantages clearly outweigh the disadvantages.\nMoreover, this approach is similar to the approach the JVM and the .Net frameworks pursue.\nThe Java and .Net code, respectively, is compiled to a format which can be executed platform independently.\n\nThe additional abstraction layer allows us to apply language independent optimizations in a coherent manner and independently of the actually used frontend language.\nThis provides us with the flexibility to easily extend Gilbert to support other linear algebra languages as well.\nThe next natural candidate for a supported frontend language would be surely R.\nMoreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimziations.\nOne class of important transformations is the reordering of operations and the determination of the execution order.\nOften, they are based on the commutativity and associativity of the corresponding operations.\nAn obvious optimization would be the execution order of multiple matrix multiplications as indicated in \\cref{sec:MatrixDimensionInference}.\nFurhtermore, the propagation \n\n\n\nI intend to implement an intermediate representation of a Matlab program.\nThe additional abstraction layer allows language independent optimizations and makes the system independent from the actually used frontend language.\nThe set of language primitives of the intermediate representation has to include the operational primitives of linear algebra as well as an iteration abstraction in order to realize algorithms based on convergence.\nFurthermore, it is of particular interest to keep this set as small as possible, because this would alleviate a possible optimization step prior to execution.\n\n\n\\section{Specification}",
 			"file": "05_intermediate_representation.tex",
-			"file_size": 2771,
-			"file_write_time": 1401695078000000,
 			"settings":
 			{
-				"buffer_size": 2802,
+				"buffer_size": 20324,
 				"line_ending": "Unix"
 			}
 		}
@@ -104,14 +101,15 @@
 	"file_history":
 	[
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/02_related_work.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/style.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_listings.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/000_titlepage.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/04_gilbert_typing.tex",
 		"/Users/till/Desktop/Kabeldeutschland",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/07_architecture.tex",
@@ -122,7 +120,6 @@
 		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/main.tex",
 		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/components/outline.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/011_problem_statement.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.bbl",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/003_abstract.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/004_zusammenfassung.tex",
@@ -193,6 +190,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"represen",
+			"the matlab",
+			"the matlab im",
+			"cellwise",
+			"squared",
+			"frobenius",
+			"shared",
+			"pagerank",
+			"listing",
+			"fixpoint",
+			"norm",
+			"logic",
+			"textas",
 			"n ",
 			"unde",
 			"euro",
@@ -282,6 +292,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"square",
+			"PageRank",
 			"TURed"
 		],
 		"reverse": false,
@@ -301,15 +313,15 @@
 					"file": "05_intermediate_representation.tex",
 					"settings":
 					{
-						"buffer_size": 2802,
+						"buffer_size": 20324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2175,
-								2175
+								15626,
+								15626
 							]
 						],
 						"settings":
@@ -318,7 +330,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3134.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

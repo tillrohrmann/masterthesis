@@ -16,7 +16,7 @@ In order to evaluate an operator, the system first evaluates all the operator's 
 Since the program is executed locally, the complete data of each operator is always accessible and thus no communication logic is required.
 All input and output files are directly written to the local hard drive.
 
-In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program distributedly.
+In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program parallelly.
 It takes the dependency tree of a Matlab program and translates it into a PACT plan.
 After the plan is generated, it is issued to the Stratosphere system for parallel execution.
 This approach implies that the program is not directly executed by the executor.
@@ -44,7 +44,7 @@ Moreover, we will see how the different linear algebra operations are realized w
 \label{sec:DistributedMatrixRepresentation}
 
 One aspect of writing distributed algorithms is how the relevant data is distributed across several worker nodes.
-Since the distribution pattern directly influences the algorithms, one cannot consider one indenpendently of the other.
+Since the distribution pattern directly influences the algorithms, one cannot consider one independently of the other.
 In Gilbert's use case, the main data structure are matrices.
 Thus, we have to conceive partitioning for matrices which allows efficient partitioning as well as efficient algorithms working on the distributed data.
 Looking at a matrix, one easily finds a multitude of different partition schemes.
@@ -91,7 +91,7 @@ The repartitioning is especially grave, since $B$ has to be broadcasted to every
 \end{figure}
 
 In order to quantify the repartitioning costs of such a matrix multiplication, we developed a simple cost model.
-First of all, we limit ourselves to modelling the communication costs, since network I/O usually constitutes the bottleneck of distributed systems and is thus the dominating factor.
+First of all, we limit ourselves to modeling the communication costs, since network I/O usually constitutes the bottleneck of distributed systems and is thus the dominating factor.
 For the sake of simplicity, we consider the multiplication of two quadratic matrices $A \in \mathbb{R}^{n\times n}$ and $B \in \mathbb{R}^{n\times n}$ giving the matrix $C\in \mathbb{R}^{n \times n}$.
 Moreover, we assume that there are $n$ worker nodes available, each of which receiving a single row of $A$ and $B$ respectively.
 Thus, $A$ and $B$ are row-wise partitioned.
@@ -181,7 +181,7 @@ Each of the transforming functions is called with a user defined function (UDF),
 In other words, it defines the program specific semantics of the transformation.
 
 \begin{description}
-	\item[map] The map operator is called with one input data set $A$ and a UDF. The UDF is called for each item $a\in A$ indenpendently, producing one result item.
+	\item[map] The map operator is called with one input data set $A$ and a UDF. The UDF is called for each item $a\in A$ independently, producing one result item.
 
 	\item[reduce] The reduce operator partitions the input data set $A$ into groups of items with the same key. 
 		All items of each group are handed together to a call of the UDF.
@@ -190,7 +190,7 @@ In other words, it defines the program specific semantics of the transformation.
 	\item[join] The join operator joins two data sets $A$ and $B$ with respect to a key value.
 		This means that a UDF is called for each pair $(a,b)$ with $a\in A$ and $b\in B$ with $key(a)=key(b)$.
 
-	\item[cross]The cross operator can be understood as the cartesian product.
+	\item[cross]The cross operator can be understood as the Cartesian product.
 		Given two data sets $A$ and $B$, cross calls the UDF for each pair $(a,b)$ with $a\in A$ and $b\in B$.
 	\item[coGroup] The coGroup operator also takes 2 input data sets $A$ and $B$.
 		It groups the elements of $A$ and $B$ according to their keys and joins the grouped submultisets.
@@ -217,7 +217,7 @@ The resulting dataflow plan is shown in \cref{fig:planScalarMatrixTransformation
 \end{figure}
 
 The \code{CellwiseMatrixTransformation} operates locally on the cells of a single matrix.
-Thus, no communication is needed and the \code{unaryScalarOp} operation $f$ can be executed embarrassingly parallely.
+Thus, no communication is needed and the \code{unaryScalarOp} operation $f$ can be executed embarrassingly parallel.
 The transformation is implemented using the map function.
 The resulting dataflow plan is shown in \cref{fig:planCellwiseMatrixTransformation}.
 
@@ -245,7 +245,7 @@ The map function is called for each of the matching pairs created by the join no
 Matrix multiplications are probably the most performance critical operation in linear algebra programs.
 Therefore, we have to pay attention to a thorough implementation within Gilbert.
 In a MapReduce-like system there exist two distinct matrix multiplication implementations for square blocking.
-The first approach is based on replicating rows and columns of the operands and is called replication based matrix multplication (RMM).
+The first approach is based on replicating rows and columns of the operands and is called replication based matrix multiplication (RMM).
 The other method is derived from the outer product formulation of matrix multiplications.
 It is called cross product based matrix multiplication (CPMM).
 The RMM and CPMM methods have been implemented within SystemML~\cite{ghoting:2011a}.
@@ -253,7 +253,7 @@ The RMM and CPMM methods have been implemented within SystemML~\cite{ghoting:201
 Let us assume that we want to calculate $A \times B = C$ with $A,B$ and $C$ being matrices.
 The block size has been chosen such that $A$ is partitioned into $m\times l$ blocks, $B$ is partitioned into $l \times n$ blocks and the result matrix $C$ will be partitioned into $m\times n$ blocks.
 In order to reference the block in the i$th$ block row and j$th$ block column of $A$, we will write $A_{ij}$.
-A block row will be denoted by a single subscripted index and a column row by a single superscripted index.
+A block row will be denoted by a single subscript index and a column row by a single superscript index.
 For example, $A_i$ marks the i$th$ block row of $A$ and $A^j$ the j$th$ block column of $A$.
 
 The replication-based strategy will copy for each $C_{ij}$ the i$th$ block row of $A$ and the j$th$ block column of $B$.
@@ -309,13 +309,13 @@ The corresponding dataflow plan is shown in \cref{fig:planMatrixMultiplication}.
 
 Stratosphere supports several execution strategies for the higher-order functions.
 A cost-based optimizer selects the best strategies prior to execution.
-One of the optimizations concerns the join function.
+One possible optimization concerns the join function.
 The join can either be realized using a hybrid-hash join or a sort-merge join algorithm depending on the current partitioning and the input data sizes.
 
 If one input data is relatively small compared to the other input, it is usually more efficient to use the hybrid-hash join algorithm.
 Without loss of generality, we assume that the matrix $B$ constitutes such a small input.
 If we further assume that the block rows of $A$ are kept on the same worker node, then the last reduce operation can be executed locally and without any shuffling.
-The resulting exeuction plan under these assumptions is equivalent to the RMM.
+The resulting execution plan under these assumptions is equivalent to the RMM.
 
 If the system chooses the sort-merge join algorithm instead, then the columns of $A$ will be distributed across the worker nodes.
 Consequently, the last reduce step causes a mandatory repartitioning.

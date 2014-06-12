@@ -11,12 +11,12 @@ Even though, the intermediate code adds an additional representation and thus mo
 Moreover, this approach is similar to the approach the JVM and the .Net frameworks pursue.
 The Java and .Net code, respectively, is compiled to a format which can be executed platform independently.
 
-The additional abstraction layer allows us to apply language independent optimizations in a coherent manner and independently of the actually used frontend language.
+The additional abstraction layer allows us to apply language independent optimization in a coherent manner and independently of the actually used front end language.
 This provides us with the flexibility to easily extend Gilbert to support other linear algebra languages as well.
-The next natural candidate for a supported frontend language would be surely R.
-Moreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimziations.
+The next natural candidate for a supported front end language would be surely R.
+Moreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimization.
 One class of important transformations is the reordering of operations and the determination of the execution order.
-Often, they are based on the commutativity and associativity of the corresponding operations.
+Often, they are based on the commutative and associative property of the corresponding operations.
 An obvious optimization would be the execution order of multiple matrix multiplications as indicated in \cref{sec:MatrixDimensionInference}.
 Furthermore, the propagation and elimination of transpose operations offers further optimization potential.
 
@@ -149,7 +149,7 @@ The operation $binarize$ has the following semantics:
 The applicable operations to the \code{ScalarScalarTransformation} depend on the input parameter types.
 The operators $+,-,*,/,pow(\cdot, \cdot)$ take two double values and produce a new double value.
 The comparison operators, on the contrary, produce a boolean result value.
-The al operations require two boolean values and produce a boolean value as the result.
+The logical operations require two boolean values and produce a boolean value as the result.
 Gilbert supports short-circuit logical operators $\&\&$ and $||$ as well as $\&$ and $|$ evaluating all of their inputs prior to computing the result.
 
 The \code{ScalarMatrixTransformation} and \code{MatrixScalarTransformation} have an almost identical support of operations.
@@ -228,7 +228,7 @@ The list of all writing operations can be seen in \cref{tab:writingOperations}.
 The intermediate representation is the target format of the compilation process after it has been parsed and typed.
 In order to illustrate the compilation process and to get a feeling for the intermediate representation, we will compile an example program.
 For this purpose, we have chosen the well-known PageRank algorithm~\cite{page:1999a}.
-The matlab implementation can be seen in \cref{lst:PageRank}.
+The Matlab implementation can be seen in \cref{lst:PageRank}.
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
@@ -266,7 +266,7 @@ The intermediate code can be seen in \cref{fig:irFixpoint}.
 \begin{figure}[!h]
 	\centering
 	\Tree [.FixpointIterationMatrix r\_0 f [.scalar 20 ] c ]
-	\caption{Intermediate represenation of PageRank's fixpoint operation.}
+	\caption{Intermediate representation of PageRank's fixpoint operation.}
 	\label{fig:irFixpoint}
 \end{figure}
 
@@ -308,7 +308,7 @@ The dependency tree of the intermediate code of \code{T} is shown in \cref{fig:i
 	\label{fig:irT}
 \end{figure}
 
-Here \code{diag} denotes a special operator which has a different behaviour depending on the given argument.
+Here \code{diag} denotes a special operator which has a different behavior depending on the given argument.
 If one provides a one-column matrix $d$ to \code{diag}, then a matrix with $d$ on its diagonal is created.
 If one provides a matrix $m$ to \code{diag}, then the diagonal of $m$ is returned.
 The operator \code{sum} takes a matrix and a dimension and computes the sums along the specified dimension.
