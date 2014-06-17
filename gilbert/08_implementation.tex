@@ -26,6 +26,37 @@ This DSL is also known as Scala Parser Combinators.
 Once an abstract syntax tree has been generated using these parser combinators, it is very easy to develop a compiler using Scala's pattern matching functionality.
 The pattern matching capabilities of Scala are similar to functional languages, such as Haskell, ML or OCaml.
 It can even be applied on object hierarchies, making it a powerful tool for OOP and functional programming likewise.
+The Scala Parser Combinators generate recursive descent parsers which are capable of parsing LL(*) grammars.
+
+\section{Math-Backend}
+
+In \cref{cha:gilbertruntime} we have explained the representation of distributed matrices and how the intermediate operators are mapped to dataflow plans.
+What was left out, though, is how the local operations on the block-level are implemented.
+Consider, for example, the matrix multiplication of two distributed matrices.
+The result is obtained by joining the blocks of both operands, performing a local matrix multiplication on a matching block pair and reducing the intermediate results.
+The local matrix multiplication is self-contained and has to be executed by some algorithm.
+Since there already exist highly optimized algorithms for different matrix representations, dense or sparse, we do not have to reinvent the wheel.
+
+One of the numerous linear algebra libraries for the Java ecosystem is Mahout~\cite{mahout:2011a}.
+The math library of Mahout is mainly written in Java and thus offers a Java binding.
+Initially, Mahout was used to implement the local linear algebra operations of Gilbert.
+However, it quickly turned out that Mahout lacked reliable support for sparse matrices.
+Since Gilbert is geared towards being a linear algebra environment for sparse matrices, we had to look for a different library.
+Next we came across Breeze~\cite{breeze}, a library for numerical processing written in Scala.
+The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
+We have chosen this library as our math backend because it is clean, more reliable than Mahout and extremely powerful.
+
+Breeze offers data structures for all linear algebra primitives, such as matrices and vectors.
+Additionally, it supports sparse and dense variants of them.
+For each version, Breeze is shipped with elaborate algorithms implementing the linear algebra operations.
+In case that the host has a BLAS or LAPACK library installed, which is compiled and optimized for the underlying architecture, Breeze automatically detects and uses them.
+That way, Breeze can achieve near optimal results when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
+
+\section{Execution Engines}
+
+\subsection{Stratosphere}
+
+\subsection{Spark}
 
 \begin{itemize}
 	\item Implemented in Scala
@@ -47,12 +78,3 @@ It can even be applied on object hierarchies, making it a powerful tool for OOP 
 	\end{itemize}
 \end{itemize}
 
-Pages $\approx$ 2-3
-
-\section{Math-Backend}
-
-\section{Execution Engines}
-
-\subsection{Stratosphere}
-
-\subsection{Spark}

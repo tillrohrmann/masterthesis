@@ -316,6 +316,6 @@ Therefore, the lexer will produce an identifier token followed by a string liter
 Eventually, this will cause a parser error, because there is no production rule requiring this combination of tokens.
 
 In order to solve this problem, we have to differentiate a transpose operator from an apostrophe belonging to a string literal.
-Since the transpoe operator always follows after an expression, we can check that the previously detected token was an identifier, closing parentheses, closing bracket or closing brace.
+Since the transpose operator always follows after an expression, we can check that the previously detected token was an identifier, closing parentheses, closing bracket or closing brace.
 If this is the case, then the apostrophe is considered being a transpose operator.
 Otherwise, it belongs to a string literal.

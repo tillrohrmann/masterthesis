@@ -1,6 +1,6 @@
 %!TEX root=main.tex
 \chapter{Gilbert Runtime}
-\label{cha:gilbertexecution}
+\label{cha:gilbertruntime}
 
 \chapterquote{A really great talent finds its happiness in execution.}{Johann Wolfgang von Goethe, (1749 - 1832)}
 
@@ -158,6 +158,13 @@ Instead of having to know the complete matrix $B$, we only have to know one bloc
 Due to these advantages, we decided to implement the square block partitioning scheme in Gilbert.
 It would also be possible to combine different partitionings and select them dynamically based on the data sizes and input partitionings.
 However, for the sake of simplicity, Gilbert only supports the aforementioned partitioning.
+
+Besides the partitioning, Gilbert also has to represent the individual matrix blocks.
+There exist several storing schemes for matrices depending on the sparsity of the matrix.
+For example, if a matrix is dense, meaning that it does not contain many zero elements, the elements are best stored in a continuous array.
+If a matrix is sparse, then a hash map or some form of compressed representation are best suited.
+Therefore, Gilbert chooses dynamically for each block how it is represented.
+Depending on the non-zero elements to total elements ratio, a sparse or dense representation is selected.
 
 \section{Linear Algebra Operations}
 \label{sec:LinearAlgebraOperations}
@@ -354,7 +361,7 @@ The respective dataflow plan can be found in \cref{fig:planAggregateMatrixTransf
 The $default$ variable holds the initial value for the fold operation.
 In case that the aggregate is not combinable, it has to be implemented individually.
 
-\begin{figure}[!h]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.3\linewidth]{images/planAggregateMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{AggregateMatrixTransformation}.}
