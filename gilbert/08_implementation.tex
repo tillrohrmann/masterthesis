@@ -1,5 +1,31 @@
+%!TEX root=main.tex
 \chapter{Implementation}
 \label{cha:implementation}
+
+\chapterquote{In any moment of decision, the best thing you can do is the right thing, the next best thing is the wrong thing, and the worst thing you can do is nothing.}{Theodore Roosevelt, (1858 - 1919)}
+
+The development of Gilbert involved the implementation of the complete technology stack of a programming language.
+For each technology, we had to decide how to implement it.
+The lexer and parser, for example, can be automatically generated using tools such as ANTLR~\cite{antlr}, Bison~\cite{bison} or Yacc~\cite{yacc}.
+However, using these tools would have required to manage the complexity of several frameworks and probably a lot of boilerplate code to fuse them together.
+Therefore, we looked for a tool with the potential to implement the complete stack of Gilbert.
+
+Fortunately, the Scala language~\cite{scala,odersky:2010a} unifies all required technologies under one umbrella.
+Scala is a highly scalable language, well suited for script sized programs as well as enterprise applications.
+The language combines object oriented and functional programming, giving a maximum of flexibility to the programmer.
+The Scala code is compiled to Java bytecode and thus executed on a JVM.
+This makes the language platform independent to the greatest possible extent.
+Furthermore, it can integrate exisiting Java code and thus benefit from the rich set of Java libraries.
+And last but not least, it is like the new cool kid on the block of programming languages, which everyone likes.
+
+An important aspect of our choice was how easily a parser and a compiler can be implemented with Scala.
+If one decides to implement these programs within a popular language such as Java, C/C++ or C\# and without any additional tools, then it quickly becomes a tedious and error-prone task.
+That's the reason why tools like Yacc and ANTLR have emerged.
+Scala circumvents this problem by providing an internal domain specific language (DSL) for an easy and quick development of parsers and lexers.
+This DSL is also known as Scala Parser Combinators.
+Once an abstract syntax tree has been generated using these parser combinators, it is very easy to develop a compiler using Scala's pattern matching functionality.
+The pattern matching capabilities of Scala are similar to functional languages, such as Haskell, ML or OCaml.
+It can even be applied on object hierarchies, making it a powerful tool for OOP and functional programming likewise.
 
 \begin{itemize}
 	\item Implemented in Scala
