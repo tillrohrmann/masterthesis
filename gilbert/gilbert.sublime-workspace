@@ -38,6 +38,14 @@
 				"buffer_size": 20324,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "06_gilbert_runtime.tex",
+			"settings":
+			{
+				"buffer_size": 25337,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
@@ -190,6 +198,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"distribu",
+			"one of the",
 			"represen",
 			"the matlab",
 			"the matlab im",
@@ -305,7 +315,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -331,6 +341,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 3134.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "06_gilbert_runtime.tex",
+					"settings":
+					{
+						"buffer_size": 25337,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1316,
+								1316
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

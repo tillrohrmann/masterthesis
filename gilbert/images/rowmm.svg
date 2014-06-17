@@ -24,16 +24,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.48543478"
-     inkscape:cx="638.98564"
-     inkscape:cy="772.39108"
+     inkscape:zoom="0.34325423"
+     inkscape:cx="203.32083"
+     inkscape:cy="890.45861"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1400"
+     inkscape:window-width="1401"
      inkscape:window-height="856"
-     inkscape:window-x="40"
-     inkscape:window-y="0"
+     inkscape:window-x="39"
+     inkscape:window-y="22"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -183,47 +183,39 @@
        inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rowMM.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
-    <g
-       id="g3769"
-       transform="matrix(1,0,0,-1,-4.087463,443.89853)"
-       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;opacity:1"
-       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rowMM.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path3757"
-         d="m 200,172.36218 240,0"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path3759"
-         d="m 200,232.36218 240,0"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path3761"
-         d="m 200,292.36218 240,0"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path3763"
-         d="m 260,112.36218 0,240"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path3765"
-         d="m 320,112.36218 0,240"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path3767"
-         d="m 380,112.36218 0,240"
-         style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-    </g>
+    <path
+       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 195.91254,271.53635 240,0"
+       id="path3757"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 195.91254,211.53635 240,0"
+       id="path3759"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#999999;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 195.91254,151.53635 240,0"
+       id="path3761"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 255.91254,331.53635 0,-240"
+       id="path3763"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 315.91254,331.53635 0,-240"
+       id="path3765"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#cccccc;stroke:#999999;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 375.91254,331.53635 0,-240"
+       id="path3767"
+       inkscape:connector-curvature="0" />
     <rect
        style="fill:none;stroke:#666666;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;opacity:1"
        id="rect2987"
@@ -693,7 +685,10 @@
        x="960"
        y="392.36218"
        id="text5162"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/images/rowMM.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
          sodipodi:role="line"
          id="tspan5164"
          x="960"
