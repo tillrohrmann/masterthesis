@@ -176,7 +176,7 @@ There are several ways to initially create such a data set, such as reading from
 Once a distributed data set is created, it can be modified by applying one of the transforming functions to it, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.
 These functions are borrowed from the world of functional programming, since they happen to be expressive enough and can serve as a utile abstraction for automatic parallelization.
 Each of these transforming functions takes one or more data sets as inputs and produces a new distributed data set.
-The distributed data sets are not computed directly but instead they generate a dataflow plan.
+The distributed data sets are not computed directly but instead they generate a dataflow plan which is lazily executed later on.
 Each node of the dataflow plan constitutes a function application and consequently a new data set.
 The edges connect input data sets to output data sets and thus represent the data dependencies.
 

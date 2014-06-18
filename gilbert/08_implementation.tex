@@ -43,38 +43,51 @@ Initially, Mahout was used to implement the local linear algebra operations of G
 However, it quickly turned out that Mahout lacked reliable support for sparse matrices.
 Since Gilbert is geared towards being a linear algebra environment for sparse matrices, we had to look for a different library.
 Next we came across Breeze~\cite{breeze}, a library for numerical processing written in Scala.
-The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
-We have chosen this library as our math backend because it is clean, more reliable than Mahout and extremely powerful.
 
 Breeze offers data structures for all linear algebra primitives, such as matrices and vectors.
 Additionally, it supports sparse and dense variants of them.
 For each version, Breeze is shipped with elaborate algorithms implementing the linear algebra operations.
 In case that the host has a BLAS or LAPACK library installed, which is compiled and optimized for the underlying architecture, Breeze automatically detects and uses them.
 That way, Breeze can achieve near optimal results when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
+Under the hood, Breeze relies on the netlib-java library for this feature.
+The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
+We have chosen this library as our math backend because it is clean, very reliable and extremely powerful.
 
 \section{Execution Engines}
 
+From the very beginning onwards, Gilbert was intended as a general purpose frontend for different runtime systems.
+Therefore, Gilbert includes an abstraction, called execution engine, which encapsulates the logic for running a Gilbert program.
+Currently, Gilbert comes with three different execution engines.
+The local executor serves as a reference implementation of the linear algebra operations and can be used for computing little data on a single machine.
+But the purpose of Gilbert was to enable linear algebra programs to handle big data and thus a distributed execution is strictly necessary.
+The Stratosphere and Spark executor fulfill this condition.
+However, Gilbert is not restricted to these systems as backends.
+In fact, it should be easy to extend Gilbert by new execution engines.
+They only have to be able to map the intermediate operators to their runtime specific implementations.
+For example, an executor using a messsage passing system for the parallel execution is easily conceivable.
+We refrained from it, though, because of its error-prone implementation.
+We will describe the Stratosphere and Spark parallel executors and the problems we encounterd while implementing Gilbert in the following subsections.
+
 \subsection{Stratosphere}
+
+The Stratosphere project is still in an early stage and thus it was not expected that the development would proceed completely smoothly.
+The individual intermediate operators could be implemented as described in \cref{sec:LinearAlgebraOperations}.
+However, the iteration mechanism of Stratosphere was slightly flawed.
+It was not possible to reuse expressions which were used before outside of the loop.
+The system would generate a completely new instance of the expression.
+This not only degraded the overall performance but also corrupted the consistency of Gilbert programs.
+A random matrix, for example, would have had two different values: One outside the loop and another one inside the loop.
+Therefore, we had to fix this problem within Stratosphere to guarantee a correct functioning of Gilbert.
+
+Another problem was that Stratosphere did not support the transmission of implicit values such as a context bound.
+These would have been necessary to implement a generic matrix being parameterized on the type of its elements.
+The Breeze library would have required the additional information for a proper functioning.
+Therefore, we had to instantiate a concrete matrix implementation for each element type we needed.
+This clumsy solution led to code duplication at some points.
 
 \subsection{Spark}
 
-\begin{itemize}
-	\item Implemented in Scala
-	\item Parser combinators used for parser
-	\item Encountered problems
-	\begin{itemize}
-		\item Distinguish string literals from transpose operation
-		\item Implement cell arrays, which have to be constructed while typing the program
-	\end{itemize}
-	\item Math backend
-	\begin{itemize}
-		\item Breeze
-		\item Mahout
-	\end{itemize}
-	\item Stratosphere related problems
-	\begin{itemize}
-		\item Fix of compilation logic to support reuse of expressions
-		\item Explicit representation of boolean matrix because the framework does not support implicits which are necessary to realize a generic matrix
-	\end{itemize}
-\end{itemize}
-
+The development of the Spark executor was comparable to the Stratosphere executor.
+The intermediate operators could be implemented almost identically.
+Furthermore, we could reuse the distributed matrices defined for Stratosphere and the math backend.
+In conclusion, the development process proceeded without major problems. 
