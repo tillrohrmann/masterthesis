@@ -15,7 +15,7 @@ Scala is a highly scalable language, well suited for script sized programs as we
 The language combines object oriented and functional programming, giving a maximum of flexibility to the programmer.
 The Scala code is compiled to Java bytecode and thus executed on a JVM.
 This makes the language platform independent to the greatest possible extent.
-Furthermore, it can integrate exisiting Java code and thus benefit from the rich set of Java libraries.
+Furthermore, it can integrate existing Java code and thus benefit from the rich set of Java libraries.
 And last but not least, it is like the new cool kid on the block of programming languages, which everyone likes.
 
 An important aspect of our choice was how easily a parser and a compiler can be implemented with Scala.
@@ -28,7 +28,7 @@ The pattern matching capabilities of Scala are similar to functional languages, 
 It can even be applied on object hierarchies, making it a powerful tool for OOP and functional programming likewise.
 The Scala Parser Combinators generate recursive descent parsers which are capable of parsing LL(*) grammars.
 
-\section{Math-Backend}
+\section{Math-Back end}
 
 In \cref{cha:gilbertruntime} we have explained the representation of distributed matrices and how the intermediate operators are mapped to dataflow plans.
 What was left out, though, is how the local operations on the block-level are implemented.
@@ -51,11 +51,11 @@ In case that the host has a BLAS or LAPACK library installed, which is compiled 
 That way, Breeze can achieve near optimal results when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
 Under the hood, Breeze relies on the netlib-java library for this feature.
 The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
-We have chosen this library as our math backend because it is clean, very reliable and extremely powerful.
+We have chosen this library as our math back end because it is clean, very reliable and extremely powerful.
 
 \section{Execution Engines}
 
-From the very beginning onwards, Gilbert was intended as a general purpose frontend for different runtime systems.
+From the very first, Gilbert was intended as a general purpose front end for different runtime systems.
 Therefore, Gilbert includes an abstraction, called execution engine, which encapsulates the logic for running a Gilbert program.
 Currently, Gilbert comes with three different execution engines.
 The local executor serves as a reference implementation of the linear algebra operations and can be used for computing little data on a single machine.
@@ -64,9 +64,9 @@ The Stratosphere and Spark executor fulfill this condition.
 However, Gilbert is not restricted to these systems as backends.
 In fact, it should be easy to extend Gilbert by new execution engines.
 They only have to be able to map the intermediate operators to their runtime specific implementations.
-For example, an executor using a messsage passing system for the parallel execution is easily conceivable.
+For example, an executor using a message passing system for the parallel execution is easily conceivable.
 We refrained from it, though, because of its error-prone implementation.
-We will describe the Stratosphere and Spark parallel executors and the problems we encounterd while implementing Gilbert in the following subsections.
+We will describe the Stratosphere and Spark parallel executors and the problems we encountered while implementing Gilbert in the following subsections.
 
 \subsection{Stratosphere}
 
@@ -89,5 +89,5 @@ This clumsy solution led to code duplication at some points.
 
 The development of the Spark executor was comparable to the Stratosphere executor.
 The intermediate operators could be implemented almost identically.
-Furthermore, we could reuse the distributed matrices defined for Stratosphere and the math backend.
+Furthermore, we could reuse the distributed matrices defined for Stratosphere and the math back end.
 In conclusion, the development process proceeded without major problems. 

@@ -6,7 +6,7 @@
 
 Gilbert provides a Matlab-like language for distributed sparse linear algebra operations.
 As such a system, it comprises the complete stack of functionalities necessary to implement a programming language.
-At first, the system has to lex the given source code into tokens.
+At first, the system has to divide the given source code into tokens.
 These tokens are parsed and an abstract syntax tree (AST) is generated from them.
 This formal representation of the program is well suited for further transformations.
 In order to generate an execution plan for one of the supported execution engines, we first have to assign types to the occurring expressions.
@@ -22,7 +22,7 @@ In cooperation, though, they implement a highly elaborate system.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\linewidth]{images/systemArchitecture.png}
-	\caption{The layered system architecture of Gilbert. The language layer is responsible for parsing, typing and compiling the given Matlab code. The intermediate layer facilitates high-level optimziation strategies. The runtime layer is responsible for executing the specified program in parallel.}
+	\caption{The layered system architecture of Gilbert. The language layer is responsible for parsing, typing and compiling the given Matlab code. The intermediate layer facilitates high-level optimization strategies. The runtime layer is responsible for executing the specified program in parallel.}
 	\label{fig:systemArchitecture}
 \end{figure}
 
@@ -33,7 +33,7 @@ This layer receives the intermediate form of the Matlab code and translates it i
 The resulting plan depends on the actually used execution engine.
 Even though, the intermediate layer only contains the execution plan generator, it is intended to also host the optimizer.
 The intermediate format is the ideal representation to apply language independent high-level transformations.
-Once the program has been translated into an execution engine's specific plan, it is executed on the respective backend.
+Once the program has been translated into an execution engine's specific plan, it is executed on the respective back end.
 In the following sections, we will further describe the individual layers.
 
 \section{Language Layer}
@@ -42,7 +42,7 @@ The language layer contains all the logic for processing Matlab source code into
 The layer itself is subdivided into three layers.
 The first of these sublayers is the lexer and parser of Matlab code.
 Gilbert uses a recursive descent parser with backtracking which is capable of parsing any LL(*) grammar.
-Consequently, it can also parse Gilbert's frontend language as specified in \cref{sec:languageGrammar}.
+Consequently, it can also parse Gilbert's front end language as specified in \cref{sec:languageGrammar}.
 
 Once the Matlab code is parsed, it is given to the next layer, namely the typing layer.
 Here, the produced AST is attributed with type information.
@@ -51,7 +51,7 @@ The typer makes use of the Hindley-Milner type inference system, as it is descri
 After the types have been inferred, a new AST with additional type information is generated.
 
 The type information enriched AST is given to the last sublayer.
-The compiler is responsible for translating the AST into a frontend independent representation of linear algebra operations.
+The compiler is responsible for translating the AST into a front end independent representation of linear algebra operations.
 In \cref{cha:intermediaterepresentation} we describe the format Gilbert uses to represent linear algebra operations in a generalized format.
 In fact, it is also some form of AST just without the peculiarities of Matlab.
 
