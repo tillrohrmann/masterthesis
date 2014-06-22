@@ -29,6 +29,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {listing}{\numberline {7.1}{\ignorespaces Transpose pushdown can eliminate unneccessary tranpose operations occuring in linear algebra programs.\relax }}{54}{listing.caption.28}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

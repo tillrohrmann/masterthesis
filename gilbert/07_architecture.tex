@@ -57,8 +57,10 @@ In fact, it is also some form of AST just without the peculiarities of Matlab.
 
 \section{Intermediate Layer}
 
-The intermediate layer contains the execution plan generator.
-It's task is to translate the intermediate format into the execution engine's specific format.
+The intermediate layer contains the optimizer and the execution plan generator.
+The optimizer works on the intermediate representation of the Gilbert program.
+It applies the optimziation described in \cref{cha:optimizer}.
+The execution plan generator's task is to translate the intermediate format into the execution engine's specific format.
 Currently, the system supports local execution and two engines for distributed execution, namely Stratosphere and Spark.
 
 For the local execution, Gilbert employs an interpreter.

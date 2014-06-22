@@ -43,7 +43,63 @@
 			"file": "06_gilbert_runtime.tex",
 			"settings":
 			{
-				"buffer_size": 25337,
+				"buffer_size": 25963,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "07_architecture.tex",
+			"settings":
+			{
+				"buffer_size": 5822,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "08_implementation.tex",
+			"settings":
+			{
+				"buffer_size": 7702,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "04_gilbert_typing.tex",
+			"settings":
+			{
+				"buffer_size": 28050,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "02_related_work.tex",
+			"settings":
+			{
+				"buffer_size": 49464,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "01_introduction.tex",
+			"settings":
+			{
+				"buffer_size": 9065,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "03_gilbert_language.tex",
+			"settings":
+			{
+				"buffer_size": 17127,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.tex",
+			"settings":
+			{
+				"buffer_size": 2391,
 				"line_ending": "Unix"
 			}
 		}
@@ -108,12 +164,13 @@
 	},
 	"file_history":
 	[
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex.bak",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/02_related_work.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/style.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_listings.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
@@ -198,6 +255,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"tree",
+			"dryad",
 			"distribu",
 			"one of the",
 			"represen",
@@ -315,7 +374,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -330,8 +389,8 @@
 						"selection":
 						[
 							[
-								15626,
-								15626
+								18538,
+								18542
 							]
 						],
 						"settings":
@@ -340,7 +399,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3134.0,
+						"translation.y": 2080.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -350,21 +409,208 @@
 					"file": "06_gilbert_runtime.tex",
 					"settings":
 					{
-						"buffer_size": 25337,
+						"buffer_size": 25963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1316,
-								1316
+								13197,
+								13197
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2191.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "07_architecture.tex",
+					"settings":
+					{
+						"buffer_size": 5822,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3041,
+								3044
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 392.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "08_implementation.tex",
+					"settings":
+					{
+						"buffer_size": 7702,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4795,
+								4795
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 348.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "04_gilbert_typing.tex",
+					"settings":
+					{
+						"buffer_size": 28050,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11414,
+								11414
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1379.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "02_related_work.tex",
+					"settings":
+					{
+						"buffer_size": 49464,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								378,
+								378
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "01_introduction.tex",
+					"settings":
+					{
+						"buffer_size": 9065,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "03_gilbert_language.tex",
+					"settings":
+					{
+						"buffer_size": 17127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16686,
+								16686
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3564.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "main.tex",
+					"settings":
+					{
+						"buffer_size": 2391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								320,
+								320
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
