@@ -51,7 +51,15 @@
 			"file": "07_architecture.tex",
 			"settings":
 			{
-				"buffer_size": 5822,
+				"buffer_size": 6014,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "051_optimizer.tex",
+			"settings":
+			{
+				"buffer_size": 5715,
 				"line_ending": "Unix"
 			}
 		},
@@ -99,7 +107,15 @@
 			"file": "main.tex",
 			"settings":
 			{
-				"buffer_size": 2391,
+				"buffer_size": 2413,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "b01_bibliography.bib",
+			"settings":
+			{
+				"buffer_size": 17870,
 				"line_ending": "Unix"
 			}
 		}
@@ -244,7 +260,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			""
@@ -255,6 +271,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"optimization",
 			"tree",
 			"dryad",
 			"distribu",
@@ -389,8 +406,8 @@
 						"selection":
 						[
 							[
-								18538,
-								18542
+								2645,
+								2645
 							]
 						],
 						"settings":
@@ -399,7 +416,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2080.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -436,15 +453,15 @@
 					"file": "07_architecture.tex",
 					"settings":
 					{
-						"buffer_size": 5822,
+						"buffer_size": 6014,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3041,
-								3044
+								4294,
+								4294
 							]
 						],
 						"settings":
@@ -453,13 +470,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 392.0,
+						"translation.y": 372.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "051_optimizer.tex",
+					"settings":
+					{
+						"buffer_size": 5715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3795,
+								3795
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "08_implementation.tex",
 					"settings":
 					{
@@ -480,13 +523,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 348.0,
+						"translation.y": 548.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "04_gilbert_typing.tex",
 					"settings":
 					{
@@ -497,8 +540,8 @@
 						"selection":
 						[
 							[
-								11414,
-								11414
+								3164,
+								3505
 							]
 						],
 						"settings":
@@ -507,13 +550,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1379.0,
+						"translation.y": 105.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "02_related_work.tex",
 					"settings":
 					{
@@ -530,7 +573,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -539,7 +583,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "01_introduction.tex",
 					"settings":
 					{
@@ -566,7 +610,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "03_gilbert_language.tex",
 					"settings":
 					{
@@ -593,24 +637,51 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "main.tex",
 					"settings":
 					{
-						"buffer_size": 2391,
+						"buffer_size": 2413,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								320,
-								320
+								1613,
+								1613
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 636.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "b01_bibliography.bib",
+					"settings":
+					{
+						"buffer_size": 17870,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								210,
+								210
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

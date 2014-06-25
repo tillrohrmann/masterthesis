@@ -4,43 +4,98 @@
 
 \chapterquote{The important thing is not to stop questioning.}{Albert Einstein, (1879 - 1955)}
 
-\begin{itemize}
-	\item Underline importance of means to analyze big volumes of data
-	\begin{itemize}
-		\item Information age $\Rightarrow$ more and more data is gathered
-		\item Examples of using big data analytics: Recommender systems, crime site prediction, etc.
-		\item Problem: How to deal with massive amounts of data?
-		\item 3 ways of scaling up: New algorithms, faster computers, parallelization
-		\item Challenges of parallelization
-		\item $Rightarrow$ need easy to use environment
-		\item Underline importance of linear algebra for data analytics
-		\item Give some famous examples, pagerank maybe?
-		\item Show that we need a linear algebra environment with support for seamless integration of parallel execution $Rightarrow$ Gilbert
-		\item Emphasize research questions: Which language primitives do we have to support, how can the operations be realized within a distributed system?
-	\end{itemize}
-\end{itemize}
+The Sloan Digital Sky Survey (SDSS), an imaging and spectroscopic redshift survey, was initiated in the year 2000.
+Only a couple of weeks after its start, its telescope had already produced more data than in the entire history of astronomy before.
+Nowadays, its archive is filled with about $140$ terabytes of sky images in different spectra.
+The successor telescope of SDSS, the Large Synoptic Survey Telescope in Chile will collect this amount of data every five days, once put into operation~\cite{economist}.
 
-Pages $\approx$ 3-4
+The fact that we are gathering more and more data at an ever-increasing pace is not only observable in the astronomy but also in every other aspect of daily routines.
+It is estimated that we are producing $\SI{2.3}{\exa\byte}$ of information each day, which is roughly $10000$ times the data stored in the Library of Congress~\cite{agrawal:2011a}.
+Actually, we have created $90\%$ of the data in the world today, during the last two years~\cite{jewell:2014a}.
+Rightly so, we can claim to live in the information age, where data became a valuable resource for companies and people alike.
 
 Since the beginning of the information age, our environment became more and more infused with digital technology gathering, processing, storing and broadcasting information of various kinds.
-Nowadays, computing devices are almost ubiquitous in our daily lives and many can hardly imagine a world without them anymore.
+Nowadays, computing devices are almost ubiquitous and many can hardly imagine a world without them anymore.
 We can find information technology in our cars making our ride safer, in our washing machines controlling the proper cleansing and in our mobile phones acting as our personal assistant just to name a few.
 Apart from the personal use, digital devices found their way into almost all important branches of science and industry such as finance, engineering, health, commerce, etc.
 
 The information technology's key to success and the reason for its quick adoption is its unprecedented amplification in computing, storage and telecommunication capacity over the last couple of decades.
 The growth has been mainly spurred by the technological progress on the fields of integrated circuits, broadcasting technology and algorithms.
 Since digital devices are strongly linked to the semiconductor technology, the aforementioned capacities exhibit a similar exponential growth rate~\cite{hilbert:s2011a} as Moore~\cite{moore:1965a} predicted for the number of components on integrated circuits.
-Nowadays, it is estimated that $\SI{2.5}{\zetta\byte}$ are produced each day and this number is supposed to rise up to $\SI{40}{\zetta\byte}$ by the year of $\num{2040}$~\cite{ibmBigData:2014a}.
+It is predicted that mankind will have produced roughly $\SI{40}{\zetta\byte}$ of data by the year of $\num{2020}$~\cite{ibmBigData:2014a}.
+Recently, the term Big Data was coined to describe the steadily growing accumulation of information.
 
-With the increase of data, people became aware of its usefulness and thus the demand for analyzing tools, able to exploit the gathered data, increased as well.
-Currently, insights gained from collected data already helps to improve a variety of processes.
-For example, retail stores analyze their sales, customer, pricing and weather data in order to decide which products to offer or  when to do a discount sale. 
-Police departments try to detect probable crime locations by extracting patterns from previously recorded criminal acts and then  reinforce the policemen in  this region~\cite{lohr:yt2012a}. 
-Hospitals analyze their patients' records and scientific studies in order to find the cancer treatment best complying with the  specifics of the patient and thus having the highest chance of cure~\cite{watson:2013a}. 
-These examples underline the importance and utility of data analysis tools. 
-The majority of these tools are based on statistic techniques. 
-Consequently, they can improve their descriptive and predictive results by getting fed more data.
+In fact, there is an ongoing debate on what Big Data actually denotes.
+The sudden appearance of the term, which is more like a buzz word nowadays, might suggest that Big Data is something revolutionary.
+But since its beginnings, computer science actually occupied itself with the automatic processing of data.
+Even before the term Big Data came up, there were people, like the database community, who handled massive amounts of data.
+Thus, one could argue that Big Data is a mere marketing word, describing an evolutionary aspect of computer science.
+What people could agree on, is that Big Data solutions differ from other IT solutions in terms of \emph{Volume}, \emph{Velocity}, \emph{Variety} and \emph{Veracity}, also denoted as the four Vs.
+
+Volume describes the aspect of storing and processing enormous amounts of data.
+Of course, the concrete amount of data always has to be seen in the temporal context.
+What today is considered to be Big Data is probably ridiculously small in $10$ years.
+Velocity means that data is arriving more and more rapidly and that the system has to cope with that.
+It might even be necessary to support streaming in order to support real-time decisions, as it is required for the financial sector.
+Variety alludes to the problem of integrating data of various kinds and from various sources.
+It is very common to work on structured as well as unstructured data.
+For example, a medical record not only consists of the diagnosis written by the doctor, but it might also include x-ray files from the last screening.
+Veracity is the last dimension and says that not all data can be taken as gospel.
+The system has to handle possibly incorrect and imprecise data and be able to distinguish it from other data.
+The first three Vs were first introduced by Gartner~\cite{gartner}.
+
+In order to develop Big Data solutions, one has to solve multifaceted problems.
+The necessary technology stack comprises the recording of data, the data cleaning and meta-data generation, the representation and integration with other data sources, the analysis and modeling of the actual problem and the interpretation.
+Each task for itself is highly complex and deserves an independent paper.
+For us, the data analysis part is the key aspect in solving Big Data problems.
+Henceforth, we will concentrate on how to gain valuable insights from a huge data set.
+
+Once big data sets were amassed, people quickly recognized that these sets contain valuable information they only have to harness.
+Unfortunately, the search for useful patterns and pecularities strongly resembled the search for a needle in a haystack.
+The quest requires sophisticated tools being able to analyze the vast amounts of data.
+Most of these tools are based on statistics to extract interesting features.
+It is benefitial to apply these statistical means to the complete data set instead of smaller chunks.
+Even if the chunks cover the complete data set, important correlations between data points might get lost in each individual parts.
+Moreover, the statistical tools improve their descriptive and predictive results by getting fed more data.
+The more data is available, the more likely it is that noise cancels out and that significant patterns manifest.
 However, this comes at the price of an increased computing time which requires fast computer systems to make the computation feasible.
+
+The insights gained from collected data already help to govern business decisions, improve life quality or simply create new industries from scratch.
+For example, retail stores analyze their sales, customer, pricing and weather data in order to decide which products to offer or when to do a discount sale.
+This not only increases the revenue of the shops but also boosts the satisfaction of the customers, getting better offers. 
+Police departments try to detect probable crime locations by extracting patterns from previously recorded criminal acts and then reinforce the policemen in  this region~\cite{lohr:yt2012a}.
+The intelligent deployment of policemen improves security for citizens without having to hire more officers.
+Hospitals analyze their patients' records and scientific studies in order to find the cancer treatment best complying with the specifics of the patient.
+The individual therapy maximizes the chance of cure~\cite{watson:2013a}.
+Another example showing the benefits of data analysis made it even into a Hollywood film.
+The film Moneyball is based on the true story of the Oakland Athletics baseball team which build an elite team in an unfavorable financial situation.
+They employed sophisticated data analysis methods to spot underestimated players which they could cheaply recruit.
+That marked the start of sports statistics which are nowadays a common tool for professional teams.
+These examples emphasize the importance and utility of information gained with analytical tools from gathered data.
+However, the IDC, an international market research firm, estimates that only $0.5\%$ of the globally collected data is harnessed~\cite{gantz:iaf2012a}.
+They further state that about $23\%$ of todays data is worth being analyzed.
+Thus, there is still some potential left for improvements.
+
+What are the reasons for the huge gap between actual and dormant exploitation?
+One of the reasons is that we are lacking the tools to keep up the pace of how fast data is created.
+Our analyzing methods do not scale well for the vast data sets.
+The more data a system has to process the longer it will take to finish.
+Since the data is growing at an exponential rate, our computers have to improve at a similar speed to keep computations feasible.
+
+In order to decrease the runtime of our analytical tools there are two adjusting screws.
+First of all, there are the algorithms.
+By finding an algorithm with a lower runtime complexity than an existing algorithm, e.g., for clustering, we can drastically decrease the required time.
+However, it is strongly doubted that it is possible to develop better algorithms for certain problems.
+In some cases, it is even proven that there exists a lower bound for any algorithm solving the problem.
+For example, it can be shown that the complexity of a sorting algorithm, which is based on comparing two of its elements to obtain their ordering, is in $\Omega\left(n\log n\right)$ with $n$ being the number of elements.
+Thus, certain problems have an inherent limitation of how fast they can be computed.
+
+The other way to speed the analytical tools up is to make the computer running them faster by vertical or horizontal scaling.
+To scale vertically means that we add more resources to a single computer.
+For example, the main memory or the frequency of a computer could be increased, giving them more computational power.
+In contrast to that, horizontal scaling means to add more computer nodes to a system.
+By having more than one node, the work can be split up and distributed across the nodes.
+Since each split is smaller than the original problem, the computer can finish it faster.
 
 In recent years, we have seen that clock rates of CPUs stagnated.
 Before, there was a simple receipt to increase the computing power of micro-controllers; increase the clock rate, which demands more power, and shrink the technology to mitigate for the increased power consumption.
@@ -49,40 +104,35 @@ The consumed power is limited by the amount of energy you can dissipate and thus
 When it became clear that the micro-controller would hit this so-called power wall, one duplicated the micro-controller's functionality to support simultaneous execution of multiple applications and to harness the inherent parallelism of programs.
 
 The emerging multi-core and distributed systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
-Due to this, parallel program development became cumbersome and error-prone.
-Therefore, new programming models are conceived which relieve the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
+Furthermore, they have to be able to reason about interweaved parallel control flows.
+Due to this, parallel program development is highly cumbersome and error-prone.
+Therefore, new programming models are conceived which relieved the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
 Instead, the programmer can concentrate on the actual algorithm and the goal he wants to achieve.
 
 These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source reimplementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
-MapReduce is a programming framework for concurrent computations on vast amounts of data running on a large cluster. 
-Originally, it is inspired by the often in the context of functional programming occurring functions \emph{map} and \emph{reduce}.
-Each MapReduce program is separated into a map-phase and a reduce-phase for which the user has to provide each a user-defined function.
-The input of the program is split up into key-value pairs and each pair is fed to the map operation which applies the user-defined map-function to it.
-This operation can be run completely in parallel since each call to the map-function is independent of the other calls.
-Each map-function produces a list of new key-value pairs which are then grouped according to their key value.
-Pairs with the same key are then given to the reduce-function which then produces a new list of key-value pairs.
-Again, each call of the reduce function can be run in parallel since there is no dependency.
+MapReduce is a programming framework for concurrent computations on vast amounts of data running on a large cluster.
+Its ingenious idea was separate the computation into a \emph{map} and a \emph{reduce} phase.
+In the map phase, the input data set is split into elements which are all processed individually.
+Afterwards, the results of the mapper are grouped together and each produced group is given to a reducer.
+The reducer knows about all elements in his group and produces the final result.
+The strengths of MapReduce are that it is expressive enough to implement a multitude of different algorithms while facilitating at the same time parallel execution.
+In fact, the map phase is embarrassingly parallel and the reduce phase only needs a shuffeling step prior to its parallel execution.
 
-MapReduce, however, exhibits also some deficiencies in realizing common sub-tasks such as joining two datasets.
-These deficiencies result from the strict programming model and cause some serious performance losses.
-There are some other distributed programming models such as Stratosphere~\cite{battre:2010a} and Spark~\cite{zaharia:2010a} which try to tackle these problems.
-They both support iterative algorithms which is a necessary requisite for many data analytical algorithms.
-Furthermore, they both offer a more flexible pipeline not requiring to store intermediate results always to hard disks.
-
-But still, these frameworks force the user to express the program in a certain way, which is often not natural or intuitive for a user coming from a different domain.
+But still, MapReduce and other frameworks force the user to express the program in a certain way, which is often not natural or intuitive for a user coming from a different domain.
 This implies that one has to overcome a particular entry-barrier to use the system and this might already be too high for some users.
 Furthermore, the actual program might become lengthy and complicated expressed within the programming model.
-This makes developing and debugging the program difficult as well as time-consuming and thus expensive.
-Especially in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
+This makes developing and debugging the program difficult as well as time-consuming and eventually expensive.
+Especially, in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
 Therefore, systems such as Matlab and R are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
 However, these linear algebra systems lack proper support for automatic parallelization on large clusters and thus restricting the user to a single workstation.
 Therefore, the amount of processable data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
-Moreover, machine learning people are usually no experts in the field of distributed computing, and neither vice versa.
+Moreover, data scientists are usually no experts in the field of distributed computing and people of the distributed computing community often do not know much about data mining.
 The group of experts on both fields is negligible small.
-Consequently, it is very difficult, time-consuming and not least expensive to implement machine learning algorithms on distributed systems.
+Consequently, it is very difficult, time-consuming and expensive to implement machine learning algorithms on distributed systems.
 
 This problem would be mitigated by having a distributed sparse linear algebra system supporting a Matlab- and R-like language.
-Assuming that such a system is realizable, then one could run existing Matlab- or R-code directly or at most with minor adjustments in a distributed fashion.
+Assuming that such a system is realizable, then existing Matlab- and R-code could be directly run in parallel.
 Furthermore, new distributed algorithms could be quickly implemented benefiting from the expressiveness of linear algebra.
-This would drastically speed up the application of machine learning and data analysis algorithms on web-scale data.
-Therefore, I want to research and implement a distributed sparse linear algebra system, henceforth called Gilbert, in the context of my master's thesis.
+This would drastically speed up the application of machine learning and data analysis algorithms to web-scale data.
+Due to these reasons, a distributed sparse linear algebra environment, called Gilbert, was developed in the context of this thesis.
+In the following, we will present the approach, the encountered problems and the results of our implementation.

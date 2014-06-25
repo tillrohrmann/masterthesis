@@ -2,8 +2,39 @@
 \chapter{Problem Statement}
 \label{cha:problemstatement}
 
+\chapterquote{Science never solves a problem without creating ten more.}{George Bernard Shaw, (1856 - 1950)}
+
 \begin{itemize}
-	\item what, when, where, why, who, how
+	\item What is the problem
+	\begin{itemize}
+		\item Need for analyzing tools capable of processing big data
+		\item Cannot scale up vertically --> horizontally is the solution
+		\item Most algorithms are based on linear algebra
+		\item Data scientists familiar with R and Matlab
+	\end{itemize}
+	\item Why is it a problem
+	\begin{itemize}
+		\item Ever growing business
+		\item People are looking for valuable business information
+	\end{itemize}
+	\item How will I solve the problem
+	\begin{itemize}
+		\item Define language representing linear algebra operations
+		\item Build compiler infrastructure to compile Matlab code
+		\item Map linear algebra operations to massively parallel dataflow systems
+		\item Investigate and define parallel datastructures to represent matrices
+		\item Look into optimizations to execute programs faster on runtime system
+		\item Implement local operations with a library
+		\item Emphasize research questions: Which language primitives do we have to support, how can the operations be realized within a distributed system?
+	\end{itemize}
+	\item Evaluating the solution
+	\begin{itemize}
+		\item Test scalability to prove applicability
+		\item Implement ML algorithms with Gilbert
+		\item Compare ML algorithms with specialized implementations (PageRank, K-Means, NNGF)
+		\item Compare optimized with unoptimized algorithms
+		\item Compare used math libraries
+	\end{itemize}
 \end{itemize}
 
 Pages $\approx$ 2-3
