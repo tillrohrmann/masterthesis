@@ -123,16 +123,16 @@ This implies that one has to overcome a particular entry-barrier to use the syst
 Furthermore, the actual program might become lengthy and complicated expressed within the programming model.
 This makes developing and debugging the program difficult as well as time-consuming and eventually expensive.
 Especially, in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
-Therefore, systems such as Matlab and R are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
+Therefore, systems such as Matlab~\cite{matlab} and R~\cite{r:1993a} are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
 However, these linear algebra systems lack proper support for automatic parallelization on large clusters and thus restricting the user to a single workstation.
 Therefore, the amount of processable data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
 Moreover, data scientists are usually no experts in the field of distributed computing and people of the distributed computing community often do not know much about data mining.
-The group of experts on both fields is negligible small.
-Consequently, it is very difficult, time-consuming and expensive to implement machine learning algorithms on distributed systems.
+The group of experts in both fields is negligible small.
+Consequently, it is very difficult, time-consuming and expensive to implement machine learning and analytical algorithms on distributed systems.
 
 This problem would be mitigated by having a distributed sparse linear algebra system supporting a Matlab- and R-like language.
 Assuming that such a system is realizable, then existing Matlab- and R-code could be directly run in parallel.
 Furthermore, new distributed algorithms could be quickly implemented benefiting from the expressiveness of linear algebra.
 This would drastically speed up the application of machine learning and data analysis algorithms to web-scale data.
-Due to these reasons, a distributed sparse linear algebra environment, called Gilbert, was developed in the context of this thesis.
+Due to these reasons, a distributed sparse linear algebra environment, called Gilbert, is developed in the context of this thesis.
 In the following, we will present the approach, the encountered problems and the results of our implementation.
