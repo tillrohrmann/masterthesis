@@ -40,8 +40,8 @@ Since there already exist highly optimized algorithms for different matrix repre
 One of the numerous linear algebra libraries for the Java ecosystem is Mahout~\cite{mahout:2011a}.
 The math library of Mahout is mainly written in Java and thus offers a Java binding.
 Initially, Mahout was used to implement the local linear algebra operations of Gilbert.
-However, it quickly turned out that Mahout lacked reliable support for sparse matrices.
-Since Gilbert is geared towards being a linear algebra environment for sparse matrices, we had to look for a different library.
+However, it quickly turned out that Mahout lacked reliable support for sparse matrices and suffered from poor performance.
+Since Gilbert is geared towards being a linear algebra environment for sparse matrices with descent performance, we were forced to look for alternatives.
 Next we came across Breeze~\cite{breeze}, a library for numerical processing written in Scala.
 
 Breeze offers data structures for all linear algebra primitives, such as matrices and vectors.
@@ -51,7 +51,11 @@ In case that the host has a BLAS or LAPACK library installed, which is compiled 
 That way, Breeze can achieve near optimal results when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
 Under the hood, Breeze relies on the netlib-java library for this feature.
 The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
-We have chosen this library as our math back end because it is clean, very reliable and extremely powerful.
+We have chosen this library as our principal math back end because it is clean, very reliable and extremely powerful.
+
+Additionally, Gilbert also supports Mahout as a secondary math back end.
+The user can select on demand which system he wants to use depending on his personal preference.
+The inclusion of Mahout also emphasizes the extensible architecture of Gilbert which can easily be extended with new math libraries.
 
 \section{Execution Engines}
 

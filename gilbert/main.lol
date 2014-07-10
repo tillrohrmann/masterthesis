@@ -42,6 +42,9 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {listing}{\numberline {11.1}{\ignorespaces Non-negative matrix factorization algorithm.\relax }}{80}{listing.caption.42}
+\contentsline {listing}{\numberline {11.2}{\ignorespaces Matlab PageRank implementation.\relax }}{83}{listing.caption.45}
+\contentsline {listing}{\numberline {11.3}{\ignorespaces Gilbert PageRank implementation.\relax }}{84}{listing.caption.46}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
