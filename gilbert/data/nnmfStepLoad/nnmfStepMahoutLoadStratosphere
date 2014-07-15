@@ -1,0 +1,15 @@
+# Engine: Stratosphere; Math-Backend: Mahout
+# Template: nnmfStep.gb.template
+# App-Name: nnmfStepMahoutLoad
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+Rows Time Error 
+500 169.62800000000001 17.788388572324358 
+1000 153.736 16.00478387857831 
+1500 178.14866666666663 8.329151597451762 
+5000 336.146 6.843467834365821 
+10000 490.8503333333333 6.340597159048459 

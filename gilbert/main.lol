@@ -43,10 +43,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {listing}{\numberline {11.1}{\ignorespaces Non-negative matrix factorization algorithm.\relax }}{80}{listing.caption.42}
-\contentsline {listing}{\numberline {11.2}{\ignorespaces Matlab's PageRank implementation.\relax }}{84}{listing.caption.45}
-\contentsline {listing}{\numberline {11.3}{\ignorespaces Gilbert's PageRank implementation.\relax }}{85}{listing.caption.46}
-\contentsline {listing}{\numberline {11.4}{\ignorespaces Matlab's k-means implementation.\relax }}{87}{listing.caption.49}
-\contentsline {listing}{\numberline {11.5}{\ignorespaces Gilbert's k-means implementation.\relax }}{89}{listing.caption.51}
+\contentsline {listing}{\numberline {11.2}{\ignorespaces Matlab's PageRank implementation.\relax }}{86}{listing.caption.46}
+\contentsline {listing}{\numberline {11.3}{\ignorespaces Gilbert's PageRank implementation.\relax }}{86}{listing.caption.47}
+\contentsline {listing}{\numberline {11.4}{\ignorespaces Matlab's k-means implementation.\relax }}{89}{listing.caption.50}
+\contentsline {listing}{\numberline {11.5}{\ignorespaces Gilbert's k-means implementation.\relax }}{90}{listing.caption.52}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

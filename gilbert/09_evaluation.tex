@@ -82,7 +82,7 @@ The resulting execution times for the local, Stratosphere and Spark execution en
 			]
 			{data/matrixMultLoad/matrixMultLoadSpark};
 			\addplot[
-				color=green,
+				color=teal,
 				mark=triangle,
 			] table[
 				x=RowsA,
@@ -114,7 +114,7 @@ The resulting execution times for the local, Stratosphere and Spark execution en
 			]
 			{data/matrixMultCores/matrixMultCoresSpark};
 			\addplot[
-				color=green,
+				color=teal,
 				mark=triangle,
 			] table[
 				x=Parallelism,
@@ -169,6 +169,7 @@ For $\text{\#cores}=50$, we can observe a slight peek in execution time.
 This behavior is counterintuitive it has to be linked to the internal functioning of the Spark system.
 
 \subsection{Non-negative Matrix Factorization}
+\label{subsec:NMF}
 
 As second benchmark for evaluating the scalability properties, we have chosen the non-negative matrix factorization (NMF) algorithm~\cite{seung:anips2001a}.
 NMF finds for a given matrix $V$ a factorization $W$ and $H$ such that $V\approx W H$ holds.
@@ -231,7 +232,8 @@ The execution times of GNMF and Gilbert's NMF are shown in \cref{fig:nmfLoadRunt
 				ylabel={Execution time $t$ in s},
 				width=\dualpgfwidth,
 				legend pos=north west,
-				legend entries={Local, Spark, Stratosphere, GNMF Spark}
+				legend entries={Local, Spark, Stratosphere, GNMF Spark, GNMF Stratosphere},
+				ymax=5000,
 			]
 			\addplot[
 				color=blue,
@@ -252,7 +254,7 @@ The execution times of GNMF and Gilbert's NMF are shown in \cref{fig:nmfLoadRunt
 			{data/nnmfStepLoad/nnmfStepLoadSpark};
 			
 			\addplot[
-				color=green,
+				color=teal,
 				mark=triangle,
 			]table[
 				x=Rows,
@@ -267,6 +269,14 @@ The execution times of GNMF and Gilbert's NMF are shown in \cref{fig:nmfLoadRunt
 				y=time,
 			]
 			{data/nnmfStepLoad/gnmfStepLoadSpark};
+			\addplot[
+				color=magenta,
+				mark=square,
+			]table[
+				x=rowsV,
+				y=time,
+			]
+			{data/nnmfStepLoad/gnmfLoadStratosphere};
 			\end{loglogaxis}
 		\end{tikzpicture}
 		\caption{}
@@ -292,7 +302,7 @@ The execution times of GNMF and Gilbert's NMF are shown in \cref{fig:nmfLoadRunt
 			{data/nnmfStepCores/nnmfStepCoresSpark};
 
 			\addplot[
-				color=green,
+				color=teal,
 				mark=diamond,
 			] table[
 				x=Parallelism,
@@ -435,7 +445,7 @@ The execution times for different block sizes are shown in \cref{fig:blocksizesN
 			]
 			{data/nnmfStepBlocksize/nnmfStepBlocksize500Spark};
 
-			\addplot[green,
+			\addplot[teal,
 				mark=diamond,
 			] table[
 				x=Rows,
@@ -462,6 +472,101 @@ The NMF algorithm is executed on $50$ cores of the cluster using the Breeze math
 We can observe that we obtain better results with an increased block size.
 Clearly, the block size $25 \times 25$ is inferior to the block sizes $500\times 500$ and $1000\times 1000$.
 However, the results between the last two block sizes do not differ significantly.
+
+\subsection{Optimization}
+
+In this subsection, we want to evaluate the effects Gilbert's optimizer has on the runtime of programs.
+For this purpose, we execute one NMF step on Gilbert's Stratosphere and Spark execution engine using the same settings as in \cref{subsec:NMF}.
+However, this time we disable the transpose pushdown and matrix-multiplication reordering optimization.
+The results are shown in \cref{fig:nnmfLoadOptimization}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{semilogxaxis}[
+			xlabel={Rows $d$ of $V$},
+			ylabel={Execution time $t$ in s},
+			legend pos=north west,
+			legend entries={Optimized Spark, Optimized Stratosphere, Non-optimized Spark, Non-optimized Stratosphere},
+		]
+		
+		\addplot[
+			color=red,
+			mark=o,
+		] table[
+			x=Rows,
+			y=Time,
+		]
+		{data/nnmfStepLoadNoOp/nnmfStepLoadSpark};
+		
+		\addplot[
+			color=teal,
+			mark=triangle,
+		]table[
+			x=Rows,
+			y=Time,
+		]
+		{data/nnmfStepLoadNoOp/nnmfStepLoadStratosphere};
+
+		\addplot[
+			color=blue,
+			mark=x,
+		] table[
+			x=Rows,
+			y=Time,
+		]
+		{data/nnmfStepLoadNoOp/nnmfStepNoOpLoadSpark};
+
+		\addplot[
+			color=black,
+			mark=diamond,
+		]table[
+			x=Rows,
+			y=Time,
+		]
+		{data/nnmfStepLoadNoOp/nnmfStepNoOpLoadStratosphere};
+		
+		\end{semilogxaxis}
+	\end{tikzpicture}
+	\caption{Runtime of Gilbert's optimized and non-optimized single nnmf step on $50$-core cluster.}
+	\label{fig:nnmfLoadOptimization}
+\end{figure}
+
+We can observe that Gilbert's optimizer has a significant effect on the runtime of NMF.
+The optimized Gilbert program runs on both distributed engines faster than it's non-optimized counterpart.
+Interestingly, the Spark execution engine seems to benefit more from the optimizer than the Stratosphere executor.
+For $d=10000$, the optimized Spark version runs about $18$ times faster than the non-optimized program.
+Stratosphere shows only a speed-up of roughly $1.7$ between the optimized and non-optimized version.
+
+It is not yet known what causes these different speed-ups.
+However, looking at the NMF formula in \cref{lst:nmf}, we can explain why the optimization works.
+There are two matrix multiplications which can be optimized: $W^\prime WH$ in line $6$ and $WHH^\prime$ in line $7$.
+Keeping in mind that $W\in \mathbb{R}^{d\times 10}$ and $H\in \mathbb{R}^{10 \times 100000}$, we can assess the different strategies.
+The non-optimized version would execute the matrix multiplications due to left-associativity from left to right:
+
+\begin{displaymath}
+	\overbrace{\underbrace{\left(W^\prime W\right)}_{\in \mathbb{R}^{10\times 10}}H}^{\in\mathbb{R}^{10\times 100000}}
+\end{displaymath}
+
+and
+
+\begin{displaymath}
+	\overbrace{\underbrace{\left(WH\right)}_{\in \mathbb{R}^{d \times 100000}}H^\prime}^{\in \mathbb{R}^{d\times 10}}
+\end{displaymath}
+
+For the first matrix multiplication, the execution order is optimal, since the intermediate result of $W^\prime W$ is much smaller than $WH$.
+However, for the second matrix multiplication, the execution order is far from optimal.
+The left-associativity produces an intermediate matrix result of size $d\times 100000$.
+For large $d$ this matrix becomes really huge.
+Additionally, the intermediate result is dense, because the operands $W$ and $H$ are dense as well.
+By changing the execution order, we can decrease the size of the intermediate result significantly.
+
+\begin{displaymath}
+	\overbrace{W\underbrace{\left(HH^\prime\right)}_{\in \mathbb{R}^{10 \times 10}}}^{\in \mathbb{R}^{d\times 10}}
+\end{displaymath}
+
+Gilbert's optimizer first detects the matrix multiplication reordering and then changes it so that the maximum intermediate result is minimized.
+That is the reason why the optimized NMF program runs clearly faster.
 
 \section{Gilbert Algorithms vs. Specialized Algorithms}
 
@@ -578,7 +683,6 @@ The runtimes are depicted in \cref{fig:pageRankResults}.
 			\begin{loglogaxis}[
 				xlabel={Number of vertices $n$},
 				ylabel={Execution time $t$ in s},
-				width=\dualpgfwidth,
 				legend pos=north west,
 				legend entries={Gilbert Spark, Gilbert Stratosphere, Specialized Stratosphere,Specialized Spark}
 			]
@@ -599,7 +703,7 @@ The runtimes are depicted in \cref{fig:pageRankResults}.
 			]
 			{data/pagerank/pagerankStratosphere};
 
-			\addplot[green,
+			\addplot[teal,
 				mark=diamond,
 			] table[
 				x=rows,
@@ -616,7 +720,7 @@ The runtimes are depicted in \cref{fig:pageRankResults}.
 			{data/pagerank/pagerankBenchSpark};
 			\end{loglogaxis}
 		\end{tikzpicture}
-	\caption{Execution time of $10$ steps of the PageRank algorithm depending on the adjacency matrix's size.}
+	\caption{Execution time of $10$ steps of the PageRank algorithm on $50$-cores depending on the adjacency matrix's size.}
 	\label{fig:pageRankResults}
 \end{figure}
 
@@ -690,7 +794,7 @@ The matrix has as many rows as there are clusters.
 Then we compare this matrix in line $8$ with \code{mask} whose cells are set to the row index of the cell.
 That gives us the aforementioned indicator matrix.
 By adding the entries of each row, we know how many data points are assigned to the cluster centers.
-The new cluster centers and thus the second step of the algorithm are obtained as the result of a matrix multiplication and cellwise matrix division in line $10$.
+The new cluster centers and thus the second step of the algorithm are obtained as the result of a matrix multiplication and cellwise matrix division in line $10$.	
 
 Compared to the Matlab representation, the direct implementation for Spark and Stratosphere seems rather simple.
 The first difference is that we represent the data points as tuples of the form $(id_i, p_i)$ with $id_i$ being an identifier of data point $i$ and $p_i$ being the coordinates of the data point.
@@ -713,7 +817,7 @@ The dataflow plan is also depicted in \cref{fig:kmeansDataflow}.
 	\label{fig:kmeansDataflow}
 \end{figure}
 
-For our evaluation we compare the runtime of Gilbert's k-means implementation with the runtime of the directly implemented algorithms.
+We compare the runtime of Gilbert's k-means implementation with the runtime of the directly implemented algorithms.
 The Gilbert code is given in \cref{lst:kmeansGilbert}.
 As we can see, the only difference between Matlab's and Gilbert's version is the \code{fixpoint} and the \code{minWithIndex} function.
 The \code{minWithIndex} function returns the minimum value of the specified dimension and its index as column vectors in a cell array.
@@ -739,14 +843,21 @@ The \code{minWithIndex} function returns the minimum value of the specified dime
 	\label{lst:kmeansGilbert}
 \end{listing}
 
-\begin{figure}
+For our experiments, we calculated $10$ steps of the k-means algorithms on the $50$ core DIMA cluster.
+The algorithms computed $100$ cluster centers from $n$ data points.
+The points were $2$-dimensional.
+We varied the number of data points from $1000$ to $1000000$.
+The data points and the initial cluster centers were drawn from a uniform distribution.
+We set the block size to $500\times 500$.
+The results of the experiment are depicted in \cref{fig:kmeansResult}.
+
+\begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}
 			\begin{loglogaxis}[
-				xlabel={Number of websites $n$},
+				xlabel={Number of data points $n$},
 				ymax=5000,
 				ylabel={Execution time $t$ in s},
-				width=\dualpgfwidth,
 				legend pos=north west,
 				legend entries={Gilbert Spark, Gilbert Stratosphere, Specialized Stratosphere}
 			]
@@ -767,7 +878,7 @@ The \code{minWithIndex} function returns the minimum value of the specified dime
 			]
 			{data/kmeans/kmeansStratosphere};
 
-			\addplot[green,
+			\addplot[teal,
 				mark=diamond,
 			] table[
 				x=numDatapoints,
@@ -776,16 +887,179 @@ The \code{minWithIndex} function returns the minimum value of the specified dime
 			{data/kmeans/kmeansBenchStratosphere};
 			\end{loglogaxis}
 		\end{tikzpicture}
-	\caption{Execution time of $10$ steps of the PageRank algorithm depending on the adjacency matrix's size.}
-	\label{fig:pageRankResults}
+	\caption{Execution time of $10$ steps of the k-means algorithm on $50$-cores depending on the adjacency matrix's size.}
+	\label{fig:kmeansResult}
 \end{figure}
+
+We observe that Gilbert's k-means implementations are slower than the specialized implementation.
+For $n=100000$ the specialized implementation achieves a speed-up of $8$ and $10$ compared to the Spark executor and Stratosphere executor, respectively.
+Additionally, we could only calculate $100000$ points with Gilbert, because for more points the computation took too long to finish.
+Thus, we can conclude that the direct implementation of k-means executing on Stratosphere not only runs faster but also scales better.
+Interestingly, we were not able to run the specialized algorithm on Spark because the two reduce operations caused too much work load.
+
+If we take a closer look at the execution plans of both algorithms, it becomes clear why Gilbert performs so poorly.
+For each step of the specialized algorithm, the dataflow system has to execute one cartesian, one map and two group reduce operations.
+The two group reduce and the cartesian operation are responsible for most of the work load, because they cause significant network I/O.
+
+For Gilbert, the execution plan is more complex.
+Looking at the code in \cref{lst:kmeansGilbert} we have the following summation:
+The \code{pdist2} function is implemented using one join, one map and one group reduce operation.
+The \code{minWithIndex} function uses three cartesian, one group reduce and two cogroup operations.
+The \code{repmat} function comprises three cartesian and one cogroup operation.
+The comparison operator in line $8$ requires one join operation.
+The matrix multiplication and cellwise matrix division in line $10$ is implemented using two join and one reduce operation.
+In total, one step of Gilbert's k-means algorithm inflicts four join, nine cartesian, four cogroup and three group reduce operations.
+Consequently, we can conclude that the linear algebra abstraction of Gilbert comes at the price of a more complex and thus longer running execution plan.
 
 \section{Breeze vs. Mahout Math-Backend}
 
-I want to demonstrate the proper functioning and potential of Gilbert by comparing the runtime of different machine learning algorithms implemented in this system with those implemented in a traditional MapReduce framework.
-Hopefully, the results of the automatically parallelized algorithms are comparable to the hand-tuned versions.
-Furthermore, I like to show the applicability of the proposed system to web-scale analytical processing.
-This will require a thorough examination of its scalability behavior.
-As benchmarking algorithms I intend to implement the PageRank~\cite{page:1999a}, non-negative matrix factorization~\cite{seung:anips2001a} and k-means~\cite{macqueen:1967a} algorithm.
-These algorithms entail to support the basic linear algebra operations as well as an iteration mechanism.
-Furthermore, they are examples of widely used algorithms and thus they emphasize the relevance of the developed system.
+As we have explained in \cref{sec:mathBackend}, Gilbert supports two math back ends for the computation of local tasks.
+The principal math back end uses the Breeze library for high performance linear algebra operations.
+As an alternative, Gilbert also supports the popular Mahout math library.
+In this section, we want to compare these two libraries against each other and assess which of them executes Gilbert programs faster.
+
+As first benchmark, we repeated the matrix multiplication from \cref{subsec:mm} with the Mahout library.
+The benchmark calculates the matrix multiplication of two sparse matrices $A,B\in\mathbb{R}^{n\times n}$ with $n$ being their dimensionality.
+The matrices have a sparsity of $0.001$.
+The computation is executed on $50$ cores and we use a block size of $500\times 500$.
+The results are given in \cref{subfig:mmMathBackend}.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{\dualpgfwidth}
+		\begin{tikzpicture}
+			\begin{semilogxaxis}[
+				xlabel={Dimensionality $n$},
+				ylabel={Execution time $t$ in s},
+				legend pos=north west,
+				legend entries={Breeze Spark, Breeze Stratosphere, Mahout Spark, Mahout Stratosphere},
+				width=\dualpgfwidth,
+			]
+			
+			\addplot[
+				color=red,
+				mark=o,
+			] table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepBreezeLoadSpark};
+			
+			\addplot[
+				color=teal,
+				mark=triangle,
+			]table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepBreezeLoadStratosphere};
+
+			\addplot[
+				color=blue,
+				mark=x,
+			] table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepMahoutLoadSpark};
+
+			\addplot[
+				color=black,
+				mark=diamond,
+			]table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepMahoutLoadStratosphere};
+			
+			\end{semilogxaxis}
+		\end{tikzpicture}
+		\caption{}
+		\label{subfig:mmMathBackend}
+	\end{subfigure}
+	\begin{subfigure}{\dualpgfwidth}
+		\begin{tikzpicture}
+			\begin{semilogxaxis}[
+				xlabel={Rows $d$ of $V$},
+				ylabel={Execution time $t$ in s},
+				legend pos=north west,
+				legend entries={Breeze Spark, Breeze Stratosphere, Mahout Spark, Mahout Stratosphere},
+				width=\dualpgfwidth,
+			]
+			
+			\addplot[
+				color=red,
+				mark=o,
+			] table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepBreezeLoadSpark};
+			
+			\addplot[
+				color=teal,
+				mark=triangle,
+			]table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepBreezeLoadStratosphere};
+
+			\addplot[
+				color=blue,
+				mark=x,
+			] table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepMahoutLoadSpark};
+
+			\addplot[
+				color=black,
+				mark=diamond,
+			]table[
+				x=Rows,
+				y=Time,
+			]
+			{data/nnmfStepLoad/nnmfStepMahoutLoadStratosphere};
+			
+			\end{semilogxaxis}
+		\end{tikzpicture}
+		\caption{}
+		\label{subfig:nmfMathBackend}
+	\end{subfigure}
+	\caption{Comparison of Breeze and Mahout math back end. \subref{subfig:mmMathBackend} Runtime of matrix multiplication on $50$-core cluster using Breeze and Mahout. \subref{subfig:nmfMathBackend} Runtime of single nnmf step on $50$-core cluster using Breeez and Mahout.}
+	\label{fig:nnmfLoadMathBackend}
+\end{figure}
+
+The results of the matrix multiplication demonstrate impressively that Breeze is far superior to Mahout in multiplying two sparse matrices.
+Even for relatively small matrix sizes of $n=2500$ the multiplication takes so long that it can hardly be regarded feasible.
+Breeze reaches a speed-up of $100$ compared to Mahout.
+The reason for this bad performance unveils a look into the code base of Mahout.
+Mahout offers a sparse matrix implementation, based on hash maps.
+However, it does not provide an efficient algorithm for this data structure.
+Instead, Mahout uses the standard matrix multiplication algorithm derived from its definition.
+Thus, for each resulting element $c_{i,j}$, Mahout iterates over the complete row $a_i$ of $A$ and column $b^{j}$ of $B$, even though most of the row and column entries will be zero.
+Even worse, each access triggers an hash map look up.
+In total, the matrix multiplication has to perform $2n^3$ hash table look ups and $n^3$ hash table insertions.
+
+In contrast to Mahout, Breeze implements the sparse matrix using the compressed column sparse (CSC) storing scheme.
+Not only does this avoid costly hash map look ups, because the data is stored in a continuous array, but Breeze also implements an optimized matrix multiplication algorithm.
+The algorithm is aware of the sparse nature of its operands and accesses only elements which are non-zero in both matrices.
+
+As second benchmark, we repeated the NMF computation from \cref{subsec:NMF}.
+We calculated a single NMF step for varying number of rows $d$ of $V$ on $50$-cores of the cluster.
+The number of rows $d$ reaches from $500$ to $10000$.
+As before, the sparsity of $V$ is $0.001$ and its non-zero cells are distributed uniformly.
+The sizes of $W$ and $H$ are $d\times 10$ and $10 \times 100000$, respectively.
+For the benchmark, we set the block size to $500 \times 500$.
+The runtimes of the Breeze and Mahout math back end are given in \cref{fig:nnmfLoadMathBackend}.
+
+It can be clearly seen that NMF runs faster with Breeze as math back end on the Stratosphere as well as on the Spark execution engine.
+On Spark, Breeze reaches a speed-up of roughly $4$ for $d=10000$. 
+On Stratosphere, Breeze reaches a speed-up of about $1.75$ for the same number of rows.
+
+We can conclude that Breeze has a better support for sparse matrix operations.
+Its performance is also better for operations on mixed sparse and dense matrices as it is the case for NMF.
+Therefore, we highly recommend using Breeze as the math back end in order to experience best performances with Gilbert programs.
+

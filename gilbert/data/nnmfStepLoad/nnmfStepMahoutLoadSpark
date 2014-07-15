@@ -1,0 +1,15 @@
+# Engine: Spark; Math-Backend: Mahout
+# Template: nnmfStep.gb.template
+# App-Name: nnmfStepMahoutLoad
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+Rows Time Error 
+500 160.95076394 0.13657421505104425 
+1000 158.77780626733332 3.976914997481271 
+1500 161.07873002933334 3.7818814945826382 
+5000 180.03242074333332 3.473319703130277 
+10000 203.33648338700002 0.4629925853200226 
