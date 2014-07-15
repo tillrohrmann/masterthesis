@@ -1,0 +1,16 @@
+# Engine: Local; Math-Backend: Breeze
+# Template: matrixMult.gb.template
+# App-Name: Evaluation
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 1 DensityThreshold: 0.5 Blocksize: 1000 
+# level: List(0.001);
+
+RowsA ColsA ColsB Time Error 
+1000 1000 1000 0.6741540616666666 0.6587262815393133 
+2500 2500 2500 2.366172097 0.7638720503027351 
+5000 5000 5000 10.193201998333334 4.928418612176393 
+7500 7500 7500 21.398552577333334 2.6780539089982107 
+10000 10000 10000 48.024165774000004 4.212245493406184 

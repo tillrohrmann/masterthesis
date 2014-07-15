@@ -1,0 +1,16 @@
+# Engine: Stratosphere; Math-Backend: Breeze
+# Template: matrixMult.gb.template
+# App-Name: matrixMultCores
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DensityThreshold: 0.5 Blocksize: 500 
+# level: List(0.001);
+
+Parallelism RowsA ColsA ColsB Time Error 
+1 7500 7500 7500 56.51166666666668 11.539851226655108 
+2 9500 9500 9500 61.18233333333333 6.175044966098086 
+5 13000 13000 13000 73.98833333333334 2.8489349471922587 
+15 18500 18500 18500 94.23966666666666 2.57123945468588 
+25 22000 22000 22000 113.66300000000001 3.255301368537175 

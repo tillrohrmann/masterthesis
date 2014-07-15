@@ -1,0 +1,3 @@
+# KMeans Benchmark Spark
+parallelism maxIterations numDatapoints error time numCentroids
+50 10 1000 0.0 504.582639196 10

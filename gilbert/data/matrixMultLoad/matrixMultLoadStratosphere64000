@@ -1,0 +1,12 @@
+# Engine: Stratosphere; Math-Backend: Breeze
+# Template: matrixMult.gb.template
+# App-Name: Evaluation
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 1
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+# level: List(0.001);
+
+RowsA ColsA ColsB Time Error 
+64000 64000 64000 1230.188 0.0 

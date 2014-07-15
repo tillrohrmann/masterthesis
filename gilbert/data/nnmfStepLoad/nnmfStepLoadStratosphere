@@ -1,0 +1,17 @@
+# Engine: Stratosphere; Math-Backend: Breeze
+# Template: nnmfStep.gb.template
+# App-Name: nnmfStepLoad
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+Rows Time Error 
+500 117.01233333333333 39.11104703703716 
+1000 97.947 18.42706631561303 
+1500 115.71499999999999 8.855576265833864 
+5000 180.3276666666667 7.552883577371847 
+10000 283.19866666666667 9.257719175549303 
+#25000 1521.241 11.239179507419566 
+50000 1082.3673333333334 33.15351300138995 

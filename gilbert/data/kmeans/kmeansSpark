@@ -1,0 +1,15 @@
+# Engine: Spark; Math-Backend: Breeze
+# Template: kmeans.gb.template
+# App-Name: kmeansSpark
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+NumDatapoints NumCentroids MaxIterations Time Error 
+1000 100 10 94.31538438033333 3.8037641871532952 
+5000 100 10 101.567969318 0.7927049892937131 
+10000 100 10 126.47825571733331 2.588269834055607 
+50000 100 10 301.276533989 1.4512782145401462 
+100000 100 10 513.4766320763333 12.923549835441015 

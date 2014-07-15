@@ -1,0 +1,15 @@
+# Engine: Stratosphere; Math-Backend: Breeze
+# Template: kmeans.gb.template
+# App-Name: kmeansStratosphere
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+NumDatapoints NumCentroids MaxIterations Time Error 
+1000 100 10 182.46366666666665 1.6455310186481857 
+5000 100 10 195.331 1.9230280809182188 
+10000 100 10 207.64300000000003 1.8294624893667533 
+50000 100 10 382.79466666666667 74.47689374116872 
+100000 100 10 639.0796666666666 142.9261169147659 

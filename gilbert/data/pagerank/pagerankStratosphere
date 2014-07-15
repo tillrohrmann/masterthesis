@@ -1,0 +1,14 @@
+# Engine: Stratosphere; Math-Backend: Breeze
+# Template: pagerank.gb.template
+# App-Name: pagerankStratosphere
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+
+NumVertices Sparsity MaxIterations Time Error 
+5000 0.001 10 105.77066666666667 6.251487609628079 
+10000 0.001 10 119.72666666666667 2.056468169783659 
+25000 0.001 10 302.29266666666666 10.635028741537711 
+50000 0.001 10 1035.2556666666667 42.58116616925062 
