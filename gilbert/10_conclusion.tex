@@ -5,15 +5,71 @@
 \chapterquote{Finishing a good book is like leaving a good friend.}{William Feather, (1889 - 1981)}
 
 \begin{itemize}
-	\item Summary
+	\item What have we done?
 	\begin{itemize}
-		\item Implementation of Gilbert
-		\item Evaluation
-		\item Thesis result
+		\item Fully functional sparse linear algebra environment
+		\item Being able to compute vast amounts of data, exceeding the memory of a single machine
+		\item Accessible to a wide audience of people
 	\end{itemize}
-	\item Outlook on what's still to be done
+	\item How did I achieve it?
+	\begin{itemize}
+		\item Parser/Lexer
+		\item Typer
+		\item Compiler
+		\item Intermediate representation
+		\item Optimizer
+		\item Execution engines
+	\end{itemize}
+	\item What are the results?
+	\begin{itemize}
+		\item Applicable to a multitude of applications
+		\item Loop support
+		\item Can execute ML algorithms
+		\item Cannot beat hand-tuned algorithms
+		\item High-level linear algebra abstractions entails performance loss $\Rightarrow$ Trade-off between performance and usability
+	\end{itemize}
+	\item Limitations
+	\begin{itemize}
+		\item Performance
+		\item Memory
+		\item Typing system
+	\end{itemize}
+	\item What is my contribution and why is it important
+	\begin{itemize}
+		\item Scalable sparse linear algebra environment
+		\item Usable by data scientist and machine learners
+	\end{itemize}
+	\item Outlook
+	\begin{itemize}
+		\item Better typing system
+		\item Numerical stability
+		\item Optimizations
+		\item Memory management/consumption
+		\item More Matlab functions
+		\item Different execution engine H2O
+	\end{itemize}
 \end{itemize}
 
-Pages: $\approx 3-4$
 
-Total pages : $\approx 45 - 66$
+In the context of this thesis, we addressed the problem of managing and exploiting the ever increasing data flood.
+In contrast to the gathering and storage capacities growing at an exponential rate, the tools to harness the collected information did not scale accordingly.
+Our current analytical tools are mostly limited to data amounts which can be kept in the memory of a single machine.
+Often analysts have to reduce data to make them processable, thereby missing valuable insights.
+In order to analyze peta bytes of data, the only viable solution is to split the work up and execute it distributedly.
+However, parallel data processing is a highly complex and error-prone task if one has to deal with low-level implementations.
+Not only does it distract the analyst from its actual task but it also requires as skill set hardly anyone possesses.
+Thus, having analytical tools which scale to vast amounts of data while hiding the low-level implementation details becomes an imperative.
+
+Gilbert tackles these problems by melding the assets of high-level linear algebra abstractions with the power of massively parallel dataflow systems.
+Gilbert is fully functional linear algebra environment which is programmed by the widespread Matlab language.
+Gilbert programs are executed on the Spark and Stratosphere data processing engine, which allows to handle data exceeding vastly the capacity of a single computer's memory.
+Gilbert only requires the user to program Matlab code in order to use the system.
+Consequently, it is usable by a wide audience of data scientists, who can easily adopt Gilbert without having to re-adapt.
+These properties make Gilbert a suitable candidate for the data processing challenges of tomorrow.
+
+Gilbert itself comprises the technology stack to parse, type and compile Matlab code into a format which can be executed distributedly.
+In order to apply high-level linear algebra optimziation, we conceived an intermediate representation for linear algebra programs.
+Prior to execution, the intermediate representation is exploited by Gilbert's optimizer to apply different optimization strategies.
+The optimized program is then translated into an execution plan suitable for the execution on Spark or Stratosphere.
+
+

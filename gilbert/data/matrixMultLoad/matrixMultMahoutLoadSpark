@@ -1,0 +1,14 @@
+# Engine: Spark; Math-Backend: Mahout
+# Template: matrixMult.gb.template
+# App-Name: matrixMultLoadMahout
+# Compiler Hints: true
+# Optimization: TP: true; MM Reorder: true
+# tries: 3
+# checkpointDir: ;0
+# DOP: 50 DensityThreshold: 0.5 Blocksize: 500 
+# level: List(0.001);
+
+RowsA ColsA ColsB Time Error 
+1000 1000 1000 120.55784015933334 1.184302610465846 
+2500 2500 2500 723.23422636003334 4.148014396001
+5000 5000 5000 2763.12200003337 12.568511123
