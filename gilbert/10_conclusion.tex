@@ -4,53 +4,6 @@
 
 \chapterquote{Finishing a good book is like leaving a good friend.}{William Feather, (1889 - 1981)}
 
-\begin{itemize}
-	\item What have we done?
-	\begin{itemize}
-		\item Fully functional sparse linear algebra environment
-		\item Being able to compute vast amounts of data, exceeding the memory of a single machine
-		\item Accessible to a wide audience of people
-	\end{itemize}
-	\item How did I achieve it?
-	\begin{itemize}
-		\item Parser/Lexer
-		\item Typer
-		\item Compiler
-		\item Intermediate representation
-		\item Optimizer
-		\item Execution engines
-	\end{itemize}
-	\item What are the results?
-	\begin{itemize}
-		\item Applicable to a multitude of applications
-		\item Loop support
-		\item Can execute ML algorithms
-		\item Cannot beat hand-tuned algorithms
-		\item High-level linear algebra abstractions entails performance loss $\Rightarrow$ Trade-off between performance and usability
-	\end{itemize}
-	\item Limitations
-	\begin{itemize}
-		\item Performance
-		\item Memory
-		\item Typing system
-	\end{itemize}
-	\item What is my contribution and why is it important
-	\begin{itemize}
-		\item Scalable sparse linear algebra environment
-		\item Usable by data scientist and machine learners
-	\end{itemize}
-	\item Outlook
-	\begin{itemize}
-		\item Better typing system
-		\item Numerical stability
-		\item Optimizations
-		\item Memory management/consumption
-		\item More Matlab functions
-		\item Different execution engine H2O
-	\end{itemize}
-\end{itemize}
-
-
 In the context of this thesis, we addressed the problem of managing and exploiting the ever increasing data flood.
 In contrast to the gathering and storage capacities growing at an exponential rate, the tools to harness the collected information did not scale accordingly.
 Our current analytical tools are mostly limited to data amounts which can be kept in the memory of a single machine.
@@ -60,16 +13,63 @@ However, parallel data processing is a highly complex and error-prone task if on
 Not only does it distract the analyst from its actual task but it also requires as skill set hardly anyone possesses.
 Thus, having analytical tools which scale to vast amounts of data while hiding the low-level implementation details becomes an imperative.
 
-Gilbert tackles these problems by melding the assets of high-level linear algebra abstractions with the power of massively parallel dataflow systems.
-Gilbert is fully functional linear algebra environment which is programmed by the widespread Matlab language.
-Gilbert programs are executed on the Spark and Stratosphere data processing engine, which allows to handle data exceeding vastly the capacity of a single computer's memory.
+Gilbert tackles these problems by fusing the assets of high-level linear algebra abstractions with the power of massively parallel dataflow systems.
+Gilbert is a fully functional linear algebra environment which is programmed by the widespread Matlab language.
+Gilbert programs are executed on Spark and Stratosphere, which allows to process data exceeding the capacity of a single computer's memory.
 Gilbert only requires the user to program Matlab code in order to use the system.
-Consequently, it is usable by a wide audience of data scientists, who can easily adopt Gilbert without having to re-adapt.
+Consequently, it is usable by a wide audience of data scientists, who can easily switch to Gilbert without having to re-adapt.
 These properties make Gilbert a suitable candidate for the data processing challenges of tomorrow.
 
 Gilbert itself comprises the technology stack to parse, type and compile Matlab code into a format which can be executed distributedly.
 In order to apply high-level linear algebra optimziation, we conceived an intermediate representation for linear algebra programs.
 Prior to execution, the intermediate representation is exploited by Gilbert's optimizer to apply different optimization strategies.
-The optimized program is then translated into an execution plan suitable for the execution on Spark or Stratosphere.
+The optimized program is then translated into an highly optimized execution plan suitable for the execution on a supported engine.
+At the moment of writing this thesis, Gilbert allows the distributed execution on Spark and Stratosphere.
+Additionally, it exists a local execution mode.
+Gilbert was developed to be easily extensible with new execution engines.
+For the local linear algebra operations the Gilbert user can choose between the Breeze and Mahout library.
+Again, Gilbert's architecture allows to easily add any other math library to be used as math back end.
 
+Our systematical evaluation has shown that Gilbert supports all fundamental linear algebra operations, making it fully operational.
+Additionally, its loop support allows to implement a wide multitude of machine learning algorithms within Gilbert.
+Exemplary, we have implemented the PageRank, k-means and NMF algorithm with Gilbert.
+The required code changes to make them run in Gilbert are minimal and only concern Gilbert's loop abstraction.
+Our evaluation has demonstrated the effectiveness of Gilbert's matrix multiplication reordering optimization.
+Furthermore, we could observe that the matrix blocking size has strong implications on the overall performance.
+The best performance is achieved with block sizes which offer a good compromise between data parallelism and data granularity.
+Our benchmarks have proved that Gilbert can handle data sizes which no longer can be efficiently processed on a single computer.
+Moreover, Gilbert showed a promising scale out behavior, making it a suitable candidate for large-scale data processing.
 
+The key contributions of this thesis include the development of a scalable data analysis tool which can be programmed using the well-known Matlab language.
+That way, we made the world of distributed computing accessible for data scientists and machine learners.
+Furthermore, we researched how to implement linear algebra operations efficiently in modern parallel data flow systems, such as Spark and Stratosphere.
+In line with that research was the investigation of suitable distributed data structures for the representation of matrices and vectors.
+As part of the implementation of Gilbert, we also investigated how to add automatically type information to Matlab code using a type inference mechanism.
+Type inference ensures a minimally invasive approach, since the user does not have to add additional commands to his code.
+Last but not least, we showed the effectiveness of a cost-based optimizer for linear algebra programs.
+
+During the course of writing this thesis, we also noted some limitations of Gilbert.
+The proposed Hindley-Milner type inference algorithm turned out to have problems resolving polymorphic types.
+As a consequence, Gilbert will incorrectly reject some well-typed programs.
+However, these programs constitute only corner cases.
+Even though, Gilbert can process vast amounts of data, it turned out that it cannot reach or even beat the performance of hand-tuned algorithms using Spark or Stratosphere.
+Considering the overhead the linear algebra abstraction entails, this fact is not really surprising, though.
+The overhead is also the reason for the higher memory foot-print, causing Spark and Stratosphere to spill faster to disk than the hand-tuned algorithms.
+Gilbert simply trades some performance off for better usability.
+The fact that Gilbert only supports one hard-wired partitioning scheme, namely square blocks, omits possible optimization potential.
+Another limitation are the error messages of the parsing, typing and compilation phase.
+It is a well known problem of the HM type inference algorithm that in case of typing errors the original error source is hard to locate.
+The same holds for issued error messages by Scala's Parser Combinators.
+
+Interesting aspects for further research and improvements of Gilbert include the extension of Gilbert's optimizer by new optimization strategies.
+The investigation of different matrix partitioning schemes and its integration into the optimizer which selects the best overall partitionings seems to be very promising.
+Furthermore, a tighter coupling of Gilbert's optimizer with Stratosphere's optimizer could result in beneficial synergies.
+Forwarding the inferred matrix sizes to the underlying execution system might help to improve the execution plans.
+The numerical stability of Gilbert's computations is another important aspect which has been completely left out in the context of this thesis.
+However, any linear algebra environment has to guarantee numerical stability which might be influencec by Gilbert's parallel execution.
+Numerical stability deserves its own separate evaluation.
+As stated above, the HM inference algorithm has problems with polymorphic types.
+In our opinion, it is worthwhile to look into other type inference algorithms, such as the type inference system of Haskell~\cite{haskell}, to assess whether they are better suited to automatically annotate Matlab with type information.
+We also strongly advise to add support for further execution engines to Gilbert.
+An appropriate candidate could be the H2O~\cite{h2o} data processing engine.
+Additionally, it is always beneficial to extend the set of implemented algorithms and to probe them at an large data scale.
