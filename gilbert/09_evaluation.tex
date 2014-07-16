@@ -338,7 +338,7 @@ Stratosphere assigns each cluster node a specific number of slots.
 The default value is the number of cores.
 The memory is then split evenly among the slots.
 Once the task managers have started and assigned the memory to each slot, it is not possible to dynamically transfer memory portions between slots.
-Therefore, the effectively available memory to each task is considerably smaller than the initial \SI{20}{\giga\byte}.
+Therefore, the effectively available memory for each task is considerably smaller than the initial \SI{20}{\giga\byte}.
 Additionally, Stratosphere's ability to support streaming further decreases the per task memory.
 Currently, it is assumed that all tasks belonging to one pipeline can be deployed simultaneously to one slot.
 In order to execute all pipeline tasks, the slot memory will be further divided by the number of tasks which can be concurrently run.
@@ -347,13 +347,17 @@ In contrast to that, Spark separates the execution of different operations into 
 A stage is only submitted for execution, after all preceding stages have been completed.
 That way, the memory does not have to be splitted between succeeding tasks and thus spilling occurs later.
 
-The runtime between the hand-tuned GNMF running on Spark, the Stratosphere and the Spark executor differed for varying data sizes by a constant factor.
-The fastest implementation was the hand-tuned GNMF algorithm running on Spark.
+The runtime between the optimized GNMF running on Spark, the Stratosphere and the Spark executor differed for varying data sizes by a constant factor.
+The fastest implementation for $d\le 100000$ was the optimized GNMF algorithm running on Spark.
 It was approximately twice as fast as Gilbert's Spark execution engine.
-The Stratosphere execution engine was approximately $5$ times slower than its Spark counterpart.
+The Stratosphere execution engine was approximately five times slower than its Spark counterpart.
 These differences are most likely caused by the Spark and Stratosphere system, since the linear algebra operations are implemented identically.
+The runtime behavior of the optimized GNMF running on Stratosphere is interesting.
+At first, it performs rather poorly compared to its Spark counterpart.
+However, for $d>100000$ it suddenly outperforms the Spark implementation.
+Thus, GNMF scales better if it is executed on Stratosphere. 
 
-Even though, Gilbert could not reach or even beat the performance of the hand-tuned GNMF implementation, the development using Gilbert was considerably easier.
+Even though, Gilbert could not reach or even beat the performance of the optimized GNMF implementation, the development using Gilbert was considerably easier.
 One NMF step can be programmed in two lines of Gilbert code, whereas we needed $35$ lines of Scala code for GNMF.
 Not only did we have to know how to program Spark, but it also took us quite some time to verify the correct functioning of the Spark implementation.
 The verification was made significantly more difficult and time-consuming due to a programming bug we introduced.

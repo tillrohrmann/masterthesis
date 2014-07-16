@@ -9,5 +9,22 @@
 \end{center}
 \vspace{1cm}
 
-Gilbert is a sparse linear algebra environment for parallel dataflow system.
-It enables Matlab code to be run seamlessly on a distributed environment and thus be able to compute vast amounts of data.
+In recent years, the generated and gathered data has increased at an almost exponential rate.
+At the same time, people realized its usefulness in terms of insights it can bear.
+However, lifting the true treasures, being buried deep below a pile of meaningless data, requires powerful analysis tools.
+Unfortunately, our analytical capacities did not scale well with the growing data.
+Most of our existing tools run only on a single computer and thus are limited by its memory.
+The most promising remedy to deal with large-scale data is to exploit parallelism.
+
+We propose Gilbert, a distributed sparse linear algebra system, to solve the imminent lack of analytical capacities.
+Gilbert offers a Matlab-like progamming language for linear algebra programs which are automatically executed in parallel.
+The transparent parallelization is achieved by compiling the linear algebra operations into a suitable representation for the execution on massively parallel dataflow systems.
+Prior to execution, different execution strategies are evaluated and the best one is chosen by a cost-based optimizer.
+Gilbert uses Spark and Stratosphere, two parallel dataflow systems, to run linear algebra programs on a cluster of machines.
+Distributed matrices are represented by square blocks to guarantee a well-balanced trade-off between data parallelism and data granularity.
+
+Exhaustive evaluation proved that Gilbert is able to process varying amounts of data, exceeding the memory of a single computer, on clusters of different sizes.
+Three famous machine learning (ML) algorithms, PageRank, k-means and non-negative matrix factorization (NMF), were implemented with Gilbert.
+That emphasizes Gilbert's support for distributed iterations, an essential prerequsite for a broad set of ML algorithms.
+The performance of these algorithms is compared to optimized implementations based on Spark and Stratosphere.
+Gilbert is not as fast as the optimized algorithms, but it compensates for that with a high-level programming language, simplifying the development process significantly.

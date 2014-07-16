@@ -4,21 +4,6 @@
 
 \chapterquote{If I have seen further than others, it is by standing upon the shoulders of giants.}{Isaac Newton, (1642 - 1727)}
 
-\begin{itemize}
-	\item Specialized distributed computing frameworks
-	\begin{itemize}
-		\item Pegasus
-		\item Datalog
-		\item Pregel
-		\item Hyracks
-		\item Apache Hama
-		\item Hana?
-		\item dryad
-	\end{itemize}
-\end{itemize}
-
-Pages $\approx$ 10 - 15
-
 The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.
 In recent years a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.
 The different trends can be subsumed into the following categories: Distributed data processing systems, distributed numerical computing systems, database management systems, specialized distributed computing frameworks and explicit parallelization.
@@ -437,9 +422,14 @@ This approach has the advantage that a wider class of machine learning algorithm
 However, at the moment the physical plans are still created by hand which makes the framework not applicable yet.
 
 Apache Mahout~\cite{mahout:2011a} is a project offering a library of scalable machine learning algorithms.
-Many algorithms use the MapReduce paradigm to achieve scalability and are written in Hadoop.
-However, Mahout offers no easy way to write new algorithms by using a declarative language for example.
+Many algorithms use the MapReduce paradigm to achieve scalability and are written for Hadoop.
 By using Hadoop, the actual execution plan of an algorithm has to be hand-tuned for the specific cluster and input size.
+Just recently, the Mahout project decided to steer away from developing isolated applications and instead follows now a more general approach to solve the problem of scalable machine learning.
+In the context of this re-orientation, Mahout developed a Scala DSL (domain specific language) to express linear algebra operations.
+The supported functionality is not identitcal but similar to the functionality of Matlab and R.
+The Scala DSL can be either be executed locally or in a distributed fashion using Spark.
+The basic idea of the Scala DSL, which is hiding the implementation details of the parallel logic behind a well understood linear algebra abstraction, is very similar to Gilbert's approach.
+However, Mahout forces the user to do their programming in Scala, which might be a serious obstacle for people coming from the Matlab and R world. 
 
 \section{Explicit parallelization}
 
