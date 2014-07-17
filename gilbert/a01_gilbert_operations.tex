@@ -1,0 +1,135 @@
+%!TEX  root=main.tex
+\chapter{Appendix 1: Gilbert's Mathematical Operations}
+\label{appendix:GilbertOps}
+\appendix
+
+\captionsetup[table]{list=no}
+
+Gilbert is a fully functional linear algebra environment.
+As such a system, it provides a rich set of primitive operations.
+People familiar with Matlab should quickly recognize the operations, because Gilbert's syntax is identitcal to the syntax of Matlab.
+Additionally, Gilbert implemented several common Matlab functions.
+
+Gilbert's operations are used to modify scalar and matrix values.
+The full set of supported arithmetic operations is given in \cref{tab:gilbertOperations}.
+The full set of supported logical operations is given in \cref{tab:gilbertLogicalOperations}.
+The full set of supported comparison operations is given in \cref{tab:gilbertComparisonOperations}.
+
+Certain operations can not be expressed with primitive operations and thus require special functions.
+Gilbert comes with a set of pre-implemented functions, which are popular in Matlab.
+The full set of supported functions is given in \cref{tab:gilbertFunctions}.
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|p{.23\linewidth}|p{0.1\linewidth}|p{0.60\linewidth}|}
+	\hline
+	Operation & Syntax& Signature\\
+	\hline
+	Addition & \code{a + b} & $double\times double \rightarrow double$\newline $matrix[double] \times double \rightarrow matrix[double]$ \newline $double \times matrix[double] \rightarrow matrix[double]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Subtraction & \code{a - b} & $double\times double \rightarrow double$\newline $matrix[double] \times double \rightarrow matrix[double]$ \newline $double \times matrix[double] \rightarrow matrix[double]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Multiplication & \code{a * b} & $double\times double \rightarrow double$\newline $matrix[double] \times double \rightarrow matrix[double]$ \newline $double \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Division & \code{a / b} & $double\times double \rightarrow double$\newline $matrix[double] \times double \rightarrow matrix[double]$\\
+	\hline
+	Exponentiation & \code{a \textasciicircum b} & $double \times double\rightarrow double$ \newline
+	$matrix[double] \times double \rightarrow matrix[double]$\\
+	\hline
+	Matrix multiplication & \code{a * b} & $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Cellwise matrix\newline multiplication & \code{a .* b} & $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Cellwise matrix\newline division & \code{a ./ b} & $double \times matrix[double] \rightarrow matrix[double]$\newline
+	$matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	Cellwise exponentiation & \code{a .\textasciicircum b} & $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	\end{tabular}
+	\caption{Set of Gilbert's arithmetic operations.}
+	\label{tab:gilbertOperations}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|p{.23\linewidth}|p{0.1\linewidth}|p{0.60\linewidth}|}
+	\hline
+	Operation & Syntax& Signature\\
+	\hline
+	Logical and & \code{a \& b} & $boolean \times boolean \rightarrow boolean$\newline
+	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
+	\hline
+	Logical or & \code{a | b} & $boolean \times boolean \rightarrow boolean$\newline
+	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
+	\hline
+	Short-circuit logical and & \code{a \$\$ b} & $boolean \times boolean \rightarrow boolean$\newline
+	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
+	\hline
+	Short-circuit logical or & \code{a || b} & $boolean \times boolean \rightarrow boolean$\newline
+	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
+	\hline
+	\end{tabular}
+	\caption{Set of Gilbert's logical operations.}
+	\label{tab:gilbertLogicalOperations}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|p{.23\linewidth}|p{0.1\linewidth}|p{0.60\linewidth}|}
+	\hline
+	Operation & Syntax& Signature\\
+	\hline
+	Greater& \code{a > b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	Greater equals& \code{a >= b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	Less & \code{a < b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	Less equals & \code{a <= b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	Equals & \code{a == b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	Not equals & \code{a \textasciitilde= b} & $double\times double \rightarrow boolean$\newline $matrix[double] \times double \rightarrow matrix[boolean]$ \newline $double \times matrix[double] \rightarrow matrix[boolean]$ \newline $matrix[double] \times matrix[double] \rightarrow matrix[boolean]$\\
+	\hline
+	\end{tabular}
+	\caption{Set of Gilbert's comparison operations.}
+	\label{tab:gilbertComparisonOperations}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{|p{.22\linewidth}|p{0.36\linewidth}|p{0.35\linewidth}|}
+	\hline
+	Function & Explanation & Signature\\
+	\hline
+	\code{ones(r,c)}  & Creates a matrix of size $(r,c)$ initialized with $1.0$.& $double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{eye(r,c)}  & Creates an identity matrix of size $(r,c)$.& $double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{zeros(r,c)}  & Creates a zero atrix of size $(r,c)$.& $double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{rand(r,c,m,s)}& Creates matrix of size $(r,c)$ whose elements are drawn from a Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{rand(r,c,m,s,l)}& Creates matrix of size $(r,c)$ with $l$ non-zero elements, distributed uniformly. The non-zero cells are drawn from Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{pdist2(a,b)} & Calculates the pairwise euclidean distance between the rows of matrix $a$ and $b$.& $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	\code{repmat(a, rm, cm)} & Repeats the matrix $a$ $rm$ times row-wise and $cm$ times column-wise. & $matrix[double]\times double \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{minWithIndex(a, d)} & Finds the minimum value and its index in dimension $d$ of matrix $a$. & $matrix[double] \times double \rightarrow \{matrix[double], matrix[double]\}$\\
+	\hline
+	\code{linspace(s,e,n)}& Creates a matrix of size $(1,n)$ with $n$ evenly spaced points between $s$ and $e$. & $double \times double \times double \times matrix[double]$\\
+	\hline
+	\code{sum(a,d)} & Sums the dimension $d$ of matrix $a$. & $matrix[double] \times double \rightarrow matrix[double]$\\
+	\hline
+	\code{norm(a,n)} & Calculates the $n$-Frobenius norm of matrix $a$. & $matrix[double] \times double \rightarrow double$\\
+	\hline
+	\code{spones(a)} & Creates a sparse matrix from matrix $a$ where each cell is $1.0$ if the corresponding cell in $a$ is non-zero, else it is $0.0$. & $matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	\code{diag(a)} & If $a$ is a matrix, then it extracts the diagonal. If $a$ is a row or column vector, then it creates a matrix with $a$ on its diagonal.& $matrix[double] \rightarrow matrix[double]$\\
+	\hline
+	\end{tabular}
+	\caption{Set of Gilbert's functions.}
+	\label{tab:gilbertFunctions}
+\end{table}

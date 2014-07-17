@@ -63,7 +63,7 @@ However, this does not impose a serious restriction, since all multi-dimensional
 \end{listing}
 
 Gilbert supports the basic linear algebra operations defined on matrices and scalars.
-They include among others the common operations \code{+}, \code{-}, \code{/} and \code{*}, whereas \code{*} denotes the matrix-matrix multiplication and all other operations have to be interpreted cellwisely.
+They include among others the common operations \code{+}, \code{-}, \code{/} and \code{*}, whereas \code{*} denotes the matrix-matrix multiplication and all other operations are interpreted cellwisely.
 The cellwise multiplication is indicated by a point preceding the operator \code{.*} as it is also common for cellwise operations in Matlab.
 Furthermore, Gilbert supports also comparisons operators such as \code{>}, \code{>=}, \code{==} and \code{\textasciitilde=}.
 This becomes handy for realizing dynamic termination criteria for loops.
@@ -237,7 +237,7 @@ In the following, we give the Backus-Naur form (BNF) of Gilbert's language.
 
 <postfixOp> ::= '.'' | '''
 
-<expOp> ::= '.'
+<expOp> ::= '.\textasciicircum'
 
 <newlineOrSemicolon> ::= NL | ';'
 
