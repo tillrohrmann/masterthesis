@@ -9,7 +9,7 @@ The optimizer exploits equivalence transformations which result from the commuta
 Therefore, it works on the intermediate format of a program, which provides an appropriate high-level abstraction.
 
 By transforming the intermediate representation, it is often possible to obtain an equivalent algebraic expression with better runtime properties.
-Two distinct algebraic expression which are semantically equivalent can differ significantly in terms of memory consumption and required FLOPs.
+Two distinct algebraic expression which are semantically equivalent can differ significantly in terms of memory consumption and required floating-point operations.
 Consider, for example, the product of $n$ sums as shown in \cref{eq:productSum}.
 The result could be computed with $n$ additions and $n-1$ multiplications.
 
@@ -30,7 +30,7 @@ Both transformations will be described in the following sections.
 
 Matrix multiplications are one of the most expensive operations in linear algebra programs.
 The naive multiplication of $A\times B$ with $A,B \in \mathbb{R}^{n \times n}$ requires $O(n^3)$ operations.
-Even though there are algorithms, such as the Strassen algorithm~\cite{strassen:nm1969a}, which have an asymptotical complexity of $O(n^{\log_28})$, it still remains a costly operation.
+Even though there are algorithms, such as the Strassen algorithm~\cite{strassen:nm1969a}, which have an asymptotic complexity of $O(n^{\log_28})$, it still remains a costly operation.
 In addition to the high computational complexity, the space complexity must also not be forgotten.
 
 In the worst case, the result of a matrix multiplication has quadratic size of the input operands.
@@ -56,7 +56,7 @@ In this case, the biggest matrix to store would be a vector of length $n$.
 
 The best execution order of successive multiplication is that which minimizes the maximum size of intermediate results.
 In order to determine the best execution order, the optimizer first extracts all matrix multiplications with more than $2$ operands.
-Then, it will calculate for each evaluation order the maximum size of all occuring intermediate results.
+Then, it will calculate for each evaluation order the maximum size of all occurring intermediate results.
 In order to do this, the optimizer relies on the automatically inferred matrix sizes of the operands, as described in \cref{sec:MatrixDimensionInference}.
 At last, it will pick the execution order with the minimal maximum intermediate matrix size.
 
@@ -73,7 +73,7 @@ C = A'*B;
 E = (C * D')';
 		\end{lstlisting}
 	\end{CenteredBox}
-	\caption{Transpose pushdown can eliminate unneccessary tranpose operations occuring in linear algebra programs.}
+	\caption{Transpose pushdown can eliminate unnecessary transpose operations occurring in linear algebra programs.}
 	\label{lst:pushdown}
 \end{listing}
 

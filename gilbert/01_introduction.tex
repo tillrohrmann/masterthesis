@@ -51,10 +51,10 @@ For us, the data analysis part is the key aspect in solving Big Data problems.
 Henceforth, we will concentrate on how to gain valuable insights from a huge data set.
 
 Once big data sets were amassed, people quickly recognized that these sets contain valuable information they only have to harness.
-Unfortunately, the search for useful patterns and pecularities strongly resembled the search for a needle in a haystack.
+Unfortunately, the search for useful patterns and peculiarities strongly resembled the search for a needle in a haystack.
 The quest requires sophisticated tools being able to analyze the vast amounts of data.
 Most of these tools are based on statistics to extract interesting features.
-It is benefitial to apply these statistical means to the complete data set instead of smaller chunks.
+It is beneficial to apply these statistical means to the complete data set instead of smaller chunks.
 Even if the chunks cover the complete data set, important correlations between data points might get lost in each individual parts.
 Moreover, the statistical tools improve their descriptive and predictive results by getting fed more data.
 The more data is available, the more likely it is that noise cancels out and that significant patterns manifest.
@@ -71,9 +71,9 @@ Another example showing the benefits of data analysis made it even into a Hollyw
 The film Moneyball is based on the true story of the Oakland Athletics baseball team which build an elite team in an unfavorable financial situation.
 They employed sophisticated data analysis methods to spot underestimated players which they could cheaply recruit.
 That marked the start of sports statistics which are nowadays a common tool for professional teams.
-These examples emphasize the importance and utility of information gained with analytical tools from gathered data.
+These examples emphasize the importance and utility of information gained with analytic tools from gathered data.
 However, the IDC, an international market research firm, estimates that only $0.5\%$ of the globally collected data is harnessed~\cite{gantz:iaf2012a}.
-They further state that about $23\%$ of todays data is worth being analyzed.
+They further state that about $23\%$ of today's data is worth being analyzed.
 Thus, there is still some potential left for improvements.
 
 What are the reasons for the huge gap between actual and dormant exploitation?
@@ -82,7 +82,7 @@ Our analyzing methods do not scale well for the vast data sets.
 The more data a system has to process the longer it will take to finish.
 Since the data is growing at an exponential rate, our computers have to improve at a similar speed to keep computations feasible.
 
-In order to decrease the runtime of our analytical tools there are two adjusting screws.
+In order to decrease the runtime of our analytic tools there are two adjusting screws.
 First of all, there are the algorithms.
 By finding an algorithm with a lower runtime complexity than an existing algorithm, e.g., for clustering, we can drastically decrease the required time.
 However, it is strongly doubted that it is possible to develop better algorithms for certain problems.
@@ -90,7 +90,7 @@ In some cases, it is even proven that there exists a lower bound for any algorit
 For example, it can be shown that the complexity of a sorting algorithm, which is based on comparing two of its elements to obtain their ordering, is in $\Omega\left(n\log n\right)$ with $n$ being the number of elements.
 Thus, certain problems have an inherent limitation of how fast they can be computed.
 
-The other way to speed the analytical tools up is to make the computer running them faster by vertical or horizontal scaling.
+The other way to speed the analytic tools up is to make the computer running them faster by vertical or horizontal scaling.
 To scale vertically means that we add more resources to a single computer.
 For example, the main memory or the frequency of a computer could be increased, giving them more computational power.
 In contrast to that, horizontal scaling means to add more computer nodes to a system.
@@ -104,19 +104,19 @@ The consumed power is limited by the amount of energy you can dissipate and thus
 When it became clear that the micro-controller would hit this so-called power wall, one duplicated the micro-controller's functionality to support simultaneous execution of multiple applications and to harness the inherent parallelism of programs.
 
 The emerging multi-core and distributed systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
-Furthermore, they have to be able to reason about interweaved parallel control flows.
+Furthermore, they have to be able to reason about interwoven parallel control flows.
 Due to this, parallel program development is highly cumbersome and error-prone.
 Therefore, new programming models are conceived which relieved the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
 Instead, the programmer can concentrate on the actual algorithm and the goal he wants to achieve.
 
-These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source reimplementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
+These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source re-implementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
 MapReduce is a programming framework for concurrent computations on vast amounts of data running on a large cluster.
 Its ingenious idea was separate the computation into a \emph{map} and a \emph{reduce} phase.
 In the map phase, the input data set is split into elements which are all processed individually.
 Afterwards, the results of the mapper are grouped together and each produced group is given to a reducer.
 The reducer knows about all elements in his group and produces the final result.
 The strengths of MapReduce are that it is expressive enough to implement a multitude of different algorithms while facilitating at the same time parallel execution.
-In fact, the map phase is embarrassingly parallel and the reduce phase only needs a shuffeling step prior to its parallel execution.
+In fact, the map phase is embarrassingly parallel and the reduce phase only needs a shuffling step prior to its parallel execution.
 
 But still, MapReduce and other frameworks force the user to express the program in a certain way, which is often not natural or intuitive for a user coming from a different domain.
 This implies that one has to overcome a particular entry-barrier to use the system and this might already be too high for some users.
@@ -125,10 +125,10 @@ This makes developing and debugging the program difficult as well as time-consum
 Especially, in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
 Therefore, systems such as Matlab~\cite{matlab} and R~\cite{r:1993a} are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
 However, these linear algebra systems lack proper support for automatic parallelization on large clusters and thus restricting the user to a single workstation.
-Therefore, the amount of processable data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
+Therefore, the amount of processible data is limited to the size of the main memory, which constitutes a serious drawback for real-world applications.
 Moreover, data scientists are usually no experts in the field of distributed computing and people of the distributed computing community often do not know much about data mining.
 The group of experts in both fields is negligible small.
-Consequently, it is very difficult, time-consuming and expensive to implement machine learning and analytical algorithms on distributed systems.
+Consequently, it is very difficult, time-consuming and expensive to implement machine learning and analytic algorithms on distributed systems.
 
 This problem would be mitigated by having a distributed sparse linear algebra system supporting a Matlab- and R-like language.
 Assuming that such a system is realizable, then existing Matlab- and R-code could be directly run in parallel.

@@ -14,14 +14,14 @@ Therefore, Gilbert is implemented as subset of the Matlab language, but we belie
 In fact, the translation from one language to the other should be straight-forward on the compiler level.
 
 Another reason to imitate an existing language and not to devise a new language geared towards parallel execution is the laziness of people.
-Since its part of human nature to be sluggish, people are initially unwilling to learn new things or to readapt.
-Therefore, Gilbert was conceived to require as little readaption as possible of users familiar with Matlab.
+Since its part of human nature to be sluggish, people are initially unwilling to learn new things or to re-adapt.
+Therefore, Gilbert was conceived to require as little re-adaption as possible of users familiar with Matlab.
 We think that this is a crucial property of Gilbert to be successfully adopted by the statistical community.
 Furthermore, a neat side effect is that existing Matlab code can almost seamlessly be ported to Gilbert and thus benefit instantaneously from the computational power of a large shared nothing cluster.
 This becomes particularly relevant against the background of having this huge existing code base.
-Recoding parts of it would be prohibitive, because of the required labour and provoked costs.
+Re-coding parts of it would be prohibitive, because of the required labor and provoked costs.
 
-In the following sections, we will describe the key aspects of Gilbert's language explaining the taken desing decisions.
+In the following sections, we will describe the key aspects of Gilbert's language explaining the taken design decisions.
 Subsequently, we will give a formal specification of Gilbert's language and describe the parser which is used to parse it.
 
 \section{Language Features}
@@ -29,7 +29,7 @@ Subsequently, we will give a formal specification of Gilbert's language and desc
 
 In order to not be overwhelmed by the complexity of Matlab but still support a full functional subset of it, Gilbert was restricted to support the following language features and data types.
 We decided to keep the feature set as small as possible to concentrate on the parallelization instead of maintaining hardly used language features.
-The elementar data type of linear algebra as well as Matlab is a matrix.
+The elementary data type of linear algebra as well as Matlab is a matrix.
 Gilbert supports arbitrary $2$-dimensional matrices whose elements can be \emph{double} or \emph{boolean}.
 Vectors are not represented by a special type but instead are treated as a matrix.
 Additionally, scalar \emph{double} and \emph{boolean} values are supported, too.
@@ -66,20 +66,20 @@ Gilbert supports the basic linear algebra operations defined on matrices and sca
 They include among others the common operations \code{+}, \code{-}, \code{/} and \code{*}, whereas \code{*} denotes the matrix-matrix multiplication and all other operations have to be interpreted cellwisely.
 The cellwise multiplication is indicated by a point preceding the operator \code{.*} as it is also common for cellwise operations in Matlab.
 Furthermore, Gilbert supports also comparisons operators such as \code{>}, \code{>=}, \code{==} and \code{\textasciitilde=}.
-This becomes handy for realizing dynamic termination criterions for loops.
+This becomes handy for realizing dynamic termination criteria for loops.
 The full set of supported mathematical operations can be found in \cref{appendix:GilbertOps}.
 
 Besides the basic arithmetic operations, the user can also define functions and anonymous functions.
 This not only allows to better structure the code but also to express \nth{2} level functions.
 The syntax of anonymous functions adhere to the Matlab syntax.
-An anoymous function which calculates the sum of its input squares could be defined as follows: \code{@(x,y) x*x + y*y}.
+An anonymous function which calculates the sum of its input squares could be defined as follows: \code{@(x,y) x*x + y*y}.
 The formal definition can be found in \cref{sec:languageGrammar}.
 
 An important aspect of Matlab, which we had to support as well, are loops.
 Matlab permits the user to express \code{for} and \code{while} loops.
 However, these loops are quite powerful in the sense that they allow iterations with side effects.
 In fact, it is actually quite easy for the user to run in this trap.
-The problem of parallelizing iterations with side effects is that one also has to maintain the referenced state outside of the loop.
+The problem of parallelization of iterations with side effects is that one also has to maintain the referenced state outside of the loop.
 This makes preprocessing and execution unnecessarily complex.
 For the sake of simplicity, Gilbert is limited to a different loop mechanism.
 Gilbert offers a fixpoint operator \code{fixpoint} which iteratively applies a given update function $f$ on the previous result of $f$, starting with an initial value $x$ at iteration $0$.
@@ -262,7 +262,7 @@ The semantics of these specifiers can be found in \cref{tab:multiplicity}.
 \end{table}
 
 The different \emph{aexp} non-terminals are used to model the precedence order of the mathematical operators.
-An overview of the precedences can be found in \cref{tab:precedences}.
+An overview of the precedence can be found in \cref{tab:precedences}.
 The $'$ operator denotes the transpose of the operand.
 
 \begin{table}
@@ -270,7 +270,7 @@ The $'$ operator denotes the transpose of the operand.
 	\begin{tabular}{l|l}
 	Operator class & Operators\\
 	\hline
-	Short circuit logial or & $||$\\
+	Short circuit logical or & $||$\\
 	Short circuit logical and & $\&\&$\\
 	Logical or & $|$ \\
 	Logical and & $\&$ \\
@@ -311,7 +311,7 @@ This aspect becomes important when we justify our implementation choices in \cre
 The attentive reader will have noticed that our language specification contains a problem.
 Consider, for example, the following valid Matlab code \code{A' + B'} where \code{A} and \code{B} are matrices.
 The code should produces the sum of two transposed matrices.
-However, on the lexer level the two transpose operators will be recognised as the enclosing apostrophes of a string literal.
+However, on the lexer level the two transpose operators will be recognized as the enclosing apostrophes of a string literal.
 Therefore, the lexer will produce an identifier token followed by a string literal token.
 Eventually, this will cause a parser error, because there is no production rule requiring this combination of tokens.
 

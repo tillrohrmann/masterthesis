@@ -16,7 +16,7 @@ In order to evaluate an operator, the system first evaluates all the operator's 
 Since the program is executed locally, the complete data of each operator is always accessible and thus no communication logic is required.
 All input and output files are directly written to the local hard drive.
 
-In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program parallelly.
+In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program in parallel.
 It takes the dependency tree of a Matlab program and translates it into a PACT plan.
 After the plan is generated, it is issued to the Stratosphere system for parallel execution.
 This approach implies that the program is not directly executed by the executor.

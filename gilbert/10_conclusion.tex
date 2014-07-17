@@ -6,12 +6,12 @@
 
 In the context of this thesis, we addressed the problem of managing and exploiting the ever increasing data flood.
 In contrast to the gathering and storage capacities growing at an exponential rate, the tools to harness the collected information did not scale accordingly.
-Our current analytical tools are mostly limited to data amounts which can be kept in the memory of a single machine.
+Our current analytic tools are mostly limited to data amounts which can be kept in the memory of a single machine.
 Often analysts have to reduce data to make them processable, thereby missing valuable insights.
-In order to analyze peta bytes of data, the only viable solution is to split the work up and execute it distributedly.
+In order to analyze petabytes of data, the only viable solution is to split the work up and execute it in parallel.
 However, parallel data processing is a highly complex and error-prone task if one has to deal with low-level implementations.
 Not only does it distract the analyst from its actual task but it also requires as skill set hardly anyone possesses.
-Thus, having analytical tools which scale to vast amounts of data while hiding the low-level implementation details becomes an imperative.
+Thus, having analytic tools which scale to vast amounts of data while hiding the low-level implementation details becomes an imperative.
 
 Gilbert tackles these problems by fusing the assets of high-level linear algebra abstractions with the power of massively parallel dataflow systems.
 Gilbert is a fully functional linear algebra environment which is programmed by the widespread Matlab language.
@@ -20,8 +20,8 @@ Gilbert only requires the user to program Matlab code in order to use the system
 Consequently, it is usable by a wide audience of data scientists, who can easily switch to Gilbert without having to re-adapt.
 These properties make Gilbert a suitable candidate for the data processing challenges of tomorrow.
 
-Gilbert itself comprises the technology stack to parse, type and compile Matlab code into a format which can be executed distributedly.
-In order to apply high-level linear algebra optimziation, we conceived an intermediate representation for linear algebra programs.
+Gilbert itself comprises the technology stack to parse, type and compile Matlab code into a format which can be executed in parallel.
+In order to apply high-level linear algebra optimizations, we conceived an intermediate representation for linear algebra programs.
 Prior to execution, the intermediate representation is exploited by Gilbert's optimizer to apply different optimization strategies.
 The optimized program is then translated into an highly optimized execution plan suitable for the execution on a supported engine.
 At the moment of writing this thesis, Gilbert allows the distributed execution on Spark and Stratosphere.
@@ -66,7 +66,7 @@ The investigation of different matrix partitioning schemes and its integration i
 Furthermore, a tighter coupling of Gilbert's optimizer with Stratosphere's optimizer could result in beneficial synergies.
 Forwarding the inferred matrix sizes to the underlying execution system might help to improve the execution plans.
 The numerical stability of Gilbert's computations is another important aspect which has been completely left out in the context of this thesis.
-However, any linear algebra environment has to guarantee numerical stability which might be influencec by Gilbert's parallel execution.
+However, any linear algebra environment has to guarantee numerical stability which might be influenced by Gilbert's parallel execution.
 Numerical stability deserves its own separate evaluation.
 As stated above, the HM inference algorithm has problems with polymorphic types.
 In our opinion, it is worthwhile to look into other type inference algorithms, such as the type inference system of Haskell~\cite{haskell}, to assess whether they are better suited to automatically annotate Matlab with type information.
