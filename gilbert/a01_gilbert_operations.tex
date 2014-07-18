@@ -63,7 +63,7 @@ The full set of supported functions is given in \cref{tab:gilbertFunctions}.
 	Logical or & \code{a | b} & $boolean \times boolean \rightarrow boolean$\newline
 	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
 	\hline
-	Short-circuit logical and & \code{a \$\$ b} & $boolean \times boolean \rightarrow boolean$\newline
+	Short-circuit logical and & \code{a \&\& b} & $boolean \times boolean \rightarrow boolean$\newline
 	$matrix[boolean]\times matrix[boolean] \rightarrow matrix[boolean]$\\
 	\hline
 	Short-circuit logical or & \code{a || b} & $boolean \times boolean \rightarrow boolean$\newline
@@ -97,7 +97,7 @@ The full set of supported functions is given in \cref{tab:gilbertFunctions}.
 	\label{tab:gilbertComparisonOperations}
 \end{table}
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{|p{.22\linewidth}|p{0.36\linewidth}|p{0.35\linewidth}|}
 	\hline
@@ -111,7 +111,7 @@ The full set of supported functions is given in \cref{tab:gilbertFunctions}.
 	\hline
 	\code{rand(r,c,m,s)}& Creates matrix of size $(r,c)$ whose elements are drawn from a Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \rightarrow matrix[double]$\\
 	\hline
-	\code{rand(r,c,m,s,l)}& Creates matrix of size $(r,c)$ with $l$ non-zero elements, distributed uniformly. The non-zero cells are drawn from Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \times double \rightarrow matrix[double]$\\
+	\code{rand(r,c,m,s,l)}& Creates matrix of size $(r,c)$ with a poriton of $l$ non-zero elements, distributed uniformly. The non-zero cells are drawn from Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \times double \rightarrow matrix[double]$\\
 	\hline
 	\code{pdist2(a,b)} & Calculates the pairwise euclidean distance between the rows of matrix $a$ and $b$.& $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
 	\hline

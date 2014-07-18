@@ -11,13 +11,13 @@
 
 In recent years, the generated and gathered data has increased at an almost exponential rate.
 At the same time, people realized its usefulness in terms of insights it can bear.
-However, lifting the true treasures, being buried deep below a pile of meaningless data, requires powerful analysis tools.
+However, lifting the true treasures requires powerful analysis tools, since they are buried deep below a pile of meaningless data.
 Unfortunately, our analytic capacities did not scale well with the growing data.
 Most of our existing tools run only on a single computer and thus are limited by its memory.
 The most promising remedy to deal with large-scale data is to exploit parallelism.
 
 We propose Gilbert, a distributed sparse linear algebra system, to solve the imminent lack of analytic capacities.
-Gilbert offers a Matlab-like programming language for linear algebra programs which are automatically executed in parallel.
+Gilbert offers a \matlab-like programming language for linear algebra programs, which are automatically executed in parallel.
 The transparent parallelization is achieved by compiling the linear algebra operations into a suitable representation for the execution on massively parallel dataflow systems.
 Prior to execution, different execution strategies are evaluated and the best one is chosen by a cost-based optimizer.
 Gilbert uses Spark and Stratosphere, two parallel dataflow systems, to run linear algebra programs on a cluster of machines.

@@ -32,90 +32,10 @@
 	"buffers":
 	[
 		{
-			"file": "05_intermediate_representation.tex",
-			"settings":
-			{
-				"buffer_size": 20324,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "06_gilbert_runtime.tex",
 			"settings":
 			{
-				"buffer_size": 25963,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "07_architecture.tex",
-			"settings":
-			{
-				"buffer_size": 6014,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "051_optimizer.tex",
-			"settings":
-			{
-				"buffer_size": 5715,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "08_implementation.tex",
-			"settings":
-			{
-				"buffer_size": 7702,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "04_gilbert_typing.tex",
-			"settings":
-			{
-				"buffer_size": 28050,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "02_related_work.tex",
-			"settings":
-			{
-				"buffer_size": 49464,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "01_introduction.tex",
-			"settings":
-			{
-				"buffer_size": 9065,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "03_gilbert_language.tex",
-			"settings":
-			{
-				"buffer_size": 17127,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "main.tex",
-			"settings":
-			{
-				"buffer_size": 2413,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "b01_bibliography.bib",
-			"settings":
-			{
-				"buffer_size": 17870,
+				"buffer_size": 25974,
 				"line_ending": "Unix"
 			}
 		}
@@ -180,34 +100,63 @@
 	},
 	"file_history":
 	[
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex.bak",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/02_related_work.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/style.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_listings.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/000_titlepage.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_gilbert_operations.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/003_abstract.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/005_outline.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/04_gilbert_typing.tex",
-		"/Users/till/Desktop/Kabeldeutschland",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/07_architecture.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_gilbert_language.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/004_zusammenfassung.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/02_related_work.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/style.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/09_evaluation.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/10_conclusion.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/005_outline.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultBreezeLoadStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultCores/matrixMultCoresSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/b01_bibliography.bib",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoadNoOp/nnmfStepLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoadNoOp/nnmfStepLoadStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/nnmfStepBreezeLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/nnmfStepBreezeLoadStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultBreezeLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/002_acknowledgements.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepBlocksizes/nnmfStepBlocksizesSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultLoadReference",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultLoadStratosphere64000",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultCores/matrixMultCoresStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/gnmfStepLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepCores/nnmfStepCoresStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepCores/nnmfStepCoresStratosphere2",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepCores/nnmfStepCoresSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepBlocksizes/nnmfStepBlocksizesSpark100000",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepBlocksize/nnmfStepBlocksize25Spark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepBlocksize/nnmfStepBlocksize100Spark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/pagerank/pagerankSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/pagerank/pagerankBenchStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/kmeans/kmeansBenchSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMultLoad/matrixMultLoadStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/nnmfStepLoadSpark",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/nnmfStepLoadStratosphere",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/nnmfStepLoad/nnmfStepLoadReference",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/01_introduction.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/011_problem_statement.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/data/matrixMult.data",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_gilbert_runtime.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_intermediate_representation.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/07_architecture.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/051_optimizer.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/000_titlepage.tex",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/08_implementation.tex.bak",
+		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/a01_listings.tex",
+		"/Users/till/Desktop/Kabeldeutschland",
 		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/main.tex",
 		"/Users/till/uni/ss11/peano/bachelors-thesis-rohrmann/components/outline.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/011_problem_statement.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/main.bbl",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/003_abstract.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/004_zusammenfassung.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/03_concept_and_design.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/04_implementation.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/05_evaluation.tex",
-		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/002_acknowledgements.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/001_disclaimer.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/titlepage.tex",
 		"/Users/till/uni/ws14/dima/mastersthesis/thesis/gilbert/06_conclusion.tex",
@@ -271,6 +220,31 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"scalarMatrix",
+			"tilde",
+			"GilbertOps",
+			"expOp",
+			"optimization",
+			"type checking",
+			"checking",
+			"nnmf",
+			"parallelizing",
+			"GilbertOps",
+			"dsl",
+			"fully",
+			"color",
+			"repeated",
+			"optimiz",
+			"green",
+			"dual",
+			"seung:anips2001a",
+			"datapoint",
+			"datapoints",
+			"means",
+			"k-means",
+			"mathc",
+			"#",
+			"the digi",
 			"optimization",
 			"tree",
 			"dryad",
@@ -378,6 +352,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"teal",
+			"data point",
+			"data points",
 			"square",
 			"PageRank",
 			"TURed"
@@ -391,50 +368,23 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "05_intermediate_representation.tex",
-					"settings":
-					{
-						"buffer_size": 20324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2645,
-								2645
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "06_gilbert_runtime.tex",
 					"settings":
 					{
-						"buffer_size": 25963,
+						"buffer_size": 25974,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13197,
-								13197
+								22114,
+								22114
 							]
 						],
 						"settings":
@@ -443,248 +393,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2191.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "07_architecture.tex",
-					"settings":
-					{
-						"buffer_size": 6014,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4294,
-								4294
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 372.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "051_optimizer.tex",
-					"settings":
-					{
-						"buffer_size": 5715,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3795,
-								3795
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "08_implementation.tex",
-					"settings":
-					{
-						"buffer_size": 7702,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4795,
-								4795
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 548.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "04_gilbert_typing.tex",
-					"settings":
-					{
-						"buffer_size": 28050,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3164,
-								3505
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 105.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "02_related_work.tex",
-					"settings":
-					{
-						"buffer_size": 49464,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								378,
-								378
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "01_introduction.tex",
-					"settings":
-					{
-						"buffer_size": 9065,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								130,
-								130
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "03_gilbert_language.tex",
-					"settings":
-					{
-						"buffer_size": 17127,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16686,
-								16686
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3564.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "main.tex",
-					"settings":
-					{
-						"buffer_size": 2413,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1613,
-								1613
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 636.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "b01_bibliography.bib",
-					"settings":
-					{
-						"buffer_size": 17870,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								210,
-								210
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/Bibtex.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6226.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -764,6 +473,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 169.0,
+	"side_bar_width": 157.0,
 	"status_bar_visible": true
 }

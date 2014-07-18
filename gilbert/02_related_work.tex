@@ -8,7 +8,7 @@ The challenges entailed by harnessing vast amounts of data propelled much resear
 In recent years a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.
 The different trends can be subsumed into the following categories: Distributed data processing systems, distributed numerical computing systems, database management systems, specialized distributed computing frameworks and explicit parallelization.
 
-\section{Distributed data processing systems}
+\section{Distributed Data Processing Systems}
 
 In the last decade, MapReduce~\cite{dean:c2008a}, created by Google, has been one of the most influential developments in the domain of distributed data processing systems.
 Their novel approach to look at the problem of program parallelization was so intriguing and successful that a whole bunch of researchers and engineers jumped on the bandwagon and spurred a whole new area of research.
@@ -25,10 +25,10 @@ The semantics is the following:
 Given a set of key-value pairs, map is called for each pair independently and produces a set of intermediate key-value pairs.
 How this set is generated is defined by a user defined function (\emph{UDF}).
 After the map call, all key-value pairs are grouped by their key value.
-Reduce is then called for each of these groups and generates a set of result key-value pairs.
+Reduce is then called for each of these groups and generates a set of key-value pairs.
 Even though this abstraction appears to be quite simple it is surprisingly powerful and a lot of algorithms can be expressed this way.
 
-The execution model works as follows:
+The execution model works as follows.
 The input data is stored in the Google file system~\cite{ghemawat:2003a} (\emph{GFS}), a distributed file system.
 Internally the data is divided into input splits which are stored in a replicated fashion across the worker nodes.
 Each input split is processed by a map task.
@@ -37,7 +37,7 @@ Since the worker nodes also contain the input data, the MapReduce scheduler trie
 If this is not possible, the scheduler tries to select a node which is as close as possible to the data with respect to the network topology.
 Thereby, the required network communication will be minimized.
 
-Once the map task is finished it has produced a set of intermediate results which is partitioned according to a given hash function.
+Once the map task is finished it has produced a set of intermediate results, which is partitioned according to a given hash function.
 Each partition is stored locally in a temporary file and serves as the input of a reduce task.
 A reduce task which is spawned on a worker node retrieves its partitions from all map tasks.
 This shuffle step inflicts considerable network communication overhead.
@@ -47,7 +47,7 @@ The result of the reduce tasks will be written to the distributed file system fr
 
 Each map call is executed independently and thus the map phase is embarrassingly parallel.
 Once the shuffle phase is done, the reduce functions can also be executed in parallel.
-Therefore, it is possible to automatically parallelize the execution of a MapReduce job and thus freeing the user from this tedious and cumbersome task.
+Therefore, it is possible to automatically parallelize the execution of a MapReduce job and thus freeing the user from that tedious and cumbersome task.
 By having more map and reduce tasks than worker nodes, the framework achieves good load balancing, because the system can spread them evenly across all nodes.
 Furthermore, one can even achieve a high flexibility by defining many but short lasting tasks.
 The data distribution is controlled by GFS and thus it is no longer a concern of the user.
@@ -57,7 +57,7 @@ The system detects task failures by maintaining for each task an internal state.
 Moreover, it recurrently pings the worker nodes to check their health.
 If a worker nodes does not respond in a certain amount of time, all tasks scheduled to this worker node will be set to failed and eventually rescheduled.
 
-MapReduce is a renunciation from the common programming paradigm by confining the user to the map and reduce function.
+MapReduce is a renunciation from the prevailing programming paradigm by confining the user to the map and reduce function.
 The restricted model allows \citeauthor{dean:c2008a} to efficiently encapsulate automatic parallelization, load balancing, data distribution and fault-tolerance into the framework.
 Therefore, the user no longer has to struggle with these technicalities and can instead concentrate on writing productive code.
 The ease of use and the fact that MapReduce scales well to clusters of thousands of machines are the reason why the concept is so appealing.
@@ -193,7 +193,7 @@ In contrast to the distributed file system based communication scheme in Hadoop 
 This further decreases the I/O overhead of storing data to disk and allows to directly send produced results from a mapper to a reducer.
 However, Twister does not yet support a full functional fault-tolerance.
 
-\section{Distributed numerical computing systems}
+\section{Distributed Numerical Computing Systems}
 
 SystemML~\cite{ghoting:2011a} has the aim to make machine learning algorithms run on massive datasets without burdening the user with low-level implementation details and tedious hand-tuning.
 In order to achieve this, it provides a declarative higher-level language, called Declarative Machine learning Language (\emph{DML}), for linear algebra operations which is automatically executed in a distributed fashion.
@@ -325,7 +325,7 @@ But nowadays, many data analysts share a cluster of commodity hardware and run s
 This interferes with the design of MPI.
 Furthermore, MPI inherently lacks often requested properties such as fault-tolerance, elasticity and reliability.
 
-\section{Database systems}
+\section{Database Systems}
 
 As the statistics community tries to enrich systems like R with massive data processing capabilities, the database community tries to extend database management systems (\emph{DBMS}) with analytic functionality.
 It is already the case that the current SQL standard supports simple statistical computations such as linear regression, correlation coefficient and T-test functions.
@@ -399,7 +399,7 @@ Considering current developments of the statistical capabilities of DBMS as well
 But the system suffers currently from a non-negligible disadvantage when it comes to state of the art machine learning algorithms: Namely iteration support.
 There is no way described how to efficiently realize loops.
 
-\section{Specialized distributed computing frameworks}
+\section{Specialized Distributed Computing Frameworks}
 
 Apart from these more general approaches to distributed data processing and numerical computing systems, there emerged also quite a lot of specialized systems.
 By restricting oneself to a more confined domain, it is often possible to find more efficient ways to solve a problem at the expense of generality.
@@ -431,7 +431,7 @@ The Scala DSL can be either be executed locally or in a distributed fashion usin
 The basic idea of the Scala DSL, which is hiding the implementation details of the parallel logic behind a well understood linear algebra abstraction, is very similar to Gilbert's approach.
 However, Mahout forces the user to do their programming in Scala, which might be a serious obstacle for people coming from the Matlab and R world. 
 
-\section{Explicit parallelization}
+\section{Explicit Parallelization}
 
 A popular approach to develop parallel programs running on a large cluster of computers is to employ message passing.
 A message passing library offers primitives to send and receive messages to and from a remote host while hiding the used communication infrastructure.
@@ -480,8 +480,8 @@ However, multi-threading is limited to a single machine.
 Since the prevailing trend is to employ large shared nothing clusters to solve computing intensive tasks, the authors implemented other parallelization means, too.
 
 One of them is the exposure of MPI to the user.
-Because this gives users great power at hand, it also requires great responsibility of them.
-But Matlab offers MPI's functionality through a simplified and easily usable form, which assists the user in writing error free code.
+Because this gives users great power at hand, it also requires great responsibility.
+But Matlab offers MPI's functionality through a simplified API, which assists the user in writing error free code.
 The Matlab MPI functions encapsulate deadlock and mismatched communication detection.
 A mismatched communication occurs if there is sender or receiver whose communication counterpart (receiver or sender respectively) is missing.
 Yet, the MPI functions offer only a very low-level approach to code parallelization.
