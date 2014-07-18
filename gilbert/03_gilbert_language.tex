@@ -279,7 +279,7 @@ The $'$ operator denotes the transpose of the operand.
 	Addition and Subtraction & $+$, $-$\\
 	Multiplication and Division & $*$, $/$\\
 	Prefix operator & $+$, $-$\\
-	Exponentiation & $pow$\\
+	Exponentiation & \textasciicircum\\
 	Postfix operator & $'$
 	\end{tabular}
 	\caption{Precedence order of mathematical operators in ascending order.}
@@ -295,7 +295,7 @@ The non-terminals \emph{identifier}, \emph{numericLiteral}, \emph{stringLiteral}
 	\hline
 	identifier & [a-zA-Z] [a-zA-Z0-9\_]*\\
 	numericLiteral & [+-]? [0-9]+ (.[0-9]*)? ([eE][+-]?[0-9]+)? | [+-]? .[0-9]+ ([eE][+-]?[0-9]+)? \\
-	stringLiteral & "["]*" | '[']*'\\
+	stringLiteral & "[\textasciicircum"]*" | '[\textasciicircum']*'\\
 	booleanLiteral & true | false
 	\end{tabular}
 	\caption{Definition of generated tokens by regular expressions.}

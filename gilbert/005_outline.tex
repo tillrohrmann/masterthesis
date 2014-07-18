@@ -12,60 +12,64 @@
 
 \section*{Part I: Introduction \& Related Work}
 
+\vspace{3mm}
+
 \noindent {\scshape Chapter 1: Introduction} 
 
 \noindent This chapter gives an introduction into the field of large-scale data processing. 
 It carves out the problems people are currently facing when trying to analyze big data. 
-It further motivates the necessity of Gilbert as a scalable data analysis tool to mitigate the presented challenges.
+It further motivates the necessity of Gilbert as a scalable data analysis tool to solve the presented challenges.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 2: Problem Statement} 
 
 \noindent This chapter specifies the goals of this thesis. 
-More precisely, it defines the goal Gilbert tries to solve, specifies the necessary features and describes how to solve the problem. 
+More precisely, it defines the goal Gilbert tries to solve, specifies the necessary features and describes the solution approach. 
 Moreover, it determines the evaluation criteria to measure the overall success of the work.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 3: Related Work}  
 
-\noindent This chapter presents the related work on the field of large-scalar data processing. 
+\noindent This chapter presents the related work on the field of large-scale numerical data processing. 
 The field can be roughly distinguished into distributed data processing systems, distributed numerical computing systems, database systems, specialized distributed computing frameworks and explicit parallelization.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \section*{Part II: Theory \& Concept}
 
+\vspace{3mm}
+
 \noindent {\scshape Chapter 4: Gilbert Language}  
 
-\noindent This chapter defines Gilbert's programming language, which is mostly a subset of Matlab. 
-Furthermore, it explains Gilbert's fixpoint abstraction which serves as a loop replacement.
+\noindent This chapter defines Gilbert's programming language, which is strongly inspired by \matlab. 
+Furthermore, it explains Gilbert's fixpoint abstraction which serves as loop mechanism.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 5: Gilbert Typing}  
 
 \noindent This chapter explains the assets and drawbacks of static vs. dynamic typing.
 Furthermore, it emphasizes the importance of type information for the execution of Gilbert programs. 
-It explains how type information can be automatically inferred without having to clutter the programming language.
+It explains how type information can be automatically inferred without having to clutter the programming code.
 It also shows how type inference can be used to infer matrix sizes.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 6: Intermediate Representation}  
 
 \noindent This chapter defines Gilbert's intermediate representation for linear algebra programs and explains its benefits.
 It further gives an example of how the compiling process proceeds.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 7: Gilbert Optimizer} 
 
 \noindent This chapter describes Gilbert's optimizer.
 Moreover, the matrix multiplication reordering and transpose pushdown optimization strategy is explained in detail.
 
- \vspace{1mm}
+ \vspace{3mm}
 
 \noindent {\scshape Chapter 8: Gilbert Runtime}  
 
@@ -73,44 +77,50 @@ Moreover, the matrix multiplication reordering and transpose pushdown optimizati
 Furthermore, it describes different blocking schemes for matrices and weighs the assets and drawbacks up for each scheme.
 It is also explained how the different linear algebra operations are implemented within the massively parallel dataflow systems Spark and Stratosphere.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \section*{Part III: Architecture \& Implementation}
+
+\vspace{3mm}
 
 \noindent {\scshape Chapter 9: Architecture}  
 
 \noindent This chapter presents Gilbert's layered architecture.
 It further explains the design decisions which have been made to make Gilbert easily extensible.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 10: Implementation}  
 
 \noindent This chapter covers the implementation details.
-It explains which libraries we use for the linear algebra operations and what kind of execution engines are currently supported.
+It explains which libraries were used for the linear algebra operations and what kind of execution engines are currently supported.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \section*{Part IV: Evaluation \& Conclusion}
+
+\vspace{3mm}
 
 \noindent {\scshape Chapter 11: Evaluation}  
 
 This chapter evaluates how well Gilbert meets the defined goal.
 It assesses Gilbert's scalability, optimizer and blocking scheme for matrices.
 Moreover, algorithms implemented with Gilbert are compared to their optimal implementations to gauge Gilbert's performance.
-At last, the performance of Gilbert's math back ends, Breeze and Mahout, is evaluated.
+At last, the performance of Gilbert's math back ends, Breeze and Mahout, are evaluated.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \noindent {\scshape Chapter 12: Conclusion}  
 
 This chapter closes the thesis with drawing a conclusion of the obtained results and giving an outlook on future developments.
 
-\vspace{1mm}
+\vspace{3mm}
 
 \section*{Appendices}
+
+\vspace{3mm}
 
 \noindent {\scshape Appendix 1: Gilbert's Mathematical Operations}
 
 This appendix lists all available mathematical operations of Gilbert.
-This includes the primitive linear algebra operators as well as the supported Matlab functions.
+This includes the primitive linear algebra operators as well as the supported functions.

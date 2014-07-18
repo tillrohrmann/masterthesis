@@ -58,19 +58,19 @@ In order to calculate the result of such an operation, we only have to join the 
 	\centering
 	\begin{subfigure}{.3\linewidth}
 		\centering
-		\includegraphics[width=0.7\textwidth]{images/rowPartitioning.png}
+		\includegraphics[width=0.55\textwidth]{images/rowPartitioning.png}
 		\caption{Row partitioning}
 		\label{fig:rowPartitioning}
 	\end{subfigure}
 	\begin{subfigure}{.3\linewidth}
 		\centering
-		\includegraphics[width=0.7\textwidth]{images/columnPartitioning.png}
+		\includegraphics[width=0.55\textwidth]{images/columnPartitioning.png}
 		\caption{Column partitioning}
 		\label{fig:columnPartitioning}
 	\end{subfigure}
 	\begin{subfigure}{.3\linewidth}
 		\centering
-		\includegraphics[width=0.7\textwidth]{images/quadraticBlockPartitioning.png}
+		\includegraphics[width=0.55\textwidth]{images/quadraticBlockPartitioning.png}
 		\caption{Quadratic block partitioning}
 		\label{fig:quadraticBlockPartitioning}
 	\end{subfigure}
@@ -85,7 +85,7 @@ The repartitioning is especially grave, since $B$ has to be broadcasted to every
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/rowMM.png}
+	\includegraphics[width=0.6\linewidth]{images/rowMM.png}
 	\caption{Matrix multiplication of $A$ and $B$. The required data to calculate row $r$ are highlighted.}
 	\label{fig:rowPartitioningMM}
 \end{figure}
@@ -218,7 +218,7 @@ The resulting dataflow plan is shown in \cref{fig:planScalarMatrixTransformation
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.3\linewidth]{images/planScalarMatrixTransformation.png}
+	\includegraphics[width=0.25\linewidth]{images/planScalarMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{ScalarMatrixTransformation}.}
 	\label{fig:planScalarMatrixTransformation}
 \end{figure}
@@ -230,7 +230,7 @@ The resulting dataflow plan is shown in \cref{fig:planCellwiseMatrixTransformati
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.3\linewidth]{images/planCellwiseMatrixTransformation.png}
+	\includegraphics[width=0.25\linewidth]{images/planCellwiseMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{CellwiseMatrixTransformation}.}
 	\label{fig:planCellwiseMatrixTransformation}
 \end{figure}
@@ -244,7 +244,7 @@ The map function is called for each of the matching pairs created by the join no
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.35\linewidth]{images/planCellwiseMatrixMatrixTransformation.png}
+	\includegraphics[width=0.365\linewidth]{images/planCellwiseMatrixMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{CellwiseMatrixMatrixTransformation}.}
 	\label{fig:planCellwiseMatrixMatrixTransformation}
 \end{figure}
@@ -273,7 +273,7 @@ The whole process is illustrated in \cref{fig:RMM}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.4\linewidth]{images/rmm.png}
+	\includegraphics[width=0.4777\linewidth]{images/rmm.png}
 	\caption{Replication based matrix multiplication.}
 	\label{fig:RMM}
 \end{figure}
@@ -309,7 +309,7 @@ The corresponding dataflow plan is shown in \cref{fig:planMatrixMultiplication}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.3\linewidth]{images/planMatrixMultiplication.png}
+	\includegraphics[width=0.354\linewidth]{images/planMatrixMultiplication.png}
 	\caption{Dataflow plan of the \code{MatrixMult} operator.}
 	\label{fig:planMatrixMultiplication}
 \end{figure}
@@ -342,7 +342,7 @@ The corresponding dataflow plan is shown in \cref{fig:planMaximumVectorwiseTrans
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.3\linewidth]{images/planMaximumVectorwiseTransformation.png}
+	\includegraphics[width=0.25\linewidth]{images/planMaximumVectorwiseTransformation.png}
 	\caption{Dataflow plan of the \code{VectorwiseMatrixTransformation} with the \code{max} operation.}
 	\label{fig:planMaximumVectorwiseTransformation}
 \end{figure}
@@ -361,9 +361,9 @@ The respective dataflow plan can be found in \cref{fig:planAggregateMatrixTransf
 The $default$ variable holds the initial value for the fold operation.
 In case that the aggregate is not combinable, it has to be implemented individually.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.3\linewidth]{images/planAggregateMatrixTransformation.png}
+	\includegraphics[width=0.25\linewidth]{images/planAggregateMatrixTransformation.png}
 	\caption{Dataflow plan of the \code{AggregateMatrixTransformation}.}
 	\label{fig:planAggregateMatrixTransformation}
 \end{figure}

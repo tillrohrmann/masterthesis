@@ -68,7 +68,7 @@ Thus, functions are considered first-class citizens in Gilbert.
 The set of intermediate operators can be distinguished into three categories: \emph{Creating operators}, \emph{transforming operators} and \emph{writing operators}.
 All of these categories will be explained in the following subsections.
 
-\subsection{Creating operators}
+\subsection{Creating Operators}
 
 Creating operators generate or load some data depending on the user's inputs.
 A list of all supported operators with its type definition and a short explanation can be found in \cref{tab:creatingOperators}.
@@ -104,7 +104,7 @@ The specified Gauss distribution is used to generate random values for the resul
 	\label{tab:creatingOperators}
 \end{table}
 
-\subsection{Transforming operators}
+\subsection{Transforming Operators}
 
 The transforming operators constitute the main abstraction of the linear algebra operations.
 They group operations with similar properties together and thus allowing an easier reasoning and optimization of the underlying program.
@@ -202,7 +202,7 @@ The convergence function is called with the current and the previous value.
 Based on these values it can check for convergence.
 For further details see \cref{sec:languageFeatures}.
 
-\subsection{Writing operators}
+\subsection{Writing Operators}
 
 The writing operators are used to make the computed results accessible to the user by writing them back to disk.
 There exists a writing operation for each supported type.
@@ -223,7 +223,7 @@ The list of all writing operations can be seen in \cref{tab:writingOperations}.
 	\label{tab:writingOperations}
 \end{table}
 
-\subsection{Compilation example}
+\subsection{Compilation Example}
 
 The intermediate representation is the target format of the compilation process after it has been parsed and typed.
 In order to illustrate the compilation process and to get a feeling for the intermediate representation, we will compile an example program.

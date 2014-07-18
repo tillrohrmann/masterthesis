@@ -12,24 +12,24 @@
 
 In den vergangenen Jahren ist die Menge der erzeugten und gesammelten Daten regelrecht explodiert.
 Fast konstante Wachstumsraten erzeugen ein exponentielles Ansteigen der aufgezeichneten Daten.
-Mit steigender Menge der Daten hat man den Nutzen und Wert der in ihnen verborgenen Informationen erkannt.
-Jedoch werden leistungsfähige Analyse-Werkzeuge benötigt, um gewinnbringende Erkenntnisse aus den Daten zu extrahieren.
+Mit steigender Menge der Daten hat man den Nutzen und Wert der in ihnen verborgenen Erkenntnisse bemerkt.
+Jedoch werden leistungsfähige Analysewerkzeuge benötigt, um gewinnbringende Erkenntnisse aus den Daten zu extrahieren.
 Unglücklicherweise haben sich unsere Analysefähigkeiten nicht im gleichen Maße wie das Datenvolumen entwickelt.
-So ist es zu erklären, dass die am meisten verwendeten statistischen Programme nur auf einem Computer ausgeführt werden können.
+So ist es zu erklären, dass die am meisten verwendeten statistischen Programme immer noch nur auf einem Computer ausgeführt werden können.
 Dadurch kann man nur Datenmengen verarbeiten, die in den Hauptspeicher eines einzelnen Rechners passen.
-Die vielversprechendste Lösung um der Datenflut Herr zu werden stellt die parallele Ausführung unserer Analyse-Werkzeuge dar.
+Die vielversprechendste Lösung, um der Datenflut Herr zu werden, stellt die parallele Ausführung unserer Analysewerkzeuge dar.
 
-Wir stellen Gilbert, eine verteilte Umgebung für lineare Algebra auf dünnbesetzte Matrizen, als Lösung des oben genannten Problems vor.
-Gilbert bietet eine Matlab-artige Programmiersprache zum Erstellen von Programmen der linearen Algebra, die automatisch parallelisiert werden.
+Wir stellen Gilbert, eine verteilte Umgebung für lineare Algebra für dünnbesetzte Matrizen, als Lösung des oben genannten Problems vor.
+Gilbert bietet eine \matlab-artige Programmiersprache zum Erstellen von Programmen der linearen Algebra, die automatisch parallelisiert werden.
 Die Parallelisierung wird dadurch erreicht, dass Gilbert das eingegebene Programm in ein Format übersetzt, das die Ausführung auf einem massiv parallelen Datenflusssystem ermöglicht.
-Vor der eigentlichen Ausführung, werden verschiedene Ausführungsstrategien bewertet und der beste Ausführungsplan von einem kosten-basierten Optimierer ausgewählt.
+Vor der eigentlichen Ausführung, werden verschiedene Ausführungsstrategien bewertet und der beste Ausführungsplan von einem kostenbasierten Optimierer ausgewählt.
 Gilbert unterstützt Spark und Stratosphere, zwei parallele Datenflusssysteme, um Programme auf einem Cluster von Computern auszuführen.
 Verteilte Matrizen werden durch quadratische Blöcke dargestellt, die eine gute Balance zwischen Datenparallelität und Datengranularität garantiert.
 
 Gründliche Untersuchungen haben ergeben, dass Gilbert gut geeignet ist Datenmenge verschiedener Größe, die die Speicherkapazität eines einzelnen Rechners übersteigen, auf einer variierenden Anzahl an Rechner zu verarbeiten.
 Drei bekannte Algorithmen des maschinellen Lernens, PageRank, k-means und non-negative matrix factorization (NMF), wurden mittels Gilbert implementiert.
-Die erfolgreiche Implementierung unterstreicht Gilberts Fähigkeit verteilte Iterationen auszuführen.
+Die erfolgreiche Implementierung belegt Gilberts Fähigkeit verteilte Iterationen ausführen zu können.
 Dies ist eine essentielle Voraussetzung um eine Vielzahl an Algorithmen des maschinellen Lernens implementieren zu können.
-Die Laufzeit der Algorithmen, die mittels Gilbert implementiert wurden, wird mit der Laufzeit von optimierten Algorithmen verglichen.
+Die Laufzeit der Algorithmen, die mittels Gilbert implementiert wurden, wurde mit der Laufzeit von optimierten Algorithmen verglichen.
 Die Ergebnisse zeigen, dass Gilbert nicht so schnell wie die optimierten Algorithmen ist.
 Die Laufzeiteinbußen werden jedoch durch die Benutzerfreundlichkeit und die Einfachheit der Programmierung, die Entwicklungsprozesse stark vereinfacht, kompensiert.
