@@ -64,19 +64,21 @@ legend style={font=\tiny}
 
 \input{001_disclaimer}
 
+\pagestyle{plain}
+
 \input{002_acknowledgements}
 
 \input{003_abstract}
 
 \input{004_zusammenfassung}
 
-\tableofcontents{\thispagestyle{empty}}
+\tableofcontents
 
 \input{005_outline}
 
 %--------------------------------------------------------------
 \mainmatter
-
+\pagestyle{fancy}
 \part{Introduction \& Related Work}
 \label{part:introductionandrelatedwork}
 \input{01_introduction}
