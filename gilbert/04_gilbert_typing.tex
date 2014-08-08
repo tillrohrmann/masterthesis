@@ -4,14 +4,14 @@
 \chapterquote{Experience without theory is blind, but theory without experience\\ is mere intellectual play.}{Immanuel Kant, (1724 - 1804)}
 
 Program development in general is an error-prone and time-consuming task.
-It usually involves besides the actual development phase several iterations of bug fixing.
+It usually involves, besides the actual development phase, several iterations of bug fixing.
 In order to reduce the number of pitfalls a programmer can fall into, typing systems were developed.
 Typing systems assign a \emph{type} to language constructs such as variables, functions and expressions.
-That way the system gives meaning to an otherwise vacuous program.
+That way, the system gives meaning to an otherwise vacuous program.
 In the memory of a computer, everything is represented as a sequence of bits, no matter whether it is an instruction code, memory address, character, boolean or floating-point number.
 For the computer there is no way to intrinsically differentiate between the different meanings without an additional hint.
 This hint comes in the form of types.
-Knowing that a bit sequence represents a floating-point number, the computer is aware of the valid values and operations and can check for correct usage.
+Knowing that a bit sequence represents a floating-point number, the computer is aware of the valid values and operations and can check for its correct usage.
 
 The pursued goal in typing theory is to develop a system which detects erroneous program behavior and is at the same time \emph{sound} and \emph{complete}.
 Soundness means that if a program passes the typer, then it behaves correctly.
@@ -21,14 +21,14 @@ For example, consider the division operation.
 The code \code{1/0} would be well-typed by almost all common type checkers, because integers are divisible.
 However, the code will cause a runtime error because of division by zero.
 In order to detect this type of error, the type checking would have to be far more detailed.
-Therefore, one usually relaxes the constraints.
+Therefore, the constraints are usually relaxed.
 In general, current type systems can already detect many different errors but they are still incomplete and only partially sound.
 
 Type checking can be distinguished into two categories: \emph{static} and \emph{dynamic} type checking.
 Static type checkers work on the source code and assign a type to each expression at compile-time.
 If it detects any type incompatibilities, such as providing the wrong arguments to a function call, assigning conflicting data types or to apply not supported operations, the type checker will alert the programmer.
-Most type checkers are designed to act conservative, meaning that they relax the constraints of soundness and completeness for the sake of decidability.
-It is easy to see that we can reduce the typing problem to a halting problem, if we assume soundness and completeness.
+Most type checkers are designed to act conservatively, meaning that they relax the constraints of soundness and completeness for the sake of decidability.
+It is easy to see that the typing problem can be reduced to the halting problem, if soundness and completeness are assumed.
 For this purpose consider \cref{lst:typingHaltingProblem}.
 In order to decide whether this code is well- or ill-typed, the typer has to decide whether \code{code\_which\_can\_run\_forever()} halts.
 Since the halting problem is undecidable, also the set of programs producing a runtime type error is undecidable.
@@ -58,9 +58,10 @@ Dynamic downcasts, for instance, as they are common in \code{C++}, can only be i
 Static type checking analyzes the program prior to execution to detect errors.
 This has the advantage that possible programming mistakes are caught early in the development process.
 An assignment of a string to a double would be an example for such a mistake.
-As indicated by \cite{westland:jss2002a}, who investigated the influence of errors during software development and found out that unfixed errors become exponentially more costly with each phase, it is important to detect and correct errors as soon as possible.
-Static typing usually requires the user to specify types explicitly in the source code, because the language lacks type inference or has ambiguities which prevent the type inference from inferring the correct type.
-Java, for example, does not have type inference and therefore the user had specify types redundantly.
+As indicated by \textcite{westland:jss2002a}, who investigated the influence of errors during the software development process, unfixed errors become exponentially more costly with each phase.
+Therefore, it is important to detect and correct errors as soon as possible.
+Static typing usually requires the user to specify types explicitly in the source code, because the language lacks type inference or has ambiguities which prevent the type inference from inferring the correct types.
+Java, for example, does not have type inference and therefore the user has to specify types redundantly.
 In line $1$ of \cref{lst:javaTypeAnnotation}, we see that we have to specify twice the type \code{Object}, even though this can easily be deduced from the right side of the assignment.
 Furthermore, in line $4$ we see an addition of two integers.
 It is clear that the result is again an integer and thus the \code{int} type specifier is dispensable.
@@ -79,38 +80,38 @@ int c = a + b;
 
 Proponents of static typing emphasize that explicit type information, as they occur in Java and many other programming languages, documents the code.
 It is easier for a programmer to use existing code if he can identify function arguments and their types with one glance, for instance. 
-Additionally, it is possible for the compiler to apply sophisticated optimization techniques if it knows the types.
-The compiler could, for example, use more efficient machine instructions for floating-point calculation if it operates on these values.
-Furthermore, it is possible to substitute virtual function calls for direct calls if the actual object type is known.
+Additionally, it is possible for the compiler to apply sophisticated optimization techniques, if it knows the types.
+The compiler could, for example, use more efficient machine instructions for floating-point calculations, if it operates on these values.
+Furthermore, it is possible to substitute virtual function calls for direct calls, if the actual object type is known.
 Another benefit of static typing is the increased type safety.
 After passing the type check, the program is guaranteed to fulfill for all inputs some set of type safety properties.
 This frees the runtime from checking them and thus the program can be executed more efficiently.
 Type information additionally helps to provide a better programming experience in an IDE by offering type dependent context help.
 If the IDE knows the type of a variable, then it can tell the programmer which methods this type supports, for instance.
-And last but not least, explicit typing permits a better abstraction of functionality and thus modularity.
+And last but not least, explicit typing permits a better abstraction of functionality and, thus, increases modularity.
 Interfaces can be defined to orchestrate the interaction between several software components allowing to develop them independently from each other.
 
 In contrast to these arguments, advocates of dynamic typing argue that their approach is more vivid and better suited for prototyping, because the static typing approach is too rigid.
 This comes especially into effect for programs in a highly dynamic environment with unknown or quickly changing requirements such as data integration.
 Another advantage is that the compile time is reduced because of the fewer passes the compiler has to go through.
-However, the avoided type checks have to be then realized within the runtime which adds overhead.
+However, the avoided type checks will then be realized within the runtime which adds overhead.
 But the dynamic nature allows interpreters to dynamically load code more quickly, because all type checkings are deferred until its actual execution.
 Moreover, dynamic languages support duck typing as a powerful tool to write reusable code.
 The term duck typing originates from the poet James Whitcomb Riley, who stated: \enquote{When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.}~\cite{heim:2007a}.
 Essentially, duck typing means that not the actual type of an object decides whether a program is well- or ill-typed but the set of supported methods and its properties.
-For example, consider a function which calls a method \code{count} on its single parameter.
-Then all function calls are valid which are called with an argument having a method \code{count} independent of its actual type.
+For example, consider a function which calls a method \code{count} on its given parameter.
+Then all function calls are valid which are called with an argument having a method \code{count}, independently of its actual type.
 That way, the programmer can write code which is applicable for a wide variety of types without having to specify them explicitly.
 \textcite{ousterhout:c1998a} even goes further and claims that static typed languages does not guarantee a higher type safety than dynamic typed languages.
-Furthermore, they are more verbose and it is difficult to write reusable code.
+Furthermore, he states that they are more verbose and it is difficult to write reusable code.
 However, it is unclear in which way reducing language features leads to a more powerful and expressive language. 
 
 The debate of whether statically or dynamically typed languages are superior has almost reached religious character.
 It is likely that none of the approaches alone solves all problems.
 Instead, a combination of the strengths of both paradigms promises the best results for the aforementioned problems~\cite{meijer:2004a}.
 
-We are in the unfortunate situation that Matlab belongs to the class of dynamically typed languages and Gilbert requires type information for the parallel execution.
-The reason why Gilbert needs type information is that the parallel data processing systems, used to run Gilbert in parallel, have to know which data types are passed from one worker node to another.
+We are in the unfortunate situation that Matlab belongs to the class of dynamically typed languages and Gilbert requires type information for its parallel execution.
+The parallel data processing systems, used to run Gilbert programs, have to know which data types are passed from one worker node to another.
 Therefore, we did not have any choice and had to enrich Matlab with type information.
 
 There exists research of how to add explicit type information to Matlab.
@@ -122,7 +123,7 @@ In the case that the type inference algorithm cannot properly infer the types, t
 We decided to pursue a similar approach as \textcite{furr:2009a}.
 \citeauthor{furr:2009a} added type information to Ruby by adding special comments to the respective code sections.
 Thereby, the code does not break with the Ruby standard and still contains type information.
-As typing system, we use the Hindley-Milner (HM) type system~\cite{hindley:tams1969a,milner:jcss1978a} and a slightly derived form of algorithm W~\cite{damas:1982a} for type inference which will be described in the next section in detail.
+As typing system, we use the Hindley-Milner (HM) type system~\cite{hindley:tams1969a,milner:jcss1978a} and a slightly derived form of algorithm W~\cite{damas:1982a} for type inference, which will be described in the next section in detail.
 Even though there exist more powerful type systems than the HM type system, it has the appealing charm that the algorithm W is sound, complete and decidable with respect to the type system.
 Furthermore, it has proven to type several algorithms implemented within Gilbert correctly.
 
@@ -135,7 +136,7 @@ In fact, HM type inference was first implemented as the typing part of the progr
 HM types the expressions of the lambda calculus enriched with the \code{let}-expression.
 For a detailed review of the lambda calculus, the interested reader is referred to the article of \textcite{cardone:hhl2006a}.
 
-The set of expressions $e$ contain a variable, a function application, a function abstraction and the \code{let}-expression.
+The set of expressions $e$ contains variables, function applications, function abstractions and \code{let}-expressions.
 The formal definition of $e$ is
 \begin{eqnarray*}
 e &= & x\quad\text{(Variable)}\\
@@ -145,7 +146,7 @@ e &= & x\quad\text{(Variable)}\\
 \end{eqnarray*}
 For those unconversant with lambda expressions, we will quickly revise them.
 The function application is written as $e_1\ e_2$ whereas $e_1$ denotes a function and $e_2$ the function argument which is applied to the function body.
-The function abstraction $\lambda x.e$ is the equivalent of an anonymous function as it is known from many program languages.
+The function abstraction $\lambda x.e$ is the equivalent of an anonymous function, as it is known from many program languages.
 It is initiated with a $\lambda$ followed by its function parameter $x$ and the function body $e$.
 The let-expression $\code{let } x = e_1 \code{ in } e_2$ introduces a new variable $x$, having the value $e_1$, into the context $\Gamma$.
 This variable can be used within the expression $e_2$.
@@ -153,7 +154,7 @@ The semantic of the assignment is that every occurrence of $x$ in $e_2$ is repla
 The context $\Gamma$ contains all type information so far known and is a mapping from variables to types.
 A more precise definition is given in a later paragraph.
 
-One might think that the lambda calculus is only a toy language and that the set of expressions is not expressive enough to represent a common programming problem.
+One might think that the lambda calculus is only a toy language and that the set of expressions is not expressive enough to represent any common programming problem.
 However, it turned out that the lambda calculus is Turing complete and thus any programming language can be reduced to it.
 Therefore, it is enough to reason about the typing aspects of these expressions.
 
@@ -174,8 +175,8 @@ If the type is known, it can be a type constant, such as \code{int}, \code{float
 A parametric type takes itself type arguments to form a concrete type.
 An example of a parametric type is the \code{Set} or the \code{List} which can be instantiated with arbitrary element types.
 Type constants are a special case of the application rule with an empty list of arguments.
-If the type not yet known but it can only be a single type, then use the type variable $\alpha$.
-Often it can be the case that these type variables are replaced with known types at a later stage of the type inference.
+If the type is not yet known but can only be a single type, then a type variable $\alpha$ is used.
+Often, it can be the case that these type variables are replaced with known types at a later stage of the type inference.
 
 In contrast to monotypes, polytypes $\sigma$ denote multiple types.
 They are defined by
@@ -184,20 +185,21 @@ They are defined by
 &|& \forall \alpha .\sigma
 \end{eqnarray*}
 .
-A type of the form $\forall \alpha.\sigma$ indicates the set of all types where $\alpha$ is substituted by a concrete type $\tau$ within $\sigma$.
+A type of the form $\forall \alpha.\sigma$ denotes the set of all types where $\alpha$ is substituted by a concrete type $\tau$ within $\sigma$.
 Consider for example the tuple access function \code{fst} which takes a tuple and returns the first entry.
 The function \code{fst} should be applicable to all different types of tuples, for example $(\code{int}, \code{int})$, $(\code{string}, \code{float})$, etc.
-Thus, \code{fst} cannot have a monotype, because then it would only work for one concrete tuple type.
+If \code{fst} has a monotype, then it will only work for one concrete tuple type.
+Therefore, \code{fst} has a polytype.
 The actual type of \code{fst} is $\forall \alpha,\beta . (\alpha, \beta) \rightarrow \alpha$.
 Depending on the applied tuple argument the quantified type variables are instantiated respectively.
-Polytypes permit to implement generic functions in a type safe manner and this is called parametric polymorphism.
+Polytypes permit to implement generic functions in a type safe manner and that is called parametric polymorphism.
 It is important to note that polytypes introduce ambiguities with respect to the calculated type.
 An expression having the type $\forall \alpha. \alpha$ also has the type $\code{int}$, for example.
 Thus, the latter type would be a valid inferred type, even though the first one is more general.
-In order to dissolve this ambiguity, the typing system always looks for the most general type.
+In order to dissolve this ambiguities, the typing system always looks for the most general type.
 
-Usually, expressions depend on other expression and thus their types, too.
-Therefore, we a kind of type dictionary where we note types of expressions we have already seen while parsing the code.
+Usually, expressions depend on other expression and, thus, their types.
+Therefore, a type dictionary is maintained where types of expressions, which have already been seen while parsing the code, are stored.
 And this is exactly what the context $\Gamma$ is used for.
 $\Gamma$ contains a list of pairs $x:\sigma$, which are called assumptions.
 The formal definition of $\Gamma$ is
@@ -206,12 +208,12 @@ The formal definition of $\Gamma$ is
 &|& \epsilon\ \text{(empty)}
 \end{eqnarray*}
 .
-Having defined the context, expressions and types we can now specify the typing judgment $\Gamma \vdash x : \sigma$.
+Having defined the context, expressions and types, the typing judgment $\Gamma \vdash x : \sigma$ can be defined.
 It means that given the context $\Gamma$ the variable $x$ has the type $\sigma$.
 The way how to come up with these judgments is defined by deduction rules.
-Before we will take a closer look at them, we first have to introduce some auxiliary functions.
+Before taking a closer look at them, some auxiliary functions are first introduced.
 
-An important distinction in a HM type expression is the state of the type variables.
+An important distinction in an HM type expression is the state of the type variables.
 In general, type variables can appear as \emph{free} or as \emph{bound} variables.
 A type variable $\alpha$ is called bound if it occurs in an expression of the form $\forall \alpha. \tau$.
 This means that $\forall$ binds the subsequent variable in the context of the expression.
