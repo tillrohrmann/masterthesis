@@ -2,10 +2,10 @@
 \clearemptydoublepage
 
 \phantomsection
-\addcontentsline{toc}{chapter}{Outline of the Thesis}
+\addcontentsline{toc}{chapter}{Outline of Thesis}
 
 \begin{center}
-	\hheading{Outline of the Thesis}
+	\hheading{Outline of Thesis}
 \end{center}
 
 \section*{Part I: Introduction \& Related Work}
@@ -14,23 +14,23 @@
 
 \noindent {\scshape Chapter 1: Introduction} 
 
-\noindent This chapter gives an introduction into the field of large-scale data processing. 
-It carves out the problems people are currently facing when trying to analyze big data. 
-It further motivates the necessity of Gilbert as a scalable data analysis tool to solve the presented challenges.
+\noindent This chapter gives an introduction to the field of large-scale data processing. 
+It points out the problems people are currently facing when trying to analyze big data. 
+It further explains the necessity of Gilbert as a scalable data analysis tool to solve the presented challenges.
 
 \vspace{3mm}
 
 \noindent {\scshape Chapter 2: Problem Statement} 
 
 \noindent This chapter specifies the goals of this thesis. 
-More precisely, it defines the goal Gilbert tries to solve, specifies the necessary features and describes the solution approach. 
+More precisely, it defines the problem Gilbert tries to solve, specifies the necessary features and describes the solution approach. 
 Moreover, it determines the evaluation criteria to measure the overall success of the work.
 
 \vspace{3mm}
 
 \noindent {\scshape Chapter 3: Related Work}  
 
-\noindent This chapter presents the related work on the field of large-scale numerical data processing. 
+\noindent This chapter presents the related work on the field of large-scale data processing. 
 The field can be roughly distinguished into distributed data processing systems, distributed numerical computing systems, database systems, specialized distributed computing frameworks and explicit parallelization.
 
 \vspace{3mm}
@@ -42,7 +42,7 @@ The field can be roughly distinguished into distributed data processing systems,
 \noindent {\scshape Chapter 4: Gilbert Language}  
 
 \noindent This chapter defines Gilbert's programming language, which is strongly inspired by \matlab. 
-Furthermore, it explains Gilbert's fixpoint abstraction which serves as loop mechanism.
+Furthermore, it explains Gilbert's fixpoint abstraction, which serves as loop mechanism.
 
 \vspace{3mm}
 
@@ -58,22 +58,22 @@ It also shows how type inference can be used to infer matrix sizes.
 \noindent {\scshape Chapter 6: Intermediate Representation}  
 
 \noindent This chapter defines Gilbert's intermediate representation for linear algebra programs and explains its benefits.
-It further gives an example of how the compiling process proceeds.
+It also gives an example of how the compiling process proceeds.
 
 \vspace{3mm}
 
 \noindent {\scshape Chapter 7: Gilbert Optimizer} 
 
-\noindent This chapter describes Gilbert's optimizer.
-Moreover, the matrix multiplication reordering and transpose pushdown optimization strategy is explained in detail.
+\noindent This chapter describes Gilbert's optimizer and the employed optimization strategies.
+The matrix multiplication reordering and transpose pushdown optimization strategy are explained in detail.
 
  \vspace{3mm}
 
 \noindent {\scshape Chapter 8: Gilbert Runtime}  
 
 \noindent This chapter explains the internal data structures used to represent distributed matrices and vectors.
-Furthermore, it describes different blocking schemes for matrices and weighs the assets and drawbacks up for each scheme.
-It is also explained how the different linear algebra operations are implemented within the massively parallel dataflow systems Spark and Stratosphere.
+Furthermore, it describes different blocking schemes for matrices and weighs the assets and drawbacks for each scheme up.
+It is also explained how the different linear algebra operations are implemented within massively parallel dataflow systems, such as Spark and Stratosphere.
 
 \vspace{3mm}
 
@@ -103,7 +103,7 @@ It explains which libraries were used for the linear algebra operations and what
 
 This chapter evaluates how well Gilbert meets the defined goal.
 It assesses Gilbert's scalability, optimizer and blocking scheme for matrices.
-Moreover, algorithms implemented with Gilbert are compared to their optimal implementations to gauge Gilbert's performance.
+Moreover, algorithms implemented with Gilbert are compared to their optimized versions to gauge Gilbert's performance.
 At last, the performance of Gilbert's math back ends, Breeze and Mahout, are evaluated.
 
 \vspace{3mm}
