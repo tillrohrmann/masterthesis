@@ -232,7 +232,13 @@ The Matlab implementation can be seen in \cref{lst:PageRank}.
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
+		\begin{lstlisting}[language=Matlab,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={ones, fixpoint},
+		  deletekeywords={eps},
+		  ]
 numVertices = 10;
 % load network matrix
 N = load("network.csv", numVertices, numVertices);

@@ -50,11 +50,14 @@ However, this does not impose a serious restriction, since all multi-dimensional
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
-		c = {true, 2*2, 'cell', 'array'};
-		b = c{1} & false; % = false
-		d = c{2} ^ 2; % = 16
-		s = {c{4}, c{3}}; % = {'array', 'cell'} 
+		\begin{lstlisting}[language=Matlab,
+  			commentstyle=\color{black},
+  			stringstyle=\color{black},
+		]
+c = {true, 2*2, 'cell', 'array'};
+b = c{1} & false; % = false
+d = c{2} ^ 2; % = 16
+s = {c{4}, c{3}}; % = {'array', 'cell'} 
 		\end{lstlisting}
 	\end{CenteredBox}
 	\caption{Cell array usage in Gilbert. Definition of a 4 element cell array which is accessed subsequently.}
@@ -125,7 +128,11 @@ The final result is retrieved from the final cell array value in line $4$.
 \begin{listing}
 	\centering
 	\begin{sublisting}{.4\linewidth}
-		\begin{lstlisting}[language=Matlab]
+		\begin{lstlisting}[language=Matlab,
+		  commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		]
 A = 0;
 for i = 1:10
 	A = A + i;

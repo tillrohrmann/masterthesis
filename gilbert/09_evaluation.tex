@@ -214,7 +214,11 @@ The operator $.*$, $./$ and $*$ denote the cell wise multiplication, the cell wi
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
+		\begin{lstlisting}[language=Matlab,
+			commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		]
 		V = load(); % load matrix to factorize
 		W = load(); % load initial values of W
 		H = load(); % load initial value of H
@@ -712,20 +716,24 @@ That importance measure is in fact the PageRank.
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
-		% load adjacency matrix
-		A = load(); 
-		maxIterations = 10;
-		d = sum(A, 2); % outdegree per vertex
-		% create the column-stochastic transition matrix
-		T = (diag(1 ./ d) * A)'; 
-		r = ones(numVertices, 1) / numVertices; % initialize the ranks
-		e = ones(numVertices, 1) / numVertices;
-		% PageRank calculation
-		while i < maxIterations
-			r = .85 * T * r + .15 * e
-			i = i + 1
-		end
+		\begin{lstlisting}[language=Matlab,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={ones},]
+% load adjacency matrix
+A = load(); 
+maxIterations = 10;
+d = sum(A, 2); % outdegree per vertex
+% create the column-stochastic transition matrix
+T = (diag(1 ./ d) * A)'; 
+r = ones(numVertices, 1) / numVertices; % initialize the ranks
+e = ones(numVertices, 1) / numVertices;
+% PageRank calculation
+while i < maxIterations
+	r = .85 * T * r + .15 * e
+	i = i + 1
+end
 		\end{lstlisting}
 	\end{CenteredBox}
 	\caption{MATLAB PageRank implementation.}
@@ -742,17 +750,21 @@ As it can be seen in \cref{lst:gilbertPageRank}, the replacement is only of synt
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
-		% load adjacency matrix
-		A = load();
-		maxIterations = 10;
-		d = sum(A, 2); % outdegree per vertex
-		% create the column-stochastic transition matrix
-		T = (diag(1 ./ d) * A)'; 
-		r_0 = ones(numVertices, 1) / numVertices; % initialize the ranks
-		e = ones(numVertices, 1) / numVertices;
-		% PageRank calculation
-		fixpoint(r_0, @(r) .85 * T * r + .15 * e, maxIterations)
+		\begin{lstlisting}[language=Matlab,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={ones, fixpoint},]
+% load adjacency matrix
+A = load();
+maxIterations = 10;
+d = sum(A, 2); % outdegree per vertex
+% create the column-stochastic transition matrix
+T = (diag(1 ./ d) * A)'; 
+r_0 = ones(numVertices, 1) / numVertices; % initialize the ranks
+e = ones(numVertices, 1) / numVertices;
+% PageRank calculation
+fixpoint(r_0, @(r) .85 * T * r + .15 * e, maxIterations)
 		\end{lstlisting}
 	\end{CenteredBox}
 	\caption{Gilbert PageRank implementation.}
@@ -914,18 +926,22 @@ The MATLAB code for the \kmeans algorithm, shown in \cref{lst:kmeansMatlab} is a
 
 \begin{listing}
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
-		datapoints = load();
-		centers = load();
-		mask = repmat((1:numCenters), numDatapoints, 1)';
-		for i = 1:maxIterations
-  			distances = pdist2(datapoints, centers);
-  			assignments = min(distances, [], 2);
-  			repIdx = repmat(assignments', numCenters, 1);
-  			multiplier = repIdx == mask;
-  			divisor = repmat(sum(multiplier, 2), 1, dimension);
-  			centers = (multiplier*datapoints)./divisor;
-		end
+		\begin{lstlisting}[language=Matlab,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={pdist2, repmat, },]
+datapoints = load();
+centers = load();
+mask = repmat((1:numCenters), numDatapoints, 1)';
+for i = 1:maxIterations
+		distances = pdist2(datapoints, centers);
+		assignments = min(distances, [], 2);
+		repIdx = repmat(assignments', numCenters, 1);
+		multiplier = repIdx == mask;
+		divisor = repmat(sum(multiplier, 2), 1, dimension);
+		centers = (multiplier*datapoints)./divisor;
+end
 		\end{lstlisting}
 	\end{CenteredBox}
 	\caption{MATLAB \kmeans implementation.}
@@ -978,20 +994,25 @@ The \code{minWithIndex} function returns the minimum value of the specified dime
 
 \begin{listing}
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Matlab]
-		datapoints = load();
-		centers = load();
-		mask = repmat(linspace(1, numCenters, numCenters), ...
-			numDatapoints, 1)';
-		function newCenters = kmeansStep(centers)
-  			distances = pdist2(datapoints, centers);
-		  	assignments = minWithIndex(distances, 2);
-		  	repIdx = repmat(assignments{2}', numCenters, 1);
-		  	multiplier = repIdx == mask;
-		  	divisor = repmat(sum(multiplier, 2), 1, dimension);
-		  	newCenters = (multiplier*datapoints)./divisor;
-		end
-		fixpoint(centers,@kmeansStep, maxIterations)
+		\begin{lstlisting}[language=Matlab,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={repmat, pdist2, minWithIndex, fixpoint}
+		  ]
+datapoints = load();
+centers = load();
+mask = repmat(linspace(1, numCenters, numCenters), ...
+	numDatapoints, 1)';
+function newCenters = kmeansStep(centers)
+		distances = pdist2(datapoints, centers);
+  	assignments = minWithIndex(distances, 2);
+  	repIdx = repmat(assignments{2}', numCenters, 1);
+  	multiplier = repIdx == mask;
+  	divisor = repmat(sum(multiplier, 2), 1, dimension);
+  	newCenters = (multiplier*datapoints)./divisor;
+end
+fixpoint(centers,@kmeansStep, maxIterations)
 		\end{lstlisting}
 	\end{CenteredBox}
 	\caption{Gilbert \kmeans implementation.}

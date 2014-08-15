@@ -34,7 +34,11 @@ In order to decide whether this code is well- or ill-typed, the typer has to dec
 Since the halting problem is undecidable, also the set of programs producing a runtime type error is undecidable.
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=C++]
+		\begin{lstlisting}[language=C++,
+		commentstyle=\color{black},
+		stringstyle=\color{black},
+		keywordstyle=\color{black}\bfseries,
+		]
 if(willHalt(f)){
 	code_with_type_error;
 }else{
@@ -67,7 +71,11 @@ Furthermore, in line $4$ we see an addition of two integers.
 It is clear that the result is an integer and thus the \code{int} type specifier is dispensable.
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=Java]
+		\begin{lstlisting}[language=C++,
+		  commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  ]
 Object obj = new Object();
 int a = 1;
 int b = 0;
@@ -288,7 +296,13 @@ The $unify$ function is an essential part of the typing system, since it incorpo
 The working principle can be best understood by looking at its pseudocode in \cref{lst:unify}.
 \begin{listing}[!h]
 	\begin{CenteredBox}
-		\begin{lstlisting}[language=inform]
+		\begin{lstlisting}[language=ML,
+		commentstyle=\color{black},
+		  stringstyle=\color{black},
+		  keywordstyle=\color{black}\bfseries,
+		  morekeywords={def, return},
+		  deletekeywords={type, of, with, and}
+		]
 def unify(typeA: Type, typeB: Type): Type = {
 	val tA = resolve(typeA)
 	val tB = resolve(typeB)
