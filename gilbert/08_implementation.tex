@@ -16,7 +16,7 @@ The language combines object oriented and functional programming, giving a maxim
 The Scala code is compiled to Java bytecode and thus executed on a JVM.
 This makes the language platform independent to the greatest possible extent.
 Furthermore, it can integrate existing Java code and thus benefit from the rich set of Java libraries.
-And last but not least, it is like the new cool kid on the block of programming languages, which everyone likes.
+Last but not least, it is like the new cool kid on the block of programming languages, which everyone likes.
 
 An important aspect of our choice was how easily a parser and a compiler can be implemented with Scala.
 If one decides to implement these programs within a popular language such as Java, C/C++ or C\# and without any additional tools, then it quickly becomes a tedious and error-prone task.
@@ -28,7 +28,7 @@ The pattern matching capabilities of Scala are similar to functional languages, 
 It can even be applied on object hierarchies, making it a powerful tool for OOP and functional programming likewise.
 The Scala Parser Combinators generate recursive descent parsers which are capable of parsing LL(*) grammars.
 
-We decided to develop Gilbert as an open source project so that everyone can benefit from the project.
+We decide to develop Gilbert as an open source project so that everyone can benefit from the project.
 The complete source code is hosted on Github and is publicly accessible under \url{https://github.com/gilbert-lang/gilbert}.
 
 \section{Math-Backend}
@@ -49,49 +49,50 @@ Since Gilbert is geared towards being a linear algebra environment for sparse ma
 Next we came across Breeze~\cite{breeze}, a library for numerical processing written in Scala.
 
 Breeze offers data structures for all linear algebra primitives, such as matrices and vectors.
-Additionally, it supports sparse and dense variants of them.
+Additionally, it supports sparse and dense variants.
 For each version, Breeze is shipped with elaborate algorithms implementing the linear algebra operations.
-In case that the host has a BLAS or LAPACK library installed, which is compiled and optimized for the underlying architecture, Breeze automatically detects and uses them.
-That way, Breeze can achieve near optimal results when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
+In case that the host has a BLAS or LAPACK library installed, which is compiled and optimized for the underlying architecture, Breeze automatically detects and uses it.
+That way, Breeze can achieve near optimal performance when multiplying dense matrices compared to compiled languages such as C/C++ and Fortran.
 Under the hood, Breeze relies on the netlib-java library for this feature.
-The fact that it offers a Scala binding allowed it to integrate seamlessly into Gilbert.
+The fact that it offers a Scala binding allowed it to be integrated seamlessly into Gilbert.
 We have chosen this library as our principal math back end because it is clean, very reliable and extremely powerful.
 
-Additionally, Gilbert also supports Mahout as a secondary math back end.
+Additionally, Gilbert also supports the aforementioned Mahout library as a secondary math back end.
 The user can select on demand which system he wants to use depending on his personal preference.
-The inclusion of Mahout also emphasizes the extensible architecture of Gilbert which can easily be extended with new math libraries.
+The inclusion of Mahout also emphasizes the extensible architecture of Gilbert.
+It is very easy to add further math libraries to Gilbert.
 
 \section{Execution Engines}
 
-From the very first, Gilbert was intended as a general purpose front end for different runtime systems.
+From the very first moment, Gilbert was intended as a general purpose linear algebra front end for different runtime systems.
 Therefore, Gilbert includes an abstraction, called execution engine, which encapsulates the logic for running a Gilbert program.
 Currently, Gilbert comes with three different execution engines.
 The local executor serves as a reference implementation of the linear algebra operations and can be used for computing little data on a single machine.
 But the purpose of Gilbert was to enable linear algebra programs to handle big data and thus a distributed execution is strictly necessary.
-The Stratosphere and Spark executor fulfill this condition.
+The Stratosphere and Spark executor fulfill that condition.
 However, Gilbert is not restricted to these systems as backends.
-In fact, it should be easy to extend Gilbert by new execution engines.
+In fact, it should be easy to add new execution engines to Gilbert.
 They only have to be able to map the intermediate operators to their runtime specific implementations.
 For example, an executor using a message passing system for the parallel execution is easily conceivable.
-We refrained from it, though, because of its error-prone implementation.
+We refrained from doing it, though, because of its error-prone implementation.
 We will describe the Stratosphere and Spark parallel executors and the problems we encountered while implementing Gilbert in the following subsections.
 
 \subsection{Stratosphere}
 
 The Stratosphere project is still in an early stage and thus it was not expected that the development would proceed completely smoothly.
-The individual intermediate operators could be implemented as described in \cref{sec:LinearAlgebraOperations}.
+The individual intermediate operators are implemented as described in \cref{sec:LinearAlgebraOperations}.
 However, the iteration mechanism of Stratosphere was slightly flawed.
-It was not possible to reuse expressions which were used before outside of the loop.
-The system would generate a completely new instance of the expression.
+It was not possible to reuse expressions which were used outside of the loop.
+The system would generate a completely new instance of the expression in that case.
 This not only degraded the overall performance but also corrupted the consistency of Gilbert programs.
-A random matrix, for example, would have had two different values: One outside the loop and another one inside the loop.
+A random matrix, for example, would have had two different values: One outside of the loop and another one inside of the loop.
 Therefore, we had to fix this problem within Stratosphere to guarantee a correct functioning of Gilbert.
 
 Another problem was that Stratosphere did not support the transmission of implicit values such as a context bound.
 These would have been necessary to implement a generic matrix being parameterized on the type of its elements.
 The Breeze library would have required the additional information for a proper functioning.
 Therefore, we had to instantiate a concrete matrix implementation for each element type we needed.
-This clumsy solution led to code duplication at some points.
+This clumsy solution leads to code duplication at some points.
 
 \subsection{Spark}
 

@@ -72,22 +72,12 @@ Due to these problems, a new class of systems has recently been developed.
 It can be considered an generalization of MapReduce.
 One of them is Stratosphere~\cite{battre:2010a}, a distributed computing framework which employs PACTs (parallel contracts)~\cite{alexandrov:2011a}.
 Stratosphere adds additional $\nth{2}$-order functions, which are called input contracts, in order to improve the expressiveness and efficiency of the MapReduce paradigm.
+The new higher-order functions are \emph{join}, \emph{cross} and \emph{coGroup}.
 Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties, such as key uniqueness, record cardinality or constant fields of the output.
 These properties are exploited by a cost-based optimizer to select the most efficient execution plan.
 Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}, which makes it applicable to machine learning and complex data analysis tasks.
 
-The new higher-level functions are \emph{join}, \emph{cross} and \emph{coGroup}.
-The join operator joins two multisets of inputs $A$ and $B$ with respect to a key value.
-This means that a UDF is called for each pair $(a,b)$ with $a\in A$ and $b\in B$ with $key(a)=key(b)$.
-The cross operator can be understood as the Cartesian product.
-Given two input multisets $A$ and $B$, cross calls the UDF for each pair $(a,b)$ with $a\in A$ and $b\in B$.
-The coGroup operator acts a little bit differently.
-It also takes 2 input multisets $A$ and $B$.
-The operator groups the elements of $A$ and $B$ according to their keys and joins the grouped submultisets.
-In other words, the UDF is called for each pair of multisets $(A^\prime, B^\prime)$ with $A^\prime \subseteq A \wedge B^\prime \subseteq B \wedge |keyset(A^\prime \cup B^\prime)| = 1$ and $keyset(A^\prime \cup B^\prime) \cap keyset((A \cup B) \setminus (A^\prime \cup B^\prime)) = \emptyset$.
-The function $keyset$ is the set of appearing keys in a set: $keyset(X) \coloneqq \{ key(x) \mid x \in X \}$.
-
-These operators allow to express certain problems occurring in data analysis more elegantly and succinctly.
+The new higher-order functions allow to express certain problems occurring in data analysis more elegantly and succinctly.
 Additionally, it gives the system a higher level of abstraction on which it can apply optimization.
 Consider, for example, the join operator.
 In MapReduce the straightforward implementation is the following:
@@ -141,7 +131,7 @@ Actions return a value to the driver program which can be the cardinality of the
 Spark also supports two restricted forms of shared variables.
 Broadcast variables are used to send and store read-only data to worker nodes so that it does not have to be shipped with the tasks.
 This reduces the communication overhead if the broadcast variable is used across several tasks.
-For example, the data points in a k-means clustering algorithm should be broadcasted because it stays constant throughout the execution of the algorithm.
+For example, the data points in a \kmeans clustering algorithm should be broadcasted because it stays constant throughout the execution of the algorithm.
 Another type of shared variables are accumulators.
 Accumulators can only be changed by applying an associative operation.
 Therefore, they can easily be implemented in parallel.

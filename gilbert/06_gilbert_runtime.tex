@@ -4,20 +4,20 @@
 
 \chapterquote{A really great talent finds its happiness in execution.}{Johann Wolfgang von Goethe, (1749 - 1832)}
 
-The Gilbert runtime is responsible for executing the compiled Matlab code on a particular platform.
+The Gilbert runtime is responsible for executing the compiled MATLAB code on a particular platform.
 For this purpose, it receives the intermediate representation of the code and translates it into the execution engine's specific format.
-Currently, Gilbert supports three different execution engines.
-One of them is the \code{ReferenceExeuctor}, which executes the compiled Matlab code locally.
+Currently, Gilbert supports three different execution engines: \emph{ReferenceExecutor}, \emph{StratosphereExecutor} and \emph{SparkExecutor}.
+The \emph{ReferenceExeuctor} executes the compiled MATLAB code locally.
 For the distributed execution Gilbert supports the Spark and the Stratosphere system as backends.
 
-The \code{ReferenceExecutor} is an interpreter for the intermediate code.
-It takes the dependency tree of a Matlab program and executes it by evaluating the operators bottom-up.
-In order to evaluate an operator, the system first evaluates all the operator's inputs and then executes the actual operator logic.
-Since the program is executed locally, the complete data of each operator is always accessible and thus no communication logic is required.
+The \emph{ReferenceExecutor} is an interpreter for the intermediate code.
+It takes the dependency tree of a MATLAB program and executes it by evaluating the operators bottom-up.
+In order to evaluate an operator, the system first evaluates all inputs of an operator and then executes the actual operator logic.
+Since the program is executed locally, the complete data of each operator is always accessible and, thus, no communication logic is required.
 All input and output files are directly written to the local hard drive.
 
-In contrast to the \code{ReferenceExecutor}, the \code{StratosphereExecutor} executes the program in parallel.
-It takes the dependency tree of a Matlab program and translates it into a PACT plan.
+In contrast to the \emph{ReferenceExecutor}, the \emph{StratosphereExecutor} executes the program in parallel.
+It takes the dependency tree of a MATLAB program and translates it into a PACT plan.
 After the plan is generated, it is issued to the Stratosphere system for parallel execution.
 This approach implies that the program is not directly executed by the executor.
 Instead, the executor represents just another translation step.
@@ -28,8 +28,8 @@ Moreover, we have to adjust the linear algebra operations so that they keep work
 Fortunately, Stratosphere offers a rich and expressive API to easily realize distributed computations.
 The details of the distributed data structures and operations are explained in \cref{sec:DistributedMatrixRepresentation} and \cref{sec:LinearAlgebraOperations}.
 
-The \code{SparkExecutor} is the second executor for distributed computations.
-In contrast to the \code{StratosphereExecutor}, it executes the Matlab programs on top of the Spark system.
+The \emph{SparkExecutor} is the second executor for distributed computations.
+In contrast to the \emph{StratosphereExecutor}, it executes the MATLAB programs on top of the Spark system.
 Since Spark and Stratosphere offer a similar set of programming primitives, they can both operate on the same data structures.
 Furthermore, even most of the linear algebra operations can be implemented similarly.
 The only programming difference is the incremental plan roll out feature of Spark.
@@ -37,16 +37,13 @@ By emitting Spark transformations and actions, the user can trigger computations
 This allows a more interactive way of programming, manifesting in a more natural way loops are defined, for example.
 However, these differences are only subtle and do not limit or extend the expressiveness of either system.
 
-In the following section, we will discuss how Gilbert represents its matrices, allowing parallel execution.
-Moreover, we will see how the different linear algebra operations are realized within both systems.
-
 \section{Distributed Matrix Representation}
 \label{sec:DistributedMatrixRepresentation}
 
 One aspect of writing distributed algorithms is how the relevant data is distributed across several worker nodes.
-Since the distribution pattern directly influences the algorithms, one cannot consider one independently of the other.
+Since the distribution pattern directly influences the algorithms, one cannot consider them independently from one another.
 In Gilbert's use case, the main data structure are matrices.
-Thus, we have to conceive partitioning for matrices which allows efficient partitioning as well as efficient algorithms working on the distributed data.
+Thus, we have to conceive a partitioning for matrices which allows efficient algorithms working on the distributed data.
 Looking at a matrix, one easily finds a multitude of different partition schemes.
 
 A first idea could be to partition a matrix according to their rows or columns, as it is depicted in \cref{fig:rowPartitioning} and \cref{fig:columnPartitioning}.
@@ -78,7 +75,7 @@ In order to calculate the result of such an operation, we only have to join the 
 	\label{fig:Partitionings}
 \end{figure}
 
-However, we run into trouble when we try to multiply two equally partitioned matrices $A$ and $B$ as illustrated in \cref{fig:rowPartitioningMM}.
+However, this approach unveils its drawbacks when multiplying two equally partitioned matrices $A$ and $B$ as illustrated in \cref{fig:rowPartitioningMM}.
 Here, to calculate the resulting row with index $r$, we need the row $r$ of $A$ and the complete matrix $B$.
 This implies a complete repartitioning of $B$.
 The repartitioning is especially grave, since $B$ has to be broadcasted to every row of $A$.
@@ -90,10 +87,10 @@ The repartitioning is especially grave, since $B$ has to be broadcasted to every
 	\label{fig:rowPartitioningMM}
 \end{figure}
 
-In order to quantify the repartitioning costs of such a matrix multiplication, we developed a simple cost model.
-First of all, we limit ourselves to modeling the communication costs, since network I/O usually constitutes the bottleneck of distributed systems and is thus the dominating factor.
-For the sake of simplicity, we consider the multiplication of two quadratic matrices $A \in \mathbb{R}^{n\times n}$ and $B \in \mathbb{R}^{n\times n}$ giving the matrix $C\in \mathbb{R}^{n \times n}$.
-Moreover, we assume that there are $n$ worker nodes available, each of which receiving a single row of $A$ and $B$ respectively.
+In order to quantify the repartitioning costs of such a matrix multiplication, a simple cost model is developed.
+First of all, it is limited to modeling the communication costs, since network I/O usually constitutes the bottleneck of distributed systems and is thus the dominating factor.
+For the sake of simplicity, the multiplication of two quadratic matrices $A \in \mathbb{R}^{n\times n}$ and $B \in \mathbb{R}^{n\times n}$ giving the matrix $C\in \mathbb{R}^{n \times n}$ is considered.
+Moreover, we assume that there are $n$ worker nodes available, each of which receiving a single row of $A$ and $B$, respectively.
 Thus, $A$ and $B$ are row-wise partitioned.
 We further assume that rows with the same index are kept on the same worker node.
 
@@ -103,11 +100,11 @@ Thus, the number of rows sent by each worker node is $n-1$.
 All of the $n$ worker nodes have to do this.
 Consequently, the total number of sent messages is $n(n-1)$ and each message has a size of $n\alpha$ where $\alpha$ is the size of a matrix entry.
 Usually, each sending operation causes some constant overhead inflicted by resource allocation.
-Before we can send the actual data over the network, we have to allocate memory to transfer the data to the network interface, reserve network resources and establish a network connection with the remote peer, for example.
+Before sending the actual data over the network, memory to transfer the data to the network interface has to be allocated, network resources have to be reserved and a network connection with the remote peer has to be established.
 This overhead is denoted by $\Delta$.
 Since all sending operations occur in parallel, the costs caused by constant overhead are $(n-1)\Delta$.
 The total amount of data which has to sent over the network is $n^2(n-1)\alpha$.
-We assume that the network interconnection guarantees every node a bandwidth $\nu$.
+The network interconnection is assumed to guarantee every node a bandwidth $\nu$.
 Therefore, the time needed for sending the data is $\frac{n^2(n-1)\alpha}{\nu}$.
 This leads to the following repartitioning cost model:
 
@@ -117,7 +114,7 @@ This leads to the following repartitioning cost model:
 
 Row and column partitioning are extreme forms of blocking.
 A less extreme form would be to split the matrix into equally sized quadratic blocks as shown in \cref{fig:quadraticBlockPartitioning}.
-In order to identify the individual blocks, each of them gets a block row and block column index assigned.
+In order to identify the individual blocks, each of them will be assigned a block row and block column index assigned.
 Thus, blocking adds some memory overhead in the form of index information.
 An example of a $4\times 4$ matrix partitioned into $2\times 2$ blocks can be seen in \cref{fig:quadraticBlockPartitioningDetailed}.
 
@@ -133,12 +130,12 @@ The block size directly controls the granularity of the partitioning.
 Increasing the block size will reduce the memory overhead of distributed matrices while reducing the degree of parallelism.
 Thus, the user has to adjust the block size value depending on the matrix sizes and the number of available worker nodes in order to obtain best performance.
 
-The quadratic block partitioning has similar properties as the row- and column-wise partitioning scheme when it comes to cellwise operations.
+The quadratic block partitioning has similar properties like the row- and column-wise partitioning scheme when it comes to cellwise operations.
 We simply have to join corresponding blocks with respect to the pair of block row and column index and execute the operation on matching blocks locally.
 But how does this pattern performs for matrix multiplications?
 
-We make the same assumptions as before and additionally presume that $n$ is a square number.
-Since our matrices $A$, $B$ and $C$ are equally partitioned into square blocks, indices will henceforth reference the block and not the matrix entry.
+The assumptions are the same as before and additionally it is assumed that $n$ is a square number.
+Since the matrices $A$, $B$ and $C$ are equally partitioned into square blocks, indices will henceforth reference the block and not the matrix entry.
 In order to calculate the block $c_{ij}$, we have to know the block row $a_{i}$ and the block column $b_{j}$.
 The resulting block will be stored on the node $node_{ij}$ which already contains the blocks $a_{ij}$ and $b_{ij}$.
 Thus, each node $node_{ij}$ has to receive the missing $2\left(\sqrt{n}-1\right)$ blocks from the block row $a_{i}$ and block column $b_{j}$.
@@ -155,25 +152,24 @@ For $n>2$, the square block partitioning scheme is thus superior to the row- and
 The reason for this is that the square blocks promote more localized computations compared to the other partitionings.
 Instead of having to know the complete matrix $B$, we only have to know one block row of $A$ and one block column of $B$ to compute the final result.
 
-Due to these advantages, we decided to implement the square block partitioning scheme in Gilbert.
+Due to these advantages and also considering its simplicity, we decide to implement the square block partitioning scheme in Gilbert.
 It would also be possible to combine different partitionings and select them dynamically based on the data sizes and input partitionings.
-However, for the sake of simplicity, Gilbert only supports the aforementioned partitioning.
 
 Besides the partitioning, Gilbert also has to represent the individual matrix blocks.
 There exist several storing schemes for matrices depending on the sparsity of the matrix.
 For example, if a matrix is dense, meaning that it does not contain many zero elements, the elements are best stored in a continuous array.
 If a matrix is sparse, then a hash map or some form of compressed representation are best suited.
-Therefore, Gilbert chooses dynamically for each block how it is represented.
+Gilbert chooses the representation of each block dynamically.
 Depending on the non-zero elements to total elements ratio, a sparse or dense representation is selected.
 
 \section{Linear Algebra Operations}
 \label{sec:LinearAlgebraOperations}
 
 The other aspect of writing distributed algorithms is to think about how the algorithms work with the locally available data and which data has to be communicated in order to compute the final result.
-Stratosphere and Spark both offer a highly expressive programming API which follow and extend the well-known MapReduce paradigm~\cite{dean:c2008a}.
-Conceptually, a set of distributed data items, called \emph{DataSet} or \emph{RDD} (resilient distributed dataset) in the context of Stratosphere and Spark respectively, forms the basis of both systems.
-There are several ways to initially create such a data set, such as reading from a file or to distribute a local collection.
-Once a distributed data set is created, it can be modified by applying one of the transforming functions to it, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.
+Stratosphere and Spark both offer a highly expressive programming API which follows and extends the well-known MapReduce paradigm~\cite{dean:c2008a}.
+Conceptually, a set of distributed data items, called \emph{DataSet} or \emph{RDD} (resilient distributed dataset) in the context of Stratosphere and Spark, respectively, forms the basis of both systems.
+There are several ways to initially create a data set, such as reading from a file or distribution of a local collection.
+Once a distributed data set is created, it can be modified by applying one of the transforming functions, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.
 These functions are borrowed from the world of functional programming, since they happen to be expressive enough and can serve as a utile abstraction for automatic parallelization.
 Each of these transforming functions takes one or more data sets as inputs and produces a new distributed data set.
 The distributed data sets are not computed directly but instead they generate a dataflow plan which is lazily executed later on.
@@ -183,7 +179,7 @@ The edges connect input data sets to output data sets and thus represent the dat
 In order to understand how the different linear algebra operations are implemented, we will quickly revise the semantics of the transforming functions.
 For a more detailed explanation, the reader is referred to~\cite{zaharia:2012a,alexandrov:2011a,battre:2010a}.
 A distributed data set is a multiset of items.
-An item can have a key value which is retrieved by the $key$ function.
+An item can have a key value, which is retrieved by the $key$ function.
 Each of the transforming functions is called with a user defined function (UDF), which specifies how each item is processed and what kind of item is emitted as the result.
 In other words, it defines the program specific semantics of the transformation.
 
@@ -249,7 +245,7 @@ The map function is called for each of the matching pairs created by the join no
 	\label{fig:planCellwiseMatrixMatrixTransformation}
 \end{figure}
 
-Matrix multiplications are probably the most performance critical operation in linear algebra programs.
+Matrix multiplications are probably the most critical operation for performance in linear algebra programs.
 Therefore, we have to pay attention to a thorough implementation within Gilbert.
 In a MapReduce-like system there exist two distinct matrix multiplication implementations for square blocking.
 The first approach is based on replicating rows and columns of the operands and is called replication based matrix multiplication (RMM).
@@ -260,7 +256,7 @@ The RMM and CPMM methods have been implemented within SystemML~\cite{ghoting:201
 Let us assume that we want to calculate $A \times B = C$ with $A,B$ and $C$ being matrices.
 The block size has been chosen such that $A$ is partitioned into $m\times l$ blocks, $B$ is partitioned into $l \times n$ blocks and the result matrix $C$ will be partitioned into $m\times n$ blocks.
 In order to reference the block in the i$th$ block row and j$th$ block column of $A$, we will write $A_{ij}$.
-A block row will be denoted by a single subscript index and a column row by a single superscript index.
+A block row will be denoted by a single subscript index and a block column by a single superscript index.
 For example, $A_i$ marks the i$th$ block row of $A$ and $A^j$ the j$th$ block column of $A$.
 
 The replication-based strategy will copy for each $C_{ij}$ the i$th$ block row of $A$ and the j$th$ block column of $B$.
@@ -274,7 +270,7 @@ The whole process is illustrated in \cref{fig:RMM}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.4777\linewidth]{images/rmm.png}
-	\caption{Replication based matrix multiplication.}
+	\caption{Replication based matrix multiplication with MapReduce.}
 	\label{fig:RMM}
 \end{figure}
 
@@ -288,11 +284,11 @@ The whole process is illustrated in \cref{fig:CPMM}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.4\linewidth]{images/cpmm.png}
-	\caption{Cross product matrix multiplication.}
+	\caption{Cross product matrix multiplication with MapReduce.}
 	\label{fig:CPMM}
 \end{figure}
 
-The methods RMM and CPMM differ as respects network communication.
+The methods RMM and CPMM differ in terms of network communication.
 The former method can be realized within a single MapReduce job whereas the latter requires two.
 Neither RMM nor CPMM is always superior.
 The optimal matrix multiplication strategy depends on the matrix size of its operands $A$ and $B$.
@@ -301,7 +297,7 @@ Fortunately, Stratosphere and Spark provide us with a little bit more flexibilit
 Freed from the tight corset of the MapReduce world, we can express matrix multiplications more subtly.
 Looking at the definition of the matrix multiplication for $C_{ij}=\sum_{k=1}^{l}A_{ik}\times B_{kj}$, we see that every $A_{ik}$ has to be joined with its corresponding $B_{kj},\forall k$.
 This can be easily achieved by using the join function.
-The join-key is the column index for $A$ and the row index for $B$.
+The join-key is the column index of $A$ and the row index of $B$.
 The joiner calculates for each matching pair $A_{ik}$ and $B_{kj}$ an intermediate result $C_{ij}^k$.
 Grouping the intermediate results with respect to the index pair $(i,j)$ allows us to compute the final result in a subsequent reduce step.
 The overall algorithm strongly resembles the CPMM.
@@ -330,14 +326,13 @@ Then, the resulting execution plan is equivalent to the CPMM.
 
 Even though Gilbert has only one dataflow plan specified to implement the matrix multiplication, the Stratosphere system can choose internally between the RMM and CPMM strategy.
 The strategy is selected by the optimizer which bases its decision on the data size and the partitioning, if available.
-Thus, Stratosphere takes this decision off our shoulders.
+Consequently, Stratosphere frees the programmer from this decision.
 
 The \code{VectorwiseMatrixTransformation} operator cannot be generalized independently of the \code{vectorwiseOp} operation.
 For example, consider the maximum and the norm operation.
-The maximum is calculated by taking the maximum of each row in block.
+The maximum is calculated by taking the maximum of each row in a block.
 Afterwards, the maximum per block is grouped with respect to the block row index and the grouped blocks are reduced by taking the maximum over all group elements.
 Grouping is based on the key of each item.
-The key selected
 The corresponding dataflow plan is shown in \cref{fig:planMaximumVectorwiseTransformation}.
 
 \begin{figure}[!h]
@@ -349,7 +344,7 @@ The corresponding dataflow plan is shown in \cref{fig:planMaximumVectorwiseTrans
 
 In contrast to that, the $2$-norm operation requires a more sophisticated implementation.
 First, the cellwise square of all matrix entries is calculated with the map function.
-Then, the partial sums of every row is computed by summing the columns of each block.
+Then, the partial sums of every row are computed by summing the columns of each block.
 This constitutes another map operation.
 The final row sums are calculated by grouping the partial sums with respect to their block row index and summing the items of each group up.
 After this reduce operation is done, the final result is computed by taking the cellwise square root.

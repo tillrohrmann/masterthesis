@@ -4,24 +4,24 @@
 
 \chapterquote{Abstraction is real, probably more real than nature.}{Josef Albers, (1888 - 1976)}
 
-After the parsing and typing of the source code is done, we have all the information needed to execute the program in a distributed fashion.
+After parsing and typing of the source code is done, we have all the information needed to execute the program in a distributed fashion.
 However, we do not compile the code directly to the respective format to let it run on a parallel data processing system.
 Instead, we compile it to an intermediate representation.
 Even though, the intermediate code adds an additional representation and thus more complexity to maintain, the advantages clearly outweigh the disadvantages.
 Moreover, this approach is similar to the approach the JVM and the .Net frameworks pursue.
-The Java and .Net code, respectively, is compiled to a format which can be executed platform independently.
+The Java and .Net code are compiled to a format which can be executed platform independently.
 
 The additional abstraction layer allows us to apply language independent optimization in a coherent manner and independently of the actually used front end language.
 This provides us with the flexibility to easily extend Gilbert to support other linear algebra languages as well.
-The next natural candidate for a supported front end language would be surely R.
+The next natural candidate for a supported front end language would surely be R.
 Moreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimization.
 One class of important transformations is the reordering of operations and the determination of the execution order.
 Often, they are based on the commutative and associative property of the corresponding operations.
 An obvious optimization would be the execution order of multiple matrix multiplications as indicated in \cref{sec:MatrixDimensionInference}.
 Furthermore, the propagation and elimination of transpose operations offers further optimization potential.
 
-The intermediate representation was designed with two goals in mind:
-First of all, it has to be expressive enough to represent in a general way a wide variety of Matlab programs.
+The intermediate representation is designed with two goals in mind:
+First of all, it has to be expressive enough to represent in a general way a wide variety of MATLAB programs.
 Therefore, the intermediate format has to include the operational primitives of linear algebra as well as an iteration abstraction.
 With these building blocks at hand, it is already possible to express a multitude of iterative machine learning algorithms.
 As pointed out in \cref{sec:languageFeatures}, Gilbert does not provide a direct \code{for} or \code{while} loop, but instead the \code{fixpoint} operator.
@@ -31,7 +31,7 @@ It is of particular interest to keep this set of intermediate operators as small
 \section{Specification}
 
 The intermediate format consists of a set of operators to represent the different linear algebra operations.
-Every operator has a distinct result type and a set of parameters it requires as input.
+Every operator has a distinct result type and a set of parameters which are required as input.
 \Cref{fig:depTreeMMIdOnes} shows how a matrix multiplication between an identity matrix $Id \in \mathbb{R}^{10\times10}$ and a matrix $Ones \in \mathbb{R}^{10\times10}$ filled with $1$s would be represented.
 On the level of the intermediate format we distinguish between the following types: \code{MatrixType}, \code{ScalarType}, \code{CellArrayType}, \code{StringType} and \code{FunctionType}.
 
@@ -39,22 +39,22 @@ On the level of the intermediate format we distinguish between the following typ
 	\begin{center}
 		\Tree [.MatrixMult [.eye [.scalar 10 ] [.scalar 10 ] ] [.ones [.scalar 10 ] [.scalar 10 ] ] ]
 	\end{center}
-	\caption{Dependency tree of a matrix multiplication of an identity matrix with a ones matrix.}
+	\caption{Dependency tree of a matrix multiplication between an identity matrix and a matrix filled with 1s.}
 	\label{fig:depTreeMMIdOnes}
 \end{figure}
 
 The matrix type is the elementary type and represents all sorts of matrices.
 A matrix contains information about its size, namely the number of rows and columns, and about its element type.
-The element type can be any supported type but currently only operations for \code{double} or \code{boolean} matrices are implemented.
+The element type can be any supported type but currently only operations for double or boolean matrices are implemented.
 
 The scalar type is a superset containing the \code{DoubleType} and \code{BooleanType}.
 Usually, the double type is used for all linear algebra operations.
-Only to support comparisons to check for convergence of an iteration, one usually uses booleans.
+Boolean scalars are mainly used for convergence criterions of iterations.
 
 The cell array type contains a list of types specifying the types of its cell entries.
 Cell arrays are usually used to return multiple values from a function.
 Thus, they can conceptually be seen as tuples.
-In contrast to the Matlab implementation, Gilbert only supports $1$-dimensional arrays.
+In contrast to the MATLAB implementation, Gilbert only supports $1$-dimensional cell arrays.
 
 The string type was included to be able to load matrices from HDFS or local disk.
 In order to load a matrix, the user has to define the location of the data, given as a string.
@@ -62,15 +62,15 @@ Besides this usage, strings are usually not necessary for linear algebra operati
 
 Last but not least, Gilbert also supports function types.
 Function types are necessary to implement \nth{2}-order functions such as the fixpoint operator.
-The user can define functions as pass them around like any other value.
+The user can pass defined functions around like any other value.
 Thus, functions are considered first-class citizens in Gilbert.
 
-The set of intermediate operators can be distinguished into three categories: \emph{Creating operators}, \emph{transforming operators} and \emph{writing operators}.
+The set of intermediate operators can be distinguished into three categories: \emph{Creation operators}, \emph{transformation operators} and \emph{Output operators}.
 All of these categories will be explained in the following subsections.
 
-\subsection{Creating Operators}
+\subsection{Creation Operators}
 
-Creating operators generate or load some data depending on the user's inputs.
+Creation operators generate or load some data depending on the used function.
 A list of all supported operators with its type definition and a short explanation can be found in \cref{tab:creatingOperators}.
 Each type definition consists of the input types and the result type of an operator:
 \begin{displaymath}
@@ -84,9 +84,9 @@ The \code{load} operator takes a path to a stored matrix on disk and the corresp
 It then reads the stored data and loads the matrix into the program context.
 The \code{eye} operator, known from Matlab, generates an identity matrix of the requested size, number of rows and columns.
 The operator also supports non quadratic result shapes.
-Another probably known operators is \code{zeros}.
+Another well-known operator is \code{zeros}.
 It generates a matrix of the given size which is initialized with zeros.
-And the last creating operator is \code{randn}, which generates a random matrix.
+And the last creation operator is \code{randn}, which generates a random matrix.
 \code{Randn} takes the number of rows and columns of the resulting matrix and the mean and the standard deviation of a Gauss distribution.
 The specified Gauss distribution is used to generate random values for the resulting matrix.
 
@@ -104,11 +104,11 @@ The specified Gauss distribution is used to generate random values for the resul
 	\label{tab:creatingOperators}
 \end{table}
 
-\subsection{Transforming Operators}
+\subsection{Transformation Operators}
 
-The transforming operators constitute the main abstraction of the linear algebra operations.
-They group operations with similar properties together and thus allowing an easier reasoning and optimization of the underlying program.
-The list of all transforming operators and their types can be found in \cref{tab:transformingOperators}.
+The transformation operators constitute the main abstraction of the linear algebra operations.
+They group operations with similar properties and thus allow an easier reasoning and optimization of the underlying program.
+The list of all transformation operators and their types can be found in \cref{tab:transformingOperators}.
 
 \begin{table}
 	\centering
@@ -244,11 +244,9 @@ d = sum(A, 2);
 T = (diag(1 ./ d) * A)';
 % initialize the ranks
 r_0 = ones(numVertices, 1) / numVertices;
-% compute PageRank
 e = ones(numVertices, 1) / numVertices;
 % update function
 f = @(r) (.85 * T * r + .15 * e)
-% convergence function
 eps = 0.1;
 c =  @(prev, cur) norm(prev-cur,2) <= eps
 % PageRank calculation
@@ -309,12 +307,12 @@ The dependency tree of the intermediate code of \code{T} is shown in \cref{fig:i
 \end{figure}
 
 Here \code{diag} denotes a special operator which has a different behavior depending on the given argument.
-If one provides a one-column matrix $d$ to \code{diag}, then a matrix with $d$ on its diagonal is created.
+If one provides a one-column matrix $d$ to \code{diag}, then a zero matrix with $d$ on its diagonal is created.
 If one provides a matrix $m$ to \code{diag}, then the diagonal of $m$ is returned.
 The operator \code{sum} takes a matrix and a dimension and computes the sums along the specified dimension.
-Thus, the row sums will be here.
+Thus, the row sums will be computed in this case.
 
-What is left to be compiled for \code{f} being complete is the matrix \code{A}.
+What is left to be compiled for \code{f} is the matrix \code{A}.
 The compiled code can be seen in \cref{fig:irA}.
 
 \begin{figure}[!h]
@@ -340,7 +338,7 @@ Its compiled version is shown in \cref{fig:irC}
 
 \begin{figure}[!h]
 	\centering
-	\Tree [.function [.scalar 2 ] [.ScalarScalarTransformation [.norm [.CellwiseMatrixMatrixTransformation [.MatrixParameter [.scalar 0 ] ] [.MatrixParameter [.scalar 1 ] ] '-' ] [.scalar 2 ] ] [.scalar 0.1 ] '>=' ] ]
+	\Tree [.function [.scalar 2 ] [.ScalarScalarTransformation [.norm [.CellwiseMatrixMatrixTransformation [.MatrixParameter 0 ] [.MatrixParameter 1 ] '-' ] [.scalar 2 ] ] [.scalar 0.1 ] '>=' ] ]
 	\caption{Intermediate representation of PageRank's \code{c}.}
 	\label{fig:irC}
 \end{figure}
@@ -348,9 +346,9 @@ Its compiled version is shown in \cref{fig:irC}
 The \code{norm} operator, taking as first parameter the matrix $m$ and as second the norm parameter $p$, calculates the $p$-norm of $m$ over all matrix elements.
 Internally this is compiled to the intermediate code shown in \cref{fig:irNorm}.
 
-\begin{figure}[!h]
+\begin{figure}[t]
 	\centering
-	\Tree [.function [.scalar 2 ] [.ScalarScalarTrans [.AggregateMatrixTrans [.CellwiseMatrixTrans [.MatrixScalarTrans [.MatrixParam [.scalar 0 ] ] [.ScalarParam [.scalar 1 ] ] 'pow' ] 'abs' ] 'sumAll' ] [.ScalarScalarTrans [.scalar 1 ] [.ScalarParam [.scalar 1 ] ] '/' ] 'pow' ] ]
+	\Tree [.function [.scalar 2 ] [.ScalarScalarTrans [.AggregateMatrixTrans [.CellwiseMatrixTrans [.MatrixScalarTrans [.MatrixParam 0 ] [.ScalarParam 1 ] 'pow' ] 'abs' ] 'sumAll' ] [.ScalarScalarTrans [.scalar 1 ] .ScalarParam 1 '/' ] 'pow' ] ]
 	\caption{Intermediate representation of \code{norm}.}
 	\label{fig:irNorm}
 \end{figure}

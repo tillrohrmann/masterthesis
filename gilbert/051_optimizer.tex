@@ -9,7 +9,7 @@ The optimizer exploits equivalence transformations which result from the commuta
 Therefore, it works on the intermediate format of a program, which provides an appropriate high-level abstraction.
 
 By transforming the intermediate representation, it is often possible to obtain an equivalent algebraic expression with better runtime properties.
-Two distinct algebraic expression which are semantically equivalent can differ significantly in terms of memory consumption and required floating-point operations.
+Two distinct algebraic expressions, which are semantically equivalent, can differ significantly in terms of memory consumption and required floating-point operations.
 Consider, for example, the product of $n$ sums as shown in \cref{eq:productSum}.
 The result could be computed with $n$ additions and $n-1$ multiplications.
 
@@ -28,29 +28,29 @@ Both transformations will be described in the following sections.
 
 \section{Matrix Multiplication Reordering}
 
-Matrix multiplications are one of the most expensive operations in linear algebra programs.
+Matrix multiplications belong to the most expensive operations in linear algebra programs.
 The naive multiplication of $A\times B$ with $A,B \in \mathbb{R}^{n \times n}$ requires $O(n^3)$ operations.
 Even though there are algorithms, such as the Strassen algorithm~\cite{strassen:nm1969a}, which have an asymptotic complexity of $O(n^{\log_28})$, it still remains a costly operation.
 In addition to the high computational complexity, the space complexity must also not be forgotten.
 
 In the worst case, the result of a matrix multiplication has quadratic size of the input operands.
 This occurs, for example, when we compute the outer product of two vectors.
-Given $A \in \mathbb{R}^{n}$, the result $C = A\times A^\prime \in \mathbb{R}^{n\times n}$ is a complete $n$ times $n$ matrix.
+Given $A \in \mathbb{R}^{n}$, the result $C = A\times A^T \in \mathbb{R}^{n\times n}$ is a complete $n\times n$ matrix.
 In practice, this characteristic can render a matrix multiplication infeasible, because there is not enough memory space available.
-Or, in case of virtual memory, it will slow the computation extensively down, due to the hard disk accesses.
+Or, in case of virtual memory, it will slow down the computation extensively, due to hard disk accesses.
 
 In general, there is not much we can do, if the final result of a matrix multiplication does not fit into memory.
-However, if an intermediate result of a plurality of successive multiplications becomes too huge, there are ways to alleviate the problem.
-Usually, by changing the multiplication order, the huge intermediate result can be avoided and, thus, also the memory shortage.
+However, if an intermediate result of successive matrix multiplications becomes too huge, there are ways to alleviate the problem.
+Usually, by changing the multiplication order, huge intermediate results can be avoided and, thus, also memory shortages.
 
 In order to illustrate the problem, consider the following example:
-Assume we want to multiply $A\times B^\prime \times C$ with $A,B,C\in \mathbb{R}^{n}$.
-If we calculated it naively, we would start with $D=A\times B^\prime \in \mathbb{R}^{n\times n}$.
+Assume we want to multiply $A\times B^T \times C$ with $A,B,C\in \mathbb{R}^{n}$.
+If we calculated it naively, we would start with $D=A\times B^T \in \mathbb{R}^{n\times n}$.
 The result would be $D\times C \in \mathbb{R}^{n}$.
 Thus, as an intermediate result, we had to store a $n\times n$ matrix.
-Using parentheses to calculate $B^\prime \times C$ first, we could circumvent the problem.
+Using parentheses to calculate $B^T \times C$ first, we could circumvent the problem.
 \begin{displaymath}
-	\underbrace{A\times \left( \underbrace{B^\prime \times C}_{\in \mathbb{R}}\right)}_{\in \mathbb{R}^{n}}
+	\underbrace{A\times \left( \underbrace{B^T \times C}_{\in \mathbb{R}}\right)}_{\in \mathbb{R}^{n}}
 \end{displaymath}
 In this case, the biggest matrix to store would be a vector of length $n$.
 
@@ -77,12 +77,12 @@ E = (C * D')';
 	\label{lst:pushdown}
 \end{listing}
 
-By inserting $C$ into $E$ we would obtain $E=(A^\prime BD^\prime)^\prime$ which is equivalent to $DB^\prime A$.
+By inserting $C$ into $E$ we would obtain $E=(A^T BD^T)^T$ which is equivalent to $DB^T A$.
 The latter formulation contains only one transpose operation.
-Depending on the cost of such an operation the optimization might already be worthwhile.
+Depending on the cost of such an operation the optimization might be worthwhile.
 
-Usually multiple transpose operations occur because the programmer writes them for convenience reasons at various positions in the code.
-Moreover, in complex programs it is possible that the user loses track of them or simply is unaware of the optimization potential.
+Usually multiple transpose operations occur because they are written for convenience reasons at various positions in the code.
+Moreover, in complex programs it is possible that the programmer loses track of them or simply is unaware of the optimization potential.
 Therefore, transpose pushdown might be a beneficial optimization.
-The performance improvement stills needs to be verified and properly quantified.
+The performance improvement still needs to be verified and properly quantified.
 This will be done in \cref{cha:evaluation}.

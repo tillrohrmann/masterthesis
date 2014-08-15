@@ -4,12 +4,12 @@
 \chapterquote{Experience without theory is blind, but theory without experience\\ is mere intellectual play.}{Immanuel Kant, (1724 - 1804)}
 
 Program development in general is an error-prone and time-consuming task.
-It usually involves, besides the actual development phase, several iterations of bug fixing.
+Besides the actual development phase, it usually involves several iterations of bug fixing.
 In order to reduce the number of pitfalls a programmer can fall into, typing systems were developed.
 Typing systems assign a \emph{type} to language constructs such as variables, functions and expressions.
 That way, the system gives meaning to an otherwise vacuous program.
 In the memory of a computer, everything is represented as a sequence of bits, no matter whether it is an instruction code, memory address, character, boolean or floating-point number.
-For the computer there is no way to intrinsically differentiate between the different meanings without an additional hint.
+For a computer there is no way to intrinsically differentiate between the different meanings without an additional hint.
 This hint comes in the form of types.
 Knowing that a bit sequence represents a floating-point number, the computer is aware of the valid values and operations and can check for its correct usage.
 
@@ -26,23 +26,23 @@ In general, current type systems can already detect many different errors but th
 
 Type checking can be distinguished into two categories: \emph{static} and \emph{dynamic} type checking.
 Static type checkers work on the source code and assign a type to each expression at compile-time.
-If it detects any type incompatibilities, such as providing the wrong arguments to a function call, assigning conflicting data types or to apply not supported operations, the type checker will alert the programmer.
+If it detects any typing incompatibilities, such as providing the wrong arguments to a function call, assigning conflicting data types or to apply not supported operations, the type checker will alert the programmer.
 Most type checkers are designed to act conservatively, meaning that they relax the constraints of soundness and completeness for the sake of decidability.
 It is easy to see that the typing problem can be reduced to the halting problem, if soundness and completeness are assumed.
 For this purpose consider \cref{lst:typingHaltingProblem}.
-In order to decide whether this code is well- or ill-typed, the typer has to decide whether \code{code\_which\_can\_run\_forever()} halts.
+In order to decide whether this code is well- or ill-typed, the typer has to decide whether \code{f} halts.
 Since the halting problem is undecidable, also the set of programs producing a runtime type error is undecidable.
 \begin{listing}[!h]
 	\begin{CenteredBox}
 		\begin{lstlisting}[language=C++]
-if(code_which_can_run_forever()){
+if(willHalt(f)){
 	code_with_type_error;
 }else{
 	code_without_type_error;
 }
 		\end{lstlisting}
 	\end{CenteredBox}
-	\caption{In order to type this code fragment, the typer has solve the halting problem.}
+	\caption{In order to type this code fragment, the typer has to solve the halting problem.}
 	\label{lst:typingHaltingProblem}
 \end{listing}
 
@@ -62,9 +62,9 @@ As indicated by \textcite{westland:jss2002a}, who investigated the influence of 
 Therefore, it is important to detect and correct errors as soon as possible.
 Static typing usually requires the user to specify types explicitly in the source code, because the language lacks type inference or has ambiguities which prevent the type inference from inferring the correct types.
 Java, for example, does not have type inference and therefore the user has to specify types redundantly.
-In line $1$ of \cref{lst:javaTypeAnnotation}, we see that we have to specify twice the type \code{Object}, even though this can easily be deduced from the right side of the assignment.
+In line $1$ of \cref{lst:javaTypeAnnotation}, it is obvious that we have to specify twice the type \code{Object}, even though this can easily be deduced from the right side of the assignment.
 Furthermore, in line $4$ we see an addition of two integers.
-It is clear that the result is again an integer and thus the \code{int} type specifier is dispensable.
+It is clear that the result is an integer and thus the \code{int} type specifier is dispensable.
 \begin{listing}[!h]
 	\begin{CenteredBox}
 		\begin{lstlisting}[language=Java]
@@ -81,19 +81,19 @@ int c = a + b;
 Proponents of static typing emphasize that explicit type information, as they occur in Java and many other programming languages, documents the code.
 It is easier for a programmer to use existing code if he can identify function arguments and their types with one glance, for instance. 
 Additionally, it is possible for the compiler to apply sophisticated optimization techniques, if it knows the types.
-The compiler could, for example, use more efficient machine instructions for floating-point calculations, if it operates on these values.
+By operating on these values, the compiler could, for example, use more efficient machine instructions for floating-point calculations.
 Furthermore, it is possible to substitute virtual function calls for direct calls, if the actual object type is known.
 Another benefit of static typing is the increased type safety.
-After passing the type check, the program is guaranteed to fulfill for all inputs some set of type safety properties.
+After passing the type checker, the program is guaranteed to fulfill for all inputs some set of type safety properties.
 This frees the runtime from checking them and thus the program can be executed more efficiently.
 Type information additionally helps to provide a better programming experience in an IDE by offering type dependent context help.
-If the IDE knows the type of a variable, then it can tell the programmer which methods this type supports, for instance.
+If the IDE knows the type of a variable, then it can tell the programmer which methods are supported by this type, for instance.
 And last but not least, explicit typing permits a better abstraction of functionality and, thus, increases modularity.
-Interfaces can be defined to orchestrate the interaction between several software components allowing to develop them independently from each other.
+Interfaces can be defined to orchestrate the interaction between several software components allowing them to be developed independently from each other.
 
 In contrast to these arguments, advocates of dynamic typing argue that their approach is more vivid and better suited for prototyping, because the static typing approach is too rigid.
 This comes especially into effect for programs in a highly dynamic environment with unknown or quickly changing requirements such as data integration.
-Another advantage is that the compile time is reduced because of the fewer passes the compiler has to go through.
+Another advantage is that the compile time is reduced because of fewer passes the compiler has to go through.
 However, the avoided type checks will then be realized within the runtime which adds overhead.
 But the dynamic nature allows interpreters to dynamically load code more quickly, because all type checkings are deferred until its actual execution.
 Moreover, dynamic languages support duck typing as a powerful tool to write reusable code.
@@ -102,24 +102,24 @@ Essentially, duck typing means that not the actual type of an object decides whe
 For example, consider a function which calls a method \code{count} on its given parameter.
 Then all function calls are valid which are called with an argument having a method \code{count}, independently of its actual type.
 That way, the programmer can write code which is applicable for a wide variety of types without having to specify them explicitly.
-\textcite{ousterhout:c1998a} even goes further and claims that static typed languages does not guarantee a higher type safety than dynamic typed languages.
+\textcite{ousterhout:c1998a} even claims that static typed languages do not guarantee a higher type safety than dynamic typed languages.
 Furthermore, he states that they are more verbose and it is difficult to write reusable code.
 However, it is unclear in which way reducing language features leads to a more powerful and expressive language. 
 
 The debate of whether statically or dynamically typed languages are superior has almost reached religious character.
-It is likely that none of the approaches alone solves all problems.
-Instead, a combination of the strengths of both paradigms promises the best results for the aforementioned problems~\cite{meijer:2004a}.
+It is likely that none of the approaches alone solves all the problems.
+Instead, a combination of the strengths of both paradigms promises the best results~\cite{meijer:2004a}.
 
-We are in the unfortunate situation that Matlab belongs to the class of dynamically typed languages and Gilbert requires type information for its parallel execution.
+We are in the unfortunate situation that MATLAB belongs to the class of dynamically typed languages and Gilbert requires type information for its parallel execution.
 The parallel data processing systems, used to run Gilbert programs, have to know which data types are passed from one worker node to another.
-Therefore, we did not have any choice and had to enrich Matlab with type information.
+Therefore, we did not have any choice but to enrich MATLAB with type information.
 
-There exists research of how to add explicit type information to Matlab.
-For example, \textcite{hendren:2011a} introduced the special keyword \emph{atype} to Matlab which are understood and interpreted by an extended compiler.
-The atype keyword basically acts as a type annotation and can be implemented within a special library or as a weaver.
+It exists research of how to add explicit type information to MATLAB.
+For example, \textcite{hendren:2011a} introduced the special keyword \emph{atype} to MATLAB which is understood and interpreted by an extended compiler.
+The \emph{atype} keyword basically acts as a type annotation and can be implemented within a special library or as a weaver.
 Even though this approach seems quite promising, we decided to opt for a more transparent mechanism, namely type inference.
-Type inference has the advantage that the Matlab user is not bothered by adding explicit type information and thus can continue writing his code in the usual fashion.
-In the case that the type inference algorithm cannot properly infer the types, there has to be a way to resolve this problem.
+Type inference has the advantage that the MATLAB user is not bothered by having to add explicit type information and thus can continue writing his code in the usual fashion.
+In case that the type inference algorithm cannot properly infer the types, there has to be a way to resolve this problem.
 We decided to pursue a similar approach as \textcite{furr:2009a}.
 \citeauthor{furr:2009a} added type information to Ruby by adding special comments to the respective code sections.
 Thereby, the code does not break with the Ruby standard and still contains type information.
@@ -165,11 +165,12 @@ The notion of the assignment is similar to the \code{let}-expression.
 An assignment adds a new variable $x$ with the value $e$ to the context.
 
 HM type inference distinguishes between two sorts of types, \emph{mono}- and \emph{polytypes}.
-Monotypes $\tau$ are defined as following:
+Monotypes $\tau$ are defined as follows:
 \begin{eqnarray*}
 \tau &=& \alpha\quad\text{(Variable)}\\
 &|& D\ \tau\ \ldots \tau\quad\text{(Application)}
 \end{eqnarray*}
+
 A monotype always denotes a concrete type.
 If the type is known, it can be a type constant, such as \code{int}, \code{float} or \code{string}, or a parametric type.
 A parametric type takes itself type arguments to form a concrete type.
@@ -184,9 +185,9 @@ They are defined by
 \sigma &=& \tau \\
 &|& \forall \alpha .\sigma
 \end{eqnarray*}
-.
+
 A type of the form $\forall \alpha.\sigma$ denotes the set of all types where $\alpha$ is substituted by a concrete type $\tau$ within $\sigma$.
-Consider for example the tuple access function \code{fst} which takes a tuple and returns the first entry.
+Consider, for example, the tuple access function \code{fst} which takes a tuple and returns the first entry.
 The function \code{fst} should be applicable to all different types of tuples, for example $(\code{int}, \code{int})$, $(\code{string}, \code{float})$, etc.
 If \code{fst} has a monotype, then it will only work for one concrete tuple type.
 Therefore, \code{fst} has a polytype.
@@ -198,7 +199,7 @@ An expression having the type $\forall \alpha. \alpha$ also has the type $\code{
 Thus, the latter type would be a valid inferred type, even though the first one is more general.
 In order to dissolve this ambiguities, the typing system always looks for the most general type.
 
-Usually, expressions depend on other expression and, thus, their types.
+Usually, expressions depend on other expression and thus their types.
 Therefore, a type dictionary is maintained where types of expressions, which have already been seen while parsing the code, are stored.
 And this is exactly what the context $\Gamma$ is used for.
 $\Gamma$ contains a list of pairs $x:\sigma$, which are called assumptions.
@@ -207,7 +208,7 @@ The formal definition of $\Gamma$ is
 \Gamma &=& \Gamma, x:\sigma \\
 &|& \epsilon\ \text{(empty)}
 \end{eqnarray*}
-.
+
 Having defined the context, expressions and types, the typing judgment $\Gamma \vdash x : \sigma$ can be defined.
 It means that given the context $\Gamma$ the variable $x$ has the type $\sigma$.
 The way how to come up with these judgments is defined by deduction rules.
@@ -263,7 +264,7 @@ The algorithm W is defined by the following deduction rules:
 	\LeftLabel{Assignment:\quad}
 	\BinaryInfC{$\Gamma \vdash x = e_0; e_1 : \tau^\prime$}
 \end{prooftree}
-.
+
 Each rule has the form
 \begin{tabular}{c}
 Premise\\
@@ -272,7 +273,7 @@ Conclusion
 \end{tabular}, which means that we have to prove the premise in order to show the conclusion.
 
 Let us go step by step through the different deduction rules of the algorithm.
-The first rule says that a variable $x$ has the type $\tau$, if we can find an assumption of $x$ in $\Gamma$ whose type $\sigma$ can be specialized to $\tau$.
+The first rule says that a variable $x$ has the type $\tau$, if an assumption of $x$ in $\Gamma$ whose type $\sigma$ can be specialized to $\tau$ is found.
 The function $inst$ does the specialization of the type.
 A type is specialized by removing all quantifiers and replacing the bound variables by fresh monotype variables.
 
@@ -284,7 +285,7 @@ The equivalence is tested by the $unify$ function.
 This function takes two types and tries to find the most general type unifying both arguments.
 
 The $unify$ function is an essential part of the typing system, since it incorporates all constraints imposed by the different expressions in order to find the most general type validating the program.
-The working principle can best understood by looking at its pseudocode in \cref{lst:unify}.
+The working principle can be best understood by looking at its pseudocode in \cref{lst:unify}.
 \begin{listing}[!h]
 	\begin{CenteredBox}
 		\begin{lstlisting}[language=inform]
@@ -309,7 +310,7 @@ def unify(typeA: Type, typeB: Type): Type = {
 \end{listing}
 
 First of all both type expressions are resolved.
-This means that type variables contained as sub expressions are looked up in a type variable assignment dictionary.
+This means that type variables that are contained as sub expressions are looked up in the type variable assignment dictionary.
 This dictionary maintains the current assignments between variables and their types.
 If a type variable has an assigned type, then this type is substituted for the corresponding type variable.
 If at least one of the resulting type expressions is still a type variable, then we can simply construct the union of both types.
@@ -330,12 +331,12 @@ In order to show that a lambda abstraction $\lambda x.e$ has the type $\tau\righ
 By adding this assumption to the context, we then have to calculate the type of the function body $e$.
 If we can prove that $e$ has the type $\tau^\prime$, we can finally conclude that the lambda abstraction has the type $\tau \rightarrow \tau^\prime$.
 
-And the last deduction rule covers assignments.
+The last deduction rule covers assignments.
 An assignment simply binds a variable name $x$ to an expression value.
 Since this expression value owns a type $\tau$, we can add a new assumption $x:\tau$ to the context.
 We continue the type inference for the subsequent expressions with this updated type context.
 That is expressed by the deduction rule.
-In fact, there is slight difference.
+In fact, there is a slight difference.
 Instead of adding the assignment $x:\tau$ we add $x:\overline{\Gamma}(\tau)$ to the context.
 $\overline{\Gamma}(\tau)$ calculates the generalization of $\tau$.
 This means that all free monotypes of $\tau$ not bound in $\Gamma$ are quantified.
@@ -344,6 +345,48 @@ That way, the most general type is found.
 	\overline{\Gamma}(\tau) &=& \forall \overline{\alpha}. \tau\\
 	\text{with}\quad\overline{\alpha} &=& free(\tau) \setminus free(\Gamma)
 \end{eqnarray*}
+
+\subsection{Function Overloading}
+
+MATLAB's basic operators, such as \code{+}, \code{-}, \code{/} and \code{*}, for example, are overloaded.
+They can be applied to matrices, scalars as well as mixture of both data types.
+That makes it very convenient to express mathematical problems, but from a programmer's point of view it causes some hardships.
+Originally, HM cannot deal with overloaded functions properly, because it assumes that each function has an unique type.
+In order to extend HM's capabilities, we allowed each function symbol to have a list of signatures.
+In the case of \code{+}, the list of signatures would consist of 
+\begin{eqnarray*}
+matrix[double] \times matrix[double] &\rightarrow& matrix[double]\\
+matrix[double] \times double &\rightarrow& matrix[double]\\
+double \times matrix[double] &\rightarrow& matrix[double]\\
+double \times double &\rightarrow& double
+\end{eqnarray*}
+
+In order to solve the typing problem, the inference algorithm has to resolve this ambiguity.
+Having complete knowledge of the argument types is enough to select the appropriate signature.
+Sometimes even partial knowledge is sufficient.
+However, if this is not the case, Gilbert has to apply a heuristic to make the typing expression well-formed.
+The heuristic selects the first entry in the list of signatures.
+
+Due to this heuristic, some well-typed programs will be rejected, though.
+Consider, for example, the code snippet in \cref{lst:typingAmbiguity}.
+In line $1$, an anonymous function $f$, which doubles its parameter, is defined.
+Within the body of $f$, the overloaded \code{+} operator is used.
+Since Gilbert has no additional typing information of $f$'s parameter, it has to apply the aforementioned heuristic to assign $f$ a valid type expression.
+The heuristic picks the first entry which is $matrix[double] \times matrix[double] \rightarrow matrix[double]$ and , thus, $f$ has the type $matrix[double] \rightarrow matrix[double]$.
+The subsequent function call \code{f(1.0)} in line $2$ will, therefore, throw a typing exception, because a scalar argument cannot be applied to a function having a matrix parameter.
+That is odd, because $f$ should be applicable to all data types supporting the \code{+} operator and scalar values definitely support this operation.
+It has to be stated that this is clearly a restriction of Gilbert, which limits the space of accepted programs.
+
+\begin{listing}[!h]
+	\begin{CenteredBox}
+		\begin{lstlisting}[language=Matlab]
+		f = @(x) x + x;
+		f(1.0)
+		\end{lstlisting}
+	\end{CenteredBox}
+	\caption{Wrongly rejected Gilbert program due to function overloading.}
+	\label{lst:typingAmbiguity}
+\end{listing}
 
 \section{Matrix Dimension Inference}
 \label{sec:MatrixDimensionInference}
@@ -355,13 +398,13 @@ For instance, consider a threefold matrix multiplication $A\times B\times C$.
 The multiplication can be evaluated in two different ways: $(A\times B)\times C$ and $A\times(B\times C)$.
 For certain matrix sizes one way might be infeasible whereas the other way can be calculated efficiently due to the matrix size of the intermediate result $(A\times B)$ or $(B\times C)$.
 
-To illustrate this point, assume that $A\in \mathbb{R}^{1000\times 10}, B\in \mathbb{R}^{10\times 1000}$ and $C \in \mathbb{R}^{10\times 1000}$.
+To illustrate this point, assume that $A\in \mathbb{R}^{1000\times 10}, B\in \mathbb{R}^{10\times 1000}$ and $C \in \mathbb{R}^{1000\times 10}$.
 Thus, the intermediate products are:
 \begin{eqnarray*}
 	A\times B &\in& \mathbb{R}^{1000 \times 1000}\\
 	B\times C &\in& \mathbb{R}^{10 \times 10}
 \end{eqnarray*}
-.
+
 In the first case we have to calculate a $1000 \times 1000$ matrix and in the second only a $10 \times 10$ matrix.
 
 By knowing the matrix sizes, we can choose the most efficient strategy to calculate the requested result.
@@ -379,23 +422,23 @@ with $\nu$ being the value type:
 	\nu &=& \gamma\quad\text{(Variable)} \\
 	&|& \delta\quad\text{(Value)}
 \end{eqnarray*}
-.
+
 The value type can either be a value variable or a concrete value.
 
 Value variables always appear if we know that a certain relationship holds, but do not know the concrete values yet.
-For example, when we multiply two matrices $A\in\mathbb{R}^{a\times b}$ and $B\in\mathbb{R}^{b\times c}$ we know that the result is $A\times B = C \in \mathbb{R}^{a\times c}$, without having knowledge about the actual values.
+For example, when we multiply two matrices $A\in\mathbb{R}^{a\times b}$ and $B\in\mathbb{R}^{b\times c}$ we know that the result is $A\times B = C \in \mathbb{R}^{a\times c}$, without having knowledge about the actual values of $a$ and $c$.
 Once we have deduced the actual values for a variable we can simply replace them.
 
 One of these occasions is the definition of a matrix.
-Gilbert implements several of these functions, known from Matlab: \code{eye}, \code{zeros}, \code{ones} or the \code{load} function, reading a matrix from disk.
+Gilbert implements several functions, known from Matlab: \code{eye}, \code{zeros}, \code{ones} or the \code{load} function, reading a matrix from disk.
 All of these functions require to specify the number of rows and columns for the resulting matrix.
-These values often serve as the source of our deduction.
+These values often serve as the source of deduction.
 Another possibility are special operations which modify the size of the matrix in a deterministic way.
-The sum operation, which calculates row or column sums respectively, will reduce the dimension which is used for the summation to $1$.
+The sum operation, which calculates row or column sums, respectively, will reduce the dimension which is used for the summation to $1$.
 
 The matrix size inference is incorporated into the HM type inference by adding some logic to the \code{unify} function.
 Whenever we encounter a matrix type during the unification process, we call a \code{unifyValue} function on the two row and column values.
 The \code{unifyValue} function works similarly to the \code{unify} function.
 First, the function resolves the value expression, thus substituting value variables with their assigned values.
-Then if at least one of the resolved value expressions is still a value variable, then the union is constructed and the corresponding value variable dictionary entry is updated.
+Then, if at least one of the resolved value expressions is still a value variable, then the union is constructed and the corresponding value variable dictionary entry is updated.
 If both resolved expressions are equal, then this value is returned and otherwise a value mismatch error is thrown.

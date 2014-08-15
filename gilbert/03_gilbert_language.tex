@@ -4,49 +4,48 @@
 
 \chapterquote{The limits of my language means the limits of my world.}{Ludwig Wittgenstein, (1889 - 1951)}
 
-Prior to the development start of Gilbert, we came across the decision which higher-level language we actually wanted to support.
-Since Gilbert has the aim to be a sparse linear algebra environment, R and Matlab are the natural candidates to be the inspiration for it.
-In fact, R and Matlab are quite similar and they both are widely used in academics as well as the industry to develop mathematical programs.
-Due to their expressiveness and their rich library support with myriads of mathematical functions, it is just as well suited for quick prototyping as for full-fledged development.
-Combined with their ease of use, they quickly became the industry standard for numerical processing.
-The final choice which language Gilbert shall resemble fell on Matlab, because of the higher familiarity of the authors with this language.
-Therefore, Gilbert is implemented as subset of the Matlab language, but we believe that there are not any fundamental reasons which would prohibit the support of R.
+Prior to the actual start of development of Gilbert, we came across the decision which higher-level language Gilbert should support.
+Since Gilbert aims to be a sparse linear algebra environment, R and MATLAB are the natural candidates.
+In fact, R and MATLAB are quite similar and are both widely used in academics as well as industry to develop mathematical programs.
+Due to their expressiveness and their rich library support with myriads of mathematical functions, it is just as well suited for quick prototyping as it is for full-fledged development.
+In combination with their ease of use, they quickly became the standard in industry for numerical processing.
+Our final choice fell on MATLAB, because of our higher familiarity with this language.
+Yet, we believe that there are not any fundamental reasons which would prohibit the support of R.
 In fact, the translation from one language to the other should be straight-forward on the compiler level.
 
 Another reason to imitate an existing language and not to devise a new language geared towards parallel execution is the laziness of people.
 Since its part of human nature to be sluggish, people are initially unwilling to learn new things or to re-adapt.
-Therefore, Gilbert was conceived to require as little re-adaption as possible of users familiar with Matlab.
-We think that this is a crucial property of Gilbert to be successfully adopted by the statistical community.
-Furthermore, a neat side effect is that existing Matlab code can almost seamlessly be ported to Gilbert and thus benefit instantaneously from the computational power of a large shared nothing cluster.
-This becomes particularly relevant against the background of having this huge existing code base.
+Therefore, Gilbert was conceived to require as little re-adaption as possible of users familiar with MATLAB.
+We think that this is a crucial property of Gilbert in order to be successfully adopted by the statistical community.
+Furthermore, a neat side effect is that existing MATLAB code can almost seamlessly be ported to Gilbert and thus benefit instantaneously from the computational power of a large shared nothing cluster.
+This becomes particularly relevant considering the huge existing code base.
 Re-coding parts of it would be prohibitive, because of the required labor and provoked costs.
 
-In the following sections, we will describe the key aspects of Gilbert's language explaining the taken design decisions.
-Subsequently, we will give a formal specification of Gilbert's language and describe the parser which is used to parse it.
+In the following sections, we will describe the key aspects of the Gilbert language and explain the design decisions taken.
+Subsequently, we will give a formal specification of the Gilbert language and describe the used parser.
 
 \section{Language Features}
 \label{sec:languageFeatures}
 
-In order to not be overwhelmed by the complexity of Matlab but still support a full functional subset of it, Gilbert was restricted to support the following language features and data types.
-We decided to keep the feature set as small as possible to concentrate on the parallelization instead of maintaining hardly used language features.
-The elementary data type of linear algebra as well as Matlab is a matrix.
+In order to not be overwhelmed by the complexity of MATLAB but still support a full functional subset of it, Gilbert was restricted to support the following language features and data types.
+We decided to keep the feature set as small as possible to concentrate on the parallelization instead of supporting hardly used language features.
+The elementary data type of linear algebra and therefore also of MATLAB is a matrix.
 Gilbert supports arbitrary $2$-dimensional matrices whose elements can be \emph{double} or \emph{boolean}.
 Vectors are not represented by a special type but instead are treated as a matrix.
-Additionally, scalar \emph{double} and \emph{boolean} values are supported, too.
-The reason to introduce a \emph{boolean} type is the control flow of loops.
-This point will be covered in a later paragraph.
-Since we also want to interact with data stored on disk, Gilbert supports strings, too.
+Additionally, scalar \emph{double} and \emph{boolean} values are supported.
+The reason to introduce a \emph{boolean} type is the control flow of loops, being covered in a later paragraph.
+Since Gilbert has to interact with data stored on disk, strings are supported.
 
 Gilbert also implements cell array types.
 A cell array consists of indexed data containers, called cells.
 Each cell can contain an individual data type.
 Therefore, cell arrays can be used to pass multiple data items combined as one argument to a function or to obtain multiple items from a function.
-The latter aspect is particularly important, because currently Gilbert only supports functions with a single return value.
+The latter aspect is particularly important, because Gilbert only supports functions with a single return value.
 A cell array is defined using curly braces and commas to separate individual values.
 The cells can be accessed by an index appended in curly braces to the cell array variable.
-\Cref{lst:cellArray} shows how to define and access cell arrays.
+\Cref{lst:cellArray} shows how to define and access them.
 The formal definition of the syntax of cell arrays can be found in \cref{sec:languageGrammar}.
-In contrast to Matlab's cell arrays, though, Gilbert only allows to have $1$-dimensional cell arrays.
+In contrast to MATLAB's cell arrays, though, Gilbert only allows to have $1$-dimensional arrays.
 However, this does not impose a serious restriction, since all multi-dimensional array can be transformed into a $1$-dimensional array. 
 
 \begin{listing}[!h]
@@ -64,25 +63,25 @@ However, this does not impose a serious restriction, since all multi-dimensional
 
 Gilbert supports the basic linear algebra operations defined on matrices and scalars.
 They include among others the common operations \code{+}, \code{-}, \code{/} and \code{*}, whereas \code{*} denotes the matrix-matrix multiplication and all other operations are interpreted cellwisely.
-The cellwise multiplication is indicated by a point preceding the operator \code{.*} as it is also common for cellwise operations in Matlab.
-Furthermore, Gilbert supports also comparisons operators such as \code{>}, \code{>=}, \code{==} and \code{\textasciitilde=}.
+The cellwise multiplication is indicated by a point preceding the operator as it is common for cellwise operations in MATLAB.
+Furthermore, Gilbert also supports comparisons operators such as \code{>}, \code{>=}, \code{==} and \code{\textasciitilde=}.
 This becomes handy for realizing dynamic termination criteria for loops.
-The full set of supported mathematical operations can be found in \cref{appendix:GilbertOps}.
+The full set of supported mathematical operations can be found in appendix 1.
 
-Besides the basic arithmetic operations, the user can also define functions and anonymous functions.
-This not only allows to better structure the code but also to express \nth{2} level functions.
-The syntax of anonymous functions adhere to the Matlab syntax.
+Besides the basic arithmetic operations, the user can also define named functions and anonymous functions.
+This not only enables a better structure of the code but also to express \nth{2}-order functions.
+The syntax of anonymous functions adheres to the MATLAB syntax.
 An anonymous function which calculates the sum of its input squares could be defined as follows: \code{@(x,y) x*x + y*y}.
-The formal definition can be found in \cref{sec:languageGrammar}.
+A formal definition can be found in \cref{sec:languageGrammar}.
 
-An important aspect of Matlab, which we had to support as well, are loops.
-Matlab permits the user to express \code{for} and \code{while} loops.
+An important aspect of MATLAB are loops.
+MATLAB permits the user to express \code{for} and \code{while} loops.
 However, these loops are quite powerful in the sense that they allow iterations with side effects.
-In fact, it is actually quite easy for the user to run in this trap.
-The problem of parallelization of iterations with side effects is that one also has to maintain the referenced state outside of the loop.
+In fact, it is actually quite easy for the user to run into this trap.
+The problem of parallelization of iterations with side effects is that the referenced external state has to be maintained.
 This makes preprocessing and execution unnecessarily complex.
 For the sake of simplicity, Gilbert is limited to a different loop mechanism.
-Gilbert offers a fixpoint operator \code{fixpoint} which iteratively applies a given update function $f$ on the previous result of $f$, starting with an initial value $x$ at iteration $0$.
+Gilbert offers a fixpoint operator \code{fixpoint}, which iteratively applies a given update function $f$ on the previous result of $f$, starting with an initial value $x$ at iteration $0$.
 Thus, the $n^{th}$ iteration is equivalent to applying the function $f$ $n$ times to $x$: 
 \begin{displaymath}
 	n^{th}\text{ iteration}\equiv\underbrace{f(f(\ldots(f(x))\ldots))}_{\text{$n$ times}}
@@ -91,12 +90,12 @@ Thus, the $n^{th}$ iteration is equivalent to applying the function $f$ $n$ time
 In order to terminate the fixpoint operation, the operator provides two mechanisms.
 First of all, the user has to specify a maximum number \code{m} of iterations after which the iteration stops for sure.
 This mechanism is henceforth denoted as the \emph{static termination criterion}.
-Such a termination criterion is often not sufficient for machine learning algorithms, because they usually continue their computations until they have reached a certain convergence criterion and thus quality.
-Since the number of necessary iterations to reach this state is not known a priori, it is called the \emph{dynamic termination criterion}.
+Such a termination criterion is often not sufficient for machine learning algorithms, because they usually continue their computations until they have reached a certain convergence criterion.
+Since the number of necessary iterations to reach this state is not always known a priori, it is called the \emph{dynamic termination criterion}.
 Gilbert offers support for the dynamic termination criterion.
 The user can provide a convergence function \code{c} to the fixpoint operator.
-The convergence function is called with the previous and current fixpoint value and returns a boolean, indicating whether the termination criterion has been fulfilled or not.
-Thus, the fixpoint operator terminates either if convergence was detected or the maximum number of iterations are exceeded.
+The convergence function is called with the previous and current fixpoint value and returns a boolean value, indicating whether the termination criterion has been fulfilled or not.
+Thus, the fixpoint operator terminates either if convergence was detected or if the maximum number of iterations is exceeded.
 Consequently, the fixpoint operator is defined as follows:
 \begin{equation}
 fixpoint: \underbrace{T}_{\text{\code{x}}} \times \left( \underbrace{T \rightarrow T}_{\text{\code{f}}} \right) \times \underbrace{\mathbb{N}}_{\text{\code{m}}} \times \left(\underbrace{T\times T \rightarrow \mathbb{B}}_{\text{\code{c}}} \right) \rightarrow T
@@ -105,19 +104,19 @@ fixpoint: \underbrace{T}_{\text{\code{x}}} \times \left( \underbrace{T \rightarr
 with $T$ being a generic type variable.
 
 In fact, the fixpoint operator replaces iterations by recursions whereas the update function $f$ is pure.
-At this point Gilbert breaks with existing Matlab code.
-To make Gilbert a real subset of Matlab, the fixpoint operator would have to be integrated into Matlab.
+At this point Gilbert breaks with existing MATLAB code.
+To make Gilbert a real subset of MATLAB, the fixpoint operator would have to be integrated into MATLAB.
 This could easily be done by providing an external library with its definition.
 
 Even though the iteration operator restricts the set of valid programs in Gilbert, it is still expressive enough to support a wide variety of programs.
-Moreover, all Matlab programs can be transformed so that the for and while loops are replaced by the fixpoint operator.
+Moreover, all MATLAB programs can be transformed so that the for and while loops are replaced by the fixpoint operator.
 This is simply achieved by passing all data which is read or written to as parameters to the update function.
 The update function returns the same set of variables, just with updated values.
 Such an exemplified transformation can be seen in \cref{fig:for2Fixpoint}.
-Here we can see that all data which is operated on is passed to the fixpoint operator as a cell array.
-Lines $1-2$ define the update function \code{f}.
+Here we can see that all data, which is operated on, is passed to the fixpoint operator as a cell array.
+Lines $1-2$ of \cref{fig:for2Fixpoint:fixpoint} define the update function \code{f}.
 The parameter \code{x} is a cell array whose first entry contains the accumulator \code{A} and second entry is the loop counter \code{i}.
-In line $2$ of \cref{fig:for2Fixpoint:fixpoint} we see the returned cell array value of the anonymous function.
+In line $2$ we see the returned cell array value of the anonymous function.
 The first entry is the sum of the current accumulator value and the loop counter.
 The second entry is the incremented loop counter for the next iteration.
 Line $3$ calls the fixpoint operator with the initial cell array value, the update function and the maximum number of iterations.
@@ -152,11 +151,10 @@ A = r{1};
 \section{Language Grammar}
 \label{sec:languageGrammar}
 
-As noted above, Gilbert's language is inspired by Matlab and in fact shall copy it.
-However, we could not find an official specification of the Matlab language.
-Therefore, we defined our own grammar with the goal to imitate Matlab as closely as possible.
+We could not find an official specification of the MATLAB language.
+Therefore, we defined our own grammar with the goal to imitate MATLAB as closely as possible.
 Even though we extensively tested the conformity of the language, we cannot guarantee that it is completely equivalent.
-In the following, we give the Backus-Naur form (BNF) of Gilbert's language.
+In the following, we give the Backus-Naur form (BNF) of the Gilbert language.
 
 \setlength{\grammarindent}{12em} % increase separation between LHS/RHS
 \begin{grammar}
@@ -217,9 +215,9 @@ In the following, we give the Backus-Naur form (BNF) of Gilbert's language.
 
 <cellExpression> ::= <cellArray> | <cellArrayIndexing>
 
-<cellArray> ::= '{' <expression> (',' <expression>)* '}'
+<cellArray> ::= '\{' <expression> (',' <expression>)* '\}'
 
-<cellArrayIndexing> ::= <identifier> ('{' <numericLiteral> '}')+
+<cellArrayIndexing> ::= <identifier> ('\{' <numericLiteral> '\}')+
 
 <scalar> ::= <numericLiteral>
 
@@ -248,7 +246,7 @@ Furthermore, we used notations known from regular expressions to shorten the gra
 We use parentheses to group subexpressions and apply the following multiplicity specifiers: \code{*}, \code{+} and \code{?}.
 The semantics of these specifiers can be found in \cref{tab:multiplicity}.
 
-\begin{table}
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{c|l}
 	Multiplicity specifier & Meaning\\
@@ -257,7 +255,7 @@ The semantics of these specifiers can be found in \cref{tab:multiplicity}.
 	$\langle exp\rangle$+ & $\langle exp\rangle$ can appear multiple times but at least once \\
 	$\langle exp\rangle$? & $\langle exp\rangle$ can appear exactly once or not at all
 	\end{tabular}
-	\caption{Multiplicity specifier used to specify Gilbert's language. They are borrowed from regular expressions.}
+	\caption{Multiplicity specifier used to specify the Gilbert language. They are borrowed from regular expressions.}
 	\label{tab:multiplicity}
 \end{table}
 
@@ -265,7 +263,7 @@ The different \emph{aexp} non-terminals are used to model the precedence order o
 An overview of the precedence can be found in \cref{tab:precedences}.
 The $'$ operator denotes the transpose of the operand.
 
-\begin{table}
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{l|l}
 	Operator class & Operators\\
@@ -288,7 +286,7 @@ The $'$ operator denotes the transpose of the operand.
 
 The non-terminals \emph{identifier}, \emph{numericLiteral}, \emph{stringLiteral} and \emph{booleanLiteral} are tokens generated by the lexer. The corresponding tokens are defined by regular expressions and can be found in \cref{tab:tokens}.
 
-\begin{table}
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{l|l}
 	Token name & Regular expression\\
@@ -304,18 +302,18 @@ The non-terminals \emph{identifier}, \emph{numericLiteral}, \emph{stringLiteral}
 
 \section{Parser}
 
-In order to implement Gilbert, a parser had to be selected which is powerful enough to parse Gilbert's language.
+In order to implement Gilbert, a parser had to be selected which is powerful enough to parse the Gilbert language.
 Luckily, the language is rather simple and since none of the production rules is left recursive, we can use a simple LL(n) parser.
 This aspect becomes important when we justify our implementation choices in \cref{cha:implementation}.
 
-The attentive reader will have noticed that our language specification contains a problem.
-Consider, for example, the following valid Matlab code \code{A' + B'} where \code{A} and \code{B} are matrices.
-The code should produces the sum of two transposed matrices.
+The attentive reader will have noticed that our language specification contains an ambiguity.
+Consider, for example, the following valid MATLAB code \code{A' + B'} where \code{A} and \code{B} are matrices.
+The code should produce the sum of two transposed matrices.
 However, on the lexer level the two transpose operators will be recognized as the enclosing apostrophes of a string literal.
 Therefore, the lexer will produce an identifier token followed by a string literal token.
-Eventually, this will cause a parser error, because there is no production rule requiring this combination of tokens.
+Eventually, this will cause a parser error, because there is no production rule consuming this combination of tokens.
 
 In order to solve this problem, we have to differentiate a transpose operator from an apostrophe belonging to a string literal.
-Since the transpose operator always follows after an expression, we can check that the previously detected token was an identifier, closing parentheses, closing bracket or closing brace.
+Since the transpose operator always follows after an expression, we can check that the previously detected token is an identifier, closing parentheses, closing bracket or closing brace.
 If this is the case, then the apostrophe is considered being a transpose operator.
 Otherwise, it belongs to a string literal.
