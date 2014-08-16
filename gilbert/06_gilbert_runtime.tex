@@ -7,7 +7,7 @@
 The Gilbert runtime is responsible for executing the compiled MATLAB code on a particular platform.
 For this purpose, it receives the intermediate representation of the code and translates it into the execution engine's specific format.
 Currently, Gilbert supports three different execution engines: \emph{ReferenceExecutor}, \emph{StratosphereExecutor} and \emph{SparkExecutor}.
-The \emph{ReferenceExeuctor} executes the compiled MATLAB code locally.
+The \emph{ReferenceExecutor} executes the compiled MATLAB code locally.
 For the distributed execution Gilbert supports the Spark and the Stratosphere system as backends.
 
 The \emph{ReferenceExecutor} is an interpreter for the intermediate code.
@@ -34,7 +34,7 @@ Since Spark and Stratosphere offer a similar set of programming primitives, they
 Furthermore, even most of the linear algebra operations can be implemented similarly.
 The only programming difference is the incremental plan roll out feature of Spark.
 By emitting Spark transformations and actions, the user can trigger computations in the cluster and retrieve intermediate results on the driver node.
-This allows a more interactive way of programming, manifesting in a more natural way loops are defined, for example.
+This feature allows a more interactive way of programming, manifesting in a more natural way loops are defined, for example.
 However, these differences are only subtle and do not limit or extend the expressiveness of either system.
 
 \section{Distributed Matrix Representation}
@@ -76,8 +76,8 @@ In order to calculate the result of such an operation, we only have to join the 
 \end{figure}
 
 However, this approach unveils its drawbacks when multiplying two equally partitioned matrices $A$ and $B$ as illustrated in \cref{fig:rowPartitioningMM}.
-Here, to calculate the resulting row with index $r$, we need the row $r$ of $A$ and the complete matrix $B$.
-This implies a complete repartitioning of $B$.
+In such a case, the row $r$ of $A$ and the complete matrix $B$ is needed to calculate the resulting row with index $r$.
+This circumstance implies a complete repartitioning of $B$.
 The repartitioning is especially grave, since $B$ has to be broadcasted to every row of $A$.
 
 \begin{figure}[!h]
@@ -97,7 +97,7 @@ We further assume that rows with the same index are kept on the same worker node
 Each row $a_r$ requires the complete knowledge of matrix $B$ in order to produce the row $c_r$.
 Therefore, every row $b_r$ has to be sent to all other worker nodes.
 Thus, the number of rows sent by each worker node is $n-1$.
-All of the $n$ worker nodes have to do this.
+All of the $n$ worker nodes have to do the same.
 Consequently, the total number of sent messages is $n(n-1)$ and each message has a size of $n\alpha$ where $\alpha$ is the size of a matrix entry.
 Usually, each sending operation causes some constant overhead inflicted by resource allocation.
 Before sending the actual data over the network, memory to transfer the data to the network interface has to be allocated, network resources have to be reserved and a network connection with the remote peer has to be established.
@@ -106,7 +106,7 @@ Since all sending operations occur in parallel, the costs caused by constant ove
 The total amount of data which has to sent over the network is $n^2(n-1)\alpha$.
 The network interconnection is assumed to guarantee every node a bandwidth $\nu$.
 Therefore, the time needed for sending the data is $\frac{n^2(n-1)\alpha}{\nu}$.
-This leads to the following repartitioning cost model:
+These considerations lead to the following repartitioning cost model:
 
 \begin{displaymath}
 	cost_{row} = \frac{n^2(n-1)\alpha}{\nu} + (n-1)\Delta
@@ -149,7 +149,7 @@ The total communication costs comprises the transmission costs and the network o
 
 We see that the term $(n-1)$ is replaced by $2\left(\sqrt{n}-1\right)$ in the square block cost model.
 For $n>2$, the square block partitioning scheme is thus superior to the row- and column-wise partitioning pattern with respect to the cost model.
-The reason for this is that the square blocks promote more localized computations compared to the other partitionings.
+The reason for this outcome is that the square blocks promote more localized computations compared to the other partitionings.
 Instead of having to know the complete matrix $B$, we only have to know one block row of $A$ and one block column of $B$ to compute the final result.
 
 Due to these advantages and also considering its simplicity, we decide to implement the square block partitioning scheme in Gilbert.
@@ -255,14 +255,14 @@ The RMM and CPMM methods have been implemented within SystemML~\cite{ghoting:201
 
 Let us assume that we want to calculate $A \times B = C$ with $A,B$ and $C$ being matrices.
 The block size has been chosen such that $A$ is partitioned into $m\times l$ blocks, $B$ is partitioned into $l \times n$ blocks and the result matrix $C$ will be partitioned into $m\times n$ blocks.
-In order to reference the block in the i$th$ block row and j$th$ block column of $A$, we will write $A_{ij}$.
+In order to reference the block in the $i$th block row and $j$th block column of $A$, we will write $A_{ij}$.
 A block row will be denoted by a single subscript index and a block column by a single superscript index.
-For example, $A_i$ marks the i$th$ block row of $A$ and $A^j$ the j$th$ block column of $A$.
+For example, $A_i$ marks the $i$th block row of $A$ and $A^j$ the $j$th block column of $A$.
 
-The replication-based strategy will copy for each $C_{ij}$ the i$th$ block row of $A$ and the j$th$ block column of $B$.
+The replication-based strategy will copy for each $C_{ij}$ the $i$th block row of $A$ and the $j$th block column of $B$.
 The replicated blocks of $A_i$ and $B^j$ will be grouped together.
 These steps can be achieved by a single mapper.
-Once this is done, we can calculate the final result $C_{ij}$ within a reducer.
+Once this grouping is done, the final result $C_{ij}$ can be calculated with a single reducer.
 The reduce function simply has to calculate the scalar product of $A_i$ and $B^j$.
 It is important to stress that $A_i$ is replicated for each $C_{ik},\forall k$.
 The whole process is illustrated in \cref{fig:RMM}.
@@ -277,8 +277,8 @@ The whole process is illustrated in \cref{fig:RMM}.
 In contrast to RMM, CPMM calculates the outer products between $A^k$ and $B_k$ for all $k$.
 A mapper can group the $A^k$ and $B_k$ together so that a reducer can compute the outer products.
 Consequently, this method does not replicate any data.
-The outer product will produce intermediate result matrices $C^k$ which have to be summed up to produce the final result $C=\sum_{k=1}^{l} C^k$.
-This can be achieved by a subsequent reducer.
+The outer product produces intermediate result matrices $C^k$ which have to be added up to produce the final result $C=\sum_{k=1}^{l} C^k$.
+This summation can be achieved by a subsequent reducer.
 The whole process is illustrated in \cref{fig:CPMM}.
 
 \begin{figure}[!h]
@@ -293,10 +293,10 @@ The former method can be realized within a single MapReduce job whereas the latt
 Neither RMM nor CPMM is always superior.
 The optimal matrix multiplication strategy depends on the matrix size of its operands $A$ and $B$.
 
-Fortunately, Stratosphere and Spark provide us with a little bit more flexibility in terms of higher order functions.
-Freed from the tight corset of the MapReduce world, we can express matrix multiplications more subtly.
-Looking at the definition of the matrix multiplication for $C_{ij}=\sum_{k=1}^{l}A_{ik}\times B_{kj}$, we see that every $A_{ik}$ has to be joined with its corresponding $B_{kj},\forall k$.
-This can be easily achieved by using the join function.
+Fortunately, Stratosphere and Spark exhibit a little bit more flexibility in terms of higher order functions.
+Freed from the tight corset of the MapReduce world, matrix multiplications can be expressed more subtly.
+Looking at the definition of the matrix multiplication for $C_{ij}=\sum_{k=1}^{l}A_{ik}\times B_{kj}$, it can be seen that every $A_{ik}$ has to be joined with its corresponding $B_{kj},\forall k$.
+This pairwise mapping can be easily achieved by using the join function.
 The join-key is the column index of $A$ and the row index of $B$.
 The joiner calculates for each matching pair $A_{ik}$ and $B_{kj}$ an intermediate result $C_{ij}^k$.
 Grouping the intermediate results with respect to the index pair $(i,j)$ allows us to compute the final result in a subsequent reduce step.
@@ -345,7 +345,7 @@ The corresponding dataflow plan is shown in \cref{fig:planMaximumVectorwiseTrans
 In contrast to that, the $2$-norm operation requires a more sophisticated implementation.
 First, the cellwise square of all matrix entries is calculated with the map function.
 Then, the partial sums of every row are computed by summing the columns of each block.
-This constitutes another map operation.
+This calculation constitutes another map operation.
 The final row sums are calculated by grouping the partial sums with respect to their block row index and summing the items of each group up.
 After this reduce operation is done, the final result is computed by taking the cellwise square root.
 

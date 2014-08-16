@@ -57,12 +57,12 @@ Most of these tools are based on statistics to extract interesting features.
 It is beneficial to apply these statistical means to the complete data set instead of smaller chunks.
 Even if the chunks cover the complete data set, important correlations between data points might get lost in smaller parts, if treated individually.
 Moreover, the statistical tools improve their descriptive and predictive results by getting fed more data.
-The more data is available, the more likely it is that noise cancels out and that significant patterns manifest.
-However, this comes at the price of an increased computing time which requires fast computer systems to make computations feasible.
+The more data is available, the more likely it is that noise cancels out and that the significant patterns manifest.
+However, these benefits come at the price of an increased computing time which requires fast computer systems to make computations feasible.
 
 The insights gained from collected data already help to govern business decisions, improve life quality or simply create new industries from scratch.
 For example, retail stores analyze their sales, customer, pricing and weather data in order to decide which products to offer or when to do a discount sale.
-This not only increases the revenue of the shops but also boosts the satisfaction of the customers by getting better offers. 
+That not only increases the revenue of the shops but also boosts the satisfaction of the customers by getting better offers. 
 Police departments try to detect probable crime sites by extracting patterns from previously recorded criminal acts and then reinforce the policemen in that region~\cite{lohr:yt2012a}.
 The intelligent deployment of policemen improves security for citizens without having to hire more officers.
 Hospitals analyze their patients' records and scientific studies in order to find the cancer treatment best complying with the specifics of the patient.
@@ -90,7 +90,7 @@ In some cases, it is even proven that there exists a lower bound for any algorit
 For example, it can be shown that the complexity of a sorting algorithm, which is based on comparing two of its elements to obtain their ordering, is in $\Omega\left(n\log n\right)$ with $n$ being the number of elements.
 Thus, certain problems have an inherent limitation of how fast they can be computed.
 
-The other way to speed the analytic tools up is to make the computer faster by vertical or horizontal scaling.
+The other way to speed up the analytic tools is to make the computer faster by vertical or horizontal scaling.
 To scale vertically means that we add more resources to a single computer.
 For example, the main memory or the frequency of a computer could be increased, giving them more computational power.
 In contrast to that, horizontal scaling means to add more computer nodes to a system.
@@ -100,12 +100,12 @@ Since each split is smaller than the original problem, the computer can process 
 In recent years, we have seen that clock rates of CPUs stagnated.
 Before, there was a simple receipt to increase the computing power of micro-controllers; increase the clock rate, which demands more power, and shrink the channel widths to mitigate for the increased power consumption.
 However, the shrinkage induces the problem of leakage, which increases the power demand again.
-The consumed power is limited by the amount of energy you can dissipate and thus there is a technological limit for the increase of clock rate.
+The consumed power is limited by the amount of energy that can be dissipated and thus there is a technological limit for the increase of clock rate.
 When it became clear that the micro-controller would hit this so-called ``power wall'', one duplicated the micro-controller's functionality to support simultaneous execution of multiple applications and to harness the inherent parallelism of programs.
 
 The emerging multi-core and distributed systems pose new challenges for programmers, since now they have to know about locking, deadlocks, race-conditions and inter-process communication in order to make most of the available hardware.
 Since they have to be able to reason about interwoven parallel control flows, parallel program development is highly cumbersome and error-prone.
-Therefore, new programming models are conceived which relieve the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
+Therefore, new programming models are conceived, a development that relieves the programmer from the tedious low-level tasks related to parallelization such as load-balancing, scheduling of parallel tasks and fault recovery.
 The programmer can concentrate on the actual algorithm and the goal he wants to achieve by using these new paradigms.
 
 These are the reasons why Google's MapReduce~\cite{dean:c2008a} framework and its open source re-implementation Hadoop~\cite{hadoop:2008a} became so popular among scientists as well as engineers.
@@ -118,9 +118,9 @@ The strengths of MapReduce are that it is expressive enough to implement a multi
 In fact, the map phase is embarrassingly parallel and the reduce phase only needs a shuffling step prior to its parallel execution.
 
 But still, MapReduce and other frameworks force the user to express the program in a certain way, which is often not natural or intuitive to a user coming from a different domain.
-This implies that one has to overcome a particular entry-barrier to use the system and this might already be too high for some users.
+This implies that one has to overcome a particular entry-barrier to use the system and this barrier might already be too high for some users.
 Furthermore, the actual program might become lengthy and complicated expressed within the programming model.
-This makes developing and debugging the program difficult as well as time-consuming and eventually expensive.
+This circumstance makes developing and debugging the program difficult as well as time-consuming and eventually expensive.
 Especially, in the field of data analytics and machine learning programs are usually expressed in a mathematical form.
 Therefore, systems such as \matlab~\cite{matlab} and R~\cite{r:1993a} are widely used and recognized for their fast prototyping capabilities and their extensive mathematical libraries.
 However, these linear algebra systems lack proper support for automatic parallelization on large clusters and are thus restricting the user to a single workstation.
@@ -131,7 +131,7 @@ Consequently, it is very difficult, time-consuming and costly to implement machi
 
 This problem would be mitigated by having a distributed sparse linear algebra system supporting a MATLAB- and R-like language.
 Assuming that such a system is realizable, then existing MATLAB- and R-code could be directly run in parallel.
-Furthermore, new distributed algorithms could be quickly implemented benefiting from the expressiveness of linear algebra.
+Furthermore, new distributed algorithms could quickly be implemented benefiting from the expressiveness of linear algebra.
 This would drastically speed up the application of machine learning and data analysis algorithms to web-scale data.
 Due to these reasons, a distributed sparse linear algebra environment, called Gilbert, is developed in the context of this thesis.
-In the following, we will present the approach, the encountered problems and the evaluation results of our implementation.
+In the following, we will present the approach, the encountered problems and the evaluation of our implementation.

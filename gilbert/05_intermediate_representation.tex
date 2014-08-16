@@ -11,8 +11,8 @@ Even though, the intermediate code adds an additional representation and thus mo
 Moreover, this approach is similar to the approach the JVM and the .Net frameworks pursue.
 The Java and .Net code are compiled to a format which can be executed platform independently.
 
-The additional abstraction layer allows us to apply language independent optimization in a coherent manner and independently of the actually used front end language.
-This provides us with the flexibility to easily extend Gilbert to support other linear algebra languages as well.
+The additional abstraction layer allows Gilbert to apply language independent optimization in a coherent manner and independently of the actually used front end language.
+This implementation aspect gives the flexibility to easily extend Gilbert to support other linear algebra languages as well.
 The next natural candidate for a supported front end language would surely be R.
 Moreover, a higher-level abstraction of the mathematical operations holds more potential for algebraic optimization.
 One class of important transformations is the reordering of operations and the determination of the execution order.
@@ -26,7 +26,7 @@ Therefore, the intermediate format has to include the operational primitives of 
 With these building blocks at hand, it is already possible to express a multitude of iterative machine learning algorithms.
 As pointed out in \cref{sec:languageFeatures}, Gilbert does not provide a direct \code{for} or \code{while} loop, but instead the \code{fixpoint} operator.
 The second design goal was simplicity.
-It is of particular interest to keep this set of intermediate operators as small as possible, because this would alleviate a possible optimization step prior to execution.
+It is of particular interest to keep the set of intermediate operators as small as possible, because it would alleviate a possible optimization step prior to execution.
 
 \section{Specification}
 
@@ -230,7 +230,7 @@ In order to illustrate the compilation process and to get a feeling for the inte
 For this purpose, we have chosen the well-known PageRank algorithm~\cite{page:1999a}.
 The Matlab implementation can be seen in \cref{lst:PageRank}.
 
-\begin{listing}[!h]
+\begin{listing}[h!]
 	\begin{CenteredBox}
 		\begin{lstlisting}[language=Matlab,
 		commentstyle=\color{black},
@@ -350,7 +350,7 @@ Its compiled version is shown in \cref{fig:irC}
 \end{figure}
 
 The \code{norm} operator, taking as first parameter the matrix $m$ and as second the norm parameter $p$, calculates the $p$-norm of $m$ over all matrix elements.
-Internally this is compiled to the intermediate code shown in \cref{fig:irNorm}.
+Internally this operator is compiled to the intermediate code shown in \cref{fig:irNorm}.
 
 \begin{figure}[t]
 	\centering

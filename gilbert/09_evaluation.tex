@@ -9,6 +9,8 @@ We show that Gilbert is not only easily usable in terms of programming but also 
 Furthermore, we compare the different execution engines and math-backends to see which system gives the best results.
 Based on these outcomes, we want to come up with a recommendation for the best configuration of Gilbert.
 
+\section{Experimental Setup}
+
 For our evaluation, we use the $400$-core cluster provided by the DIMA faculty of the Technical University of Berlin.
 The cluster comprises $25$ local machines with \SI{32}{\giga\byte} of main memory per computer.
 Each machine is equipped with $2$ AMD Opterons 6128 CPUs, each of them having $8$ cores.
@@ -21,6 +23,10 @@ Therefore, we use the current snapshot version.
 All extensions made to the current snapshot version are also pending pull requests and hopes are high that the final release will contain them all.
 Thus, executing Gilbert with the stable release Stratosphere-0.6 should work perfectly fine.
 As the underlying distributed file system both systems use Apache Hadoop-1.2.1~\cite{hadoop:2008a}.
+
+The measured execution times on the cluster can slightly differ from measurement to measurement because of non-deterministic factors, such as cache misses, load caused by the operating system and network communication.
+In order to cancel out the noise inflicted by these factors, we measure the execution time for each experimental setting five times and report the mean of the measurements.
+That way, we reduce the overall variance of the measurements.
 
 \section{Scalability}
 
@@ -35,7 +41,8 @@ As a first benchmark, we choose the matrix multiplication $A\times B$ with $A,B 
 The matrix multiplication operation is demanding, both in CPU load as well as network I/O.
 The implementation of the matrix multiplication, shown in \cref{sec:LinearAlgebraOperations}, first joins the column blocks of the left matrix with the row blocks of the right matrix.
 This operation replicates the two operands partially and sends them across the network to their respective worker nodes.
-For each matching pair of blocks a local matrix multiplication is executed, which has a complexity of $\mathcal{O}(n_{block}^3)$ with $n_{block}$ being the block size.
+For each matching pair of blocks, a local matrix multiplication is executed.
+The local matrix multiplication has a complexity of $\mathcal{O}(n_{block}^3)$ with $n_{block}$ being the block size.
 The produced intermediate results are grouped according to their left row and right column index.
 Finally, the grouped result blocks are added up to give the final result.
 
@@ -48,13 +55,15 @@ The local execution engine uses the same math-backend as the distributed engines
 Breeze is chosen as the math back end for the matrix multiplication.
 The Stratosphere and Spark execution engines are both started with \SI{20}{\giga\byte} of main memory for their task managers.
 Furthermore, they are both configured to use a similar scheduling strategy, which distributes the work equally among the available computer nodes.
-This is especially important in order to compare the results, because some parts of Breeze are multi-threaded and consequently take advantage of idling cores.
+This aspect is especially important in order to compare the results, because some parts of Breeze are multi-threaded and, consequently, take advantage of idling cores.
+
+\subsubsection{Increasing Problem Size}
 
 In the first experiment, we fixed the block sizes to $500 \times 500$ and set the number of cores to $50$.
 We then increased the dimensionality $n$ of $A$ and $B$ to observe the runtime behavior.
 The resulting execution times for the local, Stratosphere and Spark execution engines are shown in \cref{fig:mmLoadRuntime}.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\begin{subfigure}{\dualpgfwidth}
 		\begin{tikzpicture}
@@ -143,6 +152,8 @@ The speedup of Spark's execution engine compared to Stratosphere's execution eng
 We can observe that there is a peak speedup of $7$ for $n=2500$.
 However, we attribute this value to errors of measurement, because for $n>10000$ the speedup evens out at about $2$ with a slight decrease for $n=64000$.
 
+\subsubsection{Increasing Cluster Size}
+
 In the second experiment, we investigate the scaling behavior of Gilbert with respect to the cluster size.
 As a benchmark, we calculate again $A\times B$ with $A,B \in \mathbb{R}^{n\times n}$ and $n$ being the dimensionality.
 In order to observe the inflicted communication costs, we keep the work load per core constant while increasing the number of cores.
@@ -151,7 +162,7 @@ We started with $n=7500$ for a single core and reached $n=35000$ on $100$ cores.
 As block size we chose $500\times 500$.
 The results of the experiment are shown in \cref{fig:mmNodesRuntime}.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\begin{tikzpicture}
 		\begin{semilogxaxis}[
@@ -161,6 +172,7 @@ The results of the experiment are shown in \cref{fig:mmNodesRuntime}.
 			legend entries={Spark, Stratosphere},
 			ymin=0.0,
 			ymax=275,
+			width=\dualpgfwidth,
 		]
 		\addplot[
 			color=red,
@@ -248,6 +260,8 @@ As a baseline, we run the GNMF on a single machine of the cluster using the loca
 As math back end we choose the Breeze library, which is also used for the distributed execution engines.
 Like for the matrix multiplication benchmark, the task manager of Spark and Stratosphere are started with \SI{20}{\giga\byte} of memory and both systems use the same scheduling strategy keeping the work load on all nodes equally distributed.
 
+\subsubsection{Increasing Problem Size}
+
 In the first experiment we fix the number of cores to $50$ and investigate the runtime behavior for increasing values of $d$.
 We start with $d=500$ and increase the number of rows of $V$ to $150000$.
 The block size of Gilbert is set to $500 \times 500$.
@@ -256,7 +270,7 @@ This hand-tuned implementation, henceforth denoted as HT-GNMF, is also executed 
 Additionally, the data is generated having the respective partitioning required by the algorithm.
 The execution times of HT-GNMF and Gilbert's GNMF are shown in \cref{fig:nmfLoadRuntime}.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\begin{subfigure}{\dualpgfwidth}
 		\begin{tikzpicture}
@@ -347,7 +361,7 @@ The execution times of HT-GNMF and Gilbert's GNMF are shown in \cref{fig:nmfLoad
 		\caption{}
 		\label{fig:gnmfSpeedup}
 	\end{subfigure}
-	\caption{Scalability of GNMF on a $50$-core cluster. \subref{fig:nmfLoadRuntime} Execution time of one GNMF step depending on the data size on a $50$-core cluster. \subref{fig:gnmfSpeedup} Speedup of HT-GNMF running on Spark compared to Gilbert's GNMF using the Spark and Stratosphere execution engine.}
+	\caption{Scalability of GNMF on a $50$-core cluster. \subref{fig:nmfLoadRuntime} Execution time of one GNMF step depending on the data size. \subref{fig:gnmfSpeedup} Speedup of HT-GNMF running on Spark compared to Gilbert's GNMF using the Spark and Stratosphere execution engine, respectively.}
 	\label{fig:nmfBenchmark}
 \end{figure}
 
@@ -400,14 +414,16 @@ The debugging process showed us quite plainly how tedious the development proces
 Thus, the productivity increase gained by using a high-level declarative programming language for linear algebra must not be neglected and compensates for the performance loss.
 \Textcite{alvaro:2010a} made a similar observations while developing a declarative programming language for distributed systems programming.
 
+\subsubsection{Increasing Cluster Size}
+
 In the second experiment of the GNMF benchmark, we analyze how Gilbert scales-out when increasing the cluster size while keeping the work load for each core constant.
 We vary the cluster size from $1$ core to $100$ cores and scale the number of documents $d$ accordingly.
 Initially we start with $1000$ documents and, consequently, calculate the matrix factorization for $100000$ documents on $100$ cores.
 The ideal behavior would be a horizontal line.
-However, this cannot be expected, since the GNMF computation requires communication between the cluster nodes.
+However, this outcome cannot be expected, since the GNMF computation requires communication between the cluster nodes.
 The results of this experiment are shown in \cref{fig:nmfNodesRuntime}.
 
-\begin{figure}
+\begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}
 			\begin{semilogxaxis}[
@@ -416,6 +432,7 @@ The results of this experiment are shown in \cref{fig:nmfNodesRuntime}.
 				ymin=0,
 				legend entries={Spark, Stratosphere},
 				legend pos=north west,
+				width=\dualpgfwidth,
 			]
 			\addplot[
 				color=red,
@@ -449,13 +466,14 @@ In contrast to Stratosphere, Spark does not suffer from these limitations for th
 In fact, it almost exhibits an extraordinary scale-out behavior with an almost constant runtime.
 The runtime on $100$ cores is only two times slower than the runtime on a single core with the same work load per core.
 
-\subsection{Block Size}
+\section{Block Size}
 
 The block size has a significant influence on the overall performance of Gilbert since it directly controls the data parallelism and data granularity of the local operations.
 The bigger the block size is, the fewer blocks are available for parallel computations.
 But the bigger the block size is, the more work can be done on a single computer without having to communicate with other nodes.
-To measure the effect of the block size on the performance, we calculate one GNMF step with varying block sizes using the Spark execution engine.
+To measure the effect of the block size on the performance, we calculate a single GNMF step with varying block sizes using the Spark execution engine.
 For this benchmark we set $d=100000$, $w = 100000$ and $t = 10$.
+The remaining parameters are set like in \cref{subsec:NMF}.
 The execution times for different block sizes are shown in \cref{fig:blocksizesNMFStep}.
 
 \begin{figure}
@@ -549,9 +567,9 @@ It is important to stress that there is no single block size, which is optimal f
 The best degree of parallelism and the best data granularity strongly depends on the problem, its inputs and the used computing machine.
 Therefore, it is not possible to specify an ideal block size, which, instead, should be determined for each task individually.
 
-\subsection{Optimization}
+\section{Optimization}
 
-In this subsection, we want to evaluate the effects Gilbert's optimizer has on the runtime of programs.
+In this section, we want to evaluate the effects Gilbert's optimizer has on the runtime of programs.
 For this purpose, we execute one GNMF step on Gilbert's Stratosphere and Spark execution engine using the same settings as in \cref{subsec:NMF}.
 However, this time we disable the transpose pushdown and matrix-multiplication reordering optimization.
 The results are shown in \cref{fig:nnmfLoadOptimization}.
@@ -687,9 +705,9 @@ That is the reason why the optimized GNMF program runs clearly faster.
 In this section, we want to investigate how well algorithms implemented in Gilbert perform compared to specialized algorithms.
 We expect that the Gilbert runtime adds some overhead as trade-off for their easy-to-use programming interface.
 Furthermore, the high-level linear algebra abstraction of Gilbert might make it difficult to exploit certain properties to speed up the processing.
-Therefore, we believe that hand-tuned algorithms will get the upper hand.
+Therefore, we believe that the hand-tuned algorithms will get the upper hand.
 
-For our comparison, we choose two famous ML algorithms, which can be expressed in terms of linear algebra: PageRank and \kmeans.
+For our comparison, we chose two famous ML algorithms, which can be expressed in terms of linear algebra: PageRank and \kmeans.
 Since both algorithms are iterative, we can demonstrate Gilbert's loop support.
 We first execute them directly in Gilbert, given the Gilbert code, and then run them directly on Stratosphere and Spark.
 For the direct execution, we have implemented both algorithms using the Stratosphere and Spark API.
@@ -702,6 +720,8 @@ The PageRank algorithm~\cite{page:1999a} is the famous algorithm developed by La
 Initially, it was developed to rank the web sites of the world wide web, which it did so well that Google grew quickly into a multi-billion dollar company.
 PageRank is only one algorithm comprising Google's web search, but it is probably one of the best known.
 
+\subsubsection{Algorithm}
+
 The idea of PageRank is to estimate the rank of a web site based on the ranks of other web sites, which link to this site.
 It is assumed that high quality web sites are more likely to link to other high quality web sites.
 Thus, these sites get a high rank with which they can ``vote'' for other sites.
@@ -710,9 +730,13 @@ The PageRank can also be explained by the model of a ``random'' surfer.
 Assume there is a surfer which randomly follows an outgoing link from a web site.
 Occasionally, or if he ends up in a dead end, the surfer enters a random URL in his address bar.
 That way, he will eventually visit the whole web.
-By tracking the time he spends on each web site, we get an importance measure for each site.
+By tracking the time he spends on each web site, an importance measure for each site is obtained.
 Web sites, which are linked by pages on which the random surfer spends more time, will receive more clicks by the random surfer and thus a higher importance.
 That importance measure is in fact the PageRank.
+
+Even though the problem seems to be self-referencing, the PageRank vector turns out to be the solution to an eigenvalue problem.
+Thus, the PageRank vector can be easily computed using a power iteration.
+PageRank's MATLAB code is given in \cref{lst:PageRankVanilla}.
 
 \begin{listing}[!h]
 	\begin{CenteredBox}
@@ -740,12 +764,8 @@ end
 	\label{lst:PageRankVanilla}
 \end{listing}
 
-Even though the problem seems to be self-referencing, the PageRank vector turns out to be the solution to an eigenvalue problem.
-Thus, the PageRank vector can be easily computed using a power iteration.
-PageRank's MATLAB code is given in \cref{lst:PageRankVanilla}.
-
-The power iteration happens in the while loop, where we iteratively multiply the PageRank vector $r$ with the transition matrix $T$.
-In order to execute this code with Gilbert, we only have to replace the while loop with a fixpoint operation.
+The power iteration happens in the while loop, where the PageRank vector $r$ is iteratively multiplied with the transition matrix $T$.
+In order to execute this code with Gilbert, the while loop has to be replaced with a fixpoint operation.
 As it can be seen in \cref{lst:gilbertPageRank}, the replacement is only of syntactic nature.
 
 \begin{listing}[!h]
@@ -776,13 +796,13 @@ The PageRank vector is represented by a set of tuples $(w_i, r_i)$ with $w_i$ de
 The adjacency matrix is stored row-wise as a set of tuples $(w_i, A_i)$ with $w_i$ denoting the web site $i$ and $A_i$ being its adjacency list.
 For the adjacency list $A_i$, it holds that $w_j \in A_i$ if and only if there exists a link from web site $i$ to $j$.
 
-Given the PageRank vector and the adjacency matrix representation, we can compute the next PageRank vector the following way.
+Given the PageRank vector and the adjacency matrix representation, the next PageRank vector can be computed the following way.
 At first, the PageRank $r_i$ of web site $i$ is joined with its adjacency list $A_i$.
-For each outgoing link $w_j \in A_i$ we create a new tuple $(w_j, 0.85r_i/\left|A_i\right|)$ with the rank of $i$ being divided by the number of outgoing links.
+For each outgoing link $w_j \in A_i$ a new tuple $(w_j, 0.85r_i/\left|A_i\right|)$ with the rank of $i$ being divided by the number of outgoing links is created.
 In order to incorporate the random jump behavior to any available web site, a tuple $(w_i, 0.15/|w|)$, with $|w|$ being the number of all web sites, is generated for each web site $i$.
 In order to compute the next PageRank vector, all newly generated tuples are grouped according to their ID.
 The resulting groups are reduced by adding up all partial rank values.
-This produces the new PageRank vector.
+This calculation produces the new PageRank vector.
 By executing these steps iteratively, the PageRank algorithm is obtained.
 One step of the PageRank algorithm is depicted as a data flow plan in \cref{fig:pageRankDataFlow}.
 
@@ -792,6 +812,8 @@ One step of the PageRank algorithm is depicted as a data flow plan in \cref{fig:
 	\caption{Data flow of one iteration of the PageRank algorithm for Spark and Stratosphere.}
 	\label{fig:pageRankDataFlow}
 \end{figure}
+
+\subsubsection{Experiment}
 
 For comparison, $10$ steps of the PageRank algorithm for varying sizes of the adjacency matrix $A$ are calculated.
 The adjacency matrix $A$ is a sparse matrix of size $n \times n$ with a sparsity of $0.001$.
@@ -878,7 +900,7 @@ The execution times are depicted in \cref{fig:pageRankResults}.
 		\caption{}
 		\label{fig:pageRankSpeedup}
 	\end{subfigure}
-	\caption{Comparison of Gilbert's PageRank implementation with specialized algorithms on Spark and Stratosphere. \subref{fig:pageRankResults} Execution time of $10$ steps of the PageRank algorithm on $50$-cores depending on the adjacency matrix's size. \subref{fig:pageRankSpeedup} Speedup of specialized algorithms with respect to Gilbert's implementations.}
+	\caption{Comparison of Gilbert's PageRank implementation with specialized algorithms on Spark and Stratosphere running on $50$-core cluster. \subref{fig:pageRankResults} Execution time of $10$ steps of the PageRank algorithm depending on the adjacency matrix's size. \subref{fig:pageRankSpeedup} Speedup of specialized algorithms with respect to Gilbert's implementations.}
 	\label{fig:pageRankEvaluation}
 \end{figure}
 
@@ -907,9 +929,9 @@ The flat map operation can be executed without communication between the nodes.
 The join and reduce operation requires the data to be sent over the network.
 Thus, most of the time should be spent executing the join and reduce operation.
 
-Looking at line 10 of \cref{lst:gilbertPageRank}, we see that we have to compute one matrix-vector product, two vector-scalar products and one vector sum for each iteration of Gilbert's PageRank algorithm.
+Looking at line $10$ of \cref{lst:gilbertPageRank}, it can be seen that one matrix-vector product, two vector-scalar products and one vector sum have to be computed for each iteration of Gilbert's PageRank algorithm.
 Remembering \cref{sec:LinearAlgebraOperations}, we can deduce that all these operations require two cross, two join and one reduce operation.
-The two cross operations, where one of the operands is a scalar value and thus only an one element data set, can be realized efficiently by simply broadcasting the scalar value.
+The two cross operations, where one of the operands is a scalar value, can be realized efficiently by simply broadcasting this value.
 However, the two join operations and the reduce operation require to shuffle the available data and thus inflict some serious network communication costs.
 
 Comparing the specialized algorithm with Gilbert's implementation, it can be clearly seen that the high-level linear algebra representation adds three additional operations, with one of them being highly expensive.
@@ -920,9 +942,12 @@ Therefore, it is not surprising that the specialized PageRank algorithm performs
 The \kmeans clustering algorithm~\cite{macqueen:1967a} is very popular for cluster analysis in data mining.
 The goal of \kmeans is to partition the available $n$ data points into $k$ clusters, where each data point is assigned to the cluster with the nearest mean.
 Even though the optimal solution is NP-hard, heuristic algorithms exist to compute approximations.
+
+\subsubsection{Algorithm}
+
 The standard algorithm alternately assigns the data points to its nearest intermediate cluster and calculates new intermediate cluster centers as the mean of all assigned data points.
 The initial cluster centers are usually randomly selected points from the set of data points or random points.
-The MATLAB code for the \kmeans algorithm, shown in \cref{lst:kmeansMatlab} is a little bit cumbersome if one wants to write it down in matrix notation.
+The MATLAB code for the \kmeans algorithm, shown in \cref{lst:kmeansMatlab}, is a little bit cumbersome if one wants to write it down in matrix notation.
 
 \begin{listing}
 	\begin{CenteredBox}
@@ -950,9 +975,9 @@ end
 
 The data points and centers are stored row-wise in the matrices \code{datapoints} and \code{centers}.
 The first step, assigning each data point to its nearest center, is done in the lines $5$ and $6$.
-The \code{pdist2} function calculates the pairwise euclidean distance between the rows of its two operands, in this case the current centers and the data points.
-Once all pairwise distances have been calculated, for each data point its nearest cluster center is selected.
-This is done in line $6$.
+The \code{pdist2} function calculates the pairwise euclidean distance between the rows of its two operands, in this case, the current centers and the data points.
+Once all pairwise distances have been calculated, the nearest cluster center is selected for each data point.
+This computation is done in line $6$.
 The \code{assignments} column vector contains the index of the nearest cluster center for each data point.
 In order to calculate the new cluster centers as the mean of all assigned data points, some repmat magic has to be introduced.
 The idea is to construct for each center a logical row vector which indicates all data points assigned to this cluster.
@@ -967,7 +992,7 @@ Compared to the MATLAB representation, the direct implementation for Spark and S
 The first difference is that the data points are represented as tuples of the form $(id_i, p_i)$ with $id_i$ being the identifier of data point $i$ and $p_i$ being its coordinates.
 The clusters are represented likewise as tuples $(id_j, c_j)$ with $c_j$ being the coordinates of the cluster center.
 In order to calculate the pairwise distances between the data points $p_i$ and the clusters $c_j$, the Cartesian product of the two datasets is constructed.
-This produces all combinations of data point cluster pairs.
+This operation produces all combinations of data point cluster pairs.
 Having the coordinates of the data point and the cluster center, the distance can easily be computed.
 The output of the distance computation is a tuple of the form $(id_i, p_i, id_j, \norm{p_i - c_j}_2)$, the data point ID, the data point coordinates, the cluster center ID and the distance.
 The cluster center with the minimal distance can be selected by grouping on the data point id $id_i$ and selecting the cluster center ID with minimal distance. 
@@ -986,7 +1011,7 @@ The dataflow plan of a single iteration step is depicted in \cref{fig:kmeansData
 	\label{fig:kmeansDataflow}
 \end{figure}
 
-We compare the execution time of Gilbert's \kmeans implementation with the execution time of the hand-tuned algorithms.
+The execution time of Gilbert's \kmeans implementation is compared with the execution time of the hand-tuned algorithms.
 The Gilbert code is given in \cref{lst:kmeansGilbert}.
 As it can be seen, the only differences between the MATLAB and Gilbert version are the \code{fixpoint}, the \code{linspace} and the \code{minWithIndex} function.
 The \code{linspace} function generates a linearly spaced row vector, as it is known from MATLAB.
@@ -1018,6 +1043,8 @@ fixpoint(centers,@kmeansStep, maxIterations)
 	\caption{Gilbert \kmeans implementation.}
 	\label{lst:kmeansGilbert}
 \end{listing}
+
+\subsubsection{Experiment}
 
 For the experiments, $10$ steps of the \kmeans algorithms on the $50$-core DIMA cluster are calculated.
 The algorithms compute $100$ cluster centers from $n$ data points.
@@ -1123,7 +1150,7 @@ As we have explained in \cref{sec:mathBackend}, Gilbert supports two math back e
 The principal math back end uses the Breeze library for high performance linear algebra operations.
 As an alternative, Gilbert also supports the popular Mahout math library.
 
-As first benchmark, we repeat the matrix multiplication from \cref{subsec:mm} with the Mahout library.
+As first benchmark, the matrix multiplication from \cref{subsec:mm} is repeated with the Mahout library.
 The benchmark calculates the matrix multiplication of two sparse matrices $A,B\in\mathbb{R}^{n\times n}$ with $n$ being their dimensionality.
 The matrices have a sparsity of $0.001$.
 The computation is executed on $50$ cores and we use a block size of $500\times 500$.
@@ -1256,7 +1283,7 @@ Even worse, each access triggers an hash map look up.
 In total, the matrix multiplication has to perform $2n^3$ hash table look ups and $n^3$ hash table insertions.
 
 In contrast to Mahout, Breeze implements the sparse matrix using the compressed sparse column (CSC) storing scheme, which stores the data in a continuous array.
-This not only avoids costly hash map look ups, but Breeze also implements an optimized matrix multiplication algorithm for CSC.
+This approach not only avoids costly hash map look ups, but Breeze also implements an optimized matrix multiplication algorithm for CSC.
 The algorithm is aware of the sparse nature of its operands and accesses only elements which are non-zero in both matrices.
 
 As second benchmark, we repeated the GNMF computation from \cref{subsec:NMF}.
@@ -1265,7 +1292,7 @@ The number of rows $d$ reaches from $500$ to $10000$.
 As before, the sparsity of $V$ is $0.001$ and its non-zero cells are distributed uniformly.
 The sizes of $W$ and $H$ are $d\times 10$ and $10 \times 100000$, respectively.
 For the benchmark, we set the block size to $500 \times 500$.
-The runtimes of the Breeze and Mahout math back end are given in \cref{fig:nnmfLoadMathBackend}.
+The runtimes of the Breeze and Mahout math back end are given in \cref{subfig:nmfMathBackend}.
 
 It can be clearly seen that GNMF runs faster with Breeze as math back end on the Stratosphere as well as on the Spark execution engine.
 On Spark, Breeze reaches a speed-up of roughly $4$ for $d=10000$. 

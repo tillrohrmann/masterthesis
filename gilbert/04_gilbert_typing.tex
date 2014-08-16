@@ -60,13 +60,13 @@ Dynamic downcasts, for instance, as they are common in \code{C++}, can only be i
 \label{sec:staticVSDynamic}
 
 Static type checking analyzes the program prior to execution to detect errors.
-This has the advantage that possible programming mistakes are caught early in the development process.
+This approach has the advantage that possible programming mistakes are caught early in the development process.
 An assignment of a string to a double would be an example for such a mistake.
 As indicated by \textcite{westland:jss2002a}, who investigated the influence of errors during the software development process, unfixed errors become exponentially more costly with each phase.
 Therefore, it is important to detect and correct errors as soon as possible.
 Static typing usually requires the user to specify types explicitly in the source code, because the language lacks type inference or has ambiguities which prevent the type inference from inferring the correct types.
 Java, for example, does not have type inference and therefore the user has to specify types redundantly.
-In line $1$ of \cref{lst:javaTypeAnnotation}, it is obvious that we have to specify twice the type \code{Object}, even though this can easily be deduced from the right side of the assignment.
+In line $1$ of \cref{lst:javaTypeAnnotation}, it is obvious that we have to specify twice the type \code{Object}, even though this type can easily be deduced from the right side of the assignment.
 Furthermore, in line $4$ we see an addition of two integers.
 It is clear that the result is an integer and thus the \code{int} type specifier is dispensable.
 \begin{listing}[!h]
@@ -93,14 +93,14 @@ By operating on these values, the compiler could, for example, use more efficien
 Furthermore, it is possible to substitute virtual function calls for direct calls, if the actual object type is known.
 Another benefit of static typing is the increased type safety.
 After passing the type checker, the program is guaranteed to fulfill for all inputs some set of type safety properties.
-This frees the runtime from checking them and thus the program can be executed more efficiently.
+This guarantee frees the runtime from checking the safety properties and thus the program can be executed more efficiently.
 Type information additionally helps to provide a better programming experience in an IDE by offering type dependent context help.
 If the IDE knows the type of a variable, then it can tell the programmer which methods are supported by this type, for instance.
 And last but not least, explicit typing permits a better abstraction of functionality and, thus, increases modularity.
 Interfaces can be defined to orchestrate the interaction between several software components allowing them to be developed independently from each other.
 
 In contrast to these arguments, advocates of dynamic typing argue that their approach is more vivid and better suited for prototyping, because the static typing approach is too rigid.
-This comes especially into effect for programs in a highly dynamic environment with unknown or quickly changing requirements such as data integration.
+These aspects come especially into effect for programs in a highly dynamic environment with unknown or quickly changing requirements such as data integration.
 Another advantage is that the compile time is reduced because of fewer passes the compiler has to go through.
 However, the avoided type checks will then be realized within the runtime which adds overhead.
 But the dynamic nature allows interpreters to dynamically load code more quickly, because all type checkings are deferred until its actual execution.
@@ -208,8 +208,8 @@ Thus, the latter type would be a valid inferred type, even though the first one 
 In order to dissolve this ambiguities, the typing system always looks for the most general type.
 
 Usually, expressions depend on other expression and thus their types.
-Therefore, a type dictionary is maintained where types of expressions, which have already been seen while parsing the code, are stored.
-And this is exactly what the context $\Gamma$ is used for.
+Therefore, a type dictionary is maintained where types of expressions, which already have been seen while parsing the code, are stored.
+And that is exactly what the context $\Gamma$ is used for.
 $\Gamma$ contains a list of pairs $x:\sigma$, which are called assumptions.
 The formal definition of $\Gamma$ is
 \begin{eqnarray*}
@@ -225,7 +225,7 @@ Before taking a closer look at them, some auxiliary functions are first introduc
 An important distinction in an HM type expression is the state of the type variables.
 In general, type variables can appear as \emph{free} or as \emph{bound} variables.
 A type variable $\alpha$ is called bound if it occurs in an expression of the form $\forall \alpha. \tau$.
-This means that $\forall$ binds the subsequent variable in the context of the expression.
+$\forall$ binds the subsequent variable in the context of the expression.
 All variables which are not bound are free.
 We can define a function $free$ which calculates the set of free type variables in a type expression and in the context.
 \begin{eqnarray*}
@@ -240,7 +240,7 @@ free(\Gamma) &=& \bigcup_{x:\sigma \in \Gamma} free(\sigma)
 The algorithm W was initially developed by \textcite{damas:1982a} and allows to solve the HM type inference in almost linear time with respect to the size of the source code.
 Thus, it is also applicable to large programs.
 We present a modified version of the original algorithm which incorporates side effects into the deduction rules.
-Even though this contradicts the purity of logical deduction rules, it allows us to express the algorithm concisely.
+Even though these side effects contradict the purity of logical deduction rules, it allows us to express the algorithm concisely.
 The algorithm W is defined by the following deduction rules:
 
 \begin{prooftree}
@@ -323,8 +323,8 @@ def unify(typeA: Type, typeB: Type): Type = {
 	\label{lst:unify}
 \end{listing}
 
-First of all both type expressions are resolved.
-This means that type variables that are contained as sub expressions are looked up in the type variable assignment dictionary.
+First of all, both type expressions are resolved.
+This means that type variables, which are contained as sub expressions, are looked up in the type variable assignment dictionary.
 This dictionary maintains the current assignments between variables and their types.
 If a type variable has an assigned type, then this type is substituted for the corresponding type variable.
 If at least one of the resulting type expressions is still a type variable, then we can simply construct the union of both types.
@@ -334,26 +334,26 @@ If only one argument is a type variable, then the other argument is returned.
 
 If none of the resolved type expressions is a type variable, then they have to be a type application.
 Applications can only be unified if they are constructed by the same function symbol and if they have the same number of arguments.
-If this condition is fulfilled, we can try to unify the arguments.
-Depending on whether the arguments are unifiable or not, the overall type application is unifiable or not.
+If this condition is fulfilled, the arguments can be unified.
+Depending on the unifiability of the arguments, the overall type application is unifiable or not.
 
-If both type expressions are constructed by different type applications, we know that the types are impossible to unify.
-Consequently, we can directly return a type mismatch error.
+If both type expressions are constructed by different type applications, then the types are impossible to unify.
+Consequently, a type mismatch error will be returned.
 
-The fourth rule allows to type lambda abstractions or in our case concrete and anonymous functions.
-In order to show that a lambda abstraction $\lambda x.e$ has the type $\tau\rightarrow \tau^\prime$, we first define a new type variable for the unknown parameter type.
-By adding this assumption to the context, we then have to calculate the type of the function body $e$.
-If we can prove that $e$ has the type $\tau^\prime$, we can finally conclude that the lambda abstraction has the type $\tau \rightarrow \tau^\prime$.
+The third rule allows to type lambda abstractions or in Gilbert's case concrete and anonymous functions.
+In order to show that a lambda abstraction $\lambda x.e$ has the type $\tau\rightarrow \tau^\prime$, a new type variable for the unknown parameter type is introduced.
+After adding this assumption to the context, the type of the function body $e$ has to be calculated.
+If the body $e$ has the type $\tau^\prime$, then it can be concluded that the lambda abstraction has the type $\tau \rightarrow \tau^\prime$.
 
 The last deduction rule covers assignments.
 An assignment simply binds a variable name $x$ to an expression value.
-Since this expression value owns a type $\tau$, we can add a new assumption $x:\tau$ to the context.
-We continue the type inference for the subsequent expressions with this updated type context.
+Since this expression value has a type $\tau$, a new assumption $x:\tau$ can be added to the context.
+The type inference for the subsequent expressions is continued with the updated type context.
 That is expressed by the deduction rule.
 In fact, there is a slight difference.
-Instead of adding the assignment $x:\tau$ we add $x:\overline{\Gamma}(\tau)$ to the context.
-$\overline{\Gamma}(\tau)$ calculates the generalization of $\tau$.
-This means that all free monotypes of $\tau$ not bound in $\Gamma$ are quantified.
+Instead of adding the assignment $x:\tau$, the $x:\overline{\Gamma}(\tau)$ is added to the context.
+$\overline{\Gamma}(\tau)$ is the generalization of $\tau$.
+The generalization quantifies all free monotypes of $\tau$ not bound in $\Gamma$.
 That way, the most general type is found.
 \begin{eqnarray*}
 	\overline{\Gamma}(\tau) &=& \forall \overline{\alpha}. \tau\\
@@ -378,7 +378,7 @@ double \times double &\rightarrow& double
 In order to solve the typing problem, the inference algorithm has to resolve this ambiguity.
 Having complete knowledge of the argument types is enough to select the appropriate signature.
 Sometimes even partial knowledge is sufficient.
-However, if this is not the case, Gilbert has to apply a heuristic to make the typing expression well-formed.
+However, if this information is missing, Gilbert has to apply a heuristic to make the typing expression well-formed.
 The heuristic selects the first entry in the list of signatures.
 
 Due to this heuristic, some well-typed programs will be rejected, though.
@@ -389,7 +389,7 @@ Since Gilbert has no additional typing information of $f$'s parameter, it has to
 The heuristic picks the first entry which is $matrix[double] \times matrix[double] \rightarrow matrix[double]$ and , thus, $f$ has the type $matrix[double] \rightarrow matrix[double]$.
 The subsequent function call \code{f(1.0)} in line $2$ will, therefore, throw a typing exception, because a scalar argument cannot be applied to a function having a matrix parameter.
 That is odd, because $f$ should be applicable to all data types supporting the \code{+} operator and scalar values definitely support this operation.
-It has to be stated that this is clearly a restriction of Gilbert, which limits the space of accepted programs.
+It has to be stated that this peculiarity is clearly a restriction of Gilbert, which limits the space of accepted programs.
 
 \begin{listing}[!h]
 	\begin{CenteredBox}

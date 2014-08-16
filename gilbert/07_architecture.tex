@@ -9,7 +9,7 @@ Being such a system, it comprises the complete stack of functionalities necessar
 At first, the system has to divide the given source code into tokens.
 These tokens are parsed and an abstract syntax tree (AST) is created.
 In order to generate the intermediate representation (IR), it is necessary to assign types to the occurring expressions.
-This is done by the typing system.
+This assignment is done by the typing system.
 Afterwards, the compiler can translate the Gilbert program into its IR.
 The IR is well suited to apply high-level transformations to the program.
 At last, the execution plan generator translates the IR into an execution plan which can be executed in parallel.
@@ -80,4 +80,4 @@ Once the intermediate representation has been transformed, the plan is sent to t
 
 The runtime layer marks the transition from Gilbert to one of the supported execution engines.
 It is more of a conceptual abstraction of the Gilbert system.
-Even though, Gilbert only supports 3 different engines at the moment, it should be easy to add support for further execution systems.
+Gilbert supports 3 different engines at the moment, but it should be easy to add support for further execution systems.

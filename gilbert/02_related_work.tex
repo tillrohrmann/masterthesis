@@ -4,18 +4,18 @@
 
 \chapterquote{If I have seen further than others, it is by standing upon the shoulders of giants.}{Isaac Newton, (1642 - 1727)}
 
-The challenges entailed by harnessing vast amounts of data propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.
+The challenges entailed by harnessing vast amounts of data has propelled much research on the field of distributed computing as well as databases to subdue the looming data flood.
 In recent years, a couple of different programming paradigms and frameworks emerged, each with the goal to tackle the aforementioned problems.
 The different trends can be subsumed into the following categories: Distributed data processing systems, distributed numerical computing systems, database management systems, specialized distributed computing frameworks and explicit parallelization.
 
 \section{Distributed Data Processing Systems}
 
 In the last decade, MapReduce~\cite{dean:c2008a}, created by Google, has been one of the most influential developments in the domain of distributed data processing systems.
-Their novel approach to look at the problem of program parallelization was so intriguing and successful that a whole bunch of researchers and engineers jumped on the bandwagon and spurred a whole new area of research.
+Their novel approach to look at the problem of program parallelization was so intriguing and successful that many researchers and engineers jumped on the bandwagon and spurred a whole new area of research.
 Initially, MapReduce was created because of the need to process a constantly increasing amount of data.
 Before, the common way to do processing tasks, such as index generation, data-mining and web log parsing, was to write specialized programs.
 Often, these programs needed to be parallelized, fault-tolerant, support load-balancing and data-distribution to work properly.
-Not only does this require a high level of expertise but it also inflicts significant costs in terms of labor and time.
+Not only does the implementation of these features require a high level of expertise but it also inflicts significant costs in terms of labor and time.
 Therefore, \citeauthor{dean:c2008a} conceived MapReduce.
 
 MapReduce is inspired by the higher-order functions \emph{map} and \emph{reduce} which can be found in many functional programming languages.
@@ -34,7 +34,7 @@ Internally the data is divided into input splits, which are stored in a replicat
 Each input split is processed by a map task.
 The map tasks are assigned to worker nodes, which have free mapper slots.
 Since the worker nodes also contain input data, the MapReduce scheduler tries to assign the tasks to worker nodes storing the respective input split.
-If this is not possible, the scheduler tries to select a node which is as close as possible to the data with respect to the network topology.
+If this assignment is not possible, the scheduler tries to select a node which is as close as possible to the data with respect to the network topology.
 Thereby, the required network communication will be minimized.
 
 Once the map task has finished, it has produced a set of intermediate results, which is partitioned according to a given hash function.
@@ -66,14 +66,14 @@ However, there are also some deficiencies.
 MapReduce only offers map and reduce as higher-order functions.
 Several operations, for example a join between two data sets, are complicated to express with only these two functions.
 Furthermore, writing all results between two distinct phases to disk causes a lot of I/O, which is slow compared to keeping the results in memory.
-This becomes explicitly apparent if one operates on a data set in an iterative manner.
+This deficiency becomes explicitly observable if one operates on a data set in an iterative manner.
 
 Due to these problems, a new class of systems has recently been developed.
 It can be considered an generalization of MapReduce.
 One of them is Stratosphere~\cite{battre:2010a}, a distributed computing framework which employs PACTs (parallel contracts)~\cite{alexandrov:2011a}.
 Stratosphere adds additional $\nth{2}$-order functions, which are called input contracts, in order to improve the expressiveness and efficiency of the MapReduce paradigm.
 The new higher-order functions are \emph{join}, \emph{cross} and \emph{coGroup}.
-Furthermore, it adds the concept of output contracts which annotate input contracts with certain properties, such as key uniqueness, record cardinality or constant fields of the output.
+Furthermore, Stratosphere adds the concept of output contracts which annotate input contracts with certain properties, such as key uniqueness, record cardinality or constant fields of the output.
 These properties are exploited by a cost-based optimizer to select the most efficient execution plan.
 Recently, the framework has been extended to support bulk and incremental iterations~\cite{ewen:pve2012a}, which makes it applicable to machine learning and complex data analysis tasks.
 
@@ -83,8 +83,8 @@ Consider, for example, the join operator.
 In MapReduce the straightforward implementation is the following:
 First one has to unify both input sources in the map phase, adding a tag in order to distinguish them in the reduce phase.
 In the reduce UDF, the input sources are separated according to these auxiliary variables and then joined manually.
-For the join operation all entries with the same key have to be loaded into memory because, a priori, the entries are not sorted according to their keys.
-This can cause some serious thrashing.
+For the join operation all entries with the same key have to be loaded into memory, because, a priori, the entries are not sorted according to their keys.
+This process can cause some serious thrashing.
 Since the join logic is hidden within the UDFs, there is no possibility for the system to automatically optimize this operation.
 Yet, there are ways to optimize join~\cite{blanas:2010a} and multi-way join~\cite{afrati:2010a} operations on MapReduce.
 But they either require extensive hand-tuning by the user or extensions to the MapReduce programming model to work.
@@ -112,7 +112,7 @@ The iteration support helps to make Stratosphere a more general purpose processi
 However, there are still some aspects which have to be improved.
 First of all, Stratosphere currently lacks a proper fault tolerance.
 Secondly, it is not well geared towards supporting multi jobs and multi user scenarios.
-And last but not least, the system lacks the primitives, such as linear algebra data types and their operations, to easily implement data mining and machine learning algorithms based on linear algebra.
+And last, the system lacks the primitives, such as linear algebra data types and their operations, to easily implement data mining and machine learning algorithms based on linear algebra.
 
 Another distributed data processing system is Spark~\cite{zaharia:2010a}.
 Spark was developed to tackle the blind spot of MapReduce: Its inefficiency when it comes to iterative computations.
@@ -130,7 +130,7 @@ Actions return a value to the driver program which can be the cardinality of the
 
 Spark also supports two restricted forms of shared variables.
 Broadcast variables are used to send and store read-only data to worker nodes so that it does not have to be shipped with the tasks.
-This reduces the communication overhead if the broadcast variable is used across several tasks.
+This mechanism reduces the communication overhead if the broadcast variable is used across several tasks.
 For example, the data points in a \kmeans clustering algorithm should be broadcasted because it stays constant throughout the execution of the algorithm.
 Another type of shared variables are accumulators.
 Accumulators can only be changed by applying an associative operation.
@@ -139,31 +139,31 @@ An example would be a counter which each worker node increments when it processe
 
 Spark was constructed with an efficient iteration mechanism in mind.
 Therefore, the system offers a flexible execution pipeline, which can contain an arbitrary sequence of RDD operations.
-This is unlike MapReduce where a single job can only contain a map and a reduce phase.
+This property is unlike MapReduce where a single job can only contain a map and a reduce phase.
 Moreover, all its distributed data is represented by RDDs, which are kept inherently in memory.
 All the loop's computations are realized with RDDs and thus the loop's state is kept in memory between subsequent iterations.
-This frees the loop from costly I/O as it would happen in MapReduce where each iteration would be an individual job.
+The usage of RDDs frees the loop from costly I/O as it would happen in MapReduce where each iteration would be an individual job.
 
 Fault-tolerance is implemented by storing the lineage of each RDD.
 The lineage is the information how to build the RDD from its predecessors.
-This means that in case of a lost RDD, e.g., due to a machine outage, the system backtracks the RDDs which were used to construct the lost RDD.
+In case of a lost RDD, e.g., due to a machine outage, the system can backtrack the RDDs which were used to construct the lost RDD.
 Once it found a retrievable state, the computation is reissued from this point on.
 Compared to checkpointing, which stores the states at a specific moment, lineage has far smaller memory footprint.
 But Spark also supports traditional checkpointing, which can be triggered by the user.
 
 Spark does not only offer a native Scala API but also higher level languages which are built on top of it.
 Similar to Apache Hive~\cite{hive}, which allows to query data stored in the Hadoop distributed file system with a SQL-like language, Apache Shark~\cite{xin:2013a} does the same, just on Spark.
-This allows people only acquainted with SQL to employ the Spark system.
+Apache Shark allows people only acquainted with SQL to employ the Spark system.
 
 The Spark project is revolutionary, because it adds efficient loop support by means of RDDs to the MapReduce world.
-This makes it well suited for a wide variety of domains where complex tasks, such as data mining, machine learning or statistics, have to be performed.
+This feature makes it well suited for a wide variety of domains where complex tasks, such as data mining, machine learning or statistics, have to be performed.
 For example, logistic regression is executed up to $100$ times faster than on Hadoop.
 Additionally, Spark has a fully functional fault-tolerance, which can be geared towards the requirements of the user.
 It can either be lightweight storing only the lineage information or heavy in the sense that it copies the whole system state.
 However, Spark also have some weak points.
 Unlike Stratosphere, it does not have a cost-based optimizer, which can select execution plans depending on the applied strategies.
 Furthermore, the system lacks support for out-of-core operations and does not spill data to disk in case that it runs out of memory.
-This implies that the maximal size of data a job can process is limited by the amount of available main memory.
+This circumstance implies that the maximal size of data a job can process is limited by the amount of available main memory.
 Since the hard disk space is usually several magnitudes greater, set of solvable problems is unnecessarily limited.
 Finally, Spark lacks an intuitive MATLAB-like language and, thus, it requires a considerable expertise to code well performing algorithms.
 
@@ -171,8 +171,8 @@ There are also other notable projects trying to amend the deficiencies of MapRed
 The HaLoop~\cite{bu:pve2010a} project adds loop support to Hadoop.
 In order to speed up the iterations, it allows to cache loop invariant data.
 Furthermore, it makes the task scheduler iteration-aware so that tasks of subsequent iterations are scheduled on the same worker node as their predecessors.
-This increases data locality and consequently decreases the communication overhead.
-This all comes with the same fault-tolerance support like the original Hadoop implementation.
+This scheduling increases data locality and consequently decreases the communication overhead.
+All these features come with the same fault-tolerance support like the original Hadoop implementation.
 
 A similar project is Twister~\cite{ekanayake:2010a}, which also adds loop support to the MapReduce framework.
 In contrast to HaLoop, Twister stores intermediate data of iterations in-memory.
@@ -182,13 +182,13 @@ Another extension is the additional reduction phase ``combine''.
 Combine can be called after a reducer to reduce the produced results into a single value, which is accessible by the user program.
 This collective output can be used to steer the termination of a loop, for example.
 In contrast to the distributed file system based communication scheme in Hadoop and MapReduce, Twister relies on a publish-subscribe system for data and communication transfer.
-This further decreases the I/O overhead of storing data to disk and allows to directly send produced results from a mapper to a reducer.
+This feature further decreases the I/O overhead of storing data to disk and allows to directly send produced results from a mapper to a reducer.
 However, Twister does not have a fully functional fault-tolerance mechanism yet.
 
 \section{Distributed Numerical Computing Systems}
 
 SystemML~\cite{ghoting:2011a} has the aim to make machine learning algorithms run on massive datasets without burdening the user with low-level implementation details and tedious hand-tuning.
-In order to achieve this, it provides a declarative higher-level language, called Declarative Machine learning Language (\emph{DML}).
+In order to achieve this goal, it provides a declarative higher-level language, called Declarative Machine learning Language (\emph{DML}).
 With DML, the user writes linear algebra programs whose operations are automatically executed in parallel.
 DML is inspired by the R~\cite{r:1993a} language, which is the quasi standard among data scientists and statisticians.
 The language supports matrices and scalars as basic types.
@@ -209,18 +209,18 @@ Depending on the choice of the internal matrix representation, SystemML picks th
 A crucial operation, which appears in many machine learning algorithms and often inflicts the highest runtime costs, is the matrix multiplication.
 Therefore, SystemML offers two different execution strategies.
 The replication based strategy broadcasts the smaller matrix to all worker nodes which contain a block of the bigger matrix.
-Then the result block can be computed with these information.
+Then the result block can be computed with this information.
 The other strategy is based on the outer-product representation of a matrix multiplication.
 Here, the columns of the left matrix are joined with the rows of the right matrix.
 The outer-product computes a set of intermediate matrices which have to be summed up to deliver the final result.
-Both strategies exhibit different runtime characteristics with respect to the file system and network costs.
+Both strategies exhibit different runtime characteristics with respect to the file system and network communication costs.
 File system costs are caused by reading and writing to the distributed file system, which occurs at the beginning and ending of each map- and reduce-phase of a MapReduce job.
-Network costs are the dominant factor and thus the system chooses the best matrix multiplication strategy with respect to the estimated network costs.
+Network communication costs are the dominant factor and thus the system chooses the best matrix multiplication strategy with respect to the estimated network costs.
 
 Once the optimization is applied, the HOP-DAG is translated into a directed acyclic graph of low-level operators (\emph{LOP-DAG}).
 These low-level operators can directly be mapped onto MapReduce jobs, which represent the final execution format.
 Between two MapReduce jobs the output of the former, which is often the input of the latter, is written to disk and then read again.
-This causes a considerable performance loss and therefore SystemML tries to minimize the number of jobs.
+This I/O causes a considerable performance loss and therefore SystemML tries to minimize the number of jobs.
 It uses piggybacking to aggregate the low-level operators into as few map- and reduce-phases as possible.
 Additionally, the system employs \emph{local aggregators} which reduce data in the reducer by combining produced results.
 The idea is similar to the \emph{combiner} concept~\cite{dean:c2008a} and also reduces the amount of disk I/O.
@@ -229,9 +229,9 @@ SystemML proves to scale well with an increasing number of worker nodes and an i
 However, as it is not described in the paper, it lacks a proper iteration mechanism.
 It is not specified whether only loops with a static termination criterion, such as a maximum number of iterations, or also dynamic termination criteria are supported.
 In either case, the iterations have to be realized within distinct MapReduce jobs.
-This makes the loop very inefficient, because for each iteration the loop data has to be written to and read from disk.
+This circumstance makes the loop very inefficient, because for each iteration the loop data has to be written to and read from disk.
 Furthermore, SystemML relies on the MapReduce framework with all of its deficiencies compared to the more powerful parallel dataflow systems Stratosphere and Spark.
-Stratosphere and Spark support in memory storage of intermediate results which significantly speeds up loop processing.
+Stratosphere and Spark support in-memory storage of intermediate results which significantly speeds up loop processing.
 Yet, SystemML is a very promising project heading in the right direction to make web-scale data analytics accessible to people not familiar with distributed computing.
 
 Ricardo~\cite{das:2010a} is part of the eXtreme Analytics Platform~\cite{balmin:jrd2013a} (\emph{XAP}) developed at IBM.
@@ -249,17 +249,17 @@ Jaql provides a rich set of high-level operators such as \emph{join}, \emph{grou
 Furthermore, it still gives you access to the underlying MapReduce code if needed.
 Therefore, it is flexible and powerful enough to be used as an interface between R and Hadoop.
 
-The system is controlled from within a R driver process.
+The system is controlled by a R driver process.
 By using Jaql as a R-Hadoop bridge, the user can initiate the distribution, transformation and aggregation of data within Hadoop.
 Furthermore, the system supports to run R code on the worker nodes as data transformations.
 The calculated Hadoop results can also be collected at the R driver process once they have an appropriate size.
-This makes it possible to apply statistical computations to large-scale data.
+This aspect makes it possible to apply statistical computations to large-scale data.
 Since all is done from within R, the user does not have to re-adapt and can profit from a huge code base of sophisticated statistical algorithms.
 
 The combination approach enables the authors to quickly come up with a working system without reinventing the wheel.
 However, Hadoop is not integrated transparently into R.
-The user still has to specify explicitly which data to distribute and how the processing data-flow looks like.
-This requires a substantial understanding of the working principles of MapReduce and of the used algorithm.
+The user still has to specify explicitly the data-flow and the data distribution.
+This specification requires a substantial understanding of the working principles of MapReduce and of the used algorithm.
 Only then the user can efficiently distinguish between parallelizable and serial parts of the algorithm.
 Therefore, the system is not well suited for people only familiar with R.
 
@@ -267,7 +267,7 @@ Another project which tries to extend R to scale to large data sets is RHIPE~\ci
 RHIPE follows the new statistical approach of divide and recombine (\emph{D}\&\emph{R}).
 The idea is to split the examined data up into several chunks so that they fit in the memory of a single computer (\emph{S-Step}).
 Then a collection of analytic methods is applied to each chunk without communicating with any other computer (\emph{W-Step}).
-This makes the computation embarrassingly parallel.
+This approach makes the computation embarrassingly parallel.
 After each chunk is evaluated, the results will be recombined in an aggregation step to create the overall analytic result (\emph{B-Step}).
 
 This methodology strongly resembles the MapReduce principle and thus it is not surprising that the authors use the Hadoop system to execute RHIPE programs.
@@ -275,9 +275,9 @@ In fact, the W- and B-Step can be directly mapped to map and reduce tasks, respe
 The actual statistical analysis is done by R.
 The user has to define R code for each step.
 First, the R code is used to split the data into chunks for the S-Step.
-This data is then distributed to the Hadoop worker nodes using the HDFS.
-On the worker nodes the R code for the W-Step is executed in the map tasks.
-This places the whole analytic power of the R system with all its proven libraries at the analyst's disposal.
+This data is then distributed to the Hadoop worker nodes using Hadoop's distributed file system (HDFS).
+On the worker nodes, the R code for the W-Step is executed in the map tasks.
+This scheme places the whole analytic power of the R system with all its proven libraries at the analyst's disposal.
 And finally, the recombination in the B-Step is carried out by applying the provided R code on the intermediate results of the W-Step.
 
 The approach of RHIPE has the charm to be perfectly executable in parallel due to its D\&R paradigm.
@@ -285,21 +285,21 @@ However, this strict execution pipeline constrains the analysis process consider
 First of all, the statistical method, the analyst wants to apply, has to be suitable to be split up into a map phase where subsets of the data are processed independently and a reduce phase where the final result is processed from the intermediate results.
 For example, it works for the mean calculation of a data set if the chunks are of equal size.
 Yet, as soon as you need access to the whole data set to compute the exact result, as it is, e.g., the case for linear regression, one can in general only compute an approximation.
-This might still be enough for most cases since statistics itself is by its definition an approximation.
-But first, the user has to conceive the data division, the data processing and the final recombination step.
-This strongly resembles programming a MapReduce job.
+This estimate might still be enough for most cases since statistics itself is by its definition an approximation.
+But first, the user has to conceive the data distribution, the data processing and the final recombination step.
+This approach strongly resembles programming a MapReduce job.
 Since not many data analysts are familiar with the concepts of MapReduce, it might hinder them to utilize the system.
 
 A system which integrates more seamlessly into the R ecosystem is pR (parallel R)~\cite{samatova:2009a}.
 Again, the goal of pR is to let the statistician compute large-scale data without requiring him to learn a new system.
-pR achieves this by providing a set of specialized libraries which offer parallelized versions of different algorithms.
+pR achieves its goal by providing a set of specialized libraries which offer parallelized versions of different algorithms.
 In this way, the user only has to switch the used library and can directly benefit from the parallel processing power.
 Thus the adoption requires only little code changes which makes it cost- and labor-efficient.
 
 pR utilizes several methods to achieve parallelization.
-One approach is to integrate \nth{3} party libraries containing specialized code into the R session.
+One approach is to integrate \nth{3} party libraries, containing specialized code, into the R session.
 Often, high performance computing (HPC) code is used, which is parallelized by using a message-passing system such as MPI~\cite{gropp:pc1996a,lusk:2009a}.
-This has the advantage to use well tested and efficient code.
+Using external libraries has the advantage to rely on well tested and efficient code.
 But MPI requires to have an HPC cluster with a high throughput network to run efficiently~\cite{sur:2006a}.
 Furthermore, it assumes to have exclusive access to the computing resources, which is usually not guaranteed in a multi-user environment.
 Therefore, this approach is unsuitable to be used on a shared commodity cluster.
@@ -315,20 +315,20 @@ But the downside is that not all operations in R are supported to be run in para
 Moreover, MPI is used for the parallelization.
 MPI is well suited for HPC where a single large job is exclusively run on a set of machines.
 But nowadays, many data analysts share a cluster of commodity hardware and run several jobs concurrently, some of which are interactive and others take a long time to finish.
-This interferes with the design of MPI.
+This multi-job scenario interferes with the design of MPI.
 Furthermore, MPI inherently lacks often requested properties such as fault-tolerance, elasticity and reliability.
 
 \section{Database Systems}
 
 As the statistics community tries to enrich systems like R with massive data processing capabilities, the database community tries to extend database management systems (\emph{DBMS}) with analytic functionality.
 It is already the case that the current SQL standard supports simple statistical computations such as linear regression, correlation coefficient and T-test functions.
-However, the system quickly reaches its limits, as soon as you try to solve a slightly more complex problem, as classification.
-Therefore, \textcite{cohen:pve2009a} devised a set of properties modern DBMSs have to satisfy in order to meet the requirements of Big Data analysts.
+However, the system quickly reaches its limits, as soon as slightly more complex problem are addressed, such as classification.
+\textcite{cohen:pve2009a} devised a set of properties modern DBMSs have to satisfy in order to meet the requirements of Big Data analysts.
 In order to further integrate statistical computations into the DBMS, they showed how to implement a matrix type and the corresponding matrix operations with SQL.
 Additionally, they implemented exemplarily the conjugate gradient method and Mann-Whitney U test.
 Due to the matrix operations the implementation is more elegant than with pure SQL.
 But still, the definition of statistical functions within this system is laborious and complex compared to R.
-Furthermore, there is no easy way to migrate existing R code.
+Also, there is no easy way to migrate existing R code.
 A huge amount of work would be necessary to re-implement the algorithms statisticians are used to work with.
 For these reasons, it is doubtful if the statistics community will adapt this approach to implement large-scale data analytics.
 
@@ -347,17 +347,17 @@ Only then, the system can get adopted by the statistics community.
 
 The RIOT~\cite{zhang:apa2009a} (R with I/O Transparency) project is aimed to incorporate the advantages of a DBMS into R.
 The authors \citeauthor{zhang:apa2009a} have discovered that inefficient I/O of R causes a substantial performance loss when applied to large data sets.
-Since R loads all its data into main memory, the virtual memory mechanism has to swap data to and from local disk as soon as the data amount exceeds the memory limit.
-This can cause thrashing of the system which ultimately leads to poor performance.
+Since R loads all its data into main memory, the virtual memory mechanism has to swap data to and from the local disk as soon as the data amount exceeds the memory limit.
+This circumstance can cause thrashing of the system which ultimately leads to poor performance.
 The first approach to cope with this problem is to hand-tune the critical code sections which, however, burdens the programmer.
 A second solution is to use I/O optimized libraries, which tackle the problem at the intra-operational level.
 This method, though, leaves out valuable chances for inter-operation optimization.
 
 DBMS offer I/O-efficiency and have with their query optimizer a powerful tool at hand to optimize code on an inter-operation level.
 Therefore, the authors chose to solve the aforementioned problems by utilizing a DBMS which they call RIOT-DB.
-To guarantee a quick and wide adoption among R users, they paid explicit attention to a seamless integration into the R environment.
+To guarantee a quick and wide adoption amongst R users, they paid explicit attention to a seamless integration into the R environment.
 They implemented the RIOT-DB as an R package, which can be dynamically plugged in.
-Furthermore, it does not require any user code changes to benefit from its features.
+Additionally, it does not require any user code changes to benefit from its features.
 RIOT provides the basic set of R types: Matrices, vectors and arrays.
 They are implemented within the database as key-value pairs.
 Besides, the primitive matrix and vector operations are provided so that the R user never has to face any SQL code.
@@ -377,7 +377,7 @@ This feature is almost naturally achieved by using database views during the que
 Data layout and consequently data access patterns constitute a further inefficiency.
 In R the access patterns are inherently sequential and data layouts are static.
 Yet it may be faster for certain operations, such as a matrix-matrix multiplication, to have, for example, a column- instead of a row-wise partition for the right matrix.
-This would significantly reduce the number of page faults.
+This feature would significantly reduce the number of page faults.
 Unfortunately, the RIOT-DB implementation is not yet capable to dynamically adjust data layouts.
 
 An extra improvement is the reordering of computations.
@@ -403,7 +403,7 @@ Consequently, Pegasus implements it on top of Hadoop.
 
 \Textcite{bu:apa2012a} remarked that there exist a multitude of more or less specialized programming models for the task of distributed machine learning.
 All of these systems exhibit a tight coupling of a solution's logical representation and physical representation.
-This renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
+This coupling renders optimization difficult, because one is bound to the underlying runtime implementation and disregards alternative execution strategies.
 Moreover, the systems are mostly disjoint which implies that each framework has to be updated in order to profit from new optimization strategies.
 As a solution the authors propose to employ Datalog as a declarative language for the specification of higher level programming models such as iterative MapReduce or Pregel~\cite{malewicz:2010a} within their system.
 Standard query optimization techniques are applied on this common intermediate representation and then it is transformed into a physical execution plan.
@@ -425,7 +425,7 @@ However, Mahout forces the user to do their programming in Scala, which might be
 
 A popular approach to develop parallel programs running on a large cluster of computers is to employ message passing.
 A message passing library offers primitives to send and receive messages to and from a remote host while hiding the used communication infrastructure.
-This allows to interconnect a collection of possibly heterogeneous machines to a coherent computation unit, thus allowing to solve large computation problems in a cost-efficient manner.
+This transparency allows to interconnect a collection of possibly heterogeneous machines to a coherent computation unit, thus allowing to solve large computation problems in a cost-efficient manner.
 Message passing implementations usually support inter- as well as intra-node communication.
 The used transfer channel, for example, Ethernet, InfiniBand, Myrinet or shared memory, is chosen transparently by the library.
 
@@ -435,8 +435,8 @@ Thus, he is fully in charge for the communication pattern.
 It implies that the user needs a thorough understanding of the algorithm in order to identify which code sections can be parallelized.
 Moreover, he has to make sure that there are not any deadlocks or race conditions between multiple parallel instances.
 In order to implement desirable properties such as fault-tolerance, load balancing or elasticity, the programmer has to add even more code.
-Message passing only gives you the tools at hand to implement these features.
-This makes parallelization with message passing a very cumbersome and error-prone task, which requires a highly trained professional.
+Message passing only gives us the tools at hand to implement these features.
+These aspects make parallelization with message passing a very cumbersome and error-prone task, which requires a highly trained professional.
 In other words, message passing can be seen as the assembler language of parallel programming.
 
 There are several implementations of a message passing system.
@@ -470,7 +470,7 @@ However, multi-threading is limited to a single machine.
 Since the prevailing trend is to employ large shared nothing clusters to solve computing intensive tasks, the authors implemented other parallelization means, too.
 
 One of them is the exposure of MPI to the user.
-Because this gives users great power at hand, it also requires great responsibility of them.
+Because the MPI API gives users great power at hand, it also requires great responsibility of them.
 But MATLAB offers MPI's functionality through a simplified API, which assists the user in writing error free code.
 The MATLAB MPI functions encapsulate deadlock and mismatched communication detection.
 A mismatched communication occurs if there is a sender or a receiver whose communication counterpart (receiver or sender respectively) is missing.
@@ -494,20 +494,20 @@ A more sophisticated mechanism is the parallel for loop (parfor).
 The parfor is similar to the parallel for loop in OpenMP~\cite{dagum:csei1998a}.
 It transparently distributes work, iterations in the case of a for loop, among the available workers.
 Unlike OpenMP whose parallel for loop spawns multiple threads for each chunk of iterations, MATLAB spawns separate processes.
-This permits to let the different iterations run on different machines and thus supporting NUMA (non-uniform memory architecture) systems.
+This mechanism permits to let the different iterations run on different machines and thus supporting NUMA (non-uniform memory architecture) systems.
 
 The MATLAB Distributed Computing Server provides the infrastructure to run MATLAB code in parallel on a large set of workers.
 For this purpose, a scheduler based on the JINI/RMI framework was developed.
 The scheduler takes a MATLAB job, comprising of a command set, and assigns it to an idling worker.
 The authors decided against the support of distributed file systems and instead chose a relational database to store and communicate task related data.
-Furthermore, the whole infrastructure was developed having small clusters with up to $128$ nodes in mind.
+Furthermore, the whole infrastructure was developed having small clusters in mind, with up to $128$ nodes.
 
-Therefore, nothing was said about how well the MATLAB system scales to clusters with more than $128$ nodes.
+Hence, nothing was said about how well the MATLAB system scales to clusters with more than $128$ nodes.
 Moreover, it was not stated whether the system supports a fault-tolerance mechanism or not.
-Supposedly, this can be achieved by using the relational database for checkpointing.
-But there might be scenarios for which this is not applicable, for example, if the memory footprint of the program is too huge.
+Supposedly, the fault tolerance can be achieved by using the relational database for checkpointing.
+But there might be scenarios for which this approach is not applicable, for example, if the memory footprint of the program is too huge.
 For long running jobs it is crucial to recover automatically from a machine failure without user intervention.
 
 Besides MATLAB Parallel Computing Toolbox there are also other projects which try to parallelize MATLAB code.
 The most noteworthy candidates are pMatlab~\cite{bliss:ijhpca2007a} and MatlabMPI~\cite{kepner:jpdc2004a} which shall be named here for the sake of completeness.
-Furthermore, they are non-commercial and thus they stand out against MathsWorks product.
+Also, they are non-commercial and thus they stand out against MathsWorks product.

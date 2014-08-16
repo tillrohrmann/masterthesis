@@ -14,7 +14,7 @@ Fortunately, the Scala language~\cite{scala,odersky:2010a} unifies all required 
 Scala is a highly scalable language, well suited for script sized programs as well as enterprise applications.
 The language combines object oriented and functional programming, giving a maximum of flexibility to the programmer.
 The Scala code is compiled to Java bytecode and thus executed on a JVM.
-This makes the language platform independent to the greatest possible extent.
+This feature makes the language platform independent to the greatest possible extent.
 Furthermore, it can integrate existing Java code and thus benefit from the rich set of Java libraries.
 Last but not least, it is like the new cool kid on the block of programming languages, which everyone likes.
 
@@ -84,7 +84,7 @@ The individual intermediate operators are implemented as described in \cref{sec:
 However, the iteration mechanism of Stratosphere was slightly flawed.
 It was not possible to reuse expressions which were used outside of the loop.
 The system would generate a completely new instance of the expression in that case.
-This not only degraded the overall performance but also corrupted the consistency of Gilbert programs.
+This behavior not only degraded the overall performance but also corrupted the consistency of Gilbert programs.
 A random matrix, for example, would have had two different values: One outside of the loop and another one inside of the loop.
 Therefore, we had to fix this problem within Stratosphere to guarantee a correct functioning of Gilbert.
 
