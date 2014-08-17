@@ -31,7 +31,7 @@ It is of particular interest to keep the set of intermediate operators as small 
 \section{Specification}
 
 The intermediate format consists of a set of operators to represent the different linear algebra operations.
-Every operator has a distinct result type and a set of parameters which are required as input.
+Every operator has a distinct result type and a set of parameters which are required as inputs.
 \Cref{fig:depTreeMMIdOnes} shows how a matrix multiplication between an identity matrix $Id \in \mathbb{R}^{10\times10}$ and a matrix $Ones \in \mathbb{R}^{10\times10}$ filled with $1$s would be represented.
 On the level of the intermediate format we distinguish between the following types: \code{MatrixType}, \code{ScalarType}, \code{CellArrayType}, \code{StringType} and \code{FunctionType}.
 
@@ -86,7 +86,7 @@ The \code{eye} operator, known from Matlab, generates an identity matrix of the 
 The operator also supports non quadratic result shapes.
 Another well-known operator is \code{zeros}.
 It generates a matrix of the given size which is initialized with zeros.
-And the last creation operator is \code{randn}, which generates a random matrix.
+And the last creation operator is \code{randn} which generates a random matrix.
 \code{Randn} takes the number of rows and columns of the resulting matrix and the mean and the standard deviation of a Gauss distribution.
 The specified Gauss distribution is used to generate random values for the resulting matrix.
 
@@ -291,7 +291,7 @@ Its resulting code from the compilation process can be seen in \cref{fig:irR0}.
 The update function \code{f} is defined in line $15$ as an anonymous function.
 In order to represent functions in the intermediate format, we have to introduce a new operator \code{function} which takes the number of parameters and the body of the function.
 Additionally, all parameters of the function are represented by special intermediate code operators: \code{MatrixParameter}, \code{ScalarParameter}, \code{StringParameter} and \code{FunctionParameter}.
-Every parameter operator gets an index assigned which identifies the corresponding argument with which it has to replaced upon instantiation of the function.
+Every parameter operator gets an index assigned which identifies the corresponding argument with which it has to be replaced upon instantiation of the function.
 The compiled code of \code{f} can be found in \cref{fig:irF}.
 
 \begin{figure}[!h]
@@ -328,7 +328,7 @@ The compiled code can be seen in \cref{fig:irA}.
 	\label{fig:irA}
 \end{figure}
 
-The Matlab function \code{spones} which replaces nonzero sparse elements with ones while preserving the sparsity structure, is compiled into a CellwiseMatrixTransformation.
+The Matlab function \code{spones}, which replaces nonzero sparse elements with ones while preserving the sparsity structure, is compiled into a CellwiseMatrixTransformation.
 
 The \code{e} vector has the same representation as the initial PageRank vector \code{r\_0}.
 

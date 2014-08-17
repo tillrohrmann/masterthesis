@@ -9,7 +9,7 @@ As delineated in \cref{cha:introduction}, there does not exist any transparent s
 As soon as the data size exceeds the main memory, it becomes necessary to distribute the work in order to process it efficiently.
 However, this circumstance also implies to leave ones accustomed toolbox behind, because most of the tools do not support distributed execution natively.
 Especially the popular tools MATLAB and R only provide limited support for parallel execution.
-This fact poses a serious problem for data scientists which are challenged to analyze ever-growing data sets.
+This fact poses a serious problem for data scientists who are challenged to analyze ever-growing data sets.
 
 Since the amount of gathered data increases almost exponentially, it can be assumed that the demand for examining large data sets becomes even greater.
 In fact, the industry of data management and analytics is growing by leaps and bounds.
@@ -17,11 +17,11 @@ Its value, currently estimated to be $100$ billion \$, shoots up by an annual ra
 The quest for valuable business information extracted from collected data is spurring this industry on.
 However, that upgrowth might come to a sudden stop if we cannot develop analytic tools which scale well with the data size and are easy to use for people occupied with data analytics.
 
-We believe that a linear algebra environment which incorporates a familiar programming language and automatic parallelization to seamlessly scale from megabyte to petabyte and beyond is the best solution.
+We believe that a linear algebra environment, which incorporates a familiar programming language and automatic parallelization to seamlessly scale from megabyte to petabyte and beyond, is the best solution.
 Relieving the user from the tedious task of writing parallel code while offering a well known programming interface are the key aspects of a successful adoption by the analytics community.
 Of course, it is indispensable to achieve a descent runtime performance compared to explicitly parallelized algorithms.
 
-As a solution for the aforementioned problems, we conceived Gilbert, a distributed sparse linear algebra environment which is executed in massively parallel dataflow systems.
+As a solution for the aforementioned problems, we conceived Gilbert, a distributed sparse linear algebra environment, which is executed in massively parallel dataflow systems.
 Gilbert will be programmed using a subset of the MATLAB language.
 Therefore, it will be easy for people experienced in MATLAB programming to use our system without any further preconditions.
 We intend to develop Gilbert so that it can be easily extended to other programming languages such as R.
@@ -34,7 +34,7 @@ The compiler stack comprises the lexer, parser and compiler.
 For the parser, it is crucial to define the formal grammar of MATLAB.
 Since MATLAB does not disclose the internal definition of its language, we can only try to approximate it as closely as possible.
 In case that type information is needed for the parallel execution, we would also have to integrate a typing system.
-Originally, MATLAB is a dynamically typed language which does not contain explicit type annotations.
+Originally, MATLAB is a dynamically typed language, which does not contain explicit type annotations.
 For the sake of compatibility, it will not be possible to add explicit type information to the language.
 Therefore, the necessary type information has to be gathered using a type inference algorithm.
 We have to look into different type inference algorithms to decide which one fits our needs best.
@@ -49,13 +49,14 @@ First, it hides details of the actually used front end language.
 Consequently, it is easier to add support for other linear algebra languages such as R.
 Secondly, it makes the program amenable to high-level linear algebra optimizations independently of the programming language.
 That, however, leads to the question of how to design the intermediate representation.
-We have to find universal abstractions for the different linear algebra operations, which are general enough to support optimization and expressive enough to represent a multitude of programs.
-Furthermore, it will be important to look into different optimization strategies for linear algebra problems and which strategies perform best.
+We have to find universal abstractions for the different linear algebra operations.
+These abstractions have to be general enough to support optimization and expressive enough to represent a multitude of programs.
+Furthermore, it will be important to look into different optimization strategies for linear algebra problems and to decide which strategies perform best.
 
 After the Gilbert program has been optimized, it has to be translated into a representation which is understood by the execution engine.
 As mentioned before, Gilbert will run its programs on a parallel dataflow engine.
 We intend to add support for Stratosphere~\cite{alexandrov:2011a} and Spark~\cite{zaharia:2010a}.
-Both systems, inspired by MapReduce, are programmed similarly by defining a dataflow plan which is evaluated lazily by the system.
+Both systems, inspired by MapReduce, are programmed similarly by defining a dataflow plan, which is evaluated lazily by the system.
 They offer an equivalent set of operators to build data flows.
 The research question will be how linear algebra operations can be mapped to operations supported by these systems.
 This question is also accompanied by how different data structures, such as matrices and vectors, can be represented in a way best suited for efficient parallel execution.

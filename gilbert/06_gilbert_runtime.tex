@@ -23,8 +23,8 @@ This approach implies that the program is not directly executed by the executor.
 Instead, the executor represents just another translation step.
 
 The PACT plans are executed in parallel.
-Consequently, we need data structures which can be distributed across several nodes and represent the commonly used linear algebra abstractions, such as vectors and matrices.
-Moreover, we have to adjust the linear algebra operations so that they keep working in a distributed environment.
+Consequently, data structures are needed which can be distributed across several nodes and represent the commonly used linear algebra abstractions, such as vectors and matrices.
+Moreover, the linear algebra operations have to be adjusted so that they keep working in a distributed environment.
 Fortunately, Stratosphere offers a rich and expressive API to easily realize distributed computations.
 The details of the distributed data structures and operations are explained in \cref{sec:DistributedMatrixRepresentation} and \cref{sec:LinearAlgebraOperations}.
 
@@ -43,11 +43,11 @@ However, these differences are only subtle and do not limit or extend the expres
 One aspect of writing distributed algorithms is how the relevant data is distributed across several worker nodes.
 Since the distribution pattern directly influences the algorithms, one cannot consider them independently from one another.
 In Gilbert's use case, the main data structure are matrices.
-Thus, we have to conceive a partitioning for matrices which allows efficient algorithms working on the distributed data.
+Thus, a partitioning for matrices has to be conceived which allows efficient algorithms working on the distributed data.
 Looking at a matrix, one easily finds a multitude of different partition schemes.
 
 A first idea could be to partition a matrix according to their rows or columns, as it is depicted in \cref{fig:rowPartitioning} and \cref{fig:columnPartitioning}.
-This scheme allows to represent a matrix as a set of vectors which are stored in a distributed fashion.
+This scheme allows to represent a matrix as a set of vectors which is stored in a distributed fashion.
 Furthermore, it allows an efficient realization of cellwise operations, such as $+,-,/$ or $.*$.
 In order to calculate the result of such an operation, we only have to join the corresponding rows of both operands and execute the operation locally for each pair of rows.
 
@@ -103,7 +103,7 @@ Usually, each sending operation causes some constant overhead inflicted by resou
 Before sending the actual data over the network, memory to transfer the data to the network interface has to be allocated, network resources have to be reserved and a network connection with the remote peer has to be established.
 This overhead is denoted by $\Delta$.
 Since all sending operations occur in parallel, the costs caused by constant overhead are $(n-1)\Delta$.
-The total amount of data which has to sent over the network is $n^2(n-1)\alpha$.
+The total amount of data, which has to sent over the network, is $n^2(n-1)\alpha$.
 The network interconnection is assumed to guarantee every node a bandwidth $\nu$.
 Therefore, the time needed for sending the data is $\frac{n^2(n-1)\alpha}{\nu}$.
 These considerations lead to the following repartitioning cost model:
@@ -137,8 +137,8 @@ But how does this pattern performs for matrix multiplications?
 The assumptions are the same as before and additionally it is assumed that $n$ is a square number.
 Since the matrices $A$, $B$ and $C$ are equally partitioned into square blocks, indices will henceforth reference the block and not the matrix entry.
 In order to calculate the block $c_{ij}$, we have to know the block row $a_{i}$ and the block column $b_{j}$.
-The resulting block will be stored on the node $node_{ij}$ which already contains the blocks $a_{ij}$ and $b_{ij}$.
-Thus, each node $node_{ij}$ has to receive the missing $2\left(\sqrt{n}-1\right)$ blocks from the block row $a_{i}$ and block column $b_{j}$.
+The resulting block will be stored on the node $n_{ij}$ which already contains the blocks $a_{ij}$ and $b_{ij}$.
+Thus, each node $n_{ij}$ has to receive the missing $2\left(\sqrt{n}-1\right)$ blocks from the block row $a_{i}$ and block column $b_{j}$.
 In total, all worker nodes have to send $2n\left(\sqrt{n}-1\right)$ blocks.
 Each block has the size $n\alpha$.
 The total communication costs comprises the transmission costs and the network overhead:
@@ -166,7 +166,7 @@ Depending on the non-zero elements to total elements ratio, a sparse or dense re
 \label{sec:LinearAlgebraOperations}
 
 The other aspect of writing distributed algorithms is to think about how the algorithms work with the locally available data and which data has to be communicated in order to compute the final result.
-Stratosphere and Spark both offer a highly expressive programming API which follows and extends the well-known MapReduce paradigm~\cite{dean:c2008a}.
+Stratosphere and Spark both offer a highly expressive programming API, which follows and extends the well-known MapReduce paradigm~\cite{dean:c2008a}.
 Conceptually, a set of distributed data items, called \emph{DataSet} or \emph{RDD} (resilient distributed dataset) in the context of Stratosphere and Spark, respectively, forms the basis of both systems.
 There are several ways to initially create a data set, such as reading from a file or distribution of a local collection.
 Once a distributed data set is created, it can be modified by applying one of the transforming functions, namely \emph{map}, \emph{reduce}, \emph{join}, \emph{cross} or \emph{coGroup}.

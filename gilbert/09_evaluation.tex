@@ -203,7 +203,7 @@ Especially for the number of cores $\le 15$, we observe for Stratosphere and Spa
 From this point onwards, the scaling of Stratosphere degrades faster than Spark's scaling.
 Spark exhibits an outstanding scale-out behavior.
 The Spark execution engine requires \SI{90}{\second} to calculate the matrix multiplication with $n=35000$ on $100$ cores.
-That is only a slowdown by a factor of $1.5$ if compared to the matrix multiplication with $n=7500$ on a single core, which takes \SI{65}{\second} to finish.
+That is only a slowdown by a factor of $1.5$, if compared to the matrix multiplication with $n=7500$ on a single core, which takes \SI{65}{\second} to finish.
 Interestingly, Spark's graph is not monotonic, as one would expect it.
 For $\text{\#cores}=50$, we can observe a slight peak in the execution time.
 This behavior is counterintuitive.
@@ -219,7 +219,7 @@ In the context of topic modeling, we would have $d$ documents and a set of $w$ w
 The goal of topic modeling is to identify the different topics and the words supporting a particular topic.
 For this purpose, the matrix $V = (v_{i,j})_{i=1\ldots d,j=1\ldots w}$ is defined, with $v_{i,j}$ containing the frequency of a word $w_j$ appearing in document $d_i$.
 By specifying the number of topics $t$, the GNMF algorithm computes $W\in \mathbb{R}^{d\times t}$ and $H\in \mathbb{R}^{t\times w}$ such that $V \approx W H$.
-The row $w_i$ of $W$ indicates which topics the document $d_i$ contains and the row $h_i$ of $H$ tells which words correlate with topic $t_i$.
+The row $w_i$ of $W$ indicates the topics the document $d_i$ contains and the row $h_i$ of $H$ says which words correlate with topic $t_i$.
 The GNMF algorithm alternately updates the matrices $H$ and $W$ until the result converges.
 The algorithm is given in \cref{lst:nmf}.
 The operator $.*$, $./$ and $*$ denote the cell wise multiplication, the cell wise division and the matrix multiplication, respectively.
@@ -563,9 +563,9 @@ We can observe that we obtain better results with an increased block size.
 Clearly, the block size $25 \times 25$ is inferior to the block sizes $500\times 500$ and $1000\times 1000$.
 However, the results between the last two block sizes do not differ in a significant way.
 
-It is important to stress that there is no single block size, which is optimal for all problems and all computer architectures.
+It is important to stress that there is no single block size which is optimal for all problems and all computer architectures.
 The best degree of parallelism and the best data granularity strongly depends on the problem, its inputs and the used computing machine.
-Therefore, it is not possible to specify an ideal block size, which, instead, should be determined for each task individually.
+Therefore, the ideal block size should be determined for each problem individually.
 
 \section{Optimization}
 
@@ -671,8 +671,8 @@ The optimized Spark version runs about $18$ times faster than the non-optimized 
 In contrast to that, Stratosphere shows a constant speed-up of roughly $1.7$ between the optimized and non-optimized version.
 
 It is not yet known what causes these different speed-ups.
-However, looking at the NMF formula in \cref{lst:nmf}, we can explain why the optimization works.
-There are two matrix multiplications which can be optimized: $W^T WH$ in line $6$ and $WHH^T$ in line $7$.
+However, looking at the GNMF formula in \cref{lst:nmf}, it becomes obvious why the optimization works.
+There are two matrix multiplications that can be optimized: $W^T WH$ in line $6$ and $WHH^T$ in line $7$.
 Keeping in mind that $W\in \mathbb{R}^{d\times 10}$ and $H\in \mathbb{R}^{10 \times 100000}$, we can assess the different strategies.
 The non-optimized version would execute the matrix multiplications due to left-associativity from left to right:
 
@@ -707,7 +707,7 @@ We expect that the Gilbert runtime adds some overhead as trade-off for their eas
 Furthermore, the high-level linear algebra abstraction of Gilbert might make it difficult to exploit certain properties to speed up the processing.
 Therefore, we believe that the hand-tuned algorithms will get the upper hand.
 
-For our comparison, we chose two famous ML algorithms, which can be expressed in terms of linear algebra: PageRank and \kmeans.
+For our comparison, we chose two famous ML algorithms that can be expressed in terms of linear algebra: PageRank and \kmeans.
 Since both algorithms are iterative, we can demonstrate Gilbert's loop support.
 We first execute them directly in Gilbert, given the Gilbert code, and then run them directly on Stratosphere and Spark.
 For the direct execution, we have implemented both algorithms using the Stratosphere and Spark API.
@@ -717,17 +717,18 @@ Furthermore, the distributed implementation is far from trivial compared to the 
 \subsection{PageRank}
 
 The PageRank algorithm~\cite{page:1999a} is the famous algorithm developed by Larry Page and Sergey Brin to compute a ranking between any kind of entities with reciprocal quotations and references.
-Initially, it was developed to rank the web sites of the world wide web, which it did so well that Google grew quickly into a multi-billion dollar company.
+Initially, it was developed to rank the web sites of the world wide web.
+The algorithm did the ranking so well that Google grew quickly into a multi-billion dollar company.
 PageRank is only one algorithm comprising Google's web search, but it is probably one of the best known.
 
 \subsubsection{Algorithm}
 
-The idea of PageRank is to estimate the rank of a web site based on the ranks of other web sites, which link to this site.
+The idea of PageRank is to estimate the rank of a web site based on the ranks of other web sites, which link to the former site.
 It is assumed that high quality web sites are more likely to link to other high quality web sites.
 Thus, these sites get a high rank with which they can ``vote'' for other sites.
 
 The PageRank can also be explained by the model of a ``random'' surfer.
-Assume there is a surfer which randomly follows an outgoing link from a web site.
+Assume there is a surfer who randomly follows an outgoing link from a web site.
 Occasionally, or if he ends up in a dead end, the surfer enters a random URL in his address bar.
 That way, he will eventually visit the whole web.
 By tracking the time he spends on each web site, an importance measure for each site is obtained.

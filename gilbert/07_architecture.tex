@@ -70,11 +70,12 @@ In order to evaluate a given node of the tree, the interpreter first descends to
 After having retrieved the results of the children nodes, the parent node is evaluated.
 
 The distributed execution engines do not support immediate execution of the individual nodes.
-Instead, the plan generator has to create an execution plan for Stratosphere and Spark, which is lazily executed upon submission.
+Instead, the plan generator has to create an execution plan for Stratosphere and Spark, which is lazily executed upon submission or when Spark's actions are called.
 Fortunately, Stratosphere and Spark offer a similar programming API.
 Thus, Gilbert can translate the distinct linear algebra operations using the same general building blocks as described in \cref{sec:LinearAlgebraOperations}.
 The execution plan is generated using a recursive-descent approach similar to the local interpreter.
-Once the intermediate representation has been transformed, the plan is sent to the respective system, which triggers the parallel execution.
+Once the intermediate representation has been transformed, the plan is sent to the respective system.
+The system is responsible for the parallel execution.
 
 \section{Runtime Layer}
 

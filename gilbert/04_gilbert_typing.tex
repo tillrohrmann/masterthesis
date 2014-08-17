@@ -120,7 +120,7 @@ Instead, a combination of the strengths of both paradigms promises the best resu
 
 We are in the unfortunate situation that MATLAB belongs to the class of dynamically typed languages and Gilbert requires type information for its parallel execution.
 The parallel data processing systems, used to run Gilbert programs, have to know which data types are passed from one worker node to another.
-Therefore, we did not have any choice but to enrich MATLAB with type information.
+Therefore, the MATLAB language has to be enriched with type information.
 
 It exists research of how to add explicit type information to MATLAB.
 For example, \textcite{hendren:2011a} introduced the special keyword \emph{atype} to MATLAB which is understood and interpreted by an extended compiler.
@@ -131,7 +131,8 @@ In case that the type inference algorithm cannot properly infer the types, there
 We decided to pursue a similar approach as \textcite{furr:2009a}.
 \citeauthor{furr:2009a} added type information to Ruby by adding special comments to the respective code sections.
 Thereby, the code does not break with the Ruby standard and still contains type information.
-As typing system, we use the Hindley-Milner (HM) type system~\cite{hindley:tams1969a,milner:jcss1978a} and a slightly derived form of algorithm W~\cite{damas:1982a} for type inference, which will be described in the next section in detail.
+As typing system, we use the Hindley-Milner (HM) type system~\cite{hindley:tams1969a,milner:jcss1978a} and a slightly derived form of algorithm W~\cite{damas:1982a} for type inference.
+Algorithm W will be described in the next section in detail.
 Even though there exist more powerful type systems than the HM type system, it has the appealing charm that the algorithm W is sound, complete and decidable with respect to the type system.
 Furthermore, it has proven to type several algorithms implemented within Gilbert correctly.
 
@@ -207,8 +208,8 @@ An expression having the type $\forall \alpha. \alpha$ also has the type $\code{
 Thus, the latter type would be a valid inferred type, even though the first one is more general.
 In order to dissolve this ambiguities, the typing system always looks for the most general type.
 
-Usually, expressions depend on other expression and thus their types.
-Therefore, a type dictionary is maintained where types of expressions, which already have been seen while parsing the code, are stored.
+Usually, expressions depend on other expressions and thus their types.
+Therefore, a type dictionary is maintained where types of expressions are stored, which already have been seen while parsing the code.
 And that is exactly what the context $\Gamma$ is used for.
 $\Gamma$ contains a list of pairs $x:\sigma$, which are called assumptions.
 The formal definition of $\Gamma$ is
@@ -217,8 +218,8 @@ The formal definition of $\Gamma$ is
 &|& \epsilon\ \text{(empty)}
 \end{eqnarray*}
 
-Having defined the context, expressions and types, the typing judgment $\Gamma \vdash x : \sigma$ can be defined.
-It means that given the context $\Gamma$ the variable $x$ has the type $\sigma$.
+Having defined the context, expressions and types, the typing judgment $\Gamma \vdash x : \sigma$ can be explained.
+The typing judgment can be interpreted that given the context $\Gamma$ the variable $x$ has the type $\sigma$.
 The way how to come up with these judgments is defined by deduction rules.
 Before taking a closer look at them, some auxiliary functions are first introduced.
 
@@ -227,7 +228,7 @@ In general, type variables can appear as \emph{free} or as \emph{bound} variable
 A type variable $\alpha$ is called bound if it occurs in an expression of the form $\forall \alpha. \tau$.
 $\forall$ binds the subsequent variable in the context of the expression.
 All variables which are not bound are free.
-We can define a function $free$ which calculates the set of free type variables in a type expression and in the context.
+We can define a function $free$ which calculates the set of free type variables in a type expression and in the type context.
 \begin{eqnarray*}
 free(\alpha) &=& \{\alpha\}\\
 free(D\ \alpha_1\ \ldots\ \alpha_n) &=& \bigcup_{i=1}^n free(\alpha_i)\\
@@ -239,8 +240,8 @@ free(\Gamma) &=& \bigcup_{x:\sigma \in \Gamma} free(\sigma)
 
 The algorithm W was initially developed by \textcite{damas:1982a} and allows to solve the HM type inference in almost linear time with respect to the size of the source code.
 Thus, it is also applicable to large programs.
-We present a modified version of the original algorithm which incorporates side effects into the deduction rules.
-Even though these side effects contradict the purity of logical deduction rules, it allows us to express the algorithm concisely.
+A modified version of the original algorithm which incorporates side effects into the deduction rules is presented.
+Even though these side effects contradict the purity of logical deduction rules, it allows to express the algorithm concisely.
 The algorithm W is defined by the following deduction rules:
 
 \begin{prooftree}
@@ -278,7 +279,7 @@ Each rule has the form
 Premise\\
 \hline
 Conclusion
-\end{tabular}, which means that we have to prove the premise in order to show the conclusion.
+\end{tabular}, which means that if the premise can be proven, then the conclusion is true.
 
 Let us go step by step through the different deduction rules of the algorithm.
 The first rule says that a variable $x$ has the type $\tau$, if an assumption of $x$ in $\Gamma$ whose type $\sigma$ can be specialized to $\tau$ is found.
@@ -383,11 +384,11 @@ The heuristic selects the first entry in the list of signatures.
 
 Due to this heuristic, some well-typed programs will be rejected, though.
 Consider, for example, the code snippet in \cref{lst:typingAmbiguity}.
-In line $1$, an anonymous function $f$, which doubles its parameter, is defined.
+In line $1$, an anonymous function $f$ is defined, which doubles its parameter.
 Within the body of $f$, the overloaded \code{+} operator is used.
 Since Gilbert has no additional typing information of $f$'s parameter, it has to apply the aforementioned heuristic to assign $f$ a valid type expression.
 The heuristic picks the first entry which is $matrix[double] \times matrix[double] \rightarrow matrix[double]$ and , thus, $f$ has the type $matrix[double] \rightarrow matrix[double]$.
-The subsequent function call \code{f(1.0)} in line $2$ will, therefore, throw a typing exception, because a scalar argument cannot be applied to a function having a matrix parameter.
+The subsequent function call \code{f(1.0)} in line $2$ will throw a typing exception, because a scalar argument cannot be applied to a function having a matrix parameter.
 That is odd, because $f$ should be applicable to all data types supporting the \code{+} operator and scalar values definitely support this operation.
 It has to be stated that this peculiarity is clearly a restriction of Gilbert, which limits the space of accepted programs.
 

@@ -30,7 +30,7 @@ Both transformations will be described in the following sections.
 
 Matrix multiplications belong to the most expensive operations in linear algebra programs.
 The naive multiplication of $A\times B$ with $A,B \in \mathbb{R}^{n \times n}$ requires $O(n^3)$ operations.
-Even though there are algorithms, such as the Strassen algorithm~\cite{strassen:nm1969a}, which have an asymptotic complexity of $O(n^{\log_28})$, it still remains a costly operation.
+Even though there are algorithms, such as the Strassen algorithm~\cite{strassen:nm1969a}, which have an asymptotic complexity of $O(n^{\log_28})$, a matrix multiplication still remains a costly operation.
 In addition to the high computational complexity, the space complexity must also not be forgotten.
 
 In the worst case, the result of a matrix multiplication has quadratic size of the input operands.
@@ -54,7 +54,7 @@ Using parentheses to calculate $B^T \times C$ first, we could circumvent the pro
 \end{displaymath}
 In this case, the biggest matrix to store would be a vector of length $n$.
 
-The best execution order of successive multiplication is that which minimizes the maximum size of intermediate results.
+The best execution order of successive multiplications is the one that minimizes the maximum size of intermediate results.
 In order to determine the best execution order, the optimizer first extracts all matrix multiplications with more than $2$ operands.
 Then, it will calculate for each evaluation order the maximum size of all occurring intermediate results.
 In order to do this calculation, the optimizer relies on the operands' automatically inferred matrix sizes, as described in \cref{sec:MatrixDimensionInference}.
@@ -77,7 +77,7 @@ E = (C * D')';
 	\label{lst:pushdown}
 \end{listing}
 
-By inserting $C$ into $E$ we would obtain $E=(A^T BD^T)^T$ which is equivalent to $DB^T A$.
+By inserting $C$ into $E$, the expression $E=(A^T BD^T)^T$ is obtained. This term is equivalent to $DB^T A$.
 The latter formulation contains only one transpose operation.
 Depending on the cost of such an operation the optimization might be worthwhile.
 

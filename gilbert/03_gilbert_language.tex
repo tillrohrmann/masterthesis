@@ -10,7 +10,7 @@ In fact, R and MATLAB are quite similar and are both widely used in academics as
 Due to their expressiveness and their rich library support with myriads of mathematical functions, they are just as well suited for quick prototyping as it is for full-fledged development.
 In combination with their ease of use, they quickly became the standard in industry for numerical processing.
 Our final choice fell on MATLAB, because of our higher familiarity with this language.
-Yet, we believe that there are not any fundamental reasons which would prohibit the support of R.
+Yet, we believe that there are no fundamental reasons which would prohibit the support of R.
 In fact, the translation from one language to the other should be straight-forward on the compiler level.
 
 Another reason to imitate an existing language and not to devise a new language geared towards parallel execution is the laziness of people.
@@ -72,7 +72,7 @@ These operators become handy for realizing dynamic termination criteria for loop
 The full set of supported mathematical operations can be found in appendix 1.
 
 Besides the basic arithmetic operations, the user can also define named functions and anonymous functions.
-This feature not only enables a better structure of the code but also to express \nth{2}-order functions.
+This feature not only enables a better structure of the code but also allows to express \nth{2}-order functions.
 The syntax of anonymous functions adheres to the MATLAB syntax.
 An anonymous function which calculates the sum of its input squares could be defined as follows: \code{@(x,y) x*x + y*y}.
 A formal definition can be found in \cref{sec:languageGrammar}.
@@ -90,7 +90,7 @@ Thus, the $n^{th}$ iteration is equivalent to applying the function $f$ $n$ time
 \end{displaymath}
 
 In order to terminate the fixpoint operation, the operator provides two mechanisms.
-First of all, the user has to specify a maximum number \code{m} of iterations after which the iteration stops for sure.
+First of all, the user has to specify a maximum number \code{m} of iterations after which the loop is terminated.
 This mechanism is henceforth denoted as the \emph{static termination criterion}.
 Such a termination criterion is often not sufficient for machine learning algorithms, because they usually continue their computations until they have reached a certain convergence criterion.
 Since the number of iterations necessary to reach this state is not always known a priori, it is called the \emph{dynamic termination criterion}.
@@ -112,10 +112,10 @@ The integration could easily be done by providing an external library with the d
 
 Even though the iteration operator restricts the set of valid programs in Gilbert, it is still expressive enough to support a wide variety of programs.
 Moreover, all MATLAB programs can be transformed so that the for and while loops are replaced by the fixpoint operator.
-This replacement is simply achieved by passing all data which is read or written to as parameters to the update function.
+This replacement is simply achieved by passing all data that is read or written to as parameters to the update function.
 The update function returns the same set of variables, just with updated values.
 Such an exemplified transformation can be seen in \cref{fig:for2Fixpoint}.
-Here we can see that all data, which is operated on, is passed to the fixpoint operator as a cell array.
+Here we can see that all data that is operated on is passed to the fixpoint operator as a cell array.
 Lines $1-2$ of \cref{fig:for2Fixpoint:fixpoint} define the update function \code{f}.
 The parameter \code{x} is a cell array whose first entry contains the accumulator \code{A} and second entry is the loop counter \code{i}.
 In line $2$ we see the returned cell array value of the anonymous function.
