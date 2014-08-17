@@ -7,7 +7,7 @@
 
 Gilbert is a fully functional linear algebra environment.
 As such a system, it provides a rich set of primitive operations.
-People familiar with MATLAB should quickly recognize the operations, because Gilbert's syntax is identitcal to the syntax of MATLAB.
+People familiar with MATLAB should quickly recognize the operations, because Gilbert's syntax is identical to the syntax of MATLAB.
 Additionally, Gilbert implemented several common MATLAB functions.
 
 Gilbert's operations are used to modify scalar and matrix values.
@@ -107,11 +107,11 @@ The full set of supported functions is given in \cref{tab:gilbertFunctions}.
 	\hline
 	\code{eye(r,c)}  & Creates an identity matrix of size $(r,c)$.& $double \times double \rightarrow matrix[double]$\\
 	\hline
-	\code{zeros(r,c)}  & Creates a zero atrix of size $(r,c)$.& $double \times double \rightarrow matrix[double]$\\
+	\code{zeros(r,c)}  & Creates a zero matrix of size $(r,c)$.& $double \times double \rightarrow matrix[double]$\\
 	\hline
 	\code{rand(r,c,m,s)}& Creates matrix of size $(r,c)$ whose elements are drawn from a Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \rightarrow matrix[double]$\\
 	\hline
-	\code{rand(r,c,m,s,l)}& Creates matrix of size $(r,c)$ with a poriton of $l$ non-zero elements, distributed uniformly. The non-zero cells are drawn from Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \times double \rightarrow matrix[double]$\\
+	\code{rand(r,c,m,s,l)}& Creates matrix of size $(r,c)$ with a portion of $l$ non-zero elements, distributed uniformly. The non-zero cells are drawn from Gaussian distribution with mean $m$ and standard deviation $s$.& $double\times double\times double \times double \times double \rightarrow matrix[double]$\\
 	\hline
 	\code{pdist2(a,b)} & Calculates the pairwise euclidean distance between the rows of matrix $a$ and $b$.& $matrix[double] \times matrix[double] \rightarrow matrix[double]$\\
 	\hline

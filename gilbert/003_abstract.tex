@@ -20,7 +20,7 @@ We propose Gilbert, a distributed sparse linear algebra system, to solve the imm
 Gilbert offers a \matlab-like programming language for linear algebra programs, which are automatically executed in parallel.
 Transparent parallelization is achieved by compiling the linear algebra operations first into an intermediate representation.
 This language-independent representation is amenable to high-level algebraic optimizations.
-Different optimziation strategies are evaluated and the best one is chosen by a cost-based optimizer.
+Different optimization strategies are evaluated and the best one is chosen by a cost-based optimizer.
 The optimized intermediate representation is then transformed into a suitable format for parallel execution.
 Gilbert generates execution plans for Spark and Stratosphere, two massively parallel dataflow systems, and can easily be extended to support further parallel execution engines.
 Distributed matrices are represented by square blocks to guarantee a well-balanced trade-off between data parallelism and data granularity.

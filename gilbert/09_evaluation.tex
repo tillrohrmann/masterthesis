@@ -567,7 +567,7 @@ It is important to stress that there is no single block size which is optimal fo
 The best degree of parallelism and the best data granularity strongly depends on the problem, its inputs and the used computing machine.
 Therefore, the ideal block size should be determined for each problem individually.
 
-\section{Optimization}
+\section{Optimizations}
 
 In this section, we want to evaluate the effects Gilbert's optimizer has on the runtime of programs.
 For this purpose, we execute one GNMF step on Gilbert's Stratosphere and Spark execution engine using the same settings as in \cref{subsec:NMF}.
@@ -668,9 +668,9 @@ Interestingly, the Spark execution engine seems to benefit more from the optimiz
 The speedups of the optimized GNMF step with respect to its non-optimized counterparts are shown in \cref{fig:gnmfLoadOptimizationSpeedup}
 For the optimized program running on Spark's execution engine, a steadily ascending speedup, except for $d=500$, can be observed.
 The optimized Spark version runs about $18$ times faster than the non-optimized program for $d=10000$.
-In contrast to that, Stratosphere shows a constant speed-up of roughly $1.7$ between the optimized and non-optimized version.
+In contrast to that, Stratosphere shows a constant speedup of roughly $1.7$ between the optimized and non-optimized version.
 
-It is not yet known what causes these different speed-ups.
+It is not yet known what causes these different speedups.
 However, looking at the GNMF formula in \cref{lst:nmf}, it becomes obvious why the optimization works.
 There are two matrix multiplications that can be optimized: $W^T WH$ in line $6$ and $WHH^T$ in line $7$.
 Keeping in mind that $W\in \mathbb{R}^{d\times 10}$ and $H\in \mathbb{R}^{10 \times 100000}$, we can assess the different strategies.
@@ -1119,7 +1119,7 @@ The results of the experiment are depicted in \cref{fig:kmeansResult}.
 		\caption{}
 		\label{fig:kmeansSpeedup}
 	\end{subfigure}
-	\caption{Comparison of Gilbert's \kmeans with specialized algorithm on Stratosphere. \subref{fig:kmeansResult} Execution time of $10$ steps of the \kmeans algorithm on $50$-cores depending on the adjacency matrix's size. \subref{fig:kmeansSpeedup} Speedup of specialized algorithm with respect to Gilbert's implementation.}
+	\caption{Comparison of Gilbert's \kmeans implementation with specialized algorithm on Stratosphere. \subref{fig:kmeansResult} Execution time of $10$ steps of the \kmeans algorithm on $50$-cores depending on the adjacency matrix's size. \subref{fig:kmeansSpeedup} Speedup of specialized algorithm with respect to Gilbert's implementation on Stratosphere.}
 	\label{fig:kmeansBenchmark}
 \end{figure}
 
@@ -1127,7 +1127,7 @@ We observe that Gilbert's \kmeans implementations perform more slowly than the s
 We could only calculate $100000$ points with Gilbert, because the computation took too long to finish for more points.
 The speedup of the specialized algorithm with respect to Stratosphere's execution engine is shown in \cref{fig:kmeansSpeedup}.
 With an increasing number of data points $n$, the speedup increases monotonically.
-For $n=100000$ the specialized implementation achieves a speed-up of $8$ and $10$ compared to the Spark executor and Stratosphere executor, respectively.
+For $n=100000$ the specialized implementation achieves a speedup of $8$ and $10$ compared to the Spark executor and Stratosphere executor, respectively.
 Thus, we can conclude that the specialized algorithm of \kmeans executing on Stratosphere not only runs faster but also scales better than Gilbert's implementations.
 Interestingly, we were not able to run the specialized algorithm on Spark because the two reduce operations caused the system to become unbearably slow.
 
@@ -1272,8 +1272,8 @@ Even for relatively small matrix sizes, the execution times differ strikingly.
 For $n=2500$, Spark's and Stratosphere's execution engine using the Mahout library take \SI{723}{\second} and \SI{745}{\second} to finish the computation, respectively.
 By contrast, the same computation using the Breeze library finishes after \SI{10}{\second} and \SI{71}{\second} on Spark and Stratosphere, respectively.
 The performance gap even widens for an increasing dimensionality $n$.
-For $n=5000$, Breeze reaches a speed-up of $100$ compared to Mahout.
-It can be concluded that even for relatively small matrix sizes the multiplication using Mahout takes so long that it can hardly be regarded feasible.
+For $n=5000$, Breeze reaches a speedup of $275$ compared to Mahout on Spark.
+It can be concluded that even for small matrix sizes the multiplication using Mahout is almost infeasible.
 
 The mystery of this bad performance can be unraveled by taking a look into the source code of Mahout.
 Mahout offers a sparse matrix implementation, based on hash maps.
@@ -1296,8 +1296,8 @@ For the benchmark, we set the block size to $500 \times 500$.
 The runtimes of the Breeze and Mahout math back end are given in \cref{subfig:nmfMathBackend}.
 
 It can be clearly seen that GNMF runs faster with Breeze as math back end on the Stratosphere as well as on the Spark execution engine.
-On Spark, Breeze reaches a speed-up of roughly $4$ for $d=10000$. 
-On Stratosphere, Breeze reaches a speed-up of about $1.75$ for the same number of rows.
+On Spark, Breeze reaches a speedup of roughly $4$ for $d=10000$. 
+On Stratosphere, Breeze reaches a speedup of about $1.75$ for the same number of rows.
 
 We can conclude that Breeze has a better support for sparse matrix operations.
 Breeze also performs better for operations on mixed sparse and dense matrices as it is the case for GNMF.
